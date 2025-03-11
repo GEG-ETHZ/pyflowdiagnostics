@@ -24,44 +24,35 @@ conda activate pyfd
 Run the tool via the command line:
 
 ```
-python pyfd_cli.py -f <PATH_TO_DATA/AFI_FILE> -t <TSTEP_OF_INTEREST>
+python pyfd_cli.py -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
 ```
 
 ### Arguments:
-- `-f <PATH_TO_DATA/AFI_FILE>`: Path to the reservoir simulation primary input file (.DATA, .AFI, or .DAT).
-- `-t <TSTEP_OF_INTEREST>`: Reservoir simulation output (grid dynamic simulation results) time step of interest for the analysis.
+- `-f <PATH_TO_SIMULATOR_PRIMARY_INPUT_FILE>`: Path to the reservoir simulation primary input file (.DATA, .AFI, or .DAT).
+- `-t <LIST_OF_TSTEPS_OF_INTEREST>`: List of reservoir simulation output (grid dynamic simulation results) time step indices to run the diagnostics on.
 - `-d`: An optional argument to enable debug mode.
 
 ### Example:
 
+Using command line interface (CLI):
 ```
-python pyfd_cli.py -f /path/to/simulation.DATA -t 1
-```
-
-Or, in your Python script for a single time step of interest:
-
-```python
-from flow_diagnostics import FlowDiagnostics
-
-tstep = 1
-fd = FlowDiagnostics("examples/ecl/e100/SPE10_TOPLAYER/SPE10.DATA")
-fd.execute(tstep)
+python pyfd_cli.py -f /path/to/simulation.DATA -t 1 5 10
 ```
 
-For multiple time steps:
+Or, in your Python script:
 
 ```python
 from flow_diagnostics import FlowDiagnostics
 
 tsteps = [1,5,10]
-fd = FlowDiagnostics("examples/ecl/e100/SPE10_TOPLAYER/SPE10.DATA")
+fd = FlowDiagnostics("/path/to/simulation.DATA")
 for tstep in tsteps:
     fd.execute(tstep)
 ```
 ## Output
 
 The script generates a folder named `CASENAME.fdout` in the same directory as the provided `DATA/AFI/DAT` file. This folder contains:
-- Grid flow diagnostics results (time-of-flight, flow partitioning) in `.GRDECL` (Petrel readable) format.
+- Grid flow diagnostics results (time-of-flight, flow partitioning, well pair IDs) in Petrel readable (`.GRDECL`) format.
 - If applicable:
   - Allocation factors.
   - Lorentz curve data.
@@ -75,7 +66,7 @@ The full documentation is available `docs/build/html/pyfd_doc.html`.
 This project is actively maintained and under development. 
 - ✅ Core functionality implemented for SLB reservoir simulators.
 - ✅ Prototype support for CMG reservoir simulators.
-- ✅ Tested with various types of grid systems:
+- ✅ Tested with various types of grid systems using benchmark cases:
   - Single-porosity
   - Dual-porosity dual/single-permeability
   - Faulted reservoirs (NNCs)

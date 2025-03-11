@@ -1,0 +1,1367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PyFD Documentation &mdash; PyFD Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            pyfd
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">PyFD Documentation</a><ul>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics</span></code></a><ul>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.input_file_path"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.input_file_path</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.output_dir"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.output_dir</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.grid"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.grid</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.time_step_id"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.time_step_id</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.wells"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.wells</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.injectors"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.injectors</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.producers"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.producers</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.binary_reader"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.binary_reader</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._compute_TOF_and_tracer"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._compute_TOF_and_tracer()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._compute_flow_allocation"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._compute_flow_allocation()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._compute_flow_allocations"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._compute_flow_allocations()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._compute_other_diagnostics"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._compute_other_diagnostics()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._detect_simulator"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._detect_simulator()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_flux_CMG"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_flux_CMG()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_flux_ECL"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_flux_ECL()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_flux_from_restart_file"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_flux_from_restart_file()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_grid_CMG"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_grid_CMG()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_grid_ECL"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_grid_ECL()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_simulator_dynamic_output"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_simulator_dynamic_output()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_static_simulator_output"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_static_simulator_output()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_well_completion_CMG"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_well_completion_CMG()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._read_well_completion_ECL"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._read_well_completion_ECL()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._resolve_path"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._resolve_path()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._set_simulator_specific_methods"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._set_simulator_specific_methods()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._setup_output_directory"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._setup_output_directory()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._solve_TOF_tracer"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._solve_TOF_tracer()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._write_allocation_factors"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._write_allocation_factors()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._write_grid_flow_diagnostics"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._write_grid_flow_diagnostics()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics._write_other_flow_diagnostics"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics._write_other_flow_diagnostics()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.compute_F_and_Phi"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.compute_F_and_Phi()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.compute_Lorenz"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.compute_Lorenz()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.compute_partition"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.compute_partition()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.compute_sweep"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.compute_sweep()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.compute_well_pair_ids"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.compute_well_pair_ids()</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.FlowDiagnostics.execute"><code class="docutils literal notranslate"><span class="pre">FlowDiagnostics.execute()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#flow_diagnostics.SimulatorType"><code class="docutils literal notranslate"><span class="pre">SimulatorType</span></code></a><ul>
+<li><a class="reference internal" href="#flow_diagnostics.SimulatorType.CMG"><code class="docutils literal notranslate"><span class="pre">SimulatorType.CMG</span></code></a></li>
+<li><a class="reference internal" href="#flow_diagnostics.SimulatorType.ECL"><code class="docutils literal notranslate"><span class="pre">SimulatorType.ECL</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grid.Grid"><code class="docutils literal notranslate"><span class="pre">Grid</span></code></a><ul>
+<li><a class="reference internal" href="#grid.Grid.nx"><code class="docutils literal notranslate"><span class="pre">Grid.nx</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.ny"><code class="docutils literal notranslate"><span class="pre">Grid.ny</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.nz"><code class="docutils literal notranslate"><span class="pre">Grid.nz</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.nn"><code class="docutils literal notranslate"><span class="pre">Grid.nn</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.num_max_dims"><code class="docutils literal notranslate"><span class="pre">Grid.num_max_dims</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.num_max_phases"><code class="docutils literal notranslate"><span class="pre">Grid.num_max_phases</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.single_layer"><code class="docutils literal notranslate"><span class="pre">Grid.single_layer</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.porv"><code class="docutils literal notranslate"><span class="pre">Grid.porv</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.actnum"><code class="docutils literal notranslate"><span class="pre">Grid.actnum</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.actnum_bool"><code class="docutils literal notranslate"><span class="pre">Grid.actnum_bool</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.num_active_cells"><code class="docutils literal notranslate"><span class="pre">Grid.num_active_cells</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.dual_poro"><code class="docutils literal notranslate"><span class="pre">Grid.dual_poro</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.NNC"><code class="docutils literal notranslate"><span class="pre">Grid.NNC</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid._flux_keys</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._NNC_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid._NNC_flux_keys</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._q_xyz"><code class="docutils literal notranslate"><span class="pre">Grid._q_xyz</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._conx"><code class="docutils literal notranslate"><span class="pre">Grid._conx</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._valid_conx_idx"><code class="docutils literal notranslate"><span class="pre">Grid._valid_conx_idx</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._Qxyz_flattened"><code class="docutils literal notranslate"><span class="pre">Grid._Qxyz_flattened</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._compute_connections"><code class="docutils literal notranslate"><span class="pre">Grid._compute_connections()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._initialize_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid._initialize_flux_keys()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._initialize_fvf_keys"><code class="docutils literal notranslate"><span class="pre">Grid._initialize_fvf_keys()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._set_NNC"><code class="docutils literal notranslate"><span class="pre">Grid._set_NNC()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._set_dual_poro"><code class="docutils literal notranslate"><span class="pre">Grid._set_dual_poro()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid._total_dir_flux"><code class="docutils literal notranslate"><span class="pre">Grid._total_dir_flux()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.compute_flux_reservoir_cond"><code class="docutils literal notranslate"><span class="pre">Grid.compute_flux_reservoir_cond()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.compute_outflow"><code class="docutils literal notranslate"><span class="pre">Grid.compute_outflow()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.compute_total_fluxes"><code class="docutils literal notranslate"><span class="pre">Grid.compute_total_fluxes()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.get_NNC_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid.get_NNC_flux_keys()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.get_connections"><code class="docutils literal notranslate"><span class="pre">Grid.get_connections()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.get_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid.get_flux_keys()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.get_inv_fvf_keys"><code class="docutils literal notranslate"><span class="pre">Grid.get_inv_fvf_keys()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.get_total_flux_flattened"><code class="docutils literal notranslate"><span class="pre">Grid.get_total_flux_flattened()</span></code></a></li>
+<li><a class="reference internal" href="#grid.Grid.ijk_from_I_J_K"><code class="docutils literal notranslate"><span class="pre">Grid.ijk_from_I_J_K()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#well.Completion"><code class="docutils literal notranslate"><span class="pre">Completion</span></code></a><ul>
+<li><a class="reference internal" href="#well.Completion.id"><code class="docutils literal notranslate"><span class="pre">Completion.id</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.I"><code class="docutils literal notranslate"><span class="pre">Completion.I</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.J"><code class="docutils literal notranslate"><span class="pre">Completion.J</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.K"><code class="docutils literal notranslate"><span class="pre">Completion.K</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.status"><code class="docutils literal notranslate"><span class="pre">Completion.status</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.IJK"><code class="docutils literal notranslate"><span class="pre">Completion.IJK</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.flow_rate"><code class="docutils literal notranslate"><span class="pre">Completion.flow_rate</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion._set_status"><code class="docutils literal notranslate"><span class="pre">Completion._set_status()</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.set_flow_rate"><code class="docutils literal notranslate"><span class="pre">Completion.set_flow_rate()</span></code></a></li>
+<li><a class="reference internal" href="#well.Completion.set_ijk"><code class="docutils literal notranslate"><span class="pre">Completion.set_ijk()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#well.Well"><code class="docutils literal notranslate"><span class="pre">Well</span></code></a><ul>
+<li><a class="reference internal" href="#well.Well.name"><code class="docutils literal notranslate"><span class="pre">Well.name</span></code></a></li>
+<li><a class="reference internal" href="#well.Well.type"><code class="docutils literal notranslate"><span class="pre">Well.type</span></code></a></li>
+<li><a class="reference internal" href="#well.Well.completions"><code class="docutils literal notranslate"><span class="pre">Well.completions</span></code></a></li>
+<li><a class="reference internal" href="#well.Well.num_active_completions"><code class="docutils literal notranslate"><span class="pre">Well.num_active_completions</span></code></a></li>
+<li><a class="reference internal" href="#well.Well._set_type"><code class="docutils literal notranslate"><span class="pre">Well._set_type()</span></code></a></li>
+<li><a class="reference internal" href="#well.Well.add_completion"><code class="docutils literal notranslate"><span class="pre">Well.add_completion()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pyfd</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PyFD Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pyfd_doc.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-flow_diagnostics">
+<span id="pyfd-documentation"></span><h1>PyFD Documentation<a class="headerlink" href="#module-flow_diagnostics" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">flow_diagnostics.</span></span><span class="sig-name descname"><span class="pre">FlowDiagnostics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics" title="Link to this definition"></a></dt>
+<dd><p>Computes and analyzes flow diagnostics from reservoir simulation results.</p>
+<p>This class reads simulation outputs, calculates time-of-flight (TOF),
+tracer concentrations, flow allocation factors, and other diagnostic parameters.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.input_file_path">
+<span class="sig-name descname"><span class="pre">input_file_path</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.input_file_path" title="Link to this definition"></a></dt>
+<dd><p>Path to the simulation input file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.output_dir">
+<span class="sig-name descname"><span class="pre">output_dir</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.output_dir" title="Link to this definition"></a></dt>
+<dd><p>Directory where output files are saved.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.grid">
+<span class="sig-name descname"><span class="pre">grid</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.grid" title="Link to this definition"></a></dt>
+<dd><p>Grid object representing the reservoir grid.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#grid.Grid" title="grid.Grid">Grid</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.time_step_id">
+<span class="sig-name descname"><span class="pre">time_step_id</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.time_step_id" title="Link to this definition"></a></dt>
+<dd><p>Current time step ID being processed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Optional[int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.wells">
+<span class="sig-name descname"><span class="pre">wells</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.wells" title="Link to this definition"></a></dt>
+<dd><p>Dictionary of Well objects, keyed by well name.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[str, <a class="reference internal" href="#well.Well" title="well.Well">Well</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.injectors">
+<span class="sig-name descname"><span class="pre">injectors</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.injectors" title="Link to this definition"></a></dt>
+<dd><p>List of injector Well objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#well.Well" title="well.Well">Well</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.producers">
+<span class="sig-name descname"><span class="pre">producers</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.producers" title="Link to this definition"></a></dt>
+<dd><p>List of producer Well objects.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#well.Well" title="well.Well">Well</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.binary_reader">
+<span class="sig-name descname"><span class="pre">binary_reader</span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.binary_reader" title="Link to this definition"></a></dt>
+<dd><p>Instance of the Eclipse or CMG binary file reader.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>EclReader | CmgReader</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._compute_TOF_and_tracer">
+<span class="sig-name descname"><span class="pre">_compute_TOF_and_tracer</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._compute_TOF_and_tracer" title="Link to this definition"></a></dt>
+<dd><p>Computes Time-of-Flight (TOF) and tracer concentrations.</p>
+<p>This method calculates TOF and tracer distributions for both injectors and
+producers.  It calls the <cite>_solve_TOF_tracer</cite> method for each well type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the TOF and tracer computations were successful, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._compute_flow_allocation">
+<span class="sig-name descname"><span class="pre">_compute_flow_allocation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wells</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">C_matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._compute_flow_allocation" title="Link to this definition"></a></dt>
+<dd><p>Helper function to compute flow allocation matrices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>wells</strong> (<em>list</em><em>[</em><a class="reference internal" href="#well.Well" title="well.Well"><em>Well</em></a><em>]</em>) – List of Well objects (injectors or producers).</p></li>
+<li><p><strong>C_matrix</strong> (<em>np.ndarray</em>) – Tracer concentration matrix.</p></li>
+<li><p><strong>target_names</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Names of the target wells.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>DataFrame containing the flow allocation matrix.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._compute_flow_allocations">
+<span class="sig-name descname"><span class="pre">_compute_flow_allocations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._compute_flow_allocations" title="Link to this definition"></a></dt>
+<dd><p>Computes flow allocation matrices for injectors and producers.</p>
+<p>This method calculates and stores flow allocation factors, which indicate
+how much each injector contributes to each producer (and vice-versa).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._compute_other_diagnostics">
+<span class="sig-name descname"><span class="pre">_compute_other_diagnostics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._compute_other_diagnostics" title="Link to this definition"></a></dt>
+<dd><p>Computes additional flow diagnostics (F-Phi plots, sweep efficiency, etc.).</p>
+<p>This method calculates and saves additional flow diagnostics based on computed
+TOF and tracer results. Handles both single and dual porosity cases.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._detect_simulator">
+<span class="sig-name descname"><span class="pre">_detect_simulator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#flow_diagnostics.SimulatorType" title="flow_diagnostics.SimulatorType"><span class="pre">SimulatorType</span></a></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._detect_simulator" title="Link to this definition"></a></dt>
+<dd><p>Detects the type of simulator from the file extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The detected simulator type.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#flow_diagnostics.SimulatorType" title="flow_diagnostics.SimulatorType">SimulatorType</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_flux_CMG">
+<span class="sig-name descname"><span class="pre">_read_flux_CMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_flux_CMG" title="Link to this definition"></a></dt>
+<dd><p>Read flux outputs from sr3 file, then convert them into Eclipse style format.</p>
+<blockquote>
+<div><p>Assumptions based on some experiments (no documentation found in the CMG manuals):
+- with FLUXCON keyword, fluxes for all phases: “FLUXCONW”, “FLUXCONO”, “FLUXCONG” are always generated,</p>
+<blockquote>
+<div><p>even in single/two-phase flow cases.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Flux values are in reservoir condition.</p></li>
+<li><p>connection_dir &gt; 3 means NNCs (1: I-dir, 2: J-dir, and 3: K-dir)</p></li>
+</ul>
+</div></blockquote>
+<p>Returns: Dictionaries containing standard fluxes and NNC fluxes</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_flux_ECL">
+<span class="sig-name descname"><span class="pre">_read_flux_ECL</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_flux_ECL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_flux_from_restart_file">
+<span class="sig-name descname"><span class="pre">_read_flux_from_restart_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_flux_from_restart_file" title="Link to this definition"></a></dt>
+<dd><p>Reads flux data for the given time step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keys</strong> (<em>list</em>) – List of flux keys to read (“FLROILI+”, “FLROILJ+”, “FLRWATI+”, “FLRWATJ+”, etc.).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of flux data, keyed by the provided keys.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>IOError</strong> – If flux data cannot be read.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_grid_CMG">
+<span class="sig-name descname"><span class="pre">_read_grid_CMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_grid_CMG" title="Link to this definition"></a></dt>
+<dd><p>Reads static simulator output (simulator type: CMG).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_grid_ECL">
+<span class="sig-name descname"><span class="pre">_read_grid_ECL</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_grid_ECL" title="Link to this definition"></a></dt>
+<dd><p>Reads static simulator output (simulator type: ECL).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_simulator_dynamic_output">
+<span class="sig-name descname"><span class="pre">_read_simulator_dynamic_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_simulator_dynamic_output" title="Link to this definition"></a></dt>
+<dd><p>Reads dynamic simulator output including fluxes and well completions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_static_simulator_output">
+<span class="sig-name descname"><span class="pre">_read_static_simulator_output</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#grid.Grid" title="grid.Grid"><span class="pre">Grid</span></a></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_static_simulator_output" title="Link to this definition"></a></dt>
+<dd><p>Reads static simulator output.
+Initialize grid object that manages necessary for flow diagnostics (pore volume, fluxes, connections, etc.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Grid object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#grid.Grid" title="grid.Grid">Grid</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_well_completion_CMG">
+<span class="sig-name descname"><span class="pre">_read_well_completion_CMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_well_completion_CMG" title="Link to this definition"></a></dt>
+<dd><p>Reads well completions from sr3 file.</p>
+<p>Assumptions  (no documentation found in the CMG manuals):
+- well type:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>WELLOPMO &gt; 0: injector</p></li>
+<li><p>WELLOPMO &lt; 0: producer</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>well status
+* WELLSTATE = 0: OPEN
+* WELLSTATE = 1: SHUT</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_well_completion_ECL">
+<span class="sig-name descname"><span class="pre">_read_well_completion_ECL</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_well_completion_ECL" title="Link to this definition"></a></dt>
+<dd><p>Reads well completions from restart file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._resolve_path">
+<span class="sig-name descname"><span class="pre">_resolve_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._resolve_path" title="Link to this definition"></a></dt>
+<dd><p>Resolves an absolute file path.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._set_simulator_specific_methods">
+<span class="sig-name descname"><span class="pre">_set_simulator_specific_methods</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._set_simulator_specific_methods" title="Link to this definition"></a></dt>
+<dd><p>Sets the appropriate methods and binary reader based on simulator type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._setup_output_directory">
+<span class="sig-name descname"><span class="pre">_setup_output_directory</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._setup_output_directory" title="Link to this definition"></a></dt>
+<dd><p>Sets up the output directory for results.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path to the created output directory.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._solve_TOF_tracer">
+<span class="sig-name descname"><span class="pre">_solve_TOF_tracer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">wells</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#well.Well" title="well.Well"><span class="pre">Well</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._solve_TOF_tracer" title="Link to this definition"></a></dt>
+<dd><p>Solves the Time-of-Flight (TOF) and tracer equations for the given source wells.</p>
+<p>This method constructs and solves a sparse linear system to determine the TOF
+and tracer concentrations in each grid cell.  It handles both injector and
+producer wells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>wells</strong> (<em>list</em><em>[</em><a class="reference internal" href="#well.Well" title="well.Well"><em>Well</em></a><em>]</em>) – A list of <cite>Well</cite> objects representing the source wells
+(either injectors or producers).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>tof (np.ndarray): A 1D NumPy array of Time-of-Flight values for each grid cell.</p></li>
+<li><p>tracer (np.ndarray): A 2D NumPy array of tracer concentrations. Each column
+corresponds to a source well, and each row corresponds to a grid cell.</p></li>
+<li><p>partition (np.ndarray): A 1D NumPy array representing the partition of each
+grid cell based on tracer concentration.</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._write_allocation_factors">
+<span class="sig-name descname"><span class="pre">_write_allocation_factors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_inj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_prd</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._write_allocation_factors" title="Link to this definition"></a></dt>
+<dd><p>Saves flow allocation factors to an Excel file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df_inj</strong> (<em>pd.DataFrame</em>) – DataFrame of injector flow allocation.</p></li>
+<li><p><strong>df_prd</strong> (<em>pd.DataFrame</em>) – DataFrame of producer flow allocation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._write_grid_flow_diagnostics">
+<span class="sig-name descname"><span class="pre">_write_grid_flow_diagnostics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._write_grid_flow_diagnostics" title="Link to this definition"></a></dt>
+<dd><p>Writes flow diagnostics results to a GRDECL file.</p>
+<p>Saves computed TOF (Time-of-Flight) and partitioning data to a GRDECL file for visualization in Petrel.
+Handles both single and dual porosity cases and replaces NaN values appropriately.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if writing to the GRDECL file was successful, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._write_other_flow_diagnostics">
+<span class="sig-name descname"><span class="pre">_write_other_flow_diagnostics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._write_other_flow_diagnostics" title="Link to this definition"></a></dt>
+<dd><p>Generates and saves flow diagnostics plots (F-Phi, tracer concentration)
+and writes outputs into csv files.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.compute_F_and_Phi">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_F_and_Phi</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.compute_F_and_Phi" title="Link to this definition"></a></dt>
+<dd><p>Computes the flow-capacity/storage-capacity diagram (F, Phi).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pv</strong> (<em>np.ndarray</em>) – A 1D NumPy array of pore volumes for each grid cell.</p></li>
+<li><p><strong>tof</strong> (<em>np.ndarray</em>) – A 2D NumPy array of time-of-flight values from injector and
+producer, per cell.  Should have two columns.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>F (np.ndarray): Flow capacity (cumulative flux).</p></li>
+<li><p>Phi (np.ndarray): Storage capacity (cumulative pore volume).</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.compute_Lorenz">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_Lorenz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.compute_Lorenz" title="Link to this definition"></a></dt>
+<dd><p>Computes the Lorenz coefficient, a measure of heterogeneity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>F</strong> (<em>np.ndarray</em>) – Flow capacity.</p></li>
+<li><p><strong>Phi</strong> (<em>np.ndarray</em>) – Storage capacity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Lorenz coefficient.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.compute_partition">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_partition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">C</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.compute_partition" title="Link to this definition"></a></dt>
+<dd><p>Computes the partition of grid cells based on tracer concentrations.</p>
+<dl class="simple">
+<dt>This static method determines which source well (injector, or producer with a reversed flux field)</dt><dd><p>has the highest tracer concentration in each grid cell.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>C</strong> (<em>np.ndarray</em>) – A 2D NumPy array of tracer concentrations.  The shape should
+be (number of grid cells, number of injectors).</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A 1D NumPy array representing the partition. Each element</dt><dd><p>corresponds to a grid cell and indicates the index (1-based) of the
+source well with the maximum absolute tracer concentration.  NaN values
+are assigned where the maximum concentration is 0 or NaN.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.compute_sweep">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_sweep</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">F</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Phi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.compute_sweep" title="Link to this definition"></a></dt>
+<dd><p>Computes sweep efficiency versus dimensionless time (PVI).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>F</strong> (<em>np.ndarray</em>) – Flow capacity.</p></li>
+<li><p><strong>Phi</strong> (<em>np.ndarray</em>) – Storage capacity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing:</dt><dd><ul class="simple">
+<li><p>Ev (np.ndarray): Sweep efficiency.</p></li>
+<li><p>tD (np.ndarray): Dimensionless time (PVI).</p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[np.ndarray, np.ndarray]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.compute_well_pair_ids">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_well_pair_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partP</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.compute_well_pair_ids" title="Link to this definition"></a></dt>
+<dd><p>Computes the partition of grid cells based on tracer concentrations.</p>
+<dl class="simple">
+<dt>This static method determines which source well (injector, or producer with a reversed flux field)</dt><dd><p>has the highest tracer concentration in each grid cell.</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>partI</strong> (<em>np.ndarray</em>) – A 2D NumPy array of partition ids (injectors).</p></li>
+<li><p><strong>partP</strong> (<em>np.ndarray</em>) – A 2D NumPy array of partition ids (producers).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A 1D NumPy array representing the well pair ids.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.execute">
+<span class="sig-name descname"><span class="pre">execute</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time_step_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.execute" title="Link to this definition"></a></dt>
+<dd><p>Executes the flow diagnostics analysis for a given time step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>time_step_id</strong> (<em>int</em>) – The time step ID to process.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="flow_diagnostics.SimulatorType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">flow_diagnostics.</span></span><span class="sig-name descname"><span class="pre">SimulatorType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.SimulatorType" title="Link to this definition"></a></dt>
+<dd><p>Enum class for simulator type</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.SimulatorType.CMG">
+<span class="sig-name descname"><span class="pre">CMG</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'CMG'</span></em><a class="headerlink" href="#flow_diagnostics.SimulatorType.CMG" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="flow_diagnostics.SimulatorType.ECL">
+<span class="sig-name descname"><span class="pre">ECL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ECL'</span></em><a class="headerlink" href="#flow_diagnostics.SimulatorType.ECL" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-grid">
+<dt class="sig sig-object py" id="grid.Grid">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">grid.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">porv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dp_flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_NNC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#grid.Grid" title="Link to this definition"></a></dt>
+<dd><p>Manages grid properties and fluxes.</p>
+<p>Stores grid dimensions, pore volume, active cell information,
+and handles flux calculations. Supports dual porosity and
+non-neighboring connections (NNCs).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.nx">
+<span class="sig-name descname"><span class="pre">nx</span></span><a class="headerlink" href="#grid.Grid.nx" title="Link to this definition"></a></dt>
+<dd><p>Number of grid cells in the x-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.ny">
+<span class="sig-name descname"><span class="pre">ny</span></span><a class="headerlink" href="#grid.Grid.ny" title="Link to this definition"></a></dt>
+<dd><p>Number of grid cells in the y-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.nz">
+<span class="sig-name descname"><span class="pre">nz</span></span><a class="headerlink" href="#grid.Grid.nz" title="Link to this definition"></a></dt>
+<dd><p>Number of grid cells in the z-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.nn">
+<span class="sig-name descname"><span class="pre">nn</span></span><a class="headerlink" href="#grid.Grid.nn" title="Link to this definition"></a></dt>
+<dd><p>Total number of grid cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.num_max_dims">
+<span class="sig-name descname"><span class="pre">num_max_dims</span></span><a class="headerlink" href="#grid.Grid.num_max_dims" title="Link to this definition"></a></dt>
+<dd><p>Maximum number of dimensions (typically 3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.num_max_phases">
+<span class="sig-name descname"><span class="pre">num_max_phases</span></span><a class="headerlink" href="#grid.Grid.num_max_phases" title="Link to this definition"></a></dt>
+<dd><p>Maximum number of fluid phases (typically 3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.single_layer">
+<span class="sig-name descname"><span class="pre">single_layer</span></span><a class="headerlink" href="#grid.Grid.single_layer" title="Link to this definition"></a></dt>
+<dd><p>True if the grid has only one layer (nz == 1 or nz==2 in DP).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.porv">
+<span class="sig-name descname"><span class="pre">porv</span></span><a class="headerlink" href="#grid.Grid.porv" title="Link to this definition"></a></dt>
+<dd><p>Pore volume array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.actnum">
+<span class="sig-name descname"><span class="pre">actnum</span></span><a class="headerlink" href="#grid.Grid.actnum" title="Link to this definition"></a></dt>
+<dd><p>Active cell mask (1 for active cells, 0 otherwise).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.actnum_bool">
+<span class="sig-name descname"><span class="pre">actnum_bool</span></span><a class="headerlink" href="#grid.Grid.actnum_bool" title="Link to this definition"></a></dt>
+<dd><p>Boolean array indicating active cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.num_active_cells">
+<span class="sig-name descname"><span class="pre">num_active_cells</span></span><a class="headerlink" href="#grid.Grid.num_active_cells" title="Link to this definition"></a></dt>
+<dd><p>Number of active grid cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.dual_poro">
+<span class="sig-name descname"><span class="pre">dual_poro</span></span><a class="headerlink" href="#grid.Grid.dual_poro" title="Link to this definition"></a></dt>
+<dd><p>True if dual porosity is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid.NNC">
+<span class="sig-name descname"><span class="pre">NNC</span></span><a class="headerlink" href="#grid.Grid.NNC" title="Link to this definition"></a></dt>
+<dd><p>True if non-neighboring connections (NNCs) are enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid._flux_keys">
+<span class="sig-name descname"><span class="pre">_flux_keys</span></span><a class="headerlink" href="#grid.Grid._flux_keys" title="Link to this definition"></a></dt>
+<dd><p>List of flux keys for standard connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid._NNC_flux_keys">
+<span class="sig-name descname"><span class="pre">_NNC_flux_keys</span></span><a class="headerlink" href="#grid.Grid._NNC_flux_keys" title="Link to this definition"></a></dt>
+<dd><p>List of flux keys for NNC connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid._q_xyz">
+<span class="sig-name descname"><span class="pre">_q_xyz</span></span><a class="headerlink" href="#grid.Grid._q_xyz" title="Link to this definition"></a></dt>
+<dd><p>Array of phase fluxes in all directions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_Qx,</span> <span class="pre">_Qy,</span> <span class="pre">_Qz</span></span></dt>
+<dd><p>Flux arrays in x, y, and z directions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid._conx">
+<span class="sig-name descname"><span class="pre">_conx</span></span><a class="headerlink" href="#grid.Grid._conx" title="Link to this definition"></a></dt>
+<dd><p>Connection matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid._valid_conx_idx">
+<span class="sig-name descname"><span class="pre">_valid_conx_idx</span></span><a class="headerlink" href="#grid.Grid._valid_conx_idx" title="Link to this definition"></a></dt>
+<dd><p>Boolean array indicating valid connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="grid.Grid._Qxyz_flattened">
+<span class="sig-name descname"><span class="pre">_Qxyz_flattened</span></span><a class="headerlink" href="#grid.Grid._Qxyz_flattened" title="Link to this definition"></a></dt>
+<dd><p>Flattened array of all valid fluxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid._compute_connections">
+<span class="sig-name descname"><span class="pre">_compute_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#grid.Grid._compute_connections" title="Link to this definition"></a></dt>
+<dd><p>Computes the connection matrix
+conx (np.ndarray): connextion matrix. Each row represents a connection</p>
+<blockquote>
+<div><p>between two grid cells.</p>
+</div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid._initialize_flux_keys">
+<span class="sig-name descname"><span class="pre">_initialize_flux_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#grid.Grid._initialize_flux_keys" title="Link to this definition"></a></dt>
+<dd><p>Initializes the flux keys for standard and non-neighbor connections.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid._initialize_fvf_keys">
+<span class="sig-name descname"><span class="pre">_initialize_fvf_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#grid.Grid._initialize_fvf_keys" title="Link to this definition"></a></dt>
+<dd><p>Initializes the inverse of formation volume factor (STB/RB).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid._set_NNC">
+<span class="sig-name descname"><span class="pre">_set_NNC</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dict_NNC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#grid.Grid._set_NNC" title="Link to this definition"></a></dt>
+<dd><p>Configures the grid for NNCs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dict_NNC</strong> (<em>dict</em>) – Dictionary containing egrid data (NNC1, NNC2).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid._set_dual_poro">
+<span class="sig-name descname"><span class="pre">_set_dual_poro</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dp_flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#grid.Grid._set_dual_poro" title="Link to this definition"></a></dt>
+<dd><p>Configures the grid for dual porosity.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dp_flag</strong> (<em>int</em>) – Dual porosity flag (0 for single porosity, 1 or 2 for dual porosity).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid._total_dir_flux">
+<span class="sig-name descname"><span class="pre">_total_dir_flux</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">q_xyz</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dir_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#grid.Grid._total_dir_flux" title="Link to this definition"></a></dt>
+<dd><p>Computes total flux in a specific direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>q_xyz</strong> (<em>np.ndarray</em>) – Flux array.</p></li>
+<li><p><strong>dir_id</strong> (<em>int</em>) – Direction index (1: x, 2: y, 3: z).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Total flux values in the specified direction.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.compute_flux_reservoir_cond">
+<span class="sig-name descname"><span class="pre">compute_flux_reservoir_cond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_inv_fvf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#grid.Grid.compute_flux_reservoir_cond" title="Link to this definition"></a></dt>
+<dd><p>Computes fluxes in reservoir condition using fluxes in surface condition and formation volume factors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d_fluxes</strong> (<em>dict</em>) – Dictionary of flux data for standard connections.</p></li>
+<li><p><strong>d_inv_fvf</strong> (<em>dict</em>) – Dictionary of inverse formation volume factors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>fluxes in reservoir condition.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.compute_outflow">
+<span class="sig-name descname"><span class="pre">compute_outflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#grid.Grid.compute_outflow" title="Link to this definition"></a></dt>
+<dd><p>Computes outflow at a given grid cell (I, J, K).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>int</em>) – I-index of the grid cell.</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – J-index of the grid cell.</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – K-index of the grid cell.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outflow at the grid cell. Positive: injection, negative: production.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.compute_total_fluxes">
+<span class="sig-name descname"><span class="pre">compute_total_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_NNC_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#grid.Grid.compute_total_fluxes" title="Link to this definition"></a></dt>
+<dd><p>Computes and stores total fluxes, including NNC fluxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d_fluxes</strong> (<em>dict</em>) – Dictionary of flux data for reservoir connections.</p></li>
+<li><p><strong>d_NNC_fluxes</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of flux data for NNC connections. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.get_NNC_flux_keys">
+<span class="sig-name descname"><span class="pre">get_NNC_flux_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.Grid.get_NNC_flux_keys" title="Link to this definition"></a></dt>
+<dd><p>Returns the flux keys for NNC connections, if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of NNC flux keys, or None if NNCs are not enabled.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.get_connections">
+<span class="sig-name descname"><span class="pre">get_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.Grid.get_connections" title="Link to this definition"></a></dt>
+<dd><p>Returns the connection matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connection matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.get_flux_keys">
+<span class="sig-name descname"><span class="pre">get_flux_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.Grid.get_flux_keys" title="Link to this definition"></a></dt>
+<dd><p>Returns the flux keys for standard connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of flux keys.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.get_inv_fvf_keys">
+<span class="sig-name descname"><span class="pre">get_inv_fvf_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.Grid.get_inv_fvf_keys" title="Link to this definition"></a></dt>
+<dd><p>Returns the inverse FVF keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of inverse FVF keys.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.get_total_flux_flattened">
+<span class="sig-name descname"><span class="pre">get_total_flux_flattened</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#grid.Grid.get_total_flux_flattened" title="Link to this definition"></a></dt>
+<dd><p>Returns the total flux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The flattened total flux.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="grid.Grid.ijk_from_I_J_K">
+<span class="sig-name descname"><span class="pre">ijk_from_I_J_K</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#grid.Grid.ijk_from_I_J_K" title="Link to this definition"></a></dt>
+<dd><p>Calculates the ijk index from I, J, K indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>int</em>) – I-index of the grid cell.</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – J-index of the grid cell.</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – K-index of the grid cell.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ijk index of the grid cell.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-well">
+<dt class="sig sig-object py" id="well.Completion">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">well.</span></span><span class="sig-name descname"><span class="pre">Completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#well.Completion" title="Link to this definition"></a></dt>
+<dd><p>Represents a well completion.</p>
+<p>A completion defines a connection between a well and a grid cell.  It stores
+information about the completion’s location, status (open or shut), and
+flow direction.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.id">
+<span class="sig-name descname"><span class="pre">id</span></span><a class="headerlink" href="#well.Completion.id" title="Link to this definition"></a></dt>
+<dd><p>Completion ID.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.I">
+<span class="sig-name descname"><span class="pre">I</span></span><a class="headerlink" href="#well.Completion.I" title="Link to this definition"></a></dt>
+<dd><p>I-index of the grid cell (1-based).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.J">
+<span class="sig-name descname"><span class="pre">J</span></span><a class="headerlink" href="#well.Completion.J" title="Link to this definition"></a></dt>
+<dd><p>J-index of the grid cell (1-based).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.K">
+<span class="sig-name descname"><span class="pre">K</span></span><a class="headerlink" href="#well.Completion.K" title="Link to this definition"></a></dt>
+<dd><p>K-index of the grid cell (1-based).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.status">
+<span class="sig-name descname"><span class="pre">status</span></span><a class="headerlink" href="#well.Completion.status" title="Link to this definition"></a></dt>
+<dd><p>Completion status (“OPEN” or “SHUT”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.IJK">
+<span class="sig-name descname"><span class="pre">IJK</span></span><a class="headerlink" href="#well.Completion.IJK" title="Link to this definition"></a></dt>
+<dd><p>Linear index of the grid cell (1-based).  This is set using the
+<cite>set_ijk</cite> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Completion.flow_rate">
+<span class="sig-name descname"><span class="pre">flow_rate</span></span><a class="headerlink" href="#well.Completion.flow_rate" title="Link to this definition"></a></dt>
+<dd><p>Flow rate at the completion. Positive: injection,
+negative: production. This is set using the <cite>set_out_flow_rate</cite> method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="well.Completion._set_status">
+<span class="sig-name descname"><span class="pre">_set_status</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stat_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#well.Completion._set_status" title="Link to this definition"></a></dt>
+<dd><p>Sets the completion status.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stat_id</strong> (<em>int</em>) – Status ID (positive for open, other values for shut).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="well.Completion.set_flow_rate">
+<span class="sig-name descname"><span class="pre">set_flow_rate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#well.Completion.set_flow_rate" title="Link to this definition"></a></dt>
+<dd><p>Sets the flow rate at the completion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>val</strong> (<em>float</em>) – Flow rate. Positive: injection, negative: production.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="well.Completion.set_ijk">
+<span class="sig-name descname"><span class="pre">set_ijk</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ijk</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#well.Completion.set_ijk" title="Link to this definition"></a></dt>
+<dd><p>Sets the linear grid cell index (IJK).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ijk</strong> (<em>int</em>) – Linear index of the grid cell (0-based).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="well.Well">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">well.</span></span><span class="sig-name descname"><span class="pre">Well</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#well.Well" title="Link to this definition"></a></dt>
+<dd><p>Represents a well.</p>
+<p>A well has a name, type (producer or injector), and a list of completions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Well.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#well.Well.name" title="Link to this definition"></a></dt>
+<dd><p>Name of the well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Well.type">
+<span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#well.Well.type" title="Link to this definition"></a></dt>
+<dd><p>Type of well (“PRD”, “OILINJ”, “WATINJ”, or “GASINJ”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Well.completions">
+<span class="sig-name descname"><span class="pre">completions</span></span><a class="headerlink" href="#well.Well.completions" title="Link to this definition"></a></dt>
+<dd><p>List of Completion objects associated with the well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list[<a class="reference internal" href="#well.Completion" title="well.Completion">Completion</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="well.Well.num_active_completions">
+<span class="sig-name descname"><span class="pre">num_active_completions</span></span><a class="headerlink" href="#well.Well.num_active_completions" title="Link to this definition"></a></dt>
+<dd><p>Number of active (open) completions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="well.Well._set_type">
+<span class="sig-name descname"><span class="pre">_set_type</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">type_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#well.Well._set_type" title="Link to this definition"></a></dt>
+<dd><p>Sets the well type.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type_id</strong> (<em>int</em>)</p></li>
+<li><p><strong>PRD</strong> (<em>- Well type ID - 1 for</em>)</p></li>
+<li><p><strong>OILINJ</strong> (<em>2 for</em>)</p></li>
+<li><p><strong>WATINJ</strong> (<em>3 for</em>)</p></li>
+<li><p><strong>GASINJ</strong> (<em>4 for</em>)</p></li>
+<li><p><strong>CMG</strong> (<em>- 5 for injector identifier for</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="well.Well.add_completion">
+<span class="sig-name descname"><span class="pre">add_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#well.Well.add_completion" title="Link to this definition"></a></dt>
+<dd><p>Adds a completion to the well.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>int</em>) – I-index of the grid cell (1-based).</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – J-index of the grid cell (1-based).</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – K-index of the grid cell (1-based).</p></li>
+<li><p><strong>stat</strong> (<em>int</em>) – Completion status ID (positive for open, other values for shut).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, Tsubasa Onishi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -120,13 +120,13 @@ class FlowDiagnostics:
 
     def _set_simulator_specific_methods(self) -> None:
         """Sets the appropriate methods and binary reader based on simulator type."""
-        self._simulator_type = self._detect_simulator()
-        if self._simulator_type == SimulatorType.ECL:
+        simulator_type = self._detect_simulator()
+        if simulator_type == SimulatorType.ECL:
             self.binary_reader = EclReader(self.input_file_path)
             self._read_grid = self._read_grid_ECL
             self._read_flux = self._read_flux_ECL
             self._read_well_completion = self._read_well_completion_ECL
-        elif self._simulator_type == SimulatorType.CMG:
+        elif simulator_type == SimulatorType.CMG:
             self.binary_reader = CmgReader(self.input_file_path)
             self._read_grid = self._read_grid_CMG
             self._read_flux = self._read_flux_CMG
@@ -162,6 +162,7 @@ class FlowDiagnostics:
         irregular_conx_idx = np.where(self.connection_dir > 3)[0]  # TODO: Assuming connection_dir>3 means NNC. Not fully tested.
         dict_NNC = {"NNC1": self.cellid1[irregular_conx_idx], "NNC2": self.cellid2[irregular_conx_idx]}
 
+        return dimens, porv, dp_flag, dict_NNC
         return dimens, porv, dp_flag, dict_NNC
 
 
@@ -691,12 +692,11 @@ class FlowDiagnostics:
 
         # --- Write Data to GRDECL File ---
         try:
-            s_end = '/' if self._simulator_type == SimulatorType.ECL else '\n'
             with open(file_path, "w") as fid:
                 for label, data in data_labels.items():
                     fid.write(f"{label}\n")
                     np.savetxt(fid, data, fmt="%e" if "TOF" in label else "%3d")
-                    fid.write(f"{s_end}\n")
+                    fid.write(f"/\n")
 
             logging.info(f"Flow diagnostics results saved to: {file_path}")
             return True

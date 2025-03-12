@@ -1,6 +1,6 @@
 # Flow Diagnostics Toolkit
 
-This repository provides a Python-based tool for flow diagnostics in reservoir simulation. To our knowledge, it is the first open-source, lightweight Python-based finite volume-based flow diagnostics tool coupled with commercial reservoir simulators.
+This repository provides a Python-based tool for flow diagnostics in reservoir simulation. To our knowledge, it is the first open-source, lightweight Python-based flow diagnostics tool coupled with commercial reservoir simulators.
 
 ## Features
 - Read reservoir simulator outputs (fluxes, pore volume, cell connections, well info, etc.)
@@ -21,13 +21,22 @@ conda activate pyfd
 
 ## Usage
 
-Run the tool via the command line:
+**Prerequisites**
+
+Before running pyFD, ensure that you have completed a reservoir simulation and that the output includes all necessary data for flow diagnostics. This should include pore volume, fluxes, cell connections, and well information, stored in the binary output files.
+
+* For SLB simulators (or OPM): ensure that you generate `.INIT` and `.EGRID` files. Additionally, specify `FLORES` under `RPTPST` keyword to output fluxes in reservoir conditions. Alternatively, the tool also works if both fluxes in surface conditions and formation volume factors are available.
+* For CMG simulators: Use `FLUXCON` along with `OUTSRF` keyword to output fluxes in reservoir condition.
+
+**Running the tool**
+
+Via the command line:
 
 ```
 python pyfd_cli.py -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
 ```
 
-### Arguments:
+Arguments:
 - `-f <PATH_TO_SIMULATOR_PRIMARY_INPUT_FILE>`: Path to the reservoir simulation primary input file (.DATA, .AFI, or .DAT).
 - `-t <LIST_OF_TSTEPS_OF_INTEREST>`: List of reservoir simulation output (grid dynamic simulation results) time step indices to run the diagnostics on.
 - `-d`: An optional argument to enable debug mode.

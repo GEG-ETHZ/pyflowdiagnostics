@@ -359,12 +359,15 @@ class Grid:
         """Initializes the flux keys for standard and non-neighbor connections."""
         self._flux_keys = ["FLROILI+", "FLROILJ+", "FLROILK+",
                            "FLRWATI+", "FLRWATJ+", "FLRWATK+",
-                           "FLRGASI+", "FLRGASJ+", "FLRGASK+"] # all posible flux keys (standard connections)
-        self._NNC_flux_keys = ["FLROILN+", "FLRWATN+", "FLRGASN+"] # all posible flux keys (NNCs)
+                           "FLRGASI+", "FLRGASJ+", "FLRGASK+"] # all possible flux keys (standard connections)
+        self._NNC_flux_keys = ["FLROILN+", "FLRWATN+", "FLRGASN+"] # all possible flux keys (NNCs)
 
 
     def _initialize_fvf_keys(self) -> None:
-        """Initializes the inverse of formation volume factor (STB/RB)."""
+        """Initializes the inverse of formation volume factor (STB/RB).
+        This will be used to convert fluxes in surface condition in to fluxes in reservoir volume,
+        in case fluxes in reservoir condition are not available in restart files.
+        """
         self._inv_fvf_keys = ["1OVERBO", "1OVERBW", "1OVERBG"]
 
 

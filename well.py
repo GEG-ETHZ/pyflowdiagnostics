@@ -89,7 +89,7 @@ class Well:
         self._set_type(type_id)
         self.completions = []
         self.num_active_completions = 0
-
+        self.status = "OPEN"
 
     def add_completion(self, I: int, J: int, K: int, stat: int) -> None:
         """Adds a completion to the well.
@@ -103,6 +103,11 @@ class Well:
         self.completions.append(Completion(I, J, K, stat))
         if self.completions[-1].status == "OPEN":
             self.num_active_completions += 1
+
+
+    def set_status(self) -> None:
+        """Set well status based on completion status"""
+        self.status = "SHUT" if self.num_active_completions == 0 else "OPEN"
 
 
     # ---- Private Methods ---------------------------------------------------------------------------------------------

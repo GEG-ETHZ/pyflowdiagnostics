@@ -120,13 +120,13 @@ class FlowDiagnostics:
 
     def _set_simulator_specific_methods(self) -> None:
         """Sets the appropriate methods and binary reader based on simulator type."""
-        simulator_type = self._detect_simulator()
-        if simulator_type == SimulatorType.ECL:
+        self._simulator_type = self._detect_simulator()
+        if self._simulator_type == SimulatorType.ECL:
             self.binary_reader = EclReader(self.input_file_path)
             self._read_grid = self._read_grid_ECL
             self._read_flux = self._read_flux_ECL
             self._read_well_completion = self._read_well_completion_ECL
-        elif simulator_type == SimulatorType.CMG:
+        elif self._simulator_type == SimulatorType.CMG:
             self.binary_reader = CmgReader(self.input_file_path)
             self._read_grid = self._read_grid_CMG
             self._read_flux = self._read_flux_CMG
@@ -328,6 +328,9 @@ class FlowDiagnostics:
                 well.completions[-1].set_ijk(self.grid.ijk_from_I_J_K(I, J, K))
                 well.completions[-1].set_flow_rate(self.grid.compute_outflow(I, J, K))
 
+        # set well status (OPEN/SHUT) according to completion status
+        for name in well_names: self.wells[name].set_status()
+
 
     def _read_well_completion_CMG(self) -> None:
         """Reads well completions from sr3 file.
@@ -504,8 +507,8 @@ class FlowDiagnostics:
             logging.warning("No wells found. Skipping TOF computation.")
             return False
 
-        self.injectors = [well for well in self.wells.values() if well.type == "INJ"]
-        self.producers = [well for well in self.wells.values() if well.type == "PRD"]
+        self.injectors = [well for well in self.wells.values() if well.type == "INJ" and well.status == "OPEN"]
+        self.producers = [well for well in self.wells.values() if well.type == "PRD" and well.status == "OPEN"]
 
         self.tofI, self.CI, self.partI = self._solve_TOF_tracer(self.injectors) if self.injectors else (None, None, None)
         self.tofP, self.CP, self.partP = self._solve_TOF_tracer(self.producers) if self.producers else (None, None, None)
@@ -679,7 +682,7 @@ class FlowDiagnostics:
         for label, data in data_labels.items():
             if np.all(np.isnan(data)):  # If all values are NaN, replace with 0
                 data_labels[label] = np.zeros_like(data)
-                logging.warning(f"All values in {label} are NaN, replacing with zeros.")
+                logging.debug(f"All values in {label} are NaN, replacing with zeros.")
             elif "TOF" in label:
                 data_labels[label] = np.where(np.isnan(data), np.nanmax(data, initial=0),
                                               data)  # Replace NaNs with max valid value
@@ -688,11 +691,12 @@ class FlowDiagnostics:
 
         # --- Write Data to GRDECL File ---
         try:
+            s_end = '/' if self._simulator_type == SimulatorType.ECL else '\n'
             with open(file_path, "w") as fid:
                 for label, data in data_labels.items():
                     fid.write(f"{label}\n")
                     np.savetxt(fid, data, fmt="%e" if "TOF" in label else "%3d")
-                    fid.write("/\n")
+                    fid.write(f"{s_end}\n")
 
             logging.info(f"Flow diagnostics results saved to: {file_path}")
             return True

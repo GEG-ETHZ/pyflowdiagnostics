@@ -101,4 +101,5 @@ class CmgReader:
 
     def _initialize_sr3(self) -> None:
         """Initializes the sr3 file."""
+        logging.info(f"Reading sr3 file: {self.sr3_file_path}. It may take a while...")
         self._sr3 = read_SR3(self.sr3_file_path)

@@ -114,7 +114,7 @@ class Completion:
         self.data = pd.DataFrame()
 
 
-def read_SR3(infile, timeout=120):
+def read_SR3(infile, timeout=240):
     """
     Reads the specified SR3 file and returns an instance of the RawHDF class with all the datasets from infile,
     unless it takes more than timeout seconds. If it takes more then timeout seconds to read the datasets,
@@ -123,11 +123,11 @@ def read_SR3(infile, timeout=120):
     try:
         sr3_file = h5py.File(infile, 'r')
         sr3 = RawHDF(sr3_file, timeout)
-    except Exception as e:
+    except:
         try:
             sr3_file = h5py.File(infile.replace(".sr3",".SR3"), 'r')
             sr3 = RawHDF(sr3_file, timeout)
-        except:
+        except Exception as e:
             raise IOError('Cannot open ' + infile + f' as a HDF file..: {e}')
 
     # Loop through all objects inside the hdf5 file and store the datasets in sr3

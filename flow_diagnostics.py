@@ -74,6 +74,7 @@ class FlowDiagnostics:
         else:
             logging.error("Failed to compute TOF and tracer concentrations.")
 
+
     # ---- Private Methods ---------------------------------------------------------------------------------------------
 
 
@@ -349,12 +350,17 @@ class FlowDiagnostics:
         if t_well_time_series[0] > 0 and self.sp_ind[0] == 0:
             self.sp_ind = self.sp_ind[1:] - 1
 
-        # initialiize well objects
+        # initialize well objects
         self.wells = {}
         for well_name in well_names:
             df = well_time_series[well_name]
 
-            WELLOPMO = df['WELLOPMO'].values[self.sp_ind]
+            if len(df) < self.sp_ind[-1]:  # This case occurs occasionally
+                self.sp_ind = self.sp_ind[self.sp_ind < len(df)]
+            try:
+                WELLOPMO = df['WELLOPMO'].values[self.sp_ind]
+            except:
+                ValueError(f"Required key: 'WELLOPMO' is not found.")
             well_type = 0 # unknown
             if WELLOPMO[self.time_step_id] > 0:
                 well_type = 5 # injector
@@ -364,7 +370,10 @@ class FlowDiagnostics:
 
         # add completions for each well
         pattern = r'(\w+)\{(\d+,\d+,\d+)\}'
-        well_completions = sr3.data['TimeSeries/LAYERS/Origins']
+        try:
+            well_completions = sr3.data['TimeSeries/LAYERS/Origins']
+        except:
+            raise ValueError(f"Required output 'TimeSeries/LAYERS/Origins' is not found.")
         for cmpl_info in well_completions:
             match = re.match(pattern, cmpl_info.decode('utf-8'))
             if match:

@@ -48,7 +48,7 @@ def main():
             fd.execute(time_step)
 
     except Exception as e:
-        logging.error(f"Error: {e}")
+        raise RuntimeError(f"{e}")
 
     logging.info("Run finished normally. Elapsed time: {:.2f} seconds.".format(time.time() - t0))
 

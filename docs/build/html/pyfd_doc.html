@@ -143,6 +143,24 @@
 <li><a class="reference internal" href="#well.Well.num_active_completions"><code class="docutils literal notranslate"><span class="pre">Well.num_active_completions</span></code></a></li>
 <li><a class="reference internal" href="#well.Well._set_type"><code class="docutils literal notranslate"><span class="pre">Well._set_type()</span></code></a></li>
 <li><a class="reference internal" href="#well.Well.add_completion"><code class="docutils literal notranslate"><span class="pre">Well.add_completion()</span></code></a></li>
+<li><a class="reference internal" href="#well.Well.set_status"><code class="docutils literal notranslate"><span class="pre">Well.set_status()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader"><code class="docutils literal notranslate"><span class="pre">EclReader</span></code></a><ul>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.input_file_path"><code class="docutils literal notranslate"><span class="pre">EclReader.input_file_path</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.input_file_path_base"><code class="docutils literal notranslate"><span class="pre">EclReader.input_file_path_base</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.init_file_path"><code class="docutils literal notranslate"><span class="pre">EclReader.init_file_path</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.egrid_file_path"><code class="docutils literal notranslate"><span class="pre">EclReader.egrid_file_path</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.unrst_file_path"><code class="docutils literal notranslate"><span class="pre">EclReader.unrst_file_path</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader._detect_endian"><code class="docutils literal notranslate"><span class="pre">EclReader._detect_endian()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader._initialize_file_names"><code class="docutils literal notranslate"><span class="pre">EclReader._initialize_file_names()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader._int2ext"><code class="docutils literal notranslate"><span class="pre">EclReader._int2ext()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader._load_vector"><code class="docutils literal notranslate"><span class="pre">EclReader._load_vector()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader._read_bin"><code class="docutils literal notranslate"><span class="pre">EclReader._read_bin()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader._validate_input_file"><code class="docutils literal notranslate"><span class="pre">EclReader._validate_input_file()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.read_egrid"><code class="docutils literal notranslate"><span class="pre">EclReader.read_egrid()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.read_init"><code class="docutils literal notranslate"><span class="pre">EclReader.read_init()</span></code></a></li>
+<li><a class="reference internal" href="#ecl_bin_reader.EclReader.read_rst"><code class="docutils literal notranslate"><span class="pre">EclReader.read_rst()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -264,7 +282,7 @@ tracer concentrations, flow allocation factors, and other diagnostic parameters.
 <dd><p>Instance of the Eclipse or CMG binary file reader.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>EclReader | CmgReader</p>
+<dd class="field-odd"><p><a class="reference internal" href="#ecl_bin_reader.EclReader" title="ecl_bin_reader.EclReader">EclReader</a> | CmgReader</p>
 </dd>
 </dl>
 </dd></dl>
@@ -340,18 +358,26 @@ TOF and tracer results. Handles both single and dual porosity cases.</p>
 <dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_flux_CMG">
 <span class="sig-name descname"><span class="pre">_read_flux_CMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_flux_CMG" title="Link to this definition"></a></dt>
 <dd><p>Read flux outputs from sr3 file, then convert them into Eclipse style format.</p>
-<blockquote>
-<div><p>Assumptions based on some experiments (no documentation found in the CMG manuals):
-- with FLUXCON keyword, fluxes for all phases: “FLUXCONW”, “FLUXCONO”, “FLUXCONG” are always generated,</p>
-<blockquote>
-<div><p>even in single/two-phase flow cases.</p>
-</div></blockquote>
+<p>Assumptions based on some experiments (no documentation found in the CMG manuals):</p>
 <ul class="simple">
-<li><p>Flux values are in reservoir condition.</p></li>
-<li><p>connection_dir &gt; 3 means NNCs (1: I-dir, 2: J-dir, and 3: K-dir)</p></li>
+<li><p>With the <cite>FLUXCON</cite> keyword, fluxes for all phases (<cite>FLUXCONW</cite>, <cite>FLUXCONO</cite>, <cite>FLUXCONG</cite>) are always generated,
+even in single/two-phase flow cases.</p></li>
+<li><p>Flux values are in <strong>reservoir conditions</strong>.</p></li>
+<li><p><cite>connection_dir &gt; 3</cite> means <strong>NNCs</strong> (1: I-dir, 2: J-dir, and 3: K-dir).</p></li>
 </ul>
-</div></blockquote>
-<p>Returns: Dictionaries containing standard fluxes and NNC fluxes</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>A tuple containing:</p>
+<ul class="simple">
+<li><p><strong>d_fluxes</strong>: Standard flux dictionary.</p></li>
+<li><p><strong>d_NNC_fluxes</strong>: NNC flux dictionary.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>tuple[dict, dict]</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -365,7 +391,7 @@ TOF and tracer results. Handles both single and dual porosity cases.</p>
 <dd><p>Reads flux data for the given time step.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>keys</strong> (<em>list</em>) – List of flux keys to read (“FLROILI+”, “FLROILJ+”, “FLRWATI+”, “FLRWATJ+”, etc.).</p>
+<dd class="field-odd"><p><strong>keys</strong> (<em>list</em>) – List of flux keys to read (FLROILI+, FLROILJ+, FLRWATI+, FLRWATJ+, etc.).</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>Dictionary of flux data, keyed by the provided keys.</p>
@@ -415,19 +441,17 @@ Initialize grid object that manages necessary for flow diagnostics (pore volume,
 <dl class="py method">
 <dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._read_well_completion_CMG">
 <span class="sig-name descname"><span class="pre">_read_well_completion_CMG</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._read_well_completion_CMG" title="Link to this definition"></a></dt>
-<dd><p>Reads well completions from sr3 file.</p>
-<p>Assumptions  (no documentation found in the CMG manuals):
-- well type:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>WELLOPMO &gt; 0: injector</p></li>
-<li><p>WELLOPMO &lt; 0: producer</p></li>
-</ul>
-</div></blockquote>
+<dd><p>Reads well completions from <cite>sr3</cite> file.</p>
+<p>Assumptions (no documentation found in the CMG manuals):</p>
+<p><strong>Well Type:</strong></p>
 <ul class="simple">
-<li><p>well status
-* WELLSTATE = 0: OPEN
-* WELLSTATE = 1: SHUT</p></li>
+<li><p><cite>WELLOPMO &gt; 0</cite>: Injector</p></li>
+<li><p><cite>WELLOPMO &lt; 0</cite>: Producer</p></li>
+</ul>
+<p><strong>Well Status:</strong></p>
+<ul class="simple">
+<li><p><cite>WELLSTATE = 0</cite>: OPEN</p></li>
+<li><p><cite>WELLSTATE = 1</cite>: SHUT</p></li>
 </ul>
 </dd></dl>
 
@@ -440,7 +464,9 @@ Initialize grid object that manages necessary for flow diagnostics (pore volume,
 <dl class="py method">
 <dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics._resolve_path">
 <span class="sig-name descname"><span class="pre">_resolve_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics._resolve_path" title="Link to this definition"></a></dt>
-<dd><p>Resolves an absolute file path.</p>
+<dd><p>Resolves an absolute file path.
+:returns: Absolute path of input file path.
+:rtype: str</p>
 </dd></dl>
 
 <dl class="py method">
@@ -638,10 +664,8 @@ are assigned where the maximum concentration is 0 or NaN.</p>
 <dt class="sig sig-object py" id="flow_diagnostics.FlowDiagnostics.compute_well_pair_ids">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">compute_well_pair_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">partI</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">partP</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#flow_diagnostics.FlowDiagnostics.compute_well_pair_ids" title="Link to this definition"></a></dt>
 <dd><p>Computes the partition of grid cells based on tracer concentrations.</p>
-<dl class="simple">
-<dt>This static method determines which source well (injector, or producer with a reversed flux field)</dt><dd><p>has the highest tracer concentration in each grid cell.</p>
-</dd>
-</dl>
+<p>This static method determines well pair ids at each cell, based on injector
+and producer partitions.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -917,11 +941,16 @@ non-neighboring connections (NNCs).</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="grid.Grid._compute_connections">
 <span class="sig-name descname"><span class="pre">_compute_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#grid.Grid._compute_connections" title="Link to this definition"></a></dt>
-<dd><p>Computes the connection matrix
-conx (np.ndarray): connextion matrix. Each row represents a connection</p>
-<blockquote>
-<div><p>between two grid cells.</p>
-</div></blockquote>
+<dd><p>Computes the connection matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connection matrix where each row represents a connection
+between two grid cells.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -933,7 +962,9 @@ conx (np.ndarray): connextion matrix. Each row represents a connection</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="grid.Grid._initialize_fvf_keys">
 <span class="sig-name descname"><span class="pre">_initialize_fvf_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#grid.Grid._initialize_fvf_keys" title="Link to this definition"></a></dt>
-<dd><p>Initializes the inverse of formation volume factor (STB/RB).</p>
+<dd><p>Initializes the inverse of formation volume factor (STB/RB).
+This will be used to convert fluxes in surface condition in to fluxes in reservoir volume,
+in case fluxes in reservoir condition are not available in restart files.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1266,7 +1297,7 @@ negative: production. This is set using the <cite>set_out_flow_rate</cite> metho
 <dl class="py attribute">
 <dt class="sig sig-object py" id="well.Well.type">
 <span class="sig-name descname"><span class="pre">type</span></span><a class="headerlink" href="#well.Well.type" title="Link to this definition"></a></dt>
-<dd><p>Type of well (“PRD”, “OILINJ”, “WATINJ”, or “GASINJ”).</p>
+<dd><p>Type of well (“PRD” or “INJ”).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str</p>
@@ -1325,6 +1356,253 @@ negative: production. This is set using the <cite>set_out_flow_rate</cite> metho
 <li><p><strong>J</strong> (<em>int</em>) – J-index of the grid cell (1-based).</p></li>
 <li><p><strong>K</strong> (<em>int</em>) – K-index of the grid cell (1-based).</p></li>
 <li><p><strong>stat</strong> (<em>int</em>) – Completion status ID (positive for open, other values for shut).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="well.Well.set_status">
+<span class="sig-name descname"><span class="pre">set_status</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#well.Well.set_status" title="Link to this definition"></a></dt>
+<dd><p>Set well status based on completion status</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class" id="module-ecl_bin_reader">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ecl_bin_reader.</span></span><span class="sig-name descname"><span class="pre">EclReader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input_file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ecl_bin_reader.EclReader" title="Link to this definition"></a></dt>
+<dd><p>Reads SLB ECLIPSE style binary output files (.INIT, .EGRID, .UNRST, .X00xx).</p>
+<p>This class provides methods to read various ECLIPSE output files, including
+initial conditions (.INIT), grid data (.EGRID), and restart files (.UNRST, .X00xx).
+It handles endianness detection and data type conversion.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.input_file_path">
+<span class="sig-name descname"><span class="pre">input_file_path</span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.input_file_path" title="Link to this definition"></a></dt>
+<dd><p>Path to the main ECLIPSE input file (.DATA or .IXF).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.input_file_path_base">
+<span class="sig-name descname"><span class="pre">input_file_path_base</span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.input_file_path_base" title="Link to this definition"></a></dt>
+<dd><p>Base path of the input file (without extension).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.init_file_path">
+<span class="sig-name descname"><span class="pre">init_file_path</span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.init_file_path" title="Link to this definition"></a></dt>
+<dd><p>Path to the initial conditions file (.INIT).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.egrid_file_path">
+<span class="sig-name descname"><span class="pre">egrid_file_path</span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.egrid_file_path" title="Link to this definition"></a></dt>
+<dd><p>Path to the grid data file (.EGRID).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.unrst_file_path">
+<span class="sig-name descname"><span class="pre">unrst_file_path</span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.unrst_file_path" title="Link to this definition"></a></dt>
+<dd><p>Path to the unified restart file (.UNRST).  Currently not used.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader._detect_endian">
+<span class="sig-name descname"><span class="pre">_detect_endian</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ecl_bin_reader.EclReader._detect_endian" title="Link to this definition"></a></dt>
+<dd><p>Detects file endianness.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>fid</strong> – File object.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Endianness (‘&lt;’ for little-endian, ‘&gt;’ for big-endian).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader._initialize_file_names">
+<span class="sig-name descname"><span class="pre">_initialize_file_names</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ecl_bin_reader.EclReader._initialize_file_names" title="Link to this definition"></a></dt>
+<dd><p>Initializes file paths for related binary files (.INIT, .EGRID, .UNRST).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>FileNotFoundError</strong> – If any of the required files (.INIT, .EGRID) are not found.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader._int2ext">
+<span class="sig-name descname"><span class="pre">_int2ext</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">i</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ecl_bin_reader.EclReader._int2ext" title="Link to this definition"></a></dt>
+<dd><p>Converts an integer to a formatted string with leading zeros (e.g., 1 to “0001”).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>i</strong> (<em>int</em>) – Integer to convert.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Formatted string with leading zeros.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader._load_vector">
+<span class="sig-name descname"><span class="pre">_load_vector</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fid</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endian</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ecl_bin_reader.EclReader._load_vector" title="Link to this definition"></a></dt>
+<dd><p>Reads a data block (vector) from the binary file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fid</strong> – File object.</p></li>
+<li><p><strong>endian</strong> (<em>str</em>) – Endianness (‘&lt;’ for little-endian, ‘&gt;’ for big-endian).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>A tuple containing the data (NumPy array or string), the data count, and the key.</dt><dd><p>Returns (None, None, key) if an error occurs during reading.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader._read_bin">
+<span class="sig-name descname"><span class="pre">_read_bin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#ecl_bin_reader.EclReader._read_bin" title="Link to this definition"></a></dt>
+<dd><p>Reads ECLIPSE style binary data from the given file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file_path</strong> (<em>str</em>) – Path to the binary file.</p></li>
+<li><p><strong>keys</strong> (<em>list</em>) – List of keys to read.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary containing the requested data. Returns an empty dictionary if keys is None.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader._validate_input_file">
+<span class="sig-name descname"><span class="pre">_validate_input_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#ecl_bin_reader.EclReader._validate_input_file" title="Link to this definition"></a></dt>
+<dd><p>Validates the input file and its extension.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>FileNotFoundError</strong> – If the input file is not found.</p></li>
+<li><p><strong>RuntimeError</strong> – If the input file has an unsupported extension.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.read_egrid">
+<span class="sig-name descname"><span class="pre">read_egrid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.read_egrid" title="Link to this definition"></a></dt>
+<dd><p>Reads data from the grid data file (.EGRID).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keys</strong> (<em>list</em><em>, </em><em>optional</em>) – List of keys to read. If None, all keys are read. Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary containing the requested data, keyed by the provided keys.</dt><dd><p>Returns an empty dictionary if no keys are provided.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.read_init">
+<span class="sig-name descname"><span class="pre">read_init</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.read_init" title="Link to this definition"></a></dt>
+<dd><p>Reads data from the initial conditions file (.INIT).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>keys</strong> (<em>list</em><em>, </em><em>optional</em>) – List of keys to read. If None, all keys are read. Defaults to None.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary containing the requested data, keyed by the provided keys.</dt><dd><p>Returns an empty dictionary if no keys are provided.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ecl_bin_reader.EclReader.read_rst">
+<span class="sig-name descname"><span class="pre">read_rst</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">keys</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tstep_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unified</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#ecl_bin_reader.EclReader.read_rst" title="Link to this definition"></a></dt>
+<dd><p>Reads data from a restart file (.X00xx).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>keys</strong> (<em>list</em><em>, </em><em>optional</em>) – List of keys to read. If None, all keys are read. Defaults to None.</p></li>
+<li><p><strong>tstep_id</strong> (<em>int</em><em>, </em><em>optional</em>) – Time step ID. Required for reading restart files. Defaults to None.</p></li>
+<li><p><strong>unified</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to read a unified restart file (.UNRST).  Not yet implemented. Defaults to False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><dl class="simple">
+<dt>Dictionary containing the requested data, keyed by the provided keys.</dt><dd><p>Returns an empty dictionary if no keys are provided.</p>
+</dd>
+</dl>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>NotImplementedError</strong> – If <cite>unified</cite> is True (UNRST support not implemented).</p></li>
+<li><p><strong>ValueError</strong> – If <cite>tstep_id</cite> is None.</p></li>
+<li><p><strong>FileNotFoundError</strong> – If the specified restart file is not found.</p></li>
 </ul>
 </dd>
 </dl>

@@ -1,8 +1,7 @@
 import os
 import sys
-
-# Correct sys.path: Go UP TWO levels to get to the root of your project
-sys.path.insert(0, os.path.abspath('../../'))  # <--- Corrected Path
+sys.path.insert(0, os.path.abspath('../../'))  # Adjust path to include pyFD
+sys.path.insert(0, os.path.abspath('../../utils'))  # Add utils explicitly
 
 print("Current sys.path:", sys.path)  # <--- Add this line
 

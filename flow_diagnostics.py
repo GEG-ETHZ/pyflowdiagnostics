@@ -182,7 +182,7 @@ class FlowDiagnostics:
         Reads flux data for the given time step.
 
         Args:
-            keys (list): List of flux keys to read ("FLROILI+", "FLROILJ+", "FLRWATI+", "FLRWATJ+", etc.).
+            keys (list): List of flux keys to read (FLROILI+, FLROILJ+, FLRWATI+, FLRWATJ+, etc.).
 
         Returns:
             dict: Dictionary of flux data, keyed by the provided keys.
@@ -229,15 +229,21 @@ class FlowDiagnostics:
 
 
     def _read_flux_CMG(self) -> tuple[dict, dict]:
-        """Read flux outputs from sr3 file, then convert them into Eclipse style format.
+        """
+        Read flux outputs from sr3 file, then convert them into Eclipse style format.
 
-            Assumptions based on some experiments (no documentation found in the CMG manuals):
-            - with FLUXCON keyword, fluxes for all phases: "FLUXCONW", "FLUXCONO", "FLUXCONG" are always generated,
-              even in single/two-phase flow cases.
-            - Flux values are in reservoir condition.
-            - connection_dir > 3 means NNCs (1: I-dir, 2: J-dir, and 3: K-dir)
+        Assumptions based on some experiments (no documentation found in the CMG manuals):
 
-        Returns: Dictionaries containing standard fluxes and NNC fluxes
+        - With the `FLUXCON` keyword, fluxes for all phases (`FLUXCONW`, `FLUXCONO`, `FLUXCONG`) are always generated,
+          even in single/two-phase flow cases.
+        - Flux values are in **reservoir conditions**.
+        - `connection_dir > 3` means **NNCs** (1: I-dir, 2: J-dir, and 3: K-dir).
+
+        Returns:
+            tuple[dict, dict]: A tuple containing:
+
+            - **d_fluxes**: Standard flux dictionary.
+            - **d_NNC_fluxes**: NNC flux dictionary.
         """
 
         sp_ind, sp = self.binary_reader.get_grid_properties(keys=["FLUXCONW", "FLUXCONO", "FLUXCONG"])
@@ -334,15 +340,20 @@ class FlowDiagnostics:
 
 
     def _read_well_completion_CMG(self) -> None:
-        """Reads well completions from sr3 file.
+        """
+        Reads well completions from `sr3` file.
 
-            Assumptions  (no documentation found in the CMG manuals):
-            Well type:
-              * WELLOPMO > 0: injector
-              * WELLOPMO < 0: producer
-            Well status
-              * WELLSTATE = 0: OPEN
-              * WELLSTATE = 1: SHUT
+        Assumptions (no documentation found in the CMG manuals):
+
+        **Well Type:**
+
+        - `WELLOPMO > 0`: Injector
+        - `WELLOPMO < 0`: Producer
+
+        **Well Status:**
+
+        - `WELLSTATE = 0`: OPEN
+        - `WELLSTATE = 1`: SHUT
         """
 
         sr3 = self.binary_reader.get_sr3()

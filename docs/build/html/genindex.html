@@ -83,8 +83,10 @@
  | <a href="#N"><strong>N</strong></a>
  | <a href="#O"><strong>O</strong></a>
  | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
  | <a href="#T"><strong>T</strong></a>
+ | <a href="#U"><strong>U</strong></a>
  | <a href="#W"><strong>W</strong></a>
  
 </div>
@@ -103,13 +105,21 @@
 </li>
       <li><a href="pyfd_doc.html#grid.Grid._conx">_conx (grid.Grid attribute)</a>
 </li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader._detect_endian">_detect_endian() (ecl_bin_reader.EclReader method)</a>
+</li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._detect_simulator">_detect_simulator() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
       <li><a href="pyfd_doc.html#grid.Grid._flux_keys">_flux_keys (grid.Grid attribute)</a>
 </li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader._initialize_file_names">_initialize_file_names() (ecl_bin_reader.EclReader method)</a>
+</li>
       <li><a href="pyfd_doc.html#grid.Grid._initialize_flux_keys">_initialize_flux_keys() (grid.Grid method)</a>
 </li>
       <li><a href="pyfd_doc.html#grid.Grid._initialize_fvf_keys">_initialize_fvf_keys() (grid.Grid method)</a>
+</li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader._int2ext">_int2ext() (ecl_bin_reader.EclReader method)</a>
+</li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader._load_vector">_load_vector() (ecl_bin_reader.EclReader method)</a>
 </li>
       <li><a href="pyfd_doc.html#grid.Grid._NNC_flux_keys">_NNC_flux_keys (grid.Grid attribute)</a>
 </li>
@@ -117,16 +127,18 @@
 </li>
       <li><a href="pyfd_doc.html#grid.Grid._Qxyz_flattened">_Qxyz_flattened (grid.Grid attribute)</a>
 </li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader._read_bin">_read_bin() (ecl_bin_reader.EclReader method)</a>
+</li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._read_flux_CMG">_read_flux_CMG() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._read_flux_ECL">_read_flux_ECL() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._read_flux_from_restart_file">_read_flux_from_restart_file() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._read_grid_CMG">_read_grid_CMG() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._read_grid_ECL">_read_grid_ECL() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._read_simulator_dynamic_output">_read_simulator_dynamic_output() (flow_diagnostics.FlowDiagnostics method)</a>
@@ -156,6 +168,8 @@
       <li><a href="pyfd_doc.html#grid.Grid._total_dir_flux">_total_dir_flux() (grid.Grid method)</a>
 </li>
       <li><a href="pyfd_doc.html#grid.Grid._valid_conx_idx">_valid_conx_idx (grid.Grid attribute)</a>
+</li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader._validate_input_file">_validate_input_file() (ecl_bin_reader.EclReader method)</a>
 </li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics._write_allocation_factors">_write_allocation_factors() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
@@ -231,8 +245,19 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfd_doc.html#flow_diagnostics.SimulatorType.ECL">ECL (flow_diagnostics.SimulatorType attribute)</a>
 </li>
+      <li>
+    ecl_bin_reader
+
+      <ul>
+        <li><a href="pyfd_doc.html#module-ecl_bin_reader">module</a>
+</li>
+      </ul></li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader">EclReader (class in ecl_bin_reader)</a>
+</li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.egrid_file_path">egrid_file_path (ecl_bin_reader.EclReader attribute)</a>
+</li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics.execute">execute() (flow_diagnostics.FlowDiagnostics method)</a>
 </li>
   </ul></td>
@@ -295,13 +320,21 @@
 </li>
       <li><a href="pyfd_doc.html#well.Completion.IJK">IJK (well.Completion attribute)</a>
 </li>
+      <li><a href="pyfd_doc.html#grid.Grid.ijk_from_I_J_K">ijk_from_I_J_K() (grid.Grid method)</a>
+</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
-      <li><a href="pyfd_doc.html#grid.Grid.ijk_from_I_J_K">ijk_from_I_J_K() (grid.Grid method)</a>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.init_file_path">init_file_path (ecl_bin_reader.EclReader attribute)</a>
 </li>
       <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics.injectors">injectors (flow_diagnostics.FlowDiagnostics attribute)</a>
 </li>
-      <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics.input_file_path">input_file_path (flow_diagnostics.FlowDiagnostics attribute)</a>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.input_file_path">input_file_path (ecl_bin_reader.EclReader attribute)</a>
+
+      <ul>
+        <li><a href="pyfd_doc.html#flow_diagnostics.FlowDiagnostics.input_file_path">(flow_diagnostics.FlowDiagnostics attribute)</a>
+</li>
+      </ul></li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.input_file_path_base">input_file_path_base (ecl_bin_reader.EclReader attribute)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -329,6 +362,8 @@
     module
 
       <ul>
+        <li><a href="pyfd_doc.html#module-ecl_bin_reader">ecl_bin_reader</a>
+</li>
         <li><a href="pyfd_doc.html#module-flow_diagnostics">flow_diagnostics</a>
 </li>
         <li><a href="pyfd_doc.html#module-grid">grid</a>
@@ -387,12 +422,28 @@
   </ul></td>
 </tr></table>
 
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.read_egrid">read_egrid() (ecl_bin_reader.EclReader method)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.read_init">read_init() (ecl_bin_reader.EclReader method)</a>
+</li>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.read_rst">read_rst() (ecl_bin_reader.EclReader method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
 <h2 id="S">S</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfd_doc.html#well.Completion.set_flow_rate">set_flow_rate() (well.Completion method)</a>
 </li>
       <li><a href="pyfd_doc.html#well.Completion.set_ijk">set_ijk() (well.Completion method)</a>
+</li>
+      <li><a href="pyfd_doc.html#well.Well.set_status">set_status() (well.Well method)</a>
 </li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
@@ -413,6 +464,14 @@
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="pyfd_doc.html#well.Well.type">type (well.Well attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="pyfd_doc.html#ecl_bin_reader.EclReader.unrst_file_path">unrst_file_path (ecl_bin_reader.EclReader attribute)</a>
 </li>
   </ul></td>
 </tr></table>

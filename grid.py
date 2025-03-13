@@ -307,9 +307,12 @@ class Grid:
 
 
     def _compute_connections(self) -> np.ndarray:
-        """Computes the connection matrix
-           conx (np.ndarray): connextion matrix. Each row represents a connection
-                              between two grid cells.
+        """
+        Computes the connection matrix.
+
+        Returns:
+            np.ndarray: The connection matrix where each row represents a connection
+            between two grid cells.
         """
 
         # Compute active cell indexing

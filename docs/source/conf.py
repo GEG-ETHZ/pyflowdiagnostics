@@ -33,4 +33,6 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 napoleon_google_docstring = True  # Or napoleon_numpy_docstring = True, but not both
 
+html_static_path = ['docs/']
+
 # html_static_path = ['_static']  # Only needed if you have custom static files

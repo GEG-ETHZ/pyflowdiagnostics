@@ -163,7 +163,6 @@ class FlowDiagnostics:
         dict_NNC = {"NNC1": self.cellid1[irregular_conx_idx], "NNC2": self.cellid2[irregular_conx_idx]}
 
         return dimens, porv, dp_flag, dict_NNC
-        return dimens, porv, dp_flag, dict_NNC
 
 
     def _read_static_simulator_output(self) -> Grid:

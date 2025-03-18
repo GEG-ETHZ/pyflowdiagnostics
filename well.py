@@ -40,7 +40,7 @@ class Completion:
         """Sets the linear grid cell index (IJK).
 
         Args:
-            ijk (int): Linear index of the grid cell (0-based).
+            ijk (int): Linear index of the grid cell (1-based).
         """
         self.IJK = ijk
 

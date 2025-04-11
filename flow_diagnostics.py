@@ -441,7 +441,7 @@ class FlowDiagnostics:
 
         # --- Construct RHS (b) ---
         rhs = np.zeros((nn, len(wells) + 1))
-        rhs[:, 0] = self.grid.porv  # Assign porosity to the first column
+        rhs[:, 0] = self.grid.porv  # Assign pore volume to the first column
 
         # Assign fluxes at source cells to the 2:num_wells columns for tracer eqs rhs.
         for i, well in enumerate(wells):

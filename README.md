@@ -24,7 +24,7 @@ conda activate pyfd
 
 **Prerequisites**
 
-Before running pyFD, ensure that you have completed a reservoir simulation and that the output includes all necessary data for flow diagnostics. This should include pore volume, fluxes, cell connections, and well information, stored in the binary output files.
+Before running, ensure that you have completed a reservoir simulation and that the output includes all necessary data for flow diagnostics. This should include pore volume, fluxes, cell connections, and well information, stored in the binary output files.
 
 * For SLB simulators (or OPM): ensure that you generate `.INIT` and `.EGRID` files. Additionally, specify `FLORES` under `RPTPST` keyword to output fluxes in reservoir conditions. Alternatively, the tool also works if both fluxes in surface conditions and formation volume factors are available.
 * For CMG simulators: Use `FLUXCON` along with `OUTSRF` keyword to output fluxes in reservoir condition.
@@ -34,7 +34,7 @@ Before running pyFD, ensure that you have completed a reservoir simulation and t
 Via the command line:
 
 ```
-python pyfd_cli.py -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
+python pyflowds_cli.py -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
 ```
 
 Arguments:
@@ -46,7 +46,7 @@ Arguments:
 
 Using command line interface (CLI):
 ```
-python pyfd_cli.py -f /path/to/simulation.DATA -t 1 5 10
+python pyflowds_cli.py -f /path/to/simulation.DATA -t 1 5 10
 ```
 
 Or, in your Python script:

@@ -71,6 +71,13 @@ The script generates a folder named `CASENAME.fdout` in the same directory as th
   - Lorentz curve data.
   - Sweep efficiencies.
 
+Sample results:
+<p align="center"> <img src="docs/imgs/spe10.png" alt="Time of Flight Map" width="600"/>
+<br/><em>SPE10 top layer: TOF, flow partition, Lorentz curve</em> </p> 
+
+<p align="center"> <img src="docs/imgs/saigup.png" alt="Time of Flight Map" width="600"/>
+<br/><em>SAIGUP: permeability and TOF</em> </p> 
+
 ## Project Status
 This project is actively maintained and under development. 
 - ✅ Core functionality implemented for SLB reservoir simulators.

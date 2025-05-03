@@ -59,6 +59,15 @@ class CmgReader:
         return get_wells_timeseries(self._sr3)
 
 
+    def get_layer_time_series(self) -> dict:
+        """Reads layer time series from the sr3 file.
+
+        Returns:
+            dict: Dictionary containing layer time series data for each well
+        """
+        return get_layers_timeseries(self._sr3)
+
+
     def get_sr3(self) -> object:
         """Returns the sr3 object.
 

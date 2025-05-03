@@ -361,25 +361,22 @@ class FlowDiagnostics:
         well_time_series = self.binary_reader.get_time_series()
 
         t_well_time_series = well_time_series[well_names[0]].index.values
-        if t_well_time_series[0] > 0 and self.sp_ind[0] == 0:
-            self.sp_ind = self.sp_ind[1:] - 1
+        is_init_step_output = False if t_well_time_series[0] > 0 else True
 
         # initialize well objects
         self.wells = {}
         for well_name in well_names:
             df = well_time_series[well_name]
-
-            if len(df) < self.sp_ind[-1]:  # This case occurs occasionally
-                self.sp_ind = self.sp_ind[self.sp_ind < len(df)]
             try:
-                WELLOPMO = df['WELLOPMO'].values[self.sp_ind]
+                WELLOPMO = df['WELLOPMO'].values
             except:
                 ValueError(f"Required key: 'WELLOPMO' is not found.")
             well_type = 0 # unknown
-            if WELLOPMO[self.time_step_id] > 0:
-                well_type = 5 # injector
-            elif WELLOPMO[self.time_step_id] < 0:
-                well_type = 1 # producer
+            if not is_init_step_output:
+                if WELLOPMO[self.time_step_id] > 0:
+                    well_type = 5 # injector
+                elif WELLOPMO[self.time_step_id] < 0:
+                    well_type = 1 # producer
             self.wells[well_name] = Well(well_name, well_type)
 
         # add completions for each well
@@ -388,6 +385,7 @@ class FlowDiagnostics:
             well_completions = sr3.data['TimeSeries/LAYERS/Origins']
         except:
             raise ValueError(f"Required output 'TimeSeries/LAYERS/Origins' is not found.")
+
         for cmpl_info in well_completions:
             match = re.match(pattern, cmpl_info.decode('utf-8'))
             if match:
@@ -395,7 +393,9 @@ class FlowDiagnostics:
                 well = self.wells[well_name]
                 I, J, K = [int(num) for num in str(f"[{match.group(2)}]").strip('[]').split(',')]
                 df = well_time_series[well_name]
-                status_arr = df["WELLSTATE"].values[self.sp_ind]
+                status_arr = df["WELLSTATE"].values
+                if not is_init_step_output:
+                    status_arr = np.insert(status_arr,0,0)
                 well.add_completion(I=I, J=J, K=K,
                                     stat = 0 if status_arr[self.time_step_id] == 1 else 1)
                 well.completions[-1].set_ijk(self.grid.ijk_from_I_J_K(I, J, K))

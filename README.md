@@ -73,7 +73,7 @@ The script generates a folder named `CASENAME.fdout` in the same directory as th
 
 Sample results:
 <p align="center"> <img src="docs/imgs/spe10.png" alt="Time of Flight Map" width="600"/>
-<br/><em>SPE10 top layer: TOF, flow partition, Lorentz curve</em> </p> 
+<br/><em>SPE10 top layer: TOF, flow partition, allocation factors, Lorentz curve</em> </p> 
 
 <p align="center"> <img src="docs/imgs/saigup.png" alt="Time of Flight Map" width="600"/>
 <br/><em>SAIGUP: permeability and TOF</em> </p> 

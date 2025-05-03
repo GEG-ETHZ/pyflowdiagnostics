@@ -4,11 +4,12 @@ This repository provides a Python-based tool for flow diagnostics in reservoir s
 
 ## Features
 - Read reservoir simulator outputs (fluxes, pore volume, cell connections, well info, etc.)
-  - For SLB reservoir simulators, we developed `ecl_reader.py` that reads ECLIPSE/IX style binary simulation outputs. This script alone may be useful for other applications that require parsing and processing ECLIPSE style binary output files.
-  - For CMG reservoir simulators, we utilize [sr3_reader](https://github.com/nikolai-andrianov/sr3_reader/blob/main/README.md) (slightly modified to support LGR).
+  - SLB reservoir simulators: we developed `ecl_reader.py` that reads ECLIPSE/IX style binary simulation outputs. This script alone may be useful for other applications that require parsing and processing ECLIPSE style binary output files.
+  - CMG reservoir simulators: we utilize [sr3_reader](https://github.com/nikolai-andrianov/sr3_reader/blob/main/README.md) (slightly modified to support LGR).
 - Solves the time-of-flight (TOF) and tracer concentrations equations (finite volume).
-- Computes allocation factors, if both injector(s) and producer(s) exist.
-- Computes Lorentz curves and sweep efficiencies, if both injector(s) and producer(s) exist (total TOF is required).
+- Compute other diagnostics, if applicable:
+  - Allocation factors
+  - Lorentz curves and sweep efficiencies
 
 ## Installation
 

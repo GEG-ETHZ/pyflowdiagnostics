@@ -58,6 +58,9 @@ fd = FlowDiagnostics("/path/to/simulation.DATA")
 for tstep in tsteps:
     fd.execute(tstep)
 ```
+
+The code will identify the simulator type based on the file path (extension) and then use appropriate binary reader. 
+
 ## Output
 
 The script generates a folder named `CASENAME.fdout` in the same directory as the provided `DATA/AFI/DAT` file. This folder contains:
@@ -66,10 +69,6 @@ The script generates a folder named `CASENAME.fdout` in the same directory as th
   - Allocation factors.
   - Lorentz curve data.
   - Sweep efficiencies.
-
-## Documentation
-
-The full documentation is available `docs/build/html/pyfd_doc.html`.
 
 ## Project Status
 This project is actively maintained and under development. 
@@ -102,9 +101,9 @@ Additionally, we utilize [sr3_reader](https://github.com/nikolai-andrianov/sr3_r
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+See the [LICENSE](LICENSE) file for details.
 
-## Contact
+## Disclaimer
 
-For any questions or contributions, feel free to open an issue or reach out.
-
+Some functionalities related to CMG simulators are not yet fully validated, as complete documentation of simulator-specific keywords is not available in their manuals.
+Additionally, [sr3_reader](https://github.com/nikolai-andrianov/sr3_reader/blob/main/README.md) is not officially supported by CMG.

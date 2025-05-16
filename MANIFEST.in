@@ -1,0 +1,9 @@
+prune docs
+prune tests
+prune .github
+exclude MANIFEST.in
+exclude Makefile
+exclude .gitignore
+exclude .readthedocs.yml
+exclude .git_archival.txt
+exclude .gitattributes

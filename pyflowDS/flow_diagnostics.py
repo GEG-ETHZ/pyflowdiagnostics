@@ -20,8 +20,8 @@ import scipy.sparse as sp
 from pypardiso import spsolve
 from enum import Enum
 
-from utils.ecl_bin_reader import EclReader
-from utils.cmg_bin_reader import CmgReader
+from readers.ecl_bin_reader import EclReader
+from readers.cmg_bin_reader import CmgReader
 from grid import Grid
 from well import Well
 

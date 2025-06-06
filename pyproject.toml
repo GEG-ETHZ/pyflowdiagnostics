@@ -36,7 +36,7 @@ Repository = "https://github.com/GEG-ETHZ/pyflowDS"
 [project.optional-dependencies]
 docs = [
     "sphinx",
-    "numpydoc",
+    "sphinx_automodapi",
     "pydata_sphinx_theme",
 ]
 tests = [

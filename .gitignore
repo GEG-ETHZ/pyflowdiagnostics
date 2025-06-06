@@ -2,7 +2,8 @@
 __pycache__/
 
 # Sphinx
-docs/build/
+docs/_build/
+docs/api/pyflowDS*
 
 # setuptools_scm
 pyflowDS/version.py

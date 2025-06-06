@@ -1,6 +1,14 @@
-.idea/
+# Directories
 __pycache__/
-*.pyc  # Ignore compiled Python files
-/examples/*
-*.log
-/pyfd_logs/*
+
+# Sphinx
+docs/build/
+
+# setuptools_scm
+pyflowDS/version.py
+
+# Build related
+.eggs/
+build/
+dist/
+pyflowDS.egg-info/

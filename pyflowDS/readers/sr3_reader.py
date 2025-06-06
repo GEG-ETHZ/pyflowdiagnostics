@@ -25,6 +25,13 @@ import pandas as pd
 import time
 import re
 
+__all__ = ["read_SR3", ]
+
+
+def __dir__():
+    return __all__
+
+
 class RawHDF:
     """
     A container for the raw data entries in the SR3 file.

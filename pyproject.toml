@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyflowDS"
+description = "Flow Diagnostics Toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  {name = "Tsubasa Onishi", email = "onishi.tsubasa@eaps.ethz.ch"},
+]
+dependencies = [
+    "numpy",
+    "scipy",
+    "pandas",
+    "h5py",
+    "pymatsolver",
+    "xlsxwriter",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python",
+]
+dynamic = ["version"]
+
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/GEG-ETHZ/pyflowDS"
+Documentation = "https://github.com/GEG-ETHZ/pyflowDS"
+Repository = "https://github.com/GEG-ETHZ/pyflowDS"
+
+[project.optional-dependencies]
+docs = [
+    "sphinx",
+    "numpydoc",
+    "pydata_sphinx_theme",
+]
+tests = [
+    "flake8",
+    "pytest",
+    "flake8-pyproject",
+]
+all = [
+    "scooby",
+    "pyflowDS[docs]",
+    "pyflowDS[tests]",
+]
+build = [
+    "setuptools_scm>=8",
+    "setuptools>=64",
+]
+
+[project.scripts]
+pyflowDS = "pyflowDS.__main__:main"
+
+[tool.setuptools.packages.find]
+include = ["pyflowDS*"]
+
+[tool.setuptools_scm]
+version_file = "pyflowDS/version.py"
+
+[tool.flake8]
+per-file-ignores = [
+    "__init__.py: ",
+]
+
+[tool.coverage.run]
+relative_files = true

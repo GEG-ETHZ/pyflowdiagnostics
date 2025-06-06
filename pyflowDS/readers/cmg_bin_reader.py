@@ -13,7 +13,13 @@
 
 import os.path
 
-from .sr3_reader import  *
+from pyflowDS.readers.sr3_reader import  *
+
+__all__ = ["CmgReader", ]
+
+
+def __dir__():
+    return __all__
 
 
 class CmgReader:

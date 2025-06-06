@@ -17,15 +17,20 @@ import numpy as np
 import pandas as pd
 import re
 import scipy.sparse as sp
-from pypardiso import spsolve
 from enum import Enum
 
-from readers.ecl_bin_reader import EclReader
-from readers.cmg_bin_reader import CmgReader
-from grid import Grid
-from well import Well
+from pyflowDS.readers import EclReader, CmgReader
+from pyflowDS.grid import Grid
+from pyflowDS.well import Well
+from pyflowDS.utils import get_default_solver
 
 EPS = 1.0e-5
+
+__all__ = ["SimulatorType", "FlowDiagnostics"]
+
+
+def __dir__():
+    return __all__
 
 
 class SimulatorType(Enum):
@@ -499,7 +504,9 @@ class FlowDiagnostics:
         A = F[active_cells_inflow][:, active_cells_inflow]
 
         # solve Ax=b
-        x = spsolve(A, b)
+        solve = get_default_solver()
+        Ainv = solve(A)
+        x = Ainv * b
 
         # --- Assign solutions to full arrays ---
         tof = np.full(nn, np.nan)

@@ -16,6 +16,12 @@ import struct
 import os
 import logging
 
+__all__ = ["EclReader", ]
+
+
+def __dir__():
+    return __all__
+
 
 class EclReader:
     """Reads SLB ECLIPSE style binary output files (.INIT, .EGRID, .UNRST, .X00xx).

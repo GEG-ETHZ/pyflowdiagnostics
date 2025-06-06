@@ -16,15 +16,16 @@ import logging
 import time
 import os
 from datetime import datetime
-from flow_diagnostics import FlowDiagnostics
+
+from pyflowDS import flow_diagnostics, utils
 
 
 def config_logging(debug_mode):
 
-    log_dir = os.path.join(os.getcwd(), "pyfd_logs")
+    log_dir = os.path.join(os.getcwd(), "pyflowDS_logs")
     os.makedirs(log_dir, exist_ok=True)
 
-    log_filename = os.path.join(log_dir, f"pyfd_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+    log_filename = os.path.join(log_dir, f"pyflowDS_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
     logging.basicConfig(
         level=logging.DEBUG if debug_mode else logging.INFO,
         format='%(asctime)s, %(levelname)s %(message)s',
@@ -37,12 +38,14 @@ def config_logging(debug_mode):
 
 def config_parser():
     parser = argparse.ArgumentParser(description="Run Flow Diagnostics on a reservoir simulation file.")
-    parser.add_argument("-f", "--file", type=str, required=True,
+    parser.add_argument("-f", "--file", type=str, default=False,
                         help="Path to the reservoir simulation file", dest="file_path")
-    parser.add_argument("-t", "--time_steps", nargs='+', type=int, required=True, default=[],
+    parser.add_argument("-t", "--time_steps", nargs='+', type=int, default=False,
                         help="List of time step indices to run the diagnostics on (e.g., -t 1 5 10)", dest="time_step_indices")
-    parser.add_argument("-d", "--debug", help="Enable debugging (optional)", required=False, default=False,
+    parser.add_argument("-d", "--debug", help="Enable debugging (optional)", default=False,
                         action=argparse.BooleanOptionalAction, dest="debug")
+    parser.add_argument("--report", action="store_true", default=False,
+                        help="Show pyflowDS report and exit")
     return parser
 
 
@@ -50,21 +53,27 @@ def main():
 
     parser = config_parser()
     args = parser.parse_args()
-    config_logging(args.debug)
+    if vars(args).pop('report'):
+        print(utils.Report())
+    elif not vars(args).get('file_path') or not vars(args).get('time_step_indices'):
+        print(f"{parser.description}\n=> Type `pyflowDS --help` for "
+              f"more info (pyflowDS v{utils.__version__}).")
+    else:
+        config_logging(args.debug)
 
-    try:
-        logging.info(f"Running Flow Diagnostics using: {args.file_path}")
-        t0 = time.time()
+        try:
+            logging.info(f"Running Flow Diagnostics using: {args.file_path}")
+            t0 = time.time()
 
-        fd = FlowDiagnostics(args.file_path)
-        for time_step in args.time_step_indices:
-            fd.execute(time_step)
+            fd = flow_diagnostics.FlowDiagnostics(args.file_path)
+            for time_step in args.time_step_indices:
+                fd.execute(time_step)
 
-    except Exception as e:
-        raise RuntimeError(f"{e}")
+        except Exception as e:
+            raise RuntimeError(f"{e}")
 
-    logging.info("Run finished normally. Elapsed time: {:.2f} seconds.".format(time.time() - t0))
+        logging.info("Run finished normally. Elapsed time: {:.2f} seconds.".format(time.time() - t0))
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

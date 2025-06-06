@@ -17,6 +17,13 @@ import logging
 NUM_MAX_DIMENS = 3
 NUM_MAX_PHASES = 3
 
+__all__ = ["Grid", ]
+
+
+def __dir__():
+    return __all__
+
+
 class Grid:
     """Manages grid properties and fluxes.
 

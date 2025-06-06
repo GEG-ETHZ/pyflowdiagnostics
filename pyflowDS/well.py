@@ -13,6 +13,12 @@
 
 import logging
 
+__all__ = ["Completion", "Well"]
+
+
+def __dir__():
+    return __all__
+
 
 class Completion:
     """Represents a well completion.

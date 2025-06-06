@@ -13,12 +13,27 @@ This repository provides a Python-based tool for flow diagnostics in reservoir s
 
 ## Installation
 
-Ensure you have [Anaconda](https://www.anaconda.com/products/distribution) installed, then create a conda environment using the provided `environment.yml` file:
+You can install pyflowDS either via `conda`:
+
 
 ```
-conda env create -f environment.yml
-conda activate pyfd
+conda install -c conda-forge pyflowDS
 ```
+
+or via `pip`:
+
+```
+pip install pyflowDS
+```
+
+Requirements are the modules `numpy`, `scipy`, `pandas`, `h5py`, and `pymatsolver`.
+
+Alternatively, you can clone or download the repo and run within the top directory
+
+```
+python -m pip install .
+```
+
 
 ## Usage
 
@@ -34,7 +49,7 @@ Before running, ensure that you have completed a reservoir simulation and that t
 Via the command line:
 
 ```
-python pyflowds_cli.py -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
+pyflowDS -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
 ```
 
 Arguments:
@@ -46,16 +61,16 @@ Arguments:
 
 Using command line interface (CLI):
 ```
-python pyflowds_cli.py -f /path/to/simulation.DATA -t 1 5 10
+pyflowDS -f /path/to/simulation.DATA -t 1 5 10
 ```
 
 Or, in your Python script:
 
 ```python
-from flow_diagnostics import FlowDiagnostics
+import pyflowDS
 
 tsteps = [1,5,10]
-fd = FlowDiagnostics("/path/to/simulation.DATA")
+fd = pyflowDS.FlowDiagnostics("/path/to/simulation.DATA")
 for tstep in tsteps:
     fd.execute(tstep)
 ```

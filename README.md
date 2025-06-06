@@ -1,4 +1,4 @@
-# Flow Diagnostics Toolkit
+# Flow Diagnostics Toolkit - Currently under development, not ready yet!
 
 This repository provides a Python-based tool for flow diagnostics in reservoir simulation. To our knowledge, it is the first open-source, lightweight Python-based flow diagnostics tool coupled with commercial reservoir simulators.
 
@@ -26,7 +26,8 @@ or via `pip`:
 pip install pyflowDS
 ```
 
-Requirements are the modules `numpy`, `scipy`, `pandas`, `h5py`, and `pymatsolver`.
+Requirements are the modules `numpy`, `scipy`, `pandas`, `xlswriter`, `h5py`,
+and `pymatsolver`.
 
 Alternatively, you can clone or download the repo and run within the top directory
 

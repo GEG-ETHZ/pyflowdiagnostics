@@ -17,6 +17,7 @@ dependencies = [
     "h5py",
     "pymatsolver",
     "xlsxwriter",
+    "scooby",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -35,7 +36,6 @@ Repository = "https://github.com/GEG-ETHZ/pyflowdiagnostics"
 
 [project.optional-dependencies]
 docs = [
-    "scooby",
     "sphinx",
     "sphinx_automodapi",
     "pydata_sphinx_theme",

@@ -5,7 +5,6 @@ on:
   pull_request:
   push:
     branches:
-      - dev ## TODO REMOVE!!!!!!!!!!!!!!
       - main
   release:
     types:
@@ -36,18 +35,18 @@ jobs:
       fail-fast: false
       matrix:
         case:
-          # TODO - python-version: "3.10"
-          # TODO   os: ubuntu
-          # TODO - python-version: "3.11"
-          # TODO   os: ubuntu
+          - python-version: "3.10"
+            os: ubuntu
+          - python-version: "3.11"
+            os: ubuntu
           - python-version: "3.12"
             os: ubuntu
-          # TODO - python-version: "3.13"
-          # TODO   os: ubuntu
-          # TODO - python-version: "3.12"
-          # TODO   os: macos
-          # TODO - python-version: "3.12"
-          # TODO   os: windows
+          - python-version: "3.13"
+            os: ubuntu
+          - python-version: "3.12"
+            os: macos
+          - python-version: "3.12"
+            os: windows
 
     steps:
 
@@ -100,8 +99,7 @@ jobs:
     name: Deploy to PyPI
     runs-on: ubuntu-latest
     # Only from the origin repository, not forks; only main and tags.
-    # TODO UNDO!!!
-    ############################################################################################################################################if: github.repository_owner == 'GEG-ETHZ' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
+    if: github.repository_owner == 'GEG-ETHZ' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
 
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE
@@ -132,7 +130,7 @@ jobs:
           python -m pip install build setuptools-scm
 
       - name: Build source and wheel distributions
-        # TODO if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main'
         run: |
           # Change setuptools-scm local_scheme to "no-local-version" so the
           # local part of the version isn't included, making the version string
@@ -160,9 +158,8 @@ jobs:
 
       - name: Publish to PyPI
         # Only for releases
-        if: success() # TODO !!! && github.event_name == 'release'
+        if: success() && github.event_name == 'release'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
-          skip-existing: true  # REMOVE TODO !!!!

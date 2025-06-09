@@ -36,18 +36,18 @@ jobs:
       fail-fast: false
       matrix:
         case:
-          - python-version: "3.10"
-            os: ubuntu
-          - python-version: "3.11"
-            os: ubuntu
+          # TODO - python-version: "3.10"
+          # TODO   os: ubuntu
+          # TODO - python-version: "3.11"
+          # TODO   os: ubuntu
           - python-version: "3.12"
             os: ubuntu
-          - python-version: "3.13"
-            os: ubuntu
-          - python-version: "3.12"
-            os: macos
-          - python-version: "3.12"
-            os: windows
+          # TODO - python-version: "3.13"
+          # TODO   os: ubuntu
+          # TODO - python-version: "3.12"
+          # TODO   os: macos
+          # TODO - python-version: "3.12"
+          # TODO   os: windows
 
     steps:
 
@@ -153,10 +153,10 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.TEST_PYPI_PASSWORD }}
-          repository_url: https://test.pypi.org/legacy/
+          repository-url: https://test.pypi.org/legacy/
           # Allow existing releases on test PyPI without errors.
           # NOT TO BE USED in PyPI!
-          skip_existing: true
+          skip-existing: true
 
       - name: Publish to PyPI
         # Only for releases

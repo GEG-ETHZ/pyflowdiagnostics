@@ -1,4 +1,8 @@
 """
+This file is a modified version of:
+https://github.com/nikolai-andrianov/sr3_reader/blob/96ddf866701642d68a37b771344bbea4c110b954/sr3_reader.py
+Original header:
+
 A reader for Computer Modelling Group Ltd. (CMG) SR3 output files.
 
 Copyright 2023 Nikolai Andrianov, nia@geus.dk
@@ -15,6 +19,9 @@ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEM
 OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
 OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
+
+
+
 import logging
 
 import h5py

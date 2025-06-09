@@ -11,6 +11,6 @@ weeks.**
 - **Bug reports:** https://github.com/GEG-ETHZ/pyflowdiagnostics/issues
 - **Zenodo:** TODO
 
-TODO: Available through ``conda`` and ``pip``; consult the `documentation
-<https://GEG-ETHZ.github.io/pyflowdiagnostics>`_ for detailed installation
-instructions.
+Available through `conda` and `pip`; consult the
+[documentation](https://GEG-ETHZ.github.io/pyflowdiagnostics) for detailed
+installation instructions.

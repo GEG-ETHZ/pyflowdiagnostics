@@ -35,6 +35,7 @@ Repository = "https://github.com/GEG-ETHZ/pyflowdiagnostics"
 
 [project.optional-dependencies]
 docs = [
+    "scooby",
     "sphinx",
     "sphinx_automodapi",
     "pydata_sphinx_theme",
@@ -45,7 +46,6 @@ tests = [
     "flake8-pyproject",
 ]
 all = [
-    "scooby",
     "pyflowdiagnostics[docs]",
     "pyflowdiagnostics[tests]",
 ]

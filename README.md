@@ -6,7 +6,7 @@
 PyPI/conda, and most links here are broken; this should change in the coming
 weeks.**
 
-- **Documentation:** TODO https://GEG-ETHZ.github.io/pyflowdiagnostics
+- **Documentation:** https://GEG-ETHZ.github.io/pyflowdiagnostics
 - **Source Code:** https://github.com/GEG-ETHZ/pyflowdiagnostics
 - **Bug reports:** https://github.com/GEG-ETHZ/pyflowdiagnostics/issues
 - **Zenodo:** TODO

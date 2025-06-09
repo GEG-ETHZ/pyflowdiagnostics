@@ -7,7 +7,7 @@ from pyflowdiagnostics import __version__
 extensions = [
     #'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
-    'sphinx_design',
+    # 'sphinx_design',
     'sphinx.ext.viewcode',
     'sphinx_automodapi.automodapi',
 ]

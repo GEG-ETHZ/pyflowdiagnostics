@@ -1,17 +1,17 @@
 Installation
 ============
 
-You can install pyflowDS either via ``conda``:
+You can install pyflowdiagnostics either via ``conda``:
 
 .. code-block:: console
 
-   conda install -c conda-forge pyflowDS
+   conda install -c conda-forge pyflowdiagnostics
 
 or via ``pip``:
 
 .. code-block:: console
 
-   pip install pyflowDS
+   pip install pyflowdiagnostics
 
 Requirements are the modules ``numpy``, ``scipy``, ``pandas``, ``xlswriter``,
 ``h5py``, and ``pymatsolver``.

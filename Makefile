@@ -19,16 +19,16 @@ dev-install:
 	python -m pip install -e .[all]
 
 pytest:
-	rm -rf .coverage htmlcov/ .pytest_cache/ && pytest --cov=pyflowDS && coverage html
+	rm -rf .coverage htmlcov/ .pytest_cache/ && pytest --cov=pyflowdiagnostics && coverage html
 
 flake8:
-	flake8 docs/ pyflowDS/  # tests/
+	flake8 docs/ pyflowdiagnostics/  # tests/
 
 html:
 	cd docs && make html
 
 html-clean:
-	cd docs && rm -rf api/pyflowDS* && rm -rf _build/ && make html
+	cd docs && rm -rf api/pyflowdiagnostics* && rm -rf _build/ && make html
 
 preview:
 	xdg-open docs/_build/html/index.html
@@ -37,8 +37,8 @@ linkcheck:
 	cd docs && make linkcheck
 
 clean:
-	python -m pip uninstall pyflowDS -y
-	rm -rf build/ dist/ .eggs/ pyflowDS.egg-info/ pyflowDS/version.py  # build
+	python -m pip uninstall pyflowdiagnostics -y
+	rm -rf build/ dist/ .eggs/ pyflowdiagnostics.egg-info/ pyflowdiagnostics/version.py  # build
 	rm -rf */__pycache__/ */*/__pycache__/      # python cache
 	rm -rf .coverage htmlcov/ .pytest_cache/    # tests and coverage
-	rm -rf docs/api/pyflowDS* docs/_build/ docs/savefig/ # docs
+	rm -rf docs/api/pyflowdiagnostics* docs/_build/ docs/savefig/ # docs

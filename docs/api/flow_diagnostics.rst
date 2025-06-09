@@ -1,6 +1,6 @@
 Flow Diagnostics
 ================
 
-.. automodapi:: pyflowDS.flow_diagnostics
+.. automodapi:: pyflowdiagnostics.flow_diagnostics
    :no-inheritance-diagram:
    :no-heading:

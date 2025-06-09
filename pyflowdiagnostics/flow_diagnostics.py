@@ -19,10 +19,10 @@ import re
 import scipy.sparse as sp
 from enum import Enum
 
-from pyflowDS.readers import EclReader, CmgReader
-from pyflowDS.grid import Grid
-from pyflowDS.well import Well
-from pyflowDS.utils import get_default_solver
+from pyflowdiagnostics.readers import EclReader, CmgReader
+from pyflowdiagnostics.grid import Grid
+from pyflowdiagnostics.well import Well
+from pyflowdiagnostics.utils import get_default_solver
 
 EPS = 1.0e-5
 

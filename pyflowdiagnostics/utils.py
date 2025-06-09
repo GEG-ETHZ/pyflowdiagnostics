@@ -16,23 +16,23 @@ from pymatsolver.solvers import Base
 from scooby import Report as ScoobyReport
 from pymatsolver import AvailableSolvers, Mumps, Pardiso, SolverLU
 
-# scooby is a soft dependency for pyflowDS
+# scooby is a soft dependency for pyflowdiagnostics
 try:
     from scooby import Report as ScoobyReport
 except ImportError:
     class ScoobyReport:
         def __init__(self, additional, core, optional, ncol, text_width, sort):
-            print("\n* WARNING :: `pyflowDS.Report` requires `scooby`."
+            print("\n* WARNING :: `pyflowdiagnostics.Report` requires `scooby`."
                   "\n             Install it via `pip install scooby`.\n")
 
 try:
     # - Released versions just tags:       0.8.0
     # - GitHub commits add .dev#+hash:     0.8.1.dev4+g2785721
     # - Uncommitted changes add timestamp: 0.8.1.dev4+g2785721.d20191022
-    from pyflowDS.version import version as __version__
+    from pyflowdiagnostics.version import version as __version__
 except ImportError:
     # If it was not installed, then we don't know the version. We could throw a
-    # warning here, but this case *should* be rare. pyflowDS should be
+    # warning here, but this case *should* be rare. pyflowdiagnostics should be
     # installed properly!
     __version__ = 'unknown-'+datetime.today().strftime('%Y%m%d')
 
@@ -65,7 +65,7 @@ class DefaultSolverWarning(UserWarning):
 
 
 def get_default_solver():
-    """Return the default solver used by pyflowDS"""
+    """Return the default solver used by pyflowdiagnostics"""
     global _SOLVER_INFO
     if not _SOLVER_INFO:
         logging.info(f"Using the default solver: {_DEFAULT_SOLVER.__name__}.")
@@ -74,7 +74,7 @@ def get_default_solver():
 
 
 def set_default_solver(solver_class):
-    """Set the default solver used by pyflowDS.
+    """Set the default solver used by pyflowdiagnostics.
 
     Parameters
     ----------
@@ -98,7 +98,7 @@ class Report(ScoobyReport):
     console), either as html-table (notebook) or as plain text (anywhere).
 
     Always shown are the OS, number of CPU(s), `numpy`, `scipy`, `pandas`,
-    `h5py`, `pymatsolver`, `pyflowDS`, `sys.version`, and time/date.
+    `h5py`, `pymatsolver`, `pyflowdiagnostics`, `sys.version`, and time/date.
 
     Additionally shown are, if they can be imported, `IPython`, and
     `matplotlib`, `pardiso`, `python-mumps`. It also shows MKL information, if
@@ -133,7 +133,7 @@ class Report(ScoobyReport):
     --------
     >>> import pytest
     >>> import dateutil
-    >>> from pyflowDS import Report
+    >>> from pyflowdiagnostics import Report
     >>> Report()                            # Default values
     >>> Report(pytest)                      # Provide additional package
     >>> Report([pytest, dateutil], ncol=5)  # Set nr of columns
@@ -146,7 +146,7 @@ class Report(ScoobyReport):
         # Mandatory packages.
         core = [
             "numpy", "scipy", "pandas", "xlsxwriter", "h5py", "pymatsolver",
-            "pyflowDS",
+            "pyflowdiagnostics",
         ]
 
         # Optional packages.

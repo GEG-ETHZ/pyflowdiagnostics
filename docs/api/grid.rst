@@ -1,6 +1,6 @@
 Grid
 ====
 
-.. automodapi:: pyflowDS.grid
+.. automodapi:: pyflowdiagnostics.grid
    :no-inheritance-diagram:
    :no-heading:

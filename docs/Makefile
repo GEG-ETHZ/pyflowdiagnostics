@@ -1,7 +1,7 @@
 # Command line options.
 SPHINXOPTS    =
 SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = pyflowDS
+SPHINXPROJ    = pyflowdiagnostics
 SOURCEDIR     = .
 BUILDDIR      = _build
 

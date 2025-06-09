@@ -17,15 +17,15 @@ import time
 import os
 from datetime import datetime
 
-from pyflowDS import flow_diagnostics, utils
+from pyflowdiagnostics import flow_diagnostics, utils
 
 
 def config_logging(debug_mode):
 
-    log_dir = os.path.join(os.getcwd(), "pyflowDS_logs")
+    log_dir = os.path.join(os.getcwd(), "pyflowdiagnostics_logs")
     os.makedirs(log_dir, exist_ok=True)
 
-    log_filename = os.path.join(log_dir, f"pyflowDS_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
+    log_filename = os.path.join(log_dir, f"pyflowdiagnostics_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log")
     logging.basicConfig(
         level=logging.DEBUG if debug_mode else logging.INFO,
         format='%(asctime)s, %(levelname)s %(message)s',
@@ -45,7 +45,7 @@ def config_parser():
     parser.add_argument("-d", "--debug", help="Enable debugging (optional)", default=False,
                         action=argparse.BooleanOptionalAction, dest="debug")
     parser.add_argument("--report", action="store_true", default=False,
-                        help="Show pyflowDS report and exit")
+                        help="Show pyflowdiagnostics report and exit")
     return parser
 
 
@@ -56,8 +56,8 @@ def main():
     if vars(args).pop('report'):
         print(utils.Report())
     elif not vars(args).get('file_path') or not vars(args).get('time_step_indices'):
-        print(f"{parser.description}\n=> Type `pyflowDS --help` for "
-              f"more info (pyflowDS v{utils.__version__}).")
+        print(f"{parser.description}\n=> Type `pyflowdiagnostics --help` for "
+              f"more info (pyflowdiagnostics v{utils.__version__}).")
     else:
         config_logging(args.debug)
 

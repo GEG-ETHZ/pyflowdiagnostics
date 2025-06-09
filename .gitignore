@@ -3,13 +3,13 @@ __pycache__/
 
 # Sphinx
 docs/_build/
-docs/api/pyflowDS*
+docs/api/pyflowdiagnostics*
 
 # setuptools_scm
-pyflowDS/version.py
+pyflowdiagnostics/version.py
 
 # Build related
 .eggs/
 build/
 dist/
-pyflowDS.egg-info/
+pyflowdiagnostics.egg-info/

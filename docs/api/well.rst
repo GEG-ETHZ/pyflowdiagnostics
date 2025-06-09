@@ -1,6 +1,6 @@
 Well
 ====
 
-.. automodapi:: pyflowDS.well
+.. automodapi:: pyflowdiagnostics.well
    :no-inheritance-diagram:
    :no-heading:

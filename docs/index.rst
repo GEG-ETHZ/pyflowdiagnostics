@@ -1,12 +1,12 @@
-.. _pyflowDS-manual:
+.. _pyflowdiagnostics-manual:
 
-######################
-pyflowDS Documentation
-######################
+###############################
+pyflowdiagnostics Documentation
+###############################
 
 :Release: |version|
 :Date: |today|
-:Source: `github.com/GEG-ETHZ/pyflowDS <https://github.com/GEG-ETHZ/pyflowDS>`_
+:Source: `github.com/GEG-ETHZ/pyflowdiagnostics <https://github.com/GEG-ETHZ/pyflowdiagnostics>`_
 
 ----
 

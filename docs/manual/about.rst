@@ -1,10 +1,10 @@
 About
 =====
 
-The code ``pyflowDS``, Flow Diagnostics Toolkit, provides a Python-based tool
-for flow diagnostics in reservoir simulation. To our knowledge, it is the first
-open-source, lightweight Python-based flow diagnostics tool coupled with
-commercial reservoir simulators.
+The code ``pyflowdiagnostics``, Flow Diagnostics Toolkit, provides a
+Python-based tool for flow diagnostics in reservoir simulation. To our
+knowledge, it is the first open-source, lightweight Python-based flow
+diagnostics tool coupled with commercial reservoir simulators.
 
 Features
 --------

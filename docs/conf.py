@@ -1,5 +1,5 @@
 import time
-from pyflowDS import __version__
+from pyflowdiagnostics import __version__
 
 # ==== 1. Extensions  ====
 
@@ -35,7 +35,7 @@ source_suffix = ['.md', '.rst']
 master_doc = 'index'
 
 # General information about the project.
-project = 'pyflowDS'
+project = 'pyflowdiagnostics'
 author = 'Tsubasa Onishi'
 copyright = f'2025-{time.strftime("%Y")}, {author}'
 
@@ -53,10 +53,10 @@ pygments_style = 'friendly'
 # ==== 3. HTML settings ====
 html_theme = 'pydata_sphinx_theme'
 html_static_path = ['_static']
-html_title = 'pyflowDS'
+html_title = 'pyflowdiagnostics'
 
 html_theme_options = {
-    "github_url": "https://github.com/GEG-ETHZ/pyflowDS",
+    "github_url": "https://github.com/GEG-ETHZ/pyflowdiagnostics",
     "external_links": [
         {"name": "GEG", "url": "https://geg.ethz.ch/"},
     ],
@@ -65,7 +65,7 @@ html_theme_options = {
 
 html_context = {
     "github_user": "GEG-ETHZ",
-    "github_repo": "pyflowDS",
+    "github_repo": "pyflowdiagnostics",
     "github_version": "main",
     "doc_path": "docs",
 }

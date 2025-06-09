@@ -26,7 +26,7 @@ Via the command line:
 
 .. code-block:: console
 
-   pyflowDS -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
+   pyflowdiagnostics -f <PATH_TO_DATA/AFI_FILE> -t <LIST_OF_TSTEPS_OF_INTEREST>
 
 Arguments:
 
@@ -45,17 +45,17 @@ Using command line interface (CLI):
 
 .. code-block:: console
 
-   pyflowDS -f /path/to/simulation.DATA -t 1 5 10
+   pyflowdiagnostics -f /path/to/simulation.DATA -t 1 5 10
 
 Or, in your Python script:
 
 .. code-block:: python
 
-   import pyflowDS
+   import pyflowdiagnostics as pfd
 
    tsteps = [1, 5, 10]
 
-   fd = pyflowDS.FlowDiagnostics("/path/to/simulation.DATA")
+   fd = pfd.FlowDiagnostics("/path/to/simulation.DATA")
    for tstep in tsteps:
        fd.execute(tstep)
 

@@ -1,0 +1,2 @@
+from pyflowdiagnostics.readers.ecl_bin_reader import EclReader
+from pyflowdiagnostics.readers.cmg_bin_reader import CmgReader

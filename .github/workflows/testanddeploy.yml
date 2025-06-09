@@ -132,7 +132,7 @@ jobs:
           python -m pip install build setuptools-scm
 
       - name: Build source and wheel distributions
-        if: github.ref == 'refs/heads/main'
+        # TODO if: github.ref == 'refs/heads/main'
         run: |
           # Change setuptools-scm local_scheme to "no-local-version" so the
           # local part of the version isn't included, making the version string

@@ -15,6 +15,7 @@ import argparse
 import logging
 import time
 import os
+import sys
 from datetime import datetime
 
 from pyflowdiagnostics import flow_diagnostics, utils

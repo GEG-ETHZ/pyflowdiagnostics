@@ -103,7 +103,18 @@ class EclReader:
             raise ValueError("Missing required argument: tstep_id.")
 
         if self.unrst_file_path is not None:
-            data = self._read_unrst(self.unrst_file_path, keys)
+
+            if not hasattr(self, "_unrst_data"):
+                self._unrst_data = {}
+
+            keys_combined = "|".join(sorted(keys))
+
+            if keys_combined in self._unrst_data.keys():
+                data = self._unrst_data[keys_combined]
+            else:
+                data = self.read_unrst(self.unrst_file_path, keys)
+                self._unrst_data[keys_combined] = data
+
             d_out = {}
             for key in keys:
                 if tstep_id >= len(data.get(key, [])):
@@ -123,117 +134,6 @@ class EclReader:
 
 
     def read_unrst(self, file_path: str, keys: list = None, tstep_id: int = None) -> dict:
-        result_dict = {"TIME": [], "DATE": []}
-        if keys:
-            for key in keys:
-                result_dict[key] = []
-
-        time_steps = []
-
-        with open(file_path, 'rb') as fid:
-            endian = self._detect_endian(fid)
-            current_position = fid.tell()
-            cumulative_days = 0
-
-            # 1. Index all timesteps
-            while True:
-                data, _, key = self._load_vector(fid, endian)
-                key = key.strip()
-
-                if key == "SEQNUM":
-                    time_steps.append((data[0], current_position))
-
-                current_position = fid.tell()
-                if fid.tell() >= os.fstat(fid.fileno()).st_size:
-                    break
-
-            # print("Raw SEQNUM values:", [s for s, _ in time_steps])
-
-            # Fix: SEQNUM marks the next timestep, so shift by -1
-            # time_steps = [(max(0, seqnum - 1), pos) for seqnum, pos in time_steps]
-
-            def read_one_timestep(fid, pos):
-                fid.seek(pos)
-                result = {}
-                found_keys = {k: False for k in keys} if keys else {}
-
-                while keys is None or not all(found_keys.values()):
-                    data, _, key = self._load_vector(fid, endian)
-                    key = key.strip()
-
-                    if key == "INTEHEAD":
-                        IDAY, IMON, IYEAR = data[64], data[65], data[66]
-                        result["DATE"] = datetime(IYEAR, IMON, IDAY)
-
-                        if keys and "INTEHEAD" in found_keys:
-                            result["INTEHEAD"] = data
-                            found_keys["INTEHEAD"] = True
-
-                    elif keys and key in found_keys:
-                        if isinstance(data, np.ndarray):
-                            result[key] = data
-                        elif isinstance(data, (bytes, str)):
-                            result[key] = data.decode(errors="ignore").strip()
-                        elif isinstance(data, (int, float)):
-                            result[key] = np.array([data], dtype=np.float32)
-                        else:
-                            result[key] = data
-                        found_keys[key] = True
-
-                    if fid.tell() >= os.fstat(fid.fileno()).st_size:
-                        break
-
-                # Fill missing keys with empty numpy arrays
-                if keys:
-                    for k in keys:
-                        if k not in result:
-                            result[k] = np.array([])
-
-                return result
-
-            # 2. Read specific timestep
-            if tstep_id is not None:
-                match = [t for t in time_steps if t[0] == tstep_id]
-                if not match:
-                    raise ValueError(f"Timestep {tstep_id} not found in {file_path}")
-                step_data = read_one_timestep(fid, match[0][1])
-                # Only return requested keys
-                if keys:
-                    return {k: step_data.get(k, np.array([])) for k in keys}
-                else:
-                    return step_data
-
-            # 3. Read all timesteps
-            previous_date = None
-            for step, pos in time_steps:
-                step_data = read_one_timestep(fid, pos)
-
-                # Track DATE and TIME
-                if "DATE" in step_data:
-                    curr_date = step_data["DATE"]
-                    if previous_date is None:
-                        cumulative_days = 0
-                    else:
-                        cumulative_days += (curr_date - previous_date).days
-                    previous_date = curr_date
-
-                    result_dict["TIME"].append(cumulative_days)
-                    result_dict["DATE"].append(curr_date)
-
-                # Append each key, even if data is missing
-                if keys:
-                    for key in keys:
-                        value = step_data.get(key, np.array([]))
-                        result_dict[key].append(value)
-
-        return result_dict
-
-    from collections import defaultdict
-    from datetime import datetime
-    import os
-    import numpy as np
-
-    def _read_unrst(self, file_path: str, keys: list = None, tstep_id: int = None) -> dict:
         def read_one_timestep(fid, pos, endian, keys):
             """Reads a full timestep starting at position `pos`."""
             fid.seek(pos)

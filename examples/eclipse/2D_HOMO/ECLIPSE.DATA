@@ -1,0 +1,168 @@
+------------------------------------------------------------------------
+-->This is the first SPE comparison problem, reported by Odeh
+------------------------------------------------------------------------
+RUNSPEC
+TITLE
+   ODEH PROBLEM - IMPLICIT OPTION
+
+DIMENS
+21 21 1  /
+
+OIL
+
+WATER
+
+FIELD
+
+EQLDIMS
+    1  100   10    1    1 /
+
+TABDIMS
+    1    1   16   12    1   12 /
+
+WELLDIMS
+    2    1    1    2 /
+
+NUPCOL
+    4 /
+
+LGR
+100 100 /
+
+
+START
+  1 'JAN' 2000  /
+
+NSTACK
+   24 /
+
+GRID    ================================================================
+
+GRIDFILE
+2 /
+
+INIT
+
+DX
+441*50   /
+DY
+441*50   /
+DZ 
+441*10  /
+PORO
+441*0.2 /
+TOPS
+441*5000 /
+PERMX
+441*1.0 /
+COPY
+'PERMX'    'PERMY'   /
+'PERMX'    'PERMZ'   /
+/
+
+ACTNUM
+441*1
+/
+
+--INCLUDE
+--'NNC.DAT'
+--/
+
+EDIT
+
+
+PROPS    ===============================================================
+-------- THE PROPS SECTION DEFINES THE REL. PERMEABILITIES, CAPILLARY
+-------- PRESSURES, AND THE PVT PROPERTIES OF THE RESERVOIR FLUIDS
+----------------------------------------------------------------------
+
+SWFN
+    0.0 0.0 0.0
+    1.0 1.0 0.0
+/
+
+
+SOF2
+   0.0 0.0
+   1.0 1.0
+/
+
+
+PVTW
+  .0000000   1.00000    3.03E-06    .50000    0.00E-01 /
+
+PVDO
+  .00000 1.00000 2.00000
+ 8000.00  .99000 2.00000
+/
+
+ROCK
+ 4000.00        .30E-05 /
+
+DENSITY
+ 52.0000  64.0000   .04400 /
+
+
+REGIONS ===============================================================
+
+SATNUM
+441*1
+/
+
+SOLUTION ===============================================================
+
+PRESSURE
+441*3000.0 
+/
+
+SWAT
+441*0.10 /
+
+RPTRST
+BASIC=2 FLOWS PRESSURE ALLPROPS / 
+
+SUMMARY  ===============================================================
+
+FOPR
+FWPR
+FPR
+FWCT
+FOPT
+FWPT
+CVFR
+*/
+/
+
+
+SCHEDULE ===============================================================
+
+RPTRST
+BASIC=2 FLOWS PRESSURE ALLPROPS / 
+
+RPTSCHED
+'FLOWAT=3' 'FLOOIL=3' /
+
+WELSPECS
+'INJ' 'FLD'   1   1  1* 'WATER'  /
+'PRD' 'FLD'  21  21  1* 'OIL'  /
+/
+
+COMPDAT
+'INJ'  1  1 1 1  'OPEN' 2*   0.5  /
+'PRD' 21 21 1 1  'OPEN' 2*   0.5  /
+/
+
+WCONINJE
+'INJ' 'WAT' 'OPEN' 'RATE'  1000 /
+/
+
+WCONPROD
+'PRD' 'OPEN' 'LRAT' 3* 1000 /
+/
+
+TSTEP
+100.0
+/
+
+END
+

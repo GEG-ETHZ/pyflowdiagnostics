@@ -1,0 +1,242 @@
+----====================================================================
+RUNSPEC
+
+--NOSIM
+
+TITLE
+NOV 2005 ECLIPSE version of SAIGUP
+
+DIMENS
+40 120 20 /
+
+  
+OIL
+
+WATER
+
+FIELD
+
+
+START
+ 1 JAN 2000 /
+
+TABDIMS
+    1    1   35   10    1   10 /
+
+WELLDIMS
+  10 100 2 10 /
+
+
+NSTACK
+   200/
+
+UNIFOUT
+
+--======================================================================
+GRID
+
+GRIDFILE
+2 1 /
+
+INIT
+
+INCLUDE
+SAIGUP.COORD /
+INCLUDE
+SAIGUP_A1.ZCORN /
+--INCLUDE
+--SAIGUP.ACTNUM /
+
+INCLUDE
+028.PERMX /
+COPY
+ PERMX  PERMY /
+ PERMX  PERMZ /
+/
+
+INCLUDE
+028.PORO /
+
+--INCLUDE
+--028.NTG /
+
+
+--========================================================
+ EDIT
+
+--=========================================================
+
+PROPS
+-- From Alhuthali
+SWFN
+    .2500  .0000 4.0000
+    .3000  .0200 2.9500
+    .4000  .0550 1.6500
+    .5000  .1000  .8500
+    .6000  .1450  .3000
+    .7000  .2000  .0000
+/
+
+
+SOF2
+    .3000  .0000
+    .4000  .1100
+    .5000  .2400
+    .6000  .4200
+    .7000  .7050
+    .7500  .9200
+/
+
+
+PVTW
+  .0000000   1.00000    3.03E-06    .50000    0.00E-01 /
+
+PVDO
+  .00000 1.00000 2.00000
+ 8000.00  .99000 2.00000
+/
+
+ROCK
+ 4000.00        .30E-05 /
+
+DENSITY
+ 52.0000  64.0000   .04400 /
+
+--=================================================================
+REGIONS
+
+--=================================================================
+SOLUTION
+
+EQUIL
+2300. 4000.0 2300. /
+ 
+
+RPTRST
+BASIC=2 FLOWS PRESSURE ALLPROPS / 
+
+
+
+--======================================================================
+SUMMARY
+--RUNSUM output to be Excel
+EXCEL
+
+RUNSUM
+
+
+FVIT
+FVIR
+FVPT
+FVPR
+FWPR
+
+FPR
+/
+FOPT
+/
+FWPT
+/
+FWIT
+/
+WOPR
+/
+WOPRH
+/
+WWPR
+/
+WWPRH
+/
+WGPR
+/
+WGPRH
+/
+WLPR
+/
+WLPRH
+/
+WWIR
+/
+WWIRH
+/
+WBHP
+/
+WBHPH
+/
+WWCT
+/
+WWCTH
+/
+WGOR
+/
+WGORH
+/
+WOPT
+/
+WWPT
+/
+CVFR
+* /
+/
+
+
+--======================================================================
+SCHEDULE
+TUNING
+--- TSINIT TSMAXZ   TSMINZ   TSMCHP TSFMAX TSFMIN TSFCNV TFDIFF THRUPT TMAXWC
+--       1*    1*  1.0E-10  1.0E-10/    
+1.E-3    1*    1.E-6 1.E-6    3.0     0.3     0.1   1.25   1E20  1*/
+--- TRGTTE TRGCNV   TRGMBE   TRGLCV XXXTTE  XXXCNV  XXXMBE  XXXLCV  XXXWFL TRGFIP TRGSFT
+--      0.1 1.0E-3  1.0E-8  1.0E-5     10.  1.0E-1  1.0E-8  1.0E-3 1.0E-3/    <- Default
+   0.1 0.001   1.0E-7  0.0001     10.0 0.01    1.0E-6   0.001 0.001  0.025  1*/
+--- NEWTMX NEWTMN LITMAX LITMIN MXWSIT MXWPIT DDPLIM DDSLIM TRGDPR XXXDPR 
+1000      1     1000      1      100      100   1000 1000 1000 1000  /
+
+
+RPTRST
+BASIC=2 FLOWS PRESSURE ALLPROPS /
+
+
+
+--****************                        ******************
+--****************  WELL SPECIFY SECTION  ******************
+--****************                        ******************
+
+
+WELSPECS
+I1  G    5  109   2200.0    WATER  /
+I2  G   29  106   2200.0    WATER  /
+I3  G   30   59   2200.0    WATER  /
+I4  G   21    8   2200.0    WATER  /
+I5  G    4    6   2200.0    WATER  /
+I6  G    3   53   2200.0    WATER  /
+P1  G   16   40   2200.0    OIL/
+P2  G   18   80   2200.0    OIL/
+/
+
+COMPDAT
+I1    5  109 	1   20   OPEN   1*    1*    0.25 /
+I2   29  106 	1   20   OPEN   1*    1*    0.25 /
+I3   30   59 	1   20   OPEN   1*    1*    0.25 /
+I4   21    8 	1   20   OPEN   1*    1*    0.25 /
+I5    4    6 	1   20   OPEN   1*    1*    0.25 /
+I6    3   53 	1   20   OPEN   1*    1*    0.25 /
+P1   16   40	1   20   OPEN   1*    1*    0.25 /
+P2   18   80	1   20   OPEN   1*    1*    0.25 /
+/
+
+WCONPROD
+'P*'   OPEN  BHP 5* 3000.0 /
+/
+
+WCONINJE
+'I*'   WATER   OPEN    RATE  1000.0/
+/
+
+TSTEP
+100.0 /
+/
+
+END
+
+

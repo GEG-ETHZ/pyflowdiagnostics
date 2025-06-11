@@ -1,0 +1,2 @@
+Start Time,Timestamp,Duration,Simulation Time,Simulation Time Unit,Timestep,Average Timestep,Simulation Speed,Average Time Period,Simulation End Time,Fraction Complete,Time Remaining,Simulation Start Date,Simulation Date,Simulation End Date,Duration Rounded,Percent Complete,Time Remaining Rounded,Average Timestep Rounded,WARNING,PROBLEM,ERROR,BUG,FATAL,End Marker
+2025-03-27T12:27:02Z,2025-03-27T12:27:26Z,23.51,100.0,d,27.7,0.00,0.00,0.00,100.0,1.00,-1.00,01 Jan 2000,10 Apr 2000,10 Apr 2000,25 s,100%,unknown,0 s,2,0,0,0,0,%%

@@ -1,0 +1,2236 @@
+
+
+
+ $$$$$         $     $                             $    $$$    $$$ 
+ $             $                                  $$   $   $  $   $
+ $       $$$   $     $   $$$$    $$$     $$$       $   $   $  $   $
+ $$$$   $   $  $     $   $   $  $       $   $      $   $   $  $   $
+ $      $      $     $   $   $   $$$    $$$$       $   $   $  $   $
+ $      $   $  $     $   $   $      $   $          $   $   $  $   $
+ $$$$$   $$$    $$   $   $$$$    $$$     $$$      $$$   $$$    $$$ 
+                         $                                         
+                         $                                         
+
+
+
+                       $$$$$         $     $                             $    $$$    $$$ 
+                       $             $                                  $$   $   $  $   $
+                       $       $$$   $     $   $$$$    $$$     $$$       $   $   $  $   $
+                       $$$$   $   $  $     $   $   $  $       $   $      $   $   $  $   $
+                       $      $      $     $   $   $   $$$    $$$$       $   $   $  $   $
+                       $      $   $  $     $   $   $      $   $          $   $   $  $   $
+                       $$$$$   $$$    $$   $   $$$$    $$$     $$$      $$$   $$$    $$$ 
+                                               $                                         
+                                               $                                         
+
+
+
+                                             $$$$$         $     $                             $    $$$    $$$ 
+                                             $             $                                  $$   $   $  $   $
+                                             $       $$$   $     $   $$$$    $$$     $$$       $   $   $  $   $
+                                             $$$$   $   $  $     $   $   $  $       $   $      $   $   $  $   $
+                                             $      $      $     $   $   $   $$$    $$$$       $   $   $  $   $
+                                             $      $   $  $     $   $   $      $   $          $   $   $  $   $
+                                             $$$$$   $$$    $$   $   $$$$    $$$     $$$      $$$   $$$    $$$ 
+                                                                     $                                         
+                                                                     $                                         
+
+
+
+                                                                   $$$$$         $     $                             $    $$$    $$$ 
+                                                                   $             $                                  $$   $   $  $   $
+                                                                   $       $$$   $     $   $$$$    $$$     $$$       $   $   $  $   $
+                                                                   $$$$   $   $  $     $   $   $  $       $   $      $   $   $  $   $
+                                                                   $      $      $     $   $   $   $$$    $$$$       $   $   $  $   $
+                                                                   $      $   $  $     $   $   $      $   $          $   $   $  $   $
+                                                                   $$$$$   $$$    $$   $   $$$$    $$$     $$$      $$$   $$$    $$$ 
+                                                                                           $                                         
+                                                                                           $                                         
+
+Proprietary Notice
+This application contains the confidential and proprietary trade secrets of SLB and may not be copied or stored in an
+information retrieval system, transferred, used, distributed, translated, or retransmitted in any form or by any means, electronic
+or mechanical, in whole or in part, without the express written permission of the copyright owner.
+
+Eclipse is a mark of SLB. Copyright (c) 1981-2024 SLB. All rights reserved.
+
+Version =  2024.4  
+Arch    =  PC WINDOWS (64 bit, PC_IFX24VS143_OPT)
+
+Annex    | Modification date    | Update date          | Baseline     | Build       | Hash                 
+=====    | =================    | ===========          | ========     | =====       | ====                      
+Eclipse  | 09-DEC-2024 10:38:45 | 09-DEC-2024 10:11:52 | 2024.4       | 20241209.1  | 5b1efde8a7a-(branch: 2024.4)
+petlast  | 09-DEC-2024 10:38:45 | 09-DEC-2024 10:11:52 | 2024.4       | 20241209.1  | 5b1efde8a7a-(branch: 2024.4)
+system   | 09-DEC-2024 10:38:46 | 09-DEC-2024 10:11:52 | 2024.4       | 20241209.1  | 5b1efde8a7a-(branch: 2024.4)
+tpb      | 09-DEC-2024 10:38:45 | 09-DEC-2024 10:11:52 | 2024.4       | 20241209.1  | 5b1efde8a7a-(branch: 2024.4)
+utility  | 09-DEC-2024 10:38:46 | 09-DEC-2024 10:11:52 | 2024.4       | 20241209.1  | 5b1efde8a7a-(branch: 2024.4)
+ 
+
+1
+
+ ******** ECHO OF INPUT DATA FOR RUN ECLIPSE
+ RUN ON 11/06/2025 AT 12:30:27 VERSION 2024.4  
+
+ 0: ------------------------------------------------------------------------
+ 0: -->This is the first SPE comparison problem, reported by Odeh
+ 0: ------------------------------------------------------------------------
+ 0: RUNSPEC
+ 0: TITLE
+ 0:    ODEH PROBLEM - IMPLICIT OPTION
+ 0: 
+ 0: DIMENS
+ 0: 5 5 3  /
+ 0: 
+ 0: OIL
+ 0: 
+ 0: WATER
+ 0: 
+ 0: FIELD
+ 0: 
+ 0: EQLDIMS
+ 0:     1  100   10    1    1 /
+ 0: 
+ 0: TABDIMS
+ 0:     1    1   16   12    1   12 /
+ 0: 
+ 0: WELLDIMS
+ 0:     3    3    3    3 /
+ 0: 
+ 0: NUPCOL
+ 0:     4 /
+ 0: 
+ 0: LGR
+ 0: 100 100 /
+ 0: 
+ 0: 
+ 0: START
+ 0:   1 'JAN' 2000  /
+ 0: 
+ 0: NSTACK
+ 0:    24 /
+ 0: 
+ 0: UNIFOUT
+ 0: 
+ 0: GRID    ================================================================
+ 0: 
+ 0: GRIDFILE
+ 0: 2 /
+ 0: 
+ 0: INIT
+ 0: 
+ 0: DX
+ 0: 75*50   /
+ 0: DY
+ 0: 75*50   /
+ 0: DZ
+ 0: 75*10  /
+ 0: PORO
+ 0: 75*0.2 /
+ 0: TOPS
+ 0: 25*5000 /
+ 0: PERMX
+ 0: 75*1.0 /
+ 0: COPY
+ 0: 'PERMX'    'PERMY'   /
+ 0: 'PERMX'    'PERMZ'   /
+ 0: /
+ 0: 
+ 0: ACTNUM
+ 0: 75*1
+ 0: /
+ 0: 
+ 0: --INCLUDE
+ 0: --'NNC.DAT'
+ 0: --/
+ 0: 
+ 0: EDIT
+ 0: 
+ 0: 
+ 0: PROPS    ===============================================================
+ 0: -------- THE PROPS SECTION DEFINES THE REL. PERMEABILITIES, CAPILLARY
+ 0: -------- PRESSURES, AND THE PVT PROPERTIES OF THE RESERVOIR FLUIDS
+ 0: ----------------------------------------------------------------------
+ 0: -- From Alhuthali
+ 0: SWFN
+ 0:     .2500  .0000 4.0000
+ 0:     .3000  .0200 2.9500
+ 0:     .4000  .0550 1.6500
+ 0:     .5000  .1000  .8500
+ 0:     .6000  .1750  .3000
+ 0:     .7000  .2000  .0000
+ 0: /
+ 0: 
+ 0: 
+ 0: SOF2
+ 0:     .3000  .0000
+ 0:     .4000  .1100
+ 0:     .5000  .2400
+ 0:     .6000  .4200
+ 0:     .7000  .7050
+ 0:     .7500  .9200
+ 0: /
+ 0: 
+ 0: 
+ 0: PVTW
+ 0:   .0000000   1.00000    3.03E-06    .50000    0.00E-01 /
+ 0: 
+ 0: PVDO
+ 0:   .00000 1.00000 2.00000
+ 0:  8000.00  .99000 2.00000
+ 0: /
+ 0: 
+ 0: ROCK
+ 0:  4000.00        .30E-05 /
+ 0: 
+ 0: DENSITY
+ 0:  52.0000  64.0000   .04400 /
+ 0: 
+ 0: 
+ 0: REGIONS ===============================================================
+ 0: 
+ 0: SATNUM
+ 0: 75*1
+ 0: /
+ 0: 
+ 0: SOLUTION ===============================================================
+ 0: 
+ 0: PRESSURE
+ 0: 75*3000.0
+ 0: /
+ 0: 
+ 0: SWAT
+ 0: 75*0.10 /
+ 0: 
+ 0: RPTRST
+ 0: BASIC=2 FLOWS PRESSURE ALLPROPS /
+ 0: 
+ 0: SUMMARY  ===============================================================
+ 0: 
+ 0: FOPR
+ 0: FWPR
+ 0: FPR
+ 0: FWCT
+ 0: FOPT
+ 0: FWPT
+ 0: CVFR
+ 0: */
+ 0: /
+ 0: 
+ 0: 
+ 0: SCHEDULE ===============================================================
+ 0: 
+ 0: RPTRST
+ 0: BASIC=2 FLOWS PRESSURE ALLPROPS /
+ 0: 
+ 0: RPTSCHED
+ 0: 'FLOWAT=3' 'FLOOIL=3' /
+ 0: 
+ 0: WELSPECS
+ 0: 'INJ' 'FLD'   2   2  1* 'WATER'  /
+ 0: 'PRD' 'FLD'   5   5  1* 'OIL'  /
+ 0: /
+ 0: 
+ 0: COMPDAT
+ 0: 'INJ'  2  2 1 2  'OPEN' 2*   0.5  /
+ 0: 'PRD'  5  5 1 3  'OPEN' 2*   0.5  /
+ 0: /
+ 0: 
+ 0: WCONINJE
+ 0: 'INJ' 'WAT' 'OPEN' 'RATE'  100 /
+ 0: /
+ 0: 
+ 0: WCONPROD
+ 0: 'PRD' 'OPEN' 'BHP' 5* 1000 /
+ 0: /
+ 0: 
+ 0: TSTEP
+ 0: 10*30
+ 0: /
+ 0: 
+ 0: END
+ 0: 
+
+ ******** END OF INPUT DATA FOR RUN ECLIPSE
+     1 READING RUNSPEC 
+     2 READING TITLE   
+     3 READING DIMENS  
+     4 READING OIL     
+     5 READING WATER   
+     6 READING FIELD   
+     7 READING EQLDIMS 
+     8 READING TABDIMS 
+     9 READING WELLDIMS
+    10 READING NUPCOL  
+    11 READING LGR     
+    12 READING START   
+    13 READING NSTACK  
+    14 READING UNIFOUT 
+    15 READING GRID    
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           CHECKING FOR LICENSES                                           
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           ECLIPSE SPECIAL OPTIONS CHECKED OUT:                            
+ @           lgr                                                             
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           CHECKING FOR LICENSES                                           
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           ECLIPSE LICENSE CHECKED OUT                                     
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           THE MEMORY REQUIRED TO PROCESS THE GRID SECTION IS              
+ @                25045 KBYTES                                               
+    16 READING GRIDFILE
+    17 READING INIT    
+    18 READING DX      
+    19 READING DY      
+    20 READING DZ      
+    21 READING PORO    
+    22 READING TOPS    
+
+ @--WARNING  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @                     50 VALUES NOT DEFINED IN BOX (  1-  5,  1-  5,  1-  3)
+ @           OF KEYWORD TOPS                                                 
+    23 READING PERMX   
+    24 READING COPY    
+    25 READING ACTNUM  
+    26 READING EDIT    
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           UNSPECIFIED TOPS VALUES OBTAINED BY ADDING DZ                   
+ @           TO TOPS VALUE FOR LAYER ABOVE                                   
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           NEITHER OLDTRAN,OLDTRANR NOR NEWTRAN SPECIFIED                  
+ @           BLOCK CENTRE TRANSMISSIBILITIES TO BE CALCULATED                
+ @           USING  OLDTRAN                                                  
+    27 READING PROPS   
+
+ @--COMMENT  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           NO NON-NEIGHBOUR CONNECTIONS IN GLOBAL GRID                     
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           NUMBER OF ACTIVE GLOBAL CELLS IS 75                             
+ @           NUMBER OF ACTIVE  LOCAL CELLS IS 0                              
+ @            TOTAL NUMBER OF ACTIVE CELLS IS 75                             
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           THE MEMORY REQUIRED TO PROCESS THE SOLUTION SECTION IS          
+ @                 6931 KBYTES                                               
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @              63888 CHARACTER VARIABLES USED                               
+    28 READING SWFN    
+    29 READING SOF2    
+    30 READING PVTW    
+    31 READING PVDO    
+    32 READING ROCK    
+    33 READING DENSITY 
+    34 READING REGIONS 
+    35 READING SATNUM  
+    36 READING SOLUTION
+    37 READING PRESSURE
+    38 READING SWAT    
+    39 READING RPTRST  
+    40 READING SUMMARY 
+
+ @--WARNING  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           INITIAL WATER SATURATION(S) ARE BELOW MINIMUM VALUE(S)          
+ @           IN A TOTAL OF 75 GRID BLOCK(S) IN THE GLOBAL GRID.              
+ @           THE LOWEST VALUE (RELATIVE TO ITS MINIMUM) OCCURS IN            
+ @           GRID BLOCK (1, 1, 1) WHERE:                                     
+ @           EXPECTED MINIMUM INITIAL WATER SATURATION IS 0.25000            
+ @           CURRENT INITIAL WATER SATURATION IS 0.10000                     
+ @           EXPECTED MAXIMUM INITIAL WATER SATURATION IS 0.70000            
+ @           RESULTS MAY NOT BE PHYSICAL AND/OR CONVERGENCE ISSUES MAY OCCUR.
+ @           PLEASE ENSURE DATA ARE WITHIN THE RIGHT RANGE                   
+
+ @--WARNING  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           INITIAL OIL SATURATION(S) ARE ABOVE MAXIMUM VALUE(S)            
+ @           IN A TOTAL OF 75 GRID BLOCK(S) IN THE GLOBAL GRID.              
+ @           THE HIGHEST VALUE (RELATIVE TO ITS MAXIMUM) OCCURS IN           
+ @           GRID BLOCK (1, 1, 1) WHERE:                                     
+ @           EXPECTED MINIMUM INITIAL OIL SATURATION IS 0.30000              
+ @           CURRENT INITIAL OIL SATURATION IS 0.90000                       
+ @           EXPECTED MAXIMUM INITIAL OIL SATURATION IS 0.75000              
+ @           RESULTS MAY NOT BE PHYSICAL AND/OR CONVERGENCE ISSUES MAY OCCUR.
+ @           PLEASE ENSURE DATA ARE WITHIN THE RIGHT RANGE                   
+    41 READING FOPR    
+    42 READING FWPR    
+    43 READING FPR     
+    44 READING FWCT    
+    45 READING FOPT    
+    46 READING FWPT    
+    47 READING CVFR    
+    48 READING SCHEDULE
+    49 READING RPTRST  
+    50 READING RPTSCHED
+    51 READING WELSPECS
+    52 READING COMPDAT 
+    53 READING WCONINJE
+
+ @--WARNING  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           THE BOTTOM HOLE PRESSURE LIMIT FOR WELL INJ                     
+ @           HAS BEEN DEFAULTED. THE DEFAULT VALUE IS  100000.   PSIA        
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           OPENING WELL INJ      AT TIME      0.00   DAYS                  
+ @           CONTROLLED BY WATER RATE                                        
+    54 READING WCONPROD
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           OPENING WELL PRD      AT TIME      0.00   DAYS                  
+ @           CONTROLLED BY BOTTOM HOLE PRESSURE                              
+    55 READING TSTEP   
+
+ @--MESSAGE  AT TIME        0.0   DAYS    ( 1-JAN-2000):
+ @           RESTART FILE WRITTEN   REPORT     0                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************   1
+  SIMULATE AT      0.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   0     1 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP    1 TIME=      1.00  DAYS (    +1.0  DAYS INIT  3 ITS) (2-JAN-2000)       
+  PAV=  3231.0  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    2 TIME=      2.35  DAYS (    +1.4  DAYS TRNC  2 ITS) (3-JAN-2000)       
+  PAV=  3563.6  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    3 TIME=      6.42  DAYS (    +4.1  DAYS MAXF  3 ITS) (7-JAN-2000)       
+  PAV=  4482.2  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    4 TIME=     11.39  DAYS (    +5.0  DAYS TRNC  2 ITS) (12-JAN-2000)      
+  PAV=  5446.7  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    5 TIME=     16.86  DAYS (    +5.5  DAYS TRNC  2 ITS) (17-JAN-2000)      
+  PAV=  6335.7  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    6 TIME=     23.43  DAYS (    +6.6  DAYS HALF  2 ITS) (24-JAN-2000)      
+  PAV=  7193.5  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    7 TIME=     30.00  DAYS (    +6.6  DAYS REPT  2 ITS) (31-JAN-2000)      
+  PAV=  7880.6  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************   2
+  FLOOILK+ AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.884    AT (  3,  3,  2)     MAXIMUM VALUE =  2.591    AT (  3,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.080   0.901   0.128  -0.007  -0.001  
+ (*,  2,  1)  0.901   1*015   1.391  -0.234  -0.012  
+ (*,  3,  1)  0.128   1.391  -0.400  -0.030  -0.002  
+ (*,  4,  1) -0.007  -0.234  -0.030  -0.002  -0.000  
+ (*,  5,  1) -0.001  -0.012  -0.002  -0.000  -0*000  
+
+ (*,  1,  2)  0.094   1.441   0.155  -0.010  -0.001  
+ (*,  2,  2)  1.440   2*196   2.591  -0.509  -0.015  
+ (*,  3,  2)  0.155   2.591  -0.884  -0.040  -0.002  
+ (*,  4,  2) -0.010  -0.509  -0.040  -0.003  -0.000  
+ (*,  5,  2) -0.001  -0.015  -0.002  -0.000  -0*000  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************   3
+  FLOOILI+ AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -1.76    AT (  1,  2,  3)     MAXIMUM VALUE =  10.92    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.30    5.12    4.43    2.34    0.00  
+ (*,  2,  1)  -0.61    1*02    4.19    2.60    0.00  
+ (*,  3,  1)   0.06    3.75    4.38    2.91    0.00  
+ (*,  4,  1)   1.62    3.74    4.83    4.65    0.00  
+ (*,  5,  1)   1.88    4.05    6.57   10.92    0*00  
+
+ (*,  1,  2)  -0.27    5.09    4.43    2.34    0.00  
+ (*,  2,  2)  -0.56    0*96    4.25    2.60    0.00  
+ (*,  3,  2)   0.13    3.78    4.39    2.91    0.00  
+ (*,  4,  2)   1.62    3.75    4.83    4.65    0.00  
+ (*,  5,  2)   1.88    4.05    6.57   10.92    0*00  
+
+ (*,  1,  3)  -0.22    5.04    4.42    2.34    0.00  
+ (*,  2,  3)  -1.76    3.27    5.75    2.62    0.00  
+ (*,  3,  3)   0.27    5.09    4.43    2.91    0.00  
+ (*,  4,  3)   1.60    3.77    4.83    4.65    0.00  
+ (*,  5,  3)   1.88    4.05    6.57   10.92    0*00  
+1                             **********************************************************************   4
+  FLOOILJ+ AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -1.76    AT (  2,  1,  3)     MAXIMUM VALUE =  10.92    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.30   -0.61    0.06    1.62    1.88  
+ (*,  2,  1)   5.12    1*02    3.74    3.74    4.05  
+ (*,  3,  1)   4.43    4.19    4.38    4.83    6.57  
+ (*,  4,  1)   2.34    2.59    2.91    4.65   10.92  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.27   -0.56    0.13    1.62    1.88  
+ (*,  2,  2)   5.09    0*96    3.78    3.75    4.05  
+ (*,  3,  2)   4.43    4.25    4.39    4.83    6.57  
+ (*,  4,  2)   2.34    2.60    2.91    4.65   10.92  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.22   -1.76    0.27    1.60    1.88  
+ (*,  2,  3)   5.04    3.27    5.08    3.77    4.05  
+ (*,  3,  3)   4.42    5.75    4.43    4.83    6.57  
+ (*,  4,  3)   2.34    2.62    2.91    4.65   10.92  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************   5
+  FLOWATK+ AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =   0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  23.61    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  1)   0.00   10*67    0.26    0.00    0.00  
+ (*,  3,  1)   0.00    0.26    0.00    0.00    0.00  
+ (*,  4,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  2)   0.00   23*61    0.44    0.00    0.00  
+ (*,  3,  2)   0.00    0.44    0.00    0.00    0.00  
+ (*,  4,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************   6
+  FLOWATI+ AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.37    AT (  1,  2,  1)     MAXIMUM VALUE =  10.60    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  1)  -6.37   10*60    0.73    0.00    0.00  
+ (*,  3,  1)   0.00    0.66    0.00    0.00    0.00  
+ (*,  4,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  2)  -5.99   10*26    0.66    0.00    0.00  
+ (*,  3,  2)   0.00    0.59    0.00    0.00    0.00  
+ (*,  4,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)  -2.63    4.87    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************   7
+  FLOWATJ+ AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.37    AT (  2,  1,  1)     MAXIMUM VALUE =  10.60    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00   -6.37    0.00    0.00    0.00  
+ (*,  2,  1)   0.00   10*60    0.66    0.00    0.00  
+ (*,  3,  1)   0.00    0.73    0.00    0.00    0.00  
+ (*,  4,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00   -5.99    0.00    0.00    0.00  
+ (*,  2,  2)   0.00   10*26    0.59    0.00    0.00  
+ (*,  3,  2)   0.00    0.66    0.00    0.00    0.00  
+ (*,  4,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00   -2.63    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    4.86    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME       30.0   DAYS    (31-JAN-2000):
+ @           RESTART FILE WRITTEN   REPORT     1                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************   8
+  SIMULATE AT     30.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   1    31 JAN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP    8 TIME=     44.15  DAYS (   +14.2  DAYS TRNC  3 ITS) (14-FEB-2000)      
+  PAV=  8861.7  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP    9 TIME=     60.00  DAYS (   +15.8  DAYS REPT  2 ITS) (1-MAR-2000)       
+  PAV=  9557.8  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************   9
+  FLOOILK+ AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.811    AT (  1,  3,  2)     MAXIMUM VALUE =  1.168    AT (  1,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.080   0.731  -0.419  -0.021  -0.001  
+ (*,  2,  1)  0.731   0*258   0.246  -0.020  -0.001  
+ (*,  3,  1) -0.419   0.246   0.118  -0.074  -0.003  
+ (*,  4,  1) -0.021  -0.020  -0.074  -0.005  -0.000  
+ (*,  5,  1) -0.001  -0.001  -0.003  -0.000  -0*000  
+
+ (*,  1,  2)  0.085   1.168  -0.811  -0.026  -0.001  
+ (*,  2,  2)  1.168   0*554   0.347  -0.064  -0.002  
+ (*,  3,  2) -0.811   0.347   0.035  -0.071  -0.003  
+ (*,  4,  2) -0.026  -0.064  -0.071  -0.005  -0.000  
+ (*,  5,  2) -0.001  -0.002  -0.003  -0.000  -0*000  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  10
+  FLOOILI+ AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.54    AT (  1,  2,  3)     MAXIMUM VALUE =  13.90    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.11    3.12    5.02    2.62    0.00  
+ (*,  2,  1)  -0.12    0*23    2.09    2.82    0.00  
+ (*,  3,  1)  -0.10    1.96    4.70    3.37    0.00  
+ (*,  4,  1)   2.22    4.51    5.85    5.77    0.00  
+ (*,  5,  1)   2.42    5.06    8.26   13.90    0*00  
+
+ (*,  1,  2)  -0.09    3.35    5.03    2.62    0.00  
+ (*,  2,  2)  -0.11    0*21    2.17    2.82    0.00  
+ (*,  3,  2)  -0.09    2.04    4.84    3.37    0.00  
+ (*,  4,  2)   2.22    4.51    5.85    5.77    0.00  
+ (*,  5,  2)   2.42    5.06    8.26   13.90    0*00  
+
+ (*,  1,  3)  -0.08    5.76    5.07    2.62    0.00  
+ (*,  2,  3)  -0.54    1.17    3.72    2.83    0.00  
+ (*,  3,  3)  -0.11    3.49    4.97    3.37    0.00  
+ (*,  4,  3)   2.21    4.51    5.85    5.77    0.00  
+ (*,  5,  3)   2.42    5.06    8.26   13.90    0*00  
+1                             **********************************************************************  11
+  FLOOILJ+ AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.54    AT (  2,  1,  3)     MAXIMUM VALUE =  13.90    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.11   -0.12   -0.10    2.22    2.42  
+ (*,  2,  1)   3.12    0*23    1.96    4.51    5.06  
+ (*,  3,  1)   5.02    2.09    4.70    5.85    8.26  
+ (*,  4,  1)   2.62    2.82    3.37    5.77   13.90  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.09   -0.11   -0.09    2.22    2.42  
+ (*,  2,  2)   3.35    0*21    2.04    4.51    5.06  
+ (*,  3,  2)   5.03    2.17    4.84    5.85    8.26  
+ (*,  4,  2)   2.62    2.82    3.37    5.77   13.90  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.08   -0.54   -0.11    2.21    2.42  
+ (*,  2,  3)   5.76    1.17    3.49    4.51    5.06  
+ (*,  3,  3)   5.07    3.72    4.97    5.85    8.26  
+ (*,  4,  3)   2.62    2.83    3.37    5.77   13.90  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  12
+  FLOWATK+ AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =   0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  29.27    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.38    0.00    0.00    0.00  
+ (*,  2,  1)   0.38   13*21    0.44    0.00    0.00  
+ (*,  3,  1)   0.00    0.44    0.01    0.00    0.00  
+ (*,  4,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.53    0.00    0.00    0.00  
+ (*,  2,  2)   0.53   29*27    0.60    0.00    0.00  
+ (*,  3,  2)   0.00    0.60    0.00    0.00    0.00  
+ (*,  4,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  13
+  FLOWATI+ AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.11    AT (  1,  2,  1)     MAXIMUM VALUE =  11.42    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.05    1.47    0.00    0.00    0.00  
+ (*,  2,  1)  -6.11   11*42    3.26    0.00    0.00  
+ (*,  3,  1)  -0.16    3.06    0.10    0.00    0.00  
+ (*,  4,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.04    1.32    0.00    0.00    0.00  
+ (*,  2,  2)  -5.64   10*94    3.15    0.00    0.00  
+ (*,  3,  2)  -0.13    2.96    0.05    0.00    0.00  
+ (*,  4,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00    0.17    0.00    0.00    0.00  
+ (*,  2,  3)  -4.13    8.89    1.69    0.00    0.00  
+ (*,  3,  3)  -0.05    1.58    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  14
+  FLOWATJ+ AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.11    AT (  2,  1,  1)     MAXIMUM VALUE =  11.42    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.05   -6.11   -0.16    0.00    0.00  
+ (*,  2,  1)   1.47   11*42    3.06    0.00    0.00  
+ (*,  3,  1)   0.00    3.26    0.10    0.00    0.00  
+ (*,  4,  1)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.04   -5.64   -0.13    0.00    0.00  
+ (*,  2,  2)   1.32   10*93    2.96    0.00    0.00  
+ (*,  3,  2)   0.00    3.15    0.05    0.00    0.00  
+ (*,  4,  2)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00   -4.13   -0.05    0.00    0.00  
+ (*,  2,  3)   0.17    8.89    1.58    0.00    0.00  
+ (*,  3,  3)   0.00    1.69    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME       60.0   DAYS    ( 1-MAR-2000):
+ @           RESTART FILE WRITTEN   REPORT     2                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  15
+  SIMULATE AT     60.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   2     1 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   10 TIME=     75.00  DAYS (   +15.0  DAYS HALF  3 ITS) (16-MAR-2000)      
+  PAV=  9985.1  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP   11 TIME=     90.00  DAYS (   +15.0  DAYS REPT  3 ITS) (31-MAR-2000)      
+  PAV= 10268.6  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  16
+  FLOOILK+ AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.928    AT (  3,  4,  2)     MAXIMUM VALUE =  1.169    AT (  4,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.058   0.282  -0.036   0.036  -0.006  
+ (*,  2,  1)  0.282   0*053   0.017   0.584  -0.146  
+ (*,  3,  1) -0.036   0.017   0.493  -0.429  -0.028  
+ (*,  4,  1)  0.036   0.584  -0.429  -0.041  -0.003  
+ (*,  5,  1) -0.006  -0.146  -0.028  -0.003  -0*000  
+
+ (*,  1,  2)  0.065   0.422  -0.110   0.045  -0.008  
+ (*,  2,  2)  0.422   0*113  -0.056   1.169  -0.305  
+ (*,  3,  2) -0.111  -0.056   1.038  -0.928  -0.037  
+ (*,  4,  2)  0.045   1.169  -0.928  -0.053  -0.003  
+ (*,  5,  2) -0.008  -0.305  -0.037  -0.003  -0*000  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  17
+  FLOOILI+ AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.20    AT (  1,  2,  3)     MAXIMUM VALUE =  15.18    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03    2.11    5.04    2.81    0.00  
+ (*,  2,  1)  -0.02    0*05    1.13    2.44    0.00  
+ (*,  3,  1)  -0.03    0.96    2.82    3.44    0.00  
+ (*,  4,  1)   2.10    3.97    6.23    6.22    0.00  
+ (*,  5,  1)   2.72    5.61    9.01   15.18    0*00  
+
+ (*,  1,  2)  -0.03    2.28    5.04    2.81    0.00  
+ (*,  2,  2)  -0.02    0*04    1.19    2.47    0.00  
+ (*,  3,  2)  -0.03    1.01    2.87    3.46    0.00  
+ (*,  4,  2)   2.13    4.03    6.25    6.22    0.00  
+ (*,  5,  2)   2.71    5.62    9.01   15.18    0*00  
+
+ (*,  1,  3)  -0.02    3.68    5.05    2.80    0.00  
+ (*,  2,  3)  -0.20    0.48    1.86    3.32    0.00  
+ (*,  3,  3)  -0.05    1.59    4.51    3.50    0.00  
+ (*,  4,  3)   2.19    5.45    6.28    6.23    0.00  
+ (*,  5,  3)   2.70    5.63    9.02   15.18    0*00  
+1                             **********************************************************************  18
+  FLOOILJ+ AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.20    AT (  2,  1,  3)     MAXIMUM VALUE =  15.18    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03   -0.02   -0.03    2.10    2.72  
+ (*,  2,  1)   2.11    0*05    0.96    3.97    5.61  
+ (*,  3,  1)   5.04    1.13    2.82    6.23    9.01  
+ (*,  4,  1)   2.81    2.44    3.44    6.22   15.18  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.03   -0.02   -0.03    2.13    2.71  
+ (*,  2,  2)   2.28    0*04    1.01    4.03    5.62  
+ (*,  3,  2)   5.04    1.19    2.87    6.25    9.01  
+ (*,  4,  2)   2.80    2.47    3.46    6.22   15.18  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.02   -0.20   -0.05    2.19    2.70  
+ (*,  2,  3)   3.68    0.48    1.59    5.45    5.63  
+ (*,  3,  3)   5.05    1.86    4.51    6.28    9.02  
+ (*,  4,  3)   2.80    3.32    3.50    6.23   15.18  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  19
+  FLOWATK+ AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.03    AT (  3,  2,  2)     MAXIMUM VALUE =  29.51    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.44    0.00    0.00    0.00  
+ (*,  2,  1)   0.44   13*28    0.17    0.11    0.00  
+ (*,  3,  1)   0.00    0.17    0.37    0.00    0.00  
+ (*,  4,  1)   0.00    0.11    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.58    0.00    0.00    0.00  
+ (*,  2,  2)   0.58   29*51   -0.03    0.20    0.00  
+ (*,  3,  2)   0.00   -0.03    0.73    0.00    0.00  
+ (*,  4,  2)   0.00    0.20    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  20
+  FLOWATI+ AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.94    AT (  1,  2,  1)     MAXIMUM VALUE =  12.02    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.05    2.86    0.00    0.00    0.00  
+ (*,  2,  1)  -5.94   12*02    5.12    0.40    0.00  
+ (*,  3,  1)  -0.16    4.32    1.91    0.00    0.00  
+ (*,  4,  1)   0.00    0.65    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.04    2.66    0.00    0.00    0.00  
+ (*,  2,  2)  -5.45   11*50    5.01    0.37    0.00  
+ (*,  3,  2)  -0.15    4.24    1.81    0.00    0.00  
+ (*,  4,  2)   0.00    0.60    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01    1.45    0.00    0.00    0.00  
+ (*,  2,  3)  -4.15    9.90    3.51    0.00    0.00  
+ (*,  3,  3)  -0.11    2.99    0.84    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  21
+  FLOWATJ+ AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.94    AT (  2,  1,  1)     MAXIMUM VALUE =  12.02    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.05   -5.94   -0.16    0.00    0.00  
+ (*,  2,  1)   2.86   12*02    4.32    0.65    0.00  
+ (*,  3,  1)   0.00    5.12    1.91    0.00    0.00  
+ (*,  4,  1)   0.00    0.40    0.00    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.04   -5.45   -0.15    0.00    0.00  
+ (*,  2,  2)   2.66   11*50    4.24    0.60    0.00  
+ (*,  3,  2)   0.00    5.01    1.81    0.00    0.00  
+ (*,  4,  2)   0.00    0.37    0.00    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01   -4.15   -0.11    0.00    0.00  
+ (*,  2,  3)   1.45    9.90    2.99    0.00    0.00  
+ (*,  3,  3)   0.00    3.51    0.84    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME       90.0   DAYS    (31-MAR-2000):
+ @           RESTART FILE WRITTEN   REPORT     3                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  22
+  SIMULATE AT     90.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   3    31 MAR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   12 TIME=    120.00  DAYS (   +30.0  DAYS REPT  3 ITS) (30-APR-2000)      
+  PAV= 10575.0  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  23
+  FLOOILK+ AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.863    AT (  4,  4,  2)     MAXIMUM VALUE =  0.653    AT (  1,  3,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.040   0.121   0.416  -0.259  -0.017  
+ (*,  2,  1)  0.121   0*014   0.042   0.223  -0.101  
+ (*,  3,  1)  0.416   0.042   0.042   0.240  -0.142  
+ (*,  4,  1) -0.259   0.223   0.240  -0.494  -0.028  
+ (*,  5,  1) -0.017  -0.101  -0.142  -0.028  -0*002  
+
+ (*,  1,  2)  0.045   0.179   0.653  -0.465  -0.021  
+ (*,  2,  2)  0.179   0*029   0.037   0.498  -0.221  
+ (*,  3,  2)  0.653   0.037   0.129   0.324  -0.245  
+ (*,  4,  2) -0.465   0.498   0.324  -0.863  -0.034  
+ (*,  5,  2) -0.021  -0.221  -0.245  -0.034  -0*002  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  24
+  FLOOILI+ AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.09    AT (  1,  2,  3)     MAXIMUM VALUE =  15.67    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.01    1.47    3.88    2.99    0.00  
+ (*,  2,  1)  -0.01    0*01    0.70    1.90    0.00  
+ (*,  3,  1)   0.10    0.61    1.88    3.05    0.00  
+ (*,  4,  1)   1.71    2.88    5.57    6.28    0.00  
+ (*,  5,  1)   2.95    5.96    9.38   15.67    0*00  
+
+ (*,  1,  2)  -0.01    1.58    4.10    3.00    0.00  
+ (*,  2,  2)  -0.01    0*01    0.74    1.92    0.00  
+ (*,  3,  2)   0.10    0.64    1.92    3.14    0.00  
+ (*,  4,  2)   1.74    2.93    5.72    6.30    0.00  
+ (*,  5,  2)   2.95    5.96    9.39   15.67    0*00  
+
+ (*,  1,  3)  -0.00    2.47    5.34    3.01    0.00  
+ (*,  2,  3)  -0.09    0.22    1.17    2.66    0.00  
+ (*,  3,  3)   0.11    1.00    2.80    3.72    0.00  
+ (*,  4,  3)   1.80    4.08    6.78    6.34    0.00  
+ (*,  5,  3)   2.94    5.96    9.40   15.67    0*00  
+1                             **********************************************************************  25
+  FLOOILJ+ AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.09    AT (  2,  1,  3)     MAXIMUM VALUE =  15.67    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.01   -0.01    0.10    1.71    2.95  
+ (*,  2,  1)   1.47    0*01    0.61    2.88    5.96  
+ (*,  3,  1)   3.88    0.70    1.88    5.57    9.38  
+ (*,  4,  1)   2.99    1.90    3.05    6.28   15.67  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.01   -0.01    0.10    1.74    2.95  
+ (*,  2,  2)   1.58    0*01    0.64    2.93    5.96  
+ (*,  3,  2)   4.10    0.74    1.92    5.72    9.39  
+ (*,  4,  2)   3.00    1.92    3.14    6.30   15.67  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00   -0.09    0.11    1.80    2.94  
+ (*,  2,  3)   2.47    0.22    1.00    4.08    5.96  
+ (*,  3,  3)   5.34    1.17    2.80    6.78    9.40  
+ (*,  4,  3)   3.01    2.66    3.72    6.34   15.67  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  26
+  FLOWATK+ AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =   0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  29.55    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.39    0.08    0.00    0.00  
+ (*,  2,  1)   0.39   13*30    0.43    0.16    0.00  
+ (*,  3,  1)   0.08    0.43    0.13    0.03    0.00  
+ (*,  4,  1)   0.00    0.16    0.03    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.50    0.10    0.00    0.00  
+ (*,  2,  2)   0.50   29*55    0.40    0.32    0.00  
+ (*,  3,  2)   0.10    0.40    0.30    0.04    0.00  
+ (*,  4,  2)   0.00    0.32    0.04    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  27
+  FLOWATI+ AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.92    AT (  1,  2,  1)     MAXIMUM VALUE =  12.14    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.04    3.79    0.62    0.00    0.00  
+ (*,  2,  1)  -5.92   12*14    5.57    1.07    0.00  
+ (*,  3,  1)   0.01    4.81    3.39    0.27    0.00  
+ (*,  4,  1)   0.00    1.62    0.49    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.03    3.52    0.49    0.00    0.00  
+ (*,  2,  2)  -5.41   11*62    5.54    1.03    0.00  
+ (*,  3,  2)   0.01    4.77    3.30    0.23    0.00  
+ (*,  4,  2)   0.00    1.57    0.42    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01    2.34    0.00    0.00    0.00  
+ (*,  2,  3)  -4.18   10.26    4.70    0.64    0.00  
+ (*,  3,  3)   0.00    4.04    2.38    0.00    0.00  
+ (*,  4,  3)   0.00    0.98    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  28
+  FLOWATJ+ AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.92    AT (  2,  1,  1)     MAXIMUM VALUE =  12.14    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.04   -5.92    0.01    0.00    0.00  
+ (*,  2,  1)   3.79   12*14    4.81    1.62    0.00  
+ (*,  3,  1)   0.62    5.57    3.39    0.49    0.00  
+ (*,  4,  1)   0.00    1.07    0.27    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.03   -5.41    0.01    0.00    0.00  
+ (*,  2,  2)   3.52   11*62    4.77    1.57    0.00  
+ (*,  3,  2)   0.49    5.54    3.30    0.42    0.00  
+ (*,  4,  2)   0.00    1.03    0.23    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01   -4.18    0.00    0.00    0.00  
+ (*,  2,  3)   2.34   10.26    4.04    0.98    0.00  
+ (*,  3,  3)   0.00    4.70    2.38    0.00    0.00  
+ (*,  4,  3)   0.00    0.64    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      120.0   DAYS    (30-APR-2000):
+ @           RESTART FILE WRITTEN   REPORT     4                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  29
+  SIMULATE AT    120.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   4    30 APR 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   13 TIME=    150.00  DAYS (   +30.0  DAYS REPT  3 ITS) (30-MAY-2000)      
+  PAV= 10774.8  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  30
+  FLOOILK+ AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.813    AT (  4,  4,  2)     MAXIMUM VALUE =  0.690    AT (  1,  3,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.028   0.062   0.391  -0.277  -0.013  
+ (*,  2,  1)  0.062   0*002   0.044  -0.009  -0.006  
+ (*,  3,  1)  0.391   0.044  -0.079   0.320  -0.120  
+ (*,  4,  1) -0.277  -0.009   0.320  -0.348  -0.068  
+ (*,  5,  1) -0.013  -0.006  -0.119  -0.068  -0*004  
+
+ (*,  1,  2)  0.031   0.071   0.690  -0.485  -0.016  
+ (*,  2,  2)  0.071   0*004   0.063  -0.019  -0.008  
+ (*,  3,  2)  0.690   0.063  -0.212   0.637  -0.237  
+ (*,  4,  2) -0.485  -0.019   0.637  -0.813  -0.052  
+ (*,  5,  2) -0.016  -0.008  -0.237  -0.052  -0*004  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  31
+  FLOOILI+ AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.04    AT (  1,  2,  3)     MAXIMUM VALUE =  15.89    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    1.05    2.85    3.06    0.00  
+ (*,  2,  1)  -0.00    0*00    0.50    1.58    0.00  
+ (*,  3,  1)   0.25    0.44    1.26    2.26    0.00  
+ (*,  4,  1)   1.45    2.08    3.95    6.03    0.00  
+ (*,  5,  1)   3.05    6.27    9.75   15.88    0*00  
+
+ (*,  1,  2)  -0.00    1.15    3.07    3.08    0.00  
+ (*,  2,  2)  -0.00    0*00    0.53    1.61    0.00  
+ (*,  3,  2)   0.26    0.47    1.31    2.30    0.00  
+ (*,  4,  2)   1.46    2.12    4.04    6.16    0.00  
+ (*,  5,  2)   3.05    6.27    9.75   15.88    0*00  
+
+ (*,  1,  3)   0.00    1.69    4.58    3.09    0.00  
+ (*,  2,  3)  -0.04    0.09    0.83    1.97    0.00  
+ (*,  3,  3)   0.38    0.73    1.73    3.10    0.00  
+ (*,  4,  3)   1.48    2.63    5.44    6.19    0.00  
+ (*,  5,  3)   3.05    6.26    9.76   15.89    0*00  
+1                             **********************************************************************  32
+  FLOOILJ+ AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.04    AT (  2,  1,  3)     MAXIMUM VALUE =  15.89    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00   -0.00    0.25    1.45    3.05  
+ (*,  2,  1)   1.05    0*00    0.44    2.08    6.27  
+ (*,  3,  1)   2.85    0.50    1.26    3.95    9.75  
+ (*,  4,  1)   3.06    1.58    2.26    6.03   15.88  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.00   -0.00    0.26    1.46    3.05  
+ (*,  2,  2)   1.15    0*00    0.47    2.13    6.27  
+ (*,  3,  2)   3.07    0.53    1.31    4.04    9.75  
+ (*,  4,  2)   3.08    1.61    2.30    6.16   15.88  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00   -0.04    0.38    1.48    3.05  
+ (*,  2,  3)   1.69    0.09    0.73    2.63    6.26  
+ (*,  3,  3)   4.58    0.83    1.73    5.44    9.76  
+ (*,  4,  3)   3.09    1.97    3.09    6.19   15.89  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  33
+  FLOWATK+ AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.34    AT (  3,  3,  2)     MAXIMUM VALUE =  29.57    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.35    0.23    0.00    0.00  
+ (*,  2,  1)   0.35   13*31    0.61    0.04    0.00  
+ (*,  3,  1)   0.23    0.61   -0.18    0.19    0.00  
+ (*,  4,  1)   0.00    0.04    0.19    0.00    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.36    0.35    0.00    0.00  
+ (*,  2,  2)   0.36   29*57    0.79    0.04    0.00  
+ (*,  3,  2)   0.35    0.79   -0.34    0.35    0.00  
+ (*,  4,  2)   0.00    0.04    0.35    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  34
+  FLOWATI+ AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.93    AT (  1,  2,  1)     MAXIMUM VALUE =  12.16    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03    4.36    1.45    0.00    0.00  
+ (*,  2,  1)  -5.93   12*16    5.76    1.70    0.00  
+ (*,  3,  1)   0.12    5.10    4.37    1.14    0.00  
+ (*,  4,  1)   0.00    2.24    1.99    0.04    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.02    4.14    1.32    0.00    0.00  
+ (*,  2,  2)  -5.42   11*65    5.71    1.68    0.00  
+ (*,  3,  2)   0.11    5.04    4.31    1.10    0.00  
+ (*,  4,  2)   0.00    2.21    1.92    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01    2.90    0.52    0.00    0.00  
+ (*,  2,  3)  -4.22   10.41    5.41    1.30    0.00  
+ (*,  3,  3)   0.04    4.74    3.42    0.67    0.00  
+ (*,  4,  3)   0.00    1.74    1.18    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  35
+  FLOWATJ+ AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.93    AT (  2,  1,  1)     MAXIMUM VALUE =  12.16    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03   -5.93    0.12    0.00    0.00  
+ (*,  2,  1)   4.36   12*16    5.10    2.24    0.00  
+ (*,  3,  1)   1.45    5.76    4.37    1.99    0.00  
+ (*,  4,  1)   0.00    1.70    1.14    0.04    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.02   -5.42    0.11    0.00    0.00  
+ (*,  2,  2)   4.14   11*65    5.04    2.21    0.00  
+ (*,  3,  2)   1.32    5.71    4.31    1.92    0.00  
+ (*,  4,  2)   0.00    1.68    1.10    0.00    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01   -4.22    0.04    0.00    0.00  
+ (*,  2,  3)   2.90   10.41    4.74    1.74    0.00  
+ (*,  3,  3)   0.52    5.41    3.42    1.18    0.00  
+ (*,  4,  3)   0.00    1.30    0.67    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      150.0   DAYS    (30-MAY-2000):
+ @           RESTART FILE WRITTEN   REPORT     5                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  36
+  SIMULATE AT    150.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   5    30 MAY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   14 TIME=    180.00  DAYS (   +30.0  DAYS REPT  3 ITS) (29-JUN-2000)      
+  PAV= 10941.4  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  37
+  FLOOILK+ AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.449    AT (  5,  4,  2)     MAXIMUM VALUE =  0.672    AT (  4,  4,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.036   0.050   0.142  -0.064  -0.002  
+ (*,  2,  1)  0.050   0*000   0.032  -0.012   0.046  
+ (*,  3,  1)  0.142   0.032  -0.047   0.042  -0.054  
+ (*,  4,  1) -0.064  -0.012   0.042   0.340  -0.230  
+ (*,  5,  1) -0.002   0.045  -0.054  -0.230  -0*021  
+
+ (*,  1,  2)  0.044   0.063   0.265  -0.145  -0.003  
+ (*,  2,  2)  0.063   0*000   0.048  -0.019   0.052  
+ (*,  3,  2)  0.265   0.048  -0.111   0.086  -0.061  
+ (*,  4,  2) -0.145  -0.019   0.086   0.672  -0.449  
+ (*,  5,  2) -0.003   0.052  -0.061  -0.449  -0*026  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  38
+  FLOOILI+ AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.02    AT (  1,  2,  3)     MAXIMUM VALUE =  16.01    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.77    2.21    3.11    0.00  
+ (*,  2,  1)   0.00    0*00    0.37    1.29    0.00  
+ (*,  3,  1)   0.26    0.33    0.88    1.79    0.00  
+ (*,  4,  1)   1.37    1.57    2.74    4.21    0.00  
+ (*,  5,  1)   3.09    6.32   10.22   15.99    0*00  
+
+ (*,  1,  2)  -0.00    0.85    2.35    3.12    0.00  
+ (*,  2,  2)   0.00    0*00    0.40    1.31    0.00  
+ (*,  3,  2)   0.28    0.36    0.91    1.82    0.00  
+ (*,  4,  2)   1.37    1.60    2.80    4.29    0.00  
+ (*,  5,  2)   3.09    6.39   10.21   16.00    0*00  
+
+ (*,  1,  3)   0.01    1.27    3.41    3.12    0.00  
+ (*,  2,  3)  -0.02    0.04    0.64    1.58    0.00  
+ (*,  3,  3)   0.41    0.57    1.20    2.27    0.00  
+ (*,  4,  3)   1.38    1.93    3.51    5.70    0.00  
+ (*,  5,  3)   3.09    6.49   10.19   16.01    0*00  
+1                             **********************************************************************  39
+  FLOOILJ+ AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.02    AT (  2,  1,  3)     MAXIMUM VALUE =  16.01    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.00    0.26    1.37    3.09  
+ (*,  2,  1)   0.77    0*00    0.33    1.57    6.31  
+ (*,  3,  1)   2.21    0.37    0.88    2.74   10.22  
+ (*,  4,  1)   3.11    1.29    1.79    4.21   15.99  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.00    0.00    0.28    1.37    3.09  
+ (*,  2,  2)   0.85    0*00    0.36    1.60    6.39  
+ (*,  3,  2)   2.35    0.40    0.91    2.80   10.21  
+ (*,  4,  2)   3.11    1.31    1.82    4.29   16.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.01   -0.02    0.41    1.38    3.09  
+ (*,  2,  3)   1.27    0.04    0.57    1.93    6.49  
+ (*,  3,  3)   3.41    0.63    1.20    3.51   10.19  
+ (*,  4,  3)   3.12    1.58    2.27    5.70   16.01  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  40
+  FLOWATK+ AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.30    AT (  3,  3,  2)     MAXIMUM VALUE =  29.57    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.41    0.20    0.00    0.00  
+ (*,  2,  1)   0.41   13*31    0.63    0.04    0.00  
+ (*,  3,  1)   0.20    0.63   -0.16    0.10    0.00  
+ (*,  4,  1)   0.00    0.04    0.10    0.13    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.46    0.31    0.00    0.00  
+ (*,  2,  2)   0.46   29*57    0.82    0.04    0.00  
+ (*,  3,  2)   0.31    0.82   -0.30    0.16    0.00  
+ (*,  4,  2)   0.00    0.04    0.16    0.25    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  41
+  FLOWATI+ AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.99    AT (  1,  2,  1)     MAXIMUM VALUE =  12.12    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03    4.68    2.28    0.00    0.00  
+ (*,  2,  1)  -5.99   12*12    5.90    2.12    0.00  
+ (*,  3,  1)   0.26    5.34    4.87    2.04    0.00  
+ (*,  4,  1)   0.00    2.57    3.11    1.36    0.00  
+ (*,  5,  1)   0.00    0.07    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.02    4.49    2.13    0.00    0.00  
+ (*,  2,  2)  -5.47   11*61    5.85    2.10    0.00  
+ (*,  3,  2)   0.25    5.28    4.80    2.00    0.00  
+ (*,  4,  2)   0.00    2.55    3.06    1.30    0.00  
+ (*,  5,  2)   0.00    0.04    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00    3.51    1.29    0.00    0.00  
+ (*,  2,  3)  -4.29   10.42    5.59    1.83    0.00  
+ (*,  3,  3)   0.15    5.03    4.17    1.54    0.00  
+ (*,  4,  3)   0.00    2.23    2.37    0.58    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  42
+  FLOWATJ+ AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.99    AT (  2,  1,  1)     MAXIMUM VALUE =  12.12    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03   -5.99    0.26    0.00    0.00  
+ (*,  2,  1)   4.68   12*12    5.34    2.57    0.07  
+ (*,  3,  1)   2.28    5.90    4.87    3.11    0.00  
+ (*,  4,  1)   0.00    2.12    2.04    1.36    0.00  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.02   -5.47    0.25    0.00    0.00  
+ (*,  2,  2)   4.49   11*61    5.28    2.55    0.04  
+ (*,  3,  2)   2.13    5.85    4.80    3.06    0.00  
+ (*,  4,  2)   0.00    2.10    2.00    1.30    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00   -4.29    0.15    0.00    0.00  
+ (*,  2,  3)   3.51   10.42    5.03    2.23    0.00  
+ (*,  3,  3)   1.29    5.59    4.17    2.37    0.00  
+ (*,  4,  3)   0.00    1.83    1.53    0.58    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      180.0   DAYS    (29-JUN-2000):
+ @           RESTART FILE WRITTEN   REPORT     6                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  43
+  SIMULATE AT    180.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   6    29 JUN 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   15 TIME=    210.00  DAYS (   +30.0  DAYS REPT  4 ITS) (29-JLY-2000)      
+  PAV= 11147.2  PSIA   WCT= 0.00 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  44
+  FLOOILK+ AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.779    AT (  5,  4,  2)     MAXIMUM VALUE =  0.412    AT (  5,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.046   0.052   0.033   0.205  -0.156  
+ (*,  2,  1)  0.052   0*000   0.024  -0.075   0.210  
+ (*,  3,  1)  0.033   0.024  -0.016  -0.010   0.238  
+ (*,  4,  1)  0.205  -0.075  -0.010   0.069  -0.337  
+ (*,  5,  1) -0.156   0.210   0.238  -0.337  -0*255  
+
+ (*,  1,  2)  0.057   0.065   0.075   0.344  -0.252  
+ (*,  2,  2)  0.065   0*000   0.037  -0.147   0.412  
+ (*,  3,  2)  0.075   0.037  -0.038   0.005   0.402  
+ (*,  4,  2)  0.344  -0.147   0.005   0.134  -0.779  
+ (*,  5,  2) -0.252   0.412   0.402  -0.778  -0*148  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  45
+  FLOOILI+ AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.01    AT (  1,  2,  3)     MAXIMUM VALUE =  16.08    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.59    1.65    2.44    0.00  
+ (*,  2,  1)   0.00    0*00    0.28    1.03    0.00  
+ (*,  3,  1)   0.24    0.26    0.65    1.38    0.00  
+ (*,  4,  1)   1.22    1.34    2.03    3.17    0.00  
+ (*,  5,  1)   2.87    5.23    8.88   15.75    0*00  
+
+ (*,  1,  2)  -0.00    0.65    1.76    2.58    0.00  
+ (*,  2,  2)   0.00    0*00    0.30    1.05    0.00  
+ (*,  3,  2)   0.26    0.28    0.68    1.40    0.00  
+ (*,  4,  2)   1.28    1.37    2.06    3.22    0.00  
+ (*,  5,  2)   2.89    5.29    9.05   16.05    0*00  
+
+ (*,  1,  3)   0.02    0.98    2.49    3.21    0.00  
+ (*,  2,  3)  -0.01    0.02    0.49    1.22    0.00  
+ (*,  3,  3)   0.38    0.45    0.90    1.73    0.00  
+ (*,  4,  3)   1.56    1.59    2.53    4.04    0.00  
+ (*,  5,  3)   2.92    6.28   10.94   16.08    0*00  
+1                             **********************************************************************  46
+  FLOOILJ+ AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.01    AT (  2,  1,  3)     MAXIMUM VALUE =  16.08    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.00    0.24    1.22    2.87  
+ (*,  2,  1)   0.59    0*00    0.26    1.35    5.23  
+ (*,  3,  1)   1.65    0.28    0.65    2.03    8.88  
+ (*,  4,  1)   2.44    1.03    1.38    3.17   15.75  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.00    0.00    0.26    1.28    2.89  
+ (*,  2,  2)   0.65    0*00    0.28    1.37    5.29  
+ (*,  3,  2)   1.76    0.30    0.68    2.06    9.05  
+ (*,  4,  2)   2.58    1.05    1.40    3.22   16.05  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.02   -0.01    0.38    1.56    2.92  
+ (*,  2,  3)   0.98    0.02    0.45    1.59    6.28  
+ (*,  3,  3)   2.49    0.49    0.90    2.53   10.94  
+ (*,  4,  3)   3.21    1.22    1.73    4.04   16.08  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  47
+  FLOWATK+ AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.18    AT (  4,  2,  2)     MAXIMUM VALUE =  29.57    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.52    0.12    0.04    0.00  
+ (*,  2,  1)   0.52   13*32    0.63   -0.10    0.04  
+ (*,  3,  1)   0.12    0.63   -0.02    0.04    0.03  
+ (*,  4,  1)   0.04   -0.10    0.04    0.10    0.00  
+ (*,  5,  1)   0.00    0.04    0.03    0.00    0*00  
+
+ (*,  1,  2)   0.00    0.59    0.20    0.05    0.00  
+ (*,  2,  2)   0.59   29*57    0.83   -0.18    0.07  
+ (*,  3,  2)   0.20    0.83   -0.10    0.08    0.05  
+ (*,  4,  2)   0.05   -0.18    0.08    0.17    0.00  
+ (*,  5,  2)   0.00    0.07    0.05    0.00    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  48
+  FLOWATI+ AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.99    AT (  1,  2,  1)     MAXIMUM VALUE =  12.11    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.04    4.74    2.81    0.32    0.00  
+ (*,  2,  1)  -5.99   12*11    6.00    2.35    0.00  
+ (*,  3,  1)   0.40    5.52    5.12    2.71    0.00  
+ (*,  4,  1)   0.16    3.06    3.97    2.71    0.00  
+ (*,  5,  1)   0.00    0.70    0.81    0.11    0*00  
+
+ (*,  1,  2)  -0.02    4.67    2.71    0.25    0.00  
+ (*,  2,  2)  -5.48   11*60    5.95    2.31    0.00  
+ (*,  3,  2)   0.40    5.47    5.10    2.67    0.00  
+ (*,  4,  2)   0.12    3.01    3.91    2.65    0.00  
+ (*,  5,  2)   0.00    0.67    0.74    0.00    0*00  
+
+ (*,  1,  3)  -0.00    3.95    1.97    0.00    0.00  
+ (*,  2,  3)  -4.31   10.43    5.72    2.00    0.00  
+ (*,  3,  3)   0.29    5.27    4.74    2.26    0.00  
+ (*,  4,  3)   0.00    2.59    3.30    1.91    0.00  
+ (*,  5,  3)   0.00    0.28    0.00    0.00    0*00  
+1                             **********************************************************************  49
+  FLOWATJ+ AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -5.99    AT (  2,  1,  1)     MAXIMUM VALUE =  12.11    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.03   -5.99    0.40    0.16    0.00  
+ (*,  2,  1)   4.74   12*11    5.52    3.06    0.70  
+ (*,  3,  1)   2.81    6.00    5.12    3.97    0.81  
+ (*,  4,  1)   0.32    2.35    2.71    2.71    0.11  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.02   -5.48    0.40    0.12    0.00  
+ (*,  2,  2)   4.67   11*60    5.47    3.01    0.67  
+ (*,  3,  2)   2.71    5.95    5.10    3.91    0.74  
+ (*,  4,  2)   0.25    2.32    2.67    2.65    0.00  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00   -4.31    0.29    0.00    0.00  
+ (*,  2,  3)   3.95   10.43    5.27    2.59    0.28  
+ (*,  3,  3)   1.97    5.72    4.74    3.30    0.00  
+ (*,  4,  3)   0.00    2.00    2.26    1.91    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      210.0   DAYS    (29-JLY-2000):
+ @           RESTART FILE WRITTEN   REPORT     7                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  50
+  SIMULATE AT    210.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   7    29 JLY 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   16 TIME=    240.00  DAYS (   +30.0  DAYS REPT  4 ITS) (28-AUG-2000)      
+  PAV= 11747.4  PSIA   WCT=0.018 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  51
+  FLOOILK+ AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -1.367    AT (  5,  5,  2)     MAXIMUM VALUE =  0.568    AT (  5,  4,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.047   0.047  -0.039   0.246  -0.147  
+ (*,  2,  1)  0.047   0*000   0.019  -0.074   0.113  
+ (*,  3,  1) -0.039   0.019  -0.005  -0.043   0.150  
+ (*,  4,  1)  0.246  -0.074  -0.043   0.082   0.281  
+ (*,  5,  1) -0.147   0.113   0.149   0.281  -0*482  
+
+ (*,  1,  2)  0.054   0.069  -0.068   0.432  -0.266  
+ (*,  2,  2)  0.069   0*000   0.029  -0.150   0.220  
+ (*,  3,  2) -0.068   0.029  -0.007  -0.085   0.277  
+ (*,  4,  2)  0.432  -0.150  -0.085   0.162   0.568  
+ (*,  5,  2) -0.266   0.219   0.277   0.568  -1*367  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  52
+  FLOOILI+ AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  15.34    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.46    1.27    1.86    0.00  
+ (*,  2,  1)   0.00    0*00    0.21    0.80    0.00  
+ (*,  3,  1)   0.19    0.19    0.49    1.02    0.00  
+ (*,  4,  1)   1.09    1.17    1.62    2.39    0.00  
+ (*,  5,  1)   2.59    4.37    7.08   11.86    0*00  
+
+ (*,  1,  2)  -0.00    0.51    1.33    1.97    0.00  
+ (*,  2,  2)   0.00    0*00    0.23    0.82    0.00  
+ (*,  3,  2)   0.21    0.21    0.52    1.04    0.00  
+ (*,  4,  2)   1.14    1.21    1.66    2.43    0.00  
+ (*,  5,  2)   2.60    4.42    7.19   12.03    0*00  
+
+ (*,  1,  3)   0.01    0.77    1.80    2.76    0.00  
+ (*,  2,  3)  -0.00    0.00    0.38    0.97    0.00  
+ (*,  3,  3)   0.29    0.35    0.69    1.22    0.00  
+ (*,  4,  3)   1.57    1.41    1.94    3.02    0.00  
+ (*,  5,  3)   2.63    5.03    8.47   15.34    0*00  
+1                             **********************************************************************  53
+  FLOOILJ+ AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  15.34    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.00    0.19    1.09    2.59  
+ (*,  2,  1)   0.46    0*00    0.19    1.17    4.37  
+ (*,  3,  1)   1.27    0.21    0.49    1.62    7.07  
+ (*,  4,  1)   1.86    0.80    1.02    2.39   11.86  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.00    0.00    0.21    1.14    2.60  
+ (*,  2,  2)   0.51    0*00    0.21    1.21    4.42  
+ (*,  3,  2)   1.33    0.23    0.52    1.66    7.19  
+ (*,  4,  2)   1.97    0.82    1.04    2.43   12.03  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)   0.00   -0.00    0.29    1.57    2.63  
+ (*,  2,  3)   0.77    0.00    0.35    1.41    5.03  
+ (*,  3,  3)   1.80    0.37    0.69    1.94    8.47  
+ (*,  4,  3)   2.76    0.97    1.22    3.02   15.34  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  54
+  FLOWATK+ AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.24    AT (  2,  4,  2)     MAXIMUM VALUE =  29.58    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.59   -0.02    0.12    0.00  
+ (*,  2,  1)   0.59   13*32    0.64   -0.13    0.05  
+ (*,  3,  1)  -0.02    0.64    0.05   -0.05    0.06  
+ (*,  4,  1)   0.12   -0.13   -0.05    0.18    0.09  
+ (*,  5,  1)   0.00    0.05    0.06    0.09   -0*01  
+
+ (*,  1,  2)   0.00    0.75   -0.02    0.18    0.00  
+ (*,  2,  2)   0.75   29*58    0.86   -0.24    0.08  
+ (*,  3,  2)  -0.02    0.86    0.06   -0.11    0.11  
+ (*,  4,  2)   0.18   -0.24   -0.11    0.32    0.17  
+ (*,  5,  2)   0.00    0.08    0.11    0.17    0*00  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  55
+  FLOWATI+ AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.02    AT (  1,  2,  1)     MAXIMUM VALUE =  12.05    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.05    4.77    3.23    0.67    0.00  
+ (*,  2,  1)  -6.02   12*05    6.00    2.36    0.00  
+ (*,  3,  1)   0.49    5.58    5.21    2.96    0.00  
+ (*,  4,  1)   0.39    3.46    4.73    3.77    0.00  
+ (*,  5,  1)   0.00    1.10    2.02    2.92    0*00  
+
+ (*,  1,  2)  -0.04    4.70    3.11    0.60    0.00  
+ (*,  2,  2)  -5.52   11*54    5.94    2.32    0.00  
+ (*,  3,  2)   0.49    5.53    5.18    2.93    0.00  
+ (*,  4,  2)   0.35    3.40    4.67    3.73    0.00  
+ (*,  5,  2)   0.00    1.07    1.97    2.82    0*00  
+
+ (*,  1,  3)  -0.01    4.31    2.39    0.21    0.00  
+ (*,  2,  3)  -4.36   10.38    5.75    2.02    0.00  
+ (*,  3,  3)   0.39    5.37    5.01    2.54    0.00  
+ (*,  4,  3)   0.12    2.94    4.04    3.14    0.00  
+ (*,  5,  3)   0.00    0.77    1.34    1.25    0*00  
+1                             **********************************************************************  56
+  FLOWATJ+ AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.03    AT (  2,  1,  1)     MAXIMUM VALUE =  12.05    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.05   -6.03    0.49    0.39    0.00  
+ (*,  2,  1)   4.77   12*05    5.58    3.46    1.10  
+ (*,  3,  1)   3.23    6.00    5.21    4.73    2.02  
+ (*,  4,  1)   0.67    2.36    2.96    3.77    2.92  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.04   -5.52    0.49    0.35    0.00  
+ (*,  2,  2)   4.70   11*54    5.53    3.40    1.07  
+ (*,  3,  2)   3.10    5.94    5.18    4.67    1.97  
+ (*,  4,  2)   0.60    2.32    2.93    3.73    2.82  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.01   -4.36    0.39    0.12    0.00  
+ (*,  2,  3)   4.31   10.38    5.37    2.94    0.77  
+ (*,  3,  3)   2.39    5.75    5.01    4.04    1.34  
+ (*,  4,  3)   0.21    2.02    2.54    3.14    1.25  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      240.0   DAYS    (28-AUG-2000):
+ @           RESTART FILE WRITTEN   REPORT     8                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  57
+  SIMULATE AT    240.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   8    28 AUG 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   17 TIME=    255.00  DAYS (   +15.0  DAYS HALF  3 ITS) (12-SEP-2000)      
+  PAV= 12204.1  PSIA   WCT=0.109 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+
+ STEP   18 TIME=    270.00  DAYS (   +15.0  DAYS REPT  2 ITS) (27-SEP-2000)      
+  PAV= 12726.3  PSIA   WCT=0.230 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  58
+  FLOOILK+ AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.147    AT (  5,  1,  2)     MAXIMUM VALUE =  0.444    AT (  5,  5,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.046   0.038  -0.046   0.126  -0.064  
+ (*,  2,  1)  0.038   0*000   0.014  -0.053   0.083  
+ (*,  3,  1) -0.046   0.014  -0.004  -0.031   0.090  
+ (*,  4,  1)  0.126  -0.053  -0.031  -0.028   0.131  
+ (*,  5,  1) -0.064   0.083   0.090   0.131   0*315  
+
+ (*,  1,  2)  0.052   0.059  -0.096   0.261  -0.147  
+ (*,  2,  2)  0.059   0*000   0.021  -0.111   0.163  
+ (*,  3,  2) -0.096   0.021  -0.005  -0.054   0.174  
+ (*,  4,  2)  0.261  -0.111  -0.054  -0.053   0.288  
+ (*,  5,  2) -0.147   0.163   0.174   0.287   0*444  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  59
+  FLOOILI+ AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  11.17    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.35    0.97    1.42    0.00  
+ (*,  2,  1)   0.00    0*00    0.15    0.61    0.00  
+ (*,  3,  1)   0.15    0.14    0.36    0.74    0.00  
+ (*,  4,  1)   0.92    1.00    1.30    1.81    0.00  
+ (*,  5,  1)   2.33    3.58    5.41    8.85    0*00  
+
+ (*,  1,  2)  -0.00    0.40    1.03    1.47    0.00  
+ (*,  2,  2)   0.00    0*00    0.17    0.64    0.00  
+ (*,  3,  2)   0.16    0.16    0.38    0.75    0.00  
+ (*,  4,  2)   0.95    1.03    1.33    1.84    0.00  
+ (*,  5,  2)   2.33    3.63    5.49    8.97    0*00  
+
+ (*,  1,  3)  -0.00    0.61    1.31    2.08    0.00  
+ (*,  2,  3)   0.00    0.00    0.28    0.76    0.00  
+ (*,  3,  3)   0.21    0.26    0.53    0.89    0.00  
+ (*,  4,  3)   1.32    1.22    1.55    2.14    0.00  
+ (*,  5,  3)   2.35    4.13    6.56   11.17    0*00  
+1                             **********************************************************************  60
+  FLOOILJ+ AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.00    AT (  1,  1,  1)     MAXIMUM VALUE =  11.17    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.00    0.00    0.15    0.92    2.33  
+ (*,  2,  1)   0.35    0*00    0.14    1.00    3.59  
+ (*,  3,  1)   0.97    0.15    0.36    1.30    5.41  
+ (*,  4,  1)   1.42    0.61    0.74    1.81    8.85  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.00    0.00    0.16    0.95    2.33  
+ (*,  2,  2)   0.40    0*00    0.16    1.03    3.63  
+ (*,  3,  2)   1.03    0.17    0.38    1.33    5.49  
+ (*,  4,  2)   1.48    0.64    0.75    1.84    8.97  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.00    0.00    0.21    1.32    2.35  
+ (*,  2,  3)   0.61    0.00    0.26    1.22    4.13  
+ (*,  3,  3)   1.31    0.28    0.53    1.55    6.57  
+ (*,  4,  3)   2.08    0.76    0.89    2.14   11.17  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  61
+  FLOWATK+ AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.21    AT (  4,  2,  2)     MAXIMUM VALUE =  29.58    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.63   -0.07    0.13    0.00  
+ (*,  2,  1)   0.63   13*33    0.65   -0.11    0.06  
+ (*,  3,  1)  -0.07    0.65    0.05   -0.04    0.08  
+ (*,  4,  1)   0.13   -0.11   -0.04   -0.00    0.11  
+ (*,  5,  1)   0.00    0.06    0.08    0.11    0*15  
+
+ (*,  1,  2)   0.00    0.82   -0.12    0.23    0.00  
+ (*,  2,  2)   0.82   29*58    0.86   -0.21    0.09  
+ (*,  3,  2)  -0.12    0.87    0.06   -0.08    0.13  
+ (*,  4,  2)   0.23   -0.21   -0.08   -0.03    0.22  
+ (*,  5,  2)   0.00    0.09    0.13    0.22    0*20  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  62
+  FLOWATI+ AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.08    AT (  1,  2,  1)     MAXIMUM VALUE =  11.95    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.08    4.80    3.46    1.01    0.00  
+ (*,  2,  1)  -6.08   11*95    5.96    2.31    0.00  
+ (*,  3,  1)   0.52    5.54    5.21    2.96    0.00  
+ (*,  4,  1)   0.65    3.74    5.21    4.63    0.00  
+ (*,  5,  1)   0.00    1.35    2.87    5.42    0*00  
+
+ (*,  1,  2)  -0.06    4.73    3.36    0.93    0.00  
+ (*,  2,  2)  -5.57   11*45    5.91    2.28    0.00  
+ (*,  3,  2)   0.52    5.50    5.19    2.94    0.00  
+ (*,  4,  2)   0.60    3.67    5.15    4.58    0.00  
+ (*,  5,  2)   0.00    1.33    2.82    5.32    0*00  
+
+ (*,  1,  3)  -0.03    4.49    2.73    0.57    0.00  
+ (*,  2,  3)  -4.42   10.29    5.76    2.01    0.00  
+ (*,  3,  3)   0.45    5.37    5.05    2.65    0.00  
+ (*,  4,  3)   0.36    3.23    4.63    3.90    0.00  
+ (*,  5,  3)   0.00    1.08    2.29    4.04    0*00  
+1                             **********************************************************************  63
+  FLOWATJ+ AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.08    AT (  2,  1,  1)     MAXIMUM VALUE =  11.96    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.08   -6.08    0.52    0.65    0.00  
+ (*,  2,  1)   4.80   11*96    5.54    3.75    1.35  
+ (*,  3,  1)   3.46    5.96    5.21    5.21    2.87  
+ (*,  4,  1)   1.01    2.31    2.96    4.63    5.42  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.06   -5.57    0.52    0.60    0.00  
+ (*,  2,  2)   4.73   11*45    5.50    3.68    1.33  
+ (*,  3,  2)   3.36    5.91    5.19    5.15    2.82  
+ (*,  4,  2)   0.93    2.28    2.93    4.58    5.32  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.03   -4.42    0.45    0.36    0.00  
+ (*,  2,  3)   4.49   10.29    5.37    3.23    1.08  
+ (*,  3,  3)   2.73    5.76    5.05    4.63    2.29  
+ (*,  4,  3)   0.57    2.01    2.65    3.90    4.04  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      270.0   DAYS    (27-SEP-2000):
+ @           RESTART FILE WRITTEN   REPORT     9                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+1                             **********************************************************************  64
+  SIMULATE AT    270.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT   9    27 SEP 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ STEP   19 TIME=    300.00  DAYS (   +30.0  DAYS REPT  3 ITS) (27-OCT-2000)      
+  PAV= 13521.9  PSIA   WCT=0.405 GOR= 0.00000  MSCF/STB WGR= 0.00000  STB/MSCF   
+1                             **********************************************************************  65
+  FLOOILK+ AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.069    AT (  4,  2,  2)     MAXIMUM VALUE =  0.121    AT (  5,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  0.046   0.030  -0.034   0.027   0.009  
+ (*,  2,  1)  0.030   0*000   0.010  -0.037   0.058  
+ (*,  3,  1) -0.034   0.010  -0.003  -0.026  -0.030  
+ (*,  4,  1)  0.027  -0.037  -0.026  -0.021   0.034  
+ (*,  5,  1)  0.009   0.058  -0.030   0.034   0*017  
+
+ (*,  1,  2)  0.052   0.047  -0.067   0.056   0.012  
+ (*,  2,  2)  0.047   0*000   0.016  -0.069   0.121  
+ (*,  3,  2) -0.067   0.016  -0.004  -0.043  -0.050  
+ (*,  4,  2)  0.056  -0.069  -0.043  -0.035   0.077  
+ (*,  5,  2)  0.012   0.121  -0.050   0.077   0*043  
+
+ (*,  1,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  2,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  3,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  4,  3)  0.000   0.000   0.000   0.000   0.000  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  66
+  FLOOILI+ AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.003    AT (  1,  1,  1)     MAXIMUM VALUE =  8.809    AT (  4,  5,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1) -0.003   0.279   0.781   1.149   0.000  
+ (*,  2,  1)  0.000   0*000   0.114   0.502   0.000  
+ (*,  3,  1)  0.120   0.107   0.275   0.599   0.000  
+ (*,  4,  1)  0.817   0.893   1.114   1.497   0.000  
+ (*,  5,  1)  2.296   3.273   4.786   7.502   0*000  
+
+ (*,  1,  2) -0.002   0.319   0.827   1.203   0.000  
+ (*,  2,  2)  0.000   0*000   0.128   0.521   0.000  
+ (*,  3,  2)  0.132   0.120   0.293   0.613   0.000  
+ (*,  4,  2)  0.852   0.923   1.140   1.522   0.000  
+ (*,  5,  2)  2.300   3.304   4.834   7.587   0*000  
+
+ (*,  1,  3) -0.001   0.505   1.048   1.565   0.000  
+ (*,  2,  3)  0.000   0.000   0.212   0.627   0.000  
+ (*,  3,  3)  0.176   0.199   0.417   0.723   0.000  
+ (*,  4,  3)  1.101   1.105   1.342   1.767   0.000  
+ (*,  5,  3)  2.310   3.724   5.424   8.809   0*000  
+1                             **********************************************************************  67
+  FLOOILJ+ AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE = -0.003    AT (  1,  1,  1)     MAXIMUM VALUE =  8.810    AT (  5,  4,  3)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1) -0.003   0.000   0.120   0.817   2.296  
+ (*,  2,  1)  0.279   0*000   0.107   0.893   3.274  
+ (*,  3,  1)  0.781   0.114   0.275   1.114   4.787  
+ (*,  4,  1)  1.149   0.502   0.599   1.497   7.503  
+ (*,  5,  1)  0.000   0.000   0.000   0.000   0*000  
+
+ (*,  1,  2) -0.002   0.000   0.132   0.852   2.300  
+ (*,  2,  2)  0.319   0*000   0.120   0.923   3.305  
+ (*,  3,  2)  0.827   0.128   0.293   1.140   4.835  
+ (*,  4,  2)  1.203   0.521   0.614   1.522   7.588  
+ (*,  5,  2)  0.000   0.000   0.000   0.000   0*000  
+
+ (*,  1,  3) -0.001   0.000   0.176   1.101   2.310  
+ (*,  2,  3)  0.505   0.000   0.199   1.105   3.725  
+ (*,  3,  3)  1.048   0.212   0.417   1.343   5.426  
+ (*,  4,  3)  1.565   0.628   0.723   1.767   8.810  
+ (*,  5,  3)  0.000   0.000   0.000   0.000   0*000  
+1                             **********************************************************************  68
+  FLOWATK+ AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -0.14    AT (  4,  2,  2)     MAXIMUM VALUE =  29.58    AT (  2,  2,  2)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)   0.00    0.64   -0.06    0.08    0.00  
+ (*,  2,  1)   0.64   13*33    0.65   -0.07    0.06  
+ (*,  3,  1)  -0.06    0.65    0.05   -0.04    0.02  
+ (*,  4,  1)   0.08   -0.07   -0.04    0.00    0.08  
+ (*,  5,  1)   0.00    0.06    0.02    0.08    0*05  
+
+ (*,  1,  2)   0.00    0.83   -0.11    0.12    0.00  
+ (*,  2,  2)   0.83   29*58    0.87   -0.14    0.09  
+ (*,  3,  2)  -0.11    0.87    0.06   -0.07    0.01  
+ (*,  4,  2)   0.12   -0.14   -0.07   -0.02    0.13  
+ (*,  5,  2)   0.00    0.09    0.01    0.13    0*08  
+
+ (*,  1,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  2,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  3,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  4,  3)   0.00    0.00    0.00    0.00    0.00  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+1                             **********************************************************************  69
+  FLOWATI+ AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.07    AT (  1,  2,  1)     MAXIMUM VALUE =  11.97    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.07    4.90    3.67    1.30    0.00  
+ (*,  2,  1)  -6.07   11*97    6.01    2.32    0.00  
+ (*,  3,  1)   0.56    5.63    5.37    3.10    0.00  
+ (*,  4,  1)   0.92    4.12    5.77    5.33    0.00  
+ (*,  5,  1)   0.00    1.59    3.66    7.52    0*00  
+
+ (*,  1,  2)  -0.05    4.84    3.57    1.24    0.00  
+ (*,  2,  2)  -5.57   11*46    5.97    2.29    0.00  
+ (*,  3,  2)   0.57    5.59    5.34    3.07    0.00  
+ (*,  4,  2)   0.87    4.05    5.71    5.28    0.00  
+ (*,  5,  2)   0.00    1.57    3.61    7.43    0*00  
+
+ (*,  1,  3)  -0.03    4.62    3.07    0.86    0.00  
+ (*,  2,  3)  -4.42   10.31    5.85    2.06    0.00  
+ (*,  3,  3)   0.51    5.48    5.22    2.82    0.00  
+ (*,  4,  3)   0.60    3.63    5.23    4.72    0.00  
+ (*,  5,  3)   0.00    1.35    3.02    6.19    0*00  
+1                             **********************************************************************  70
+  FLOWATJ+ AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+
+ UNITS  STB/DAY        
+
+ MINIMUM VALUE =  -6.07    AT (  2,  1,  1)     MAXIMUM VALUE =  11.97    AT (  2,  2,  1)                                           
+
+ (I,  J,  K) I=  1       2       3       4       5
+
+ (*,  1,  1)  -0.07   -6.07    0.56    0.92    0.00  
+ (*,  2,  1)   4.91   11*97    5.63    4.12    1.59  
+ (*,  3,  1)   3.67    6.01    5.37    5.77    3.66  
+ (*,  4,  1)   1.30    2.32    3.10    5.33    7.52  
+ (*,  5,  1)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  2)  -0.05   -5.57    0.57    0.87    0.00  
+ (*,  2,  2)   4.84   11*46    5.59    4.05    1.57  
+ (*,  3,  2)   3.57    5.97    5.35    5.71    3.61  
+ (*,  4,  2)   1.24    2.29    3.07    5.28    7.43  
+ (*,  5,  2)   0.00    0.00    0.00    0.00    0*00  
+
+ (*,  1,  3)  -0.03   -4.41    0.51    0.60    0.00  
+ (*,  2,  3)   4.62   10.31    5.48    3.63    1.35  
+ (*,  3,  3)   3.07    5.85    5.22    5.23    3.02  
+ (*,  4,  3)   0.86    2.06    2.82    4.72    6.19  
+ (*,  5,  3)   0.00    0.00    0.00    0.00    0*00  
+
+ @--MESSAGE  AT TIME      300.0   DAYS    (27-OCT-2000):
+ @           RESTART FILE WRITTEN   REPORT    10                             
+ @           RESTART INCLUDES INTERBLOCK FLOWS                               
+ @                            WATER AND GAS PHASE PRESSURES                  
+    56 READING END     
+1                             **********************************************************************  71
+  END      AT    300.00  DAYS *   ODEH PROBLEM - IMPLICIT OPTION                                       * ECLIPSE  VERSION 2024.4     
+  REPORT  10    27 OCT 2000   *  RUN                                                                   * RUN AT 12:30 ON 11 JUN 2025 
+                              **************************************************************************
+           25 Mbytes of storage required                         
+     334.7720 KB/active cell                                     
+           33 Mbytes (image size)                                
+
+ Error summary 
+ Comments               1
+ Warnings               4
+ Problems               0
+ Errors                 0
+ Bugs                   0
+ Final cpu      23.43 elapsed      23.43
+ Total number of time steps forced to be accepted          0

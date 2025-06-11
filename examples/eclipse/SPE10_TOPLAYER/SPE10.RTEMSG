@@ -1,0 +1,16 @@
+<rte>
+<comment source="slbrun" date="" time="">Version 2024.3.0</comment>
+<comment source="slbrun" date="" time="">Operation: eclipse</comment>
+<comment source="slbrun" date="" time="">Workflow starting task: SPE10</comment>
+<comment source="slbrun" date="" time="">Submission Command: C:\ecl\2024.4\bin\pc_x86_64\eclipse.exe SPE10</comment>
+<comment source="slbrun" date="" time="">Launching: C:\ecl\2024.4\bin\pc_x86_64\eclipse.exe SPE10</comment>
+<comment source="slbrun" date="" time="">E100 has finished</comment>
+<comment source="slbrun" date="" time="">Workflow starting task: SPE10 summary conversion</comment>
+<comment source="slbrun" date="" time="">Creating temp conversion directory convert_20250611060242_ee027d73</comment>
+<comment source="slbrun" date="" time="">Submission Command: C:\ecl\2024.4\bin\pc_x86_64\ConvertSummaryData2DataBase.exe SPE10.DATA convert_20250611060242_ee027d73</comment>
+<comment source="slbrun" date="" time="">Launching: C:\ecl\2024.4\bin\pc_x86_64\ConvertSummaryData2DataBase.exe SPE10.DATA convert_20250611060242_ee027d73</comment>
+<comment source="slbrun" date="" time="">Conversion has finished</comment>
+<comment source="slbrun" date="" time="">Removing temp conversion directory convert_20250611060242_ee027d73</comment>
+<comment source="slbrun" date="" time="">Workflow has finished</comment>
+<comment source="slbrun" date="" time="">Session in progress.</comment>
+</rte>

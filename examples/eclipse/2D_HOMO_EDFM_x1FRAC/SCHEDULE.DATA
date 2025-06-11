@@ -1,0 +1,24 @@
+
+WELSPECS
+'INJ' 'FLD'   1   1  1* 'WATER'  /
+'PRD' 'FLD'  21  21  1* 'OIL'  /
+/
+
+COMPDAT
+'INJ'  1  1 1 1  'OPEN' 2*   0.5  /
+'PRD' 21 21 1 1  'OPEN' 2*   0.5  /
+/
+
+WCONINJE
+'INJ' 'WAT' 'OPEN' 'RATE'  200 /
+/
+
+WCONPROD
+'PRD' 'OPEN' 'BHP' 5* 1000 /
+/
+
+
+
+
+
+

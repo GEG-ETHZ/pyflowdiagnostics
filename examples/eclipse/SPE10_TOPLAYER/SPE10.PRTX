@@ -1,0 +1,7 @@
+Start Time,Timestamp,Duration,Simulation Time,Simulation Time Unit,Timestep,Average Timestep,Simulation Speed,Average Time Period,Simulation End Time,Fraction Complete,Time Remaining,Simulation Start Date,Simulation Date,Simulation End Date,Duration Rounded,Percent Complete,Time Remaining Rounded,Average Timestep Rounded,WARNING,PROBLEM,ERROR,BUG,FATAL,End Marker
+2025-06-11T06:02:01Z,2025-06-11T06:02:32Z,30.53,1.8,d,2.4,0.00,0.00,0.00,200.0,0.01,-1.00,01 Jan 2000,03 Jan 2000,19 Jul 2000,30 s,1%,unknown,0 s,3,2,0,0,0,%%
+2025-06-11T06:02:01Z,2025-06-11T06:02:33Z,31.53,6.33,d,3.8,2.78,4.53,1.00,200.0,0.03,42.80,01 Jan 2000,07 Jan 2000,19 Jul 2000,30 s,3%,45 s,3 d,3,2,0,0,0,%%
+2025-06-11T06:02:01Z,2025-06-11T06:02:36Z,34.46,44.2,d,1.1,6.91,10.81,3.92,200.0,0.22,14.41,01 Jan 2000,14 Feb 2000,19 Jul 2000,35 s,22%,15 s,7 d,3,2,0,0,0,%%
+2025-06-11T06:02:01Z,2025-06-11T06:02:38Z,36.51,100.0,d,1.4,7.15,16.42,5.98,200.0,0.50,6.09,01 Jan 2000,10 Apr 2000,19 Jul 2000,35 s,50%,6 s,7 d,3,2,0,0,0,%%
+2025-06-11T06:02:01Z,2025-06-11T06:02:39Z,37.95,149.98,d,1.8,6.51,19.98,7.42,200.0,0.75,2.50,01 Jan 2000,30 May 2000,19 Jul 2000,40 s,75%,3 s,7 d,3,2,0,0,0,%%
+2025-06-11T06:02:01Z,2025-06-11T06:02:41Z,39.53,200.0,d,10.3,7.14,22.02,9.00,200.0,1.00,0.00,01 Jan 2000,19 Jul 2000,19 Jul 2000,40 s,100%,0 s,7 d,3,2,0,0,0,%%

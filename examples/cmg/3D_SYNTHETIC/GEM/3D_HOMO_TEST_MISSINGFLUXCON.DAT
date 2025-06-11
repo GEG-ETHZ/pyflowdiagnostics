@@ -1,0 +1,178 @@
+RESULTS SIMULATOR GEM 202210
+
+CASEID 'ML_CASE'
+TITLE1 'Caprock Sens'
+INUNIT SI
+WSRF WELL 1
+WSRF GRID TIME
+**WSRF GRID TNEXT
+INVENTORY-CO2
+**OUTSRF GRID COMPRW DENG DENW DPORMNR DROP KRG KRW MOLALITY 'CO2' PCG PCW PERM PH 
+**            POROS PRES SG SGDTHY SGHYS SGRHYS SO SW TEMP VISW W 'CO2' 
+**            Y 'CO2' Z 'CO2' 
+** *OUTSRF  *GRID *SG     *SO     *SW  *PRES *FLUXCON ** *FLUXRC ** FLUXRC, FLUXSC are not supported in GEM
+*OUTSRF  *GRID *SG     *SO     *SW  *PRES ** *FLUXCON ** *FLUXRC ** FLUXRC, FLUXSC are not supported in GEM
+***OUTSRF  *GRID *SG     *SO     *SW  *PRES ** *FLUXCON ** *FLUXRC ** FLUXRC, FLUXSC are not supported in GEM
+OUTSRF RES ALL
+OUTSRF WELL LAYER ALL DOWNHOLE
+OUTSRF SPECIAL GHGAQU 
+               GHGGAS 
+               GHGLIQ 
+               GHGMNR 
+               GHGSCRIT 
+               GHGSOL 
+               GHGTHY 
+
+WPRN GRID 0
+OUTPRN GRID NONE
+OUTPRN RES NONE
+
+
+** ***************************************************************************
+** RADIAL GRID DEFINITION
+** ***************************************************************************
+
+
+  **--------------------------------------------------------------------------
+  ** GRID GEOMETRY
+  **--------------------------------------------------------------------------
+
+   *GRID *CART 9 9 3
+   *KDIR *DOWN                         
+   *DI *CON 200.00           
+   *DJ *CON 200.00            
+   *DK *CON 50     	      
+   *DTOP 81*2000.0     
+    
+  *POR *CON 0.2  
+ 
+  *PERMI *CON 100
+  *PERMJ *EQUALSI
+  *PERMK *EQUALSI * 0.1
+  
+** ROCK COMPRESSIBILITY
+  
+  *PRPOR  20000.0  ** KPa **
+  *CPOR   1E-07    ** 1/KPa ** = 1E-5 1/bar
+  *CROCKTYPE 1 
+  CPRPOR  20000.0
+  CCPOR 2.23E-7 ** 1/kPa 
+  *CROCKTYPE 2 
+  CPRPOR  20000.0
+  CCPOR 1.34E-6 ** 1/kPa
+  
+  *VOLMOD *IJK  1:9 1:9 1:3  1.0
+                1:9 1:1 1:3  1000
+                1:9 9:9 1:3  1000
+                9:9 2:8 1:3  1000
+                1:1 2:8 1:3  1000
+
+
+MODEL PR
+
+NC 2 2
+COMPNAME 'CO2' 'CH4' 
+HCFLAG
+0 1 
+
+
+** 
+** ISOTHERMAL RESERVOIR TEMPERATURE
+**
+TRES 2000.0 75.0  2050  75.0
+
+
+MW
+44.01 16.043 
+AC
+0.225 0.008 
+PCRIT
+72.8 45.4 
+VCRIT
+0.094 0.099 
+TCRIT
+304.2 190.6 
+PCHOR
+78 77 
+SG
+0.818 0.3 
+TB
+-78.45 -161.45 
+HEATING_VALUES
+0 212.758 
+BIN
+0.103 
+
+SOLUBILITY HENRY
+HENRY-MOD1-CO2
+BIN-TDEP-CO2
+SALINITY PPMVOL 66000.0
+AQUEOUS-VISCOSITY KESTIN 
+AQUEOUS-DENSITY ROWE-CHOU
+AQFILL OFF ** a small trace of hydrocarbon phase is added in the water-filled
+
+
+ROCKFLUID
+
+*HYS_MODEL LINEAR
+
+
+
+  *INCLUDE 'SWT_SGT.INC'
+
+
+  **
+  ** THE FOLLOWING INCLUDE FILE REFERS TO THE PRE-DEFINED INCLUDE FILES
+  **                                          OF DIFFERENT REALIZATIONS
+  **
+
+
+INITIAL
+VERTICAL DEPTH_AVE WATER_GAS NOTRANZONE EQUIL
+
+ZGAS
+0.0 1
+
+
+REFPRES 
+  20000.0
+
+REFDEPTH 
+  2000.0
+
+DWGC 
+  1000.0
+
+GASZONE NOOIL
+
+
+NUMERICAL
+**AUTOTUNE ON
+*ADTSC ON
+
+RUN
+DATE 2030 1 1
+**
+**
+**
+**
+WELL  'CO2_INJ01'
+INJECTOR 'CO2_INJ01'
+INCOMP  SOLVENT  1.0  0.0
+OPERATE  MAX  BHP    21000.00  CONT REPEAT
+**OPERATE  MAX  STG     250000.00  CONT REPEAT
+
+**          rad  geofac  wfrac  skin
+GEOMETRY  K  0.108  0.37  1.00  0.0
+
+PERF GEOA 'CO2_INJ01'
+
+** UBA                 ff          Status  Connection  
+    5 5 1      1.0  OPEN    FLOW-FROM  'SURFACE'  REFLAYER
+    5 5 2      1.0  OPEN    FLOW-FROM   1
+    5 5 3      1.0  OPEN    FLOW-FROM   2
+
+INCLUDE 'SCHEDULE.INC' 
+
+
+STOP

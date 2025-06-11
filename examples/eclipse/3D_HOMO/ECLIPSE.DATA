@@ -1,0 +1,178 @@
+------------------------------------------------------------------------
+-->This is the first SPE comparison problem, reported by Odeh
+------------------------------------------------------------------------
+RUNSPEC
+TITLE
+   ODEH PROBLEM - IMPLICIT OPTION
+
+DIMENS
+5 5 3  /
+
+OIL
+
+WATER
+
+FIELD
+
+EQLDIMS
+    1  100   10    1    1 /
+
+TABDIMS
+    1    1   16   12    1   12 /
+
+WELLDIMS
+    3    3    3    3 /
+
+NUPCOL
+    4 /
+
+LGR
+100 100 /
+
+
+START
+  1 'JAN' 2000  /
+
+NSTACK
+   24 /
+
+UNIFOUT
+
+GRID    ================================================================
+
+GRIDFILE
+2 /
+
+INIT
+
+DX
+75*50   /
+DY
+75*50   /
+DZ 
+75*10  /
+PORO
+75*0.2 /
+TOPS
+25*5000 /
+PERMX
+75*1.0 /
+COPY
+'PERMX'    'PERMY'   /
+'PERMX'    'PERMZ'   /
+/
+
+ACTNUM
+75*1
+/
+
+--INCLUDE
+--'NNC.DAT'
+--/
+
+EDIT
+
+
+PROPS    ===============================================================
+-------- THE PROPS SECTION DEFINES THE REL. PERMEABILITIES, CAPILLARY
+-------- PRESSURES, AND THE PVT PROPERTIES OF THE RESERVOIR FLUIDS
+----------------------------------------------------------------------
+-- From Alhuthali
+SWFN
+    .2500  .0000 4.0000
+    .3000  .0200 2.9500
+    .4000  .0550 1.6500
+    .5000  .1000  .8500
+    .6000  .1750  .3000
+    .7000  .2000  .0000
+/
+
+
+SOF2
+    .3000  .0000
+    .4000  .1100
+    .5000  .2400
+    .6000  .4200
+    .7000  .7050
+    .7500  .9200
+/
+
+
+PVTW
+  .0000000   1.00000    3.03E-06    .50000    0.00E-01 /
+
+PVDO
+  .00000 1.00000 2.00000
+ 8000.00  .99000 2.00000
+/
+
+ROCK
+ 4000.00        .30E-05 /
+
+DENSITY
+ 52.0000  64.0000   .04400 /
+
+
+REGIONS ===============================================================
+
+SATNUM
+75*1
+/
+
+SOLUTION ===============================================================
+
+PRESSURE
+75*3000.0 
+/
+
+SWAT
+75*0.10 /
+
+RPTRST
+BASIC=2 FLOWS PRESSURE ALLPROPS / 
+
+SUMMARY  ===============================================================
+
+FOPR
+FWPR
+FPR
+FWCT
+FOPT
+FWPT
+CVFR
+*/
+/
+
+
+SCHEDULE ===============================================================
+
+RPTRST
+BASIC=2 FLOWS PRESSURE ALLPROPS / 
+
+RPTSCHED
+'FLOWAT=3' 'FLOOIL=3' /
+
+WELSPECS
+'INJ' 'FLD'   2   2  1* 'WATER'  /
+'PRD' 'FLD'   5   5  1* 'OIL'  /
+/
+
+COMPDAT
+'INJ'  2  2 1 2  'OPEN' 2*   0.5  /
+'PRD'  5  5 1 3  'OPEN' 2*   0.5  /
+/
+
+WCONINJE
+'INJ' 'WAT' 'OPEN' 'RATE'  100 /
+/
+
+WCONPROD
+'PRD' 'OPEN' 'BHP' 5* 1000 /
+/
+
+TSTEP
+10*30
+/
+
+END
+

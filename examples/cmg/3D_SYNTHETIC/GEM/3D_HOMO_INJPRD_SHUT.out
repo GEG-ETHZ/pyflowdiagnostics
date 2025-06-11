@@ -1,0 +1,1945 @@
+         ********************************************************************************
+         *                                                                              *
+         *                                 GEM  2023.10                                 *
+         *           Adaptive-Implicit EOS Compositional Reservoir Simulator            *
+         *                       Quarterly Release 1 for Win x64                        *
+         *                            2023-Mar-09   10:18:55                            *
+         *                                                                              *
+         *                          (c) Copyright 1977 - 2023                           *
+         *                Computer Modelling Group Ltd., Calgary, Canada                *
+         *                             All Rights Reserved                              *
+         *                                                                              *
+         ********************************************************************************
+
+
+         Command-line Arguments:  -f 3D_HOMO_INJPRD_SHUT.DAT
+                                  -wait
+                                  -doms
+                                  -parasol 1
+
+         *** Starting Date and Time of Simulation Run:  2025-Mar-09   19:03:33
+
+         Maximum Dimensions:
+            Grid Blocks     =      243,       Packed Blocks    =      243
+            Components      =        3,       % Implicitness   =       35
+            Number of wells =        2
+         ----------------------------------------------------------------
+ 
+ ================== INFORMATIONAL (from subroutine: INDYNM) ===================
+  Defaulting to new (2005) relative perm scaling.
+  Check your data and/or see your User's Manual.
+ ==============================================================================
+ 
+ 
+ RESULTS SIMULATOR GEM 202210
+ 
+ CASEID 'ML_CASE'
+ TITLE1 'Caprock Sens'
+ INUNIT SI
+ WSRF WELL 1
+ **WSRF GRID TIME
+ WSRF GRID TNEXT
+ INVENTORY-CO2
+ **OUTSRF GRID COMPRW DENG DENW DPORMNR DROP KRG KRW MOLALITY 'CO2' PCG PCW PERM PH
+ **            POROS PRES SG SGDTHY SGHYS SGRHYS SO SW TEMP VISW W 'CO2'
+ **            Y 'CO2' Z 'CO2'
+ *OUTSRF  *GRID *SG     *SO     *SW  *PRES *FLUXCON ** *FLUXRC ** FLUXRC, FLUXSC are not supported in GEM
+ OUTSRF RES ALL
+ OUTSRF WELL LAYER ALL DOWNHOLE
+ OUTSRF SPECIAL GHGAQU
+                GHGGAS
+                GHGLIQ
+                GHGMNR
+                GHGSCRIT
+                GHGSOL
+                GHGTHY
+ 
+ WPRN GRID 0
+ OUTPRN GRID NONE
+ OUTPRN RES NONE
+ 
+ 
+ ** ***************************************************************************
+ ** RADIAL GRID DEFINITION
+ ** ***************************************************************************
+ 
+ 
+   **--------------------------------------------------------------------------
+   ** GRID GEOMETRY
+   **--------------------------------------------------------------------------
+ 
+    *GRID *CART 9 9 3
+    *KDIR *DOWN
+    *DI *CON 200.00
+    *DJ *CON 200.00
+    *DK *CON 50     	
+    *DTOP 81*2000.0
+ 
+   *POR *CON 0.2
+ 
+   *PERMI *CON 100
+   *PERMJ *EQUALSI
+   *PERMK *EQUALSI * 0.1
+ 
+ ** ROCK COMPRESSIBILITY
+ 
+   *PRPOR  20000.0  ** KPa **
+   *CPOR   1E-07    ** 1/KPa ** = 1E-5 1/bar
+   *CROCKTYPE 1
+   CPRPOR  20000.0
+   CCPOR 2.23E-7 ** 1/kPa
+   *CROCKTYPE 2
+   CPRPOR  20000.0
+   CCPOR 1.34E-6 ** 1/kPa
+ 
+   *VOLMOD *IJK  1:9 1:9 1:3  1.0
+                 1:9 1:1 1:3  1000
+                 1:9 9:9 1:3  1000
+                 9:9 2:8 1:3  1000
+                 1:1 2:8 1:3  1000
+ 
+ 
+
+ ===================== WARNING (from subroutine: GRREV1) ======================
+  Some Volume Modifiers were larger than expected (exceeded 2).
+  Check your data and/or see your User's Manual.
+ ==============================================================================
+
+ MODEL PR
+ 
+ NC 2 2
+ COMPNAME 'CO2' 'CH4'
+ HCFLAG
+ 0 1
+ 
+ 
+ **
+ ** ISOTHERMAL RESERVOIR TEMPERATURE
+ **
+ TRES 2000.0 75.0  2050  75.0
+ 
+ 
+ MW
+ 44.01 16.043
+ AC
+ 0.225 0.008
+ PCRIT
+ 72.8 45.4
+ VCRIT
+ 0.094 0.099
+ TCRIT
+ 304.2 190.6
+ PCHOR
+ 78 77
+ SG
+ 0.818 0.3
+ TB
+ -78.45 -161.45
+ HEATING_VALUES
+ 0 212.758
+ BIN
+ 0.103
+ 
+
+ ================== INFORMATIONAL (from subroutine: INCOMP) ===================
+  *SOLUBILITY option is active.
+  Turning *FLASH-METHOD-OGW on.
+ ==============================================================================
+
+ SOLUBILITY HENRY
+ HENRY-MOD1-CO2
+ BIN-TDEP-CO2
+ SALINITY PPMVOL 66000.0
+ AQUEOUS-VISCOSITY KESTIN
+ AQUEOUS-DENSITY ROWE-CHOU
+ AQFILL OFF ** a small trace of hydrocarbon phase is added in the water-filled
+ 
+ 
+
+ ===================== WARNING (from subroutine: INCOMP) ======================
+  An internal trace-component (CO2_T) has been created to avoid potential
+  disappearance of hydrocarbon from aqueous phase.
+ ==============================================================================
+
+
+ ================== INFORMATIONAL (from subroutine: INCOMP) ===================
+  GEM is switching to use of *DERIVATIVE-METHOD *NUMERALL
+  because of the advanced options chosen.
+ ==============================================================================
+
+ ROCKFLUID
+ 
+ *HYS_MODEL LINEAR
+ 
+ 
+ 
+   *INCLUDE 'SWT_SGT.INC'
+ 
+ *************************************
+ ** RPT1: SAND, DRAINAGE            **
+ **       IMBIBITION BASED ON HYKRG **
+ *************************************
+ RPT 1
+ SWT
+ **  SW  KRW  KROW  PCOW
+ 0.3000  0.0000  1.0000  30000.0000
+ 0.325   0.0007  0.9643  30000.0000
+ 0.350   0.0030  0.9286  28819.40
+ 0.375   0.0073  0.8929  9681.18
+ 0.400   0.0138  0.8571  4463.55
+ 0.425   0.0226  0.8214  2447.26
+ 0.450   0.0337  0.7857  1496.76
+ 0.475   0.0474  0.7500  986.81
+ 0.500   0.0635  0.7143  687.09
+ 0.525   0.0823  0.6786  498.54
+ 0.550   0.1038  0.6429  373.49
+ 0.575   0.1280  0.6071  286.99
+ 0.600   0.1550  0.5714  225.03
+ 0.625   0.1849  0.5357  179.35
+ 0.650   0.2176  0.5000  144.82
+ 0.675   0.2533  0.4643  118.15
+ 0.700   0.2920  0.4286  097.15
+ 0.725   0.3336  0.3929  080.33
+ 0.750   0.3783  0.3571  066.64
+ 0.775   0.4261  0.3214  055.35
+ 0.800   0.4770  0.2857  045.89
+ 0.825   0.5310  0.2500  037.87
+ 0.850   0.5883  0.2143  030.97
+ 0.875   0.6487  0.1786  024.94
+ 0.900   0.7124  0.1429  019.60
+ 0.925   0.7793  0.1071  014.76
+ 0.950   0.8496  0.0714  010.24
+ 0.975   0.9231  0.0357  005.78
+ 0.9999   1.0000  0.0000  000.00
+ 1.0000  1.0000  0.0000  000.00
+ 
+ 
+ SGT
+ ** SG  KRG  KROG  PCOG
+ 0.0000  0.0000  1.0000  0.0000
+ 0.025   0.0003  0.9643  0.0000
+ 0.050   0.0018  0.9286  0.0000
+ 0.075   0.0047  0.8929  0.0000
+ 0.100   0.0094  0.8571  0.0000
+ 0.125   0.0160  0.8214  0.0000
+ 0.150   0.0248  0.7857  0.0000
+ 0.175   0.0359  0.7500  0.0000
+ 0.200   0.0495  0.7143  0.0000
+ 0.225   0.0656  0.6786  0.0000
+ 0.250   0.0845  0.6429  0.0000
+ 0.275   0.1062  0.6071  0.0000
+ 0.300   0.1309  0.5714  0.0000
+ 0.325   0.1586  0.5357  0.0000
+ 0.350   0.1895  0.5000  0.0000
+ 0.375   0.2236  0.4643  0.0000
+ 0.400   0.2610  0.4286  0.0000
+ 0.425   0.3019  0.3929  0.0000
+ 0.450   0.3463  0.3571  0.0000
+ 0.475   0.3943  0.3214  0.0000
+ 0.500   0.4460  0.2857  0.0000
+ 0.525   0.5014  0.2500  0.0000
+ 0.550   0.5606  0.2143  0.0000
+ 0.575   0.6237  0.1786  0.0000
+ 0.600   0.6908  0.1429  0.0000
+ 0.625   0.7619  0.1071  0.0000
+ 0.650   0.8371  0.0714  0.0000
+ 0.675   0.9164  0.0357  0.0000
+ 0.700   1.0000  0.0000  0.0000
+ 
+ 
+ *HYSKRG *LAND 0.20
+ 
+ ***************************
+ ** RPT2: SHALE, DRAINAGE **
+ ***************************
+ RPT 2
+ 
+ SWT
+ **  SW  KRW  KROW  PCOW
+ 0.3000  0.0000  1.0000  31000.0000
+ 0.325   0.0007  0.9643  31000.0000
+ 0.350   0.0030  0.9286  29819.40
+ 0.375   0.0073  0.8929  10681.18
+ 0.400   0.0138  0.8571  5463.55
+ 0.425   0.0226  0.8214  3447.26
+ 0.450   0.0337  0.7857  2496.76
+ 0.475   0.0474  0.7500  1986.81
+ 0.500   0.0635  0.7143  1687.09
+ 0.525   0.0823  0.6786  1498.54
+ 0.550   0.1038  0.6429  1373.49
+ 0.575   0.1280  0.6071  1286.99
+ 0.600   0.1550  0.5714  1225.03
+ 0.625   0.1849  0.5357  1179.35
+ 0.650   0.2176  0.5000  1144.82
+ 0.675   0.2533  0.4643  1118.15
+ 0.700   0.2920  0.4286  1097.15
+ 0.725   0.3336  0.3929  1080.33
+ 0.750   0.3783  0.3571  1066.64
+ 0.775   0.4261  0.3214  1055.35
+ 0.800   0.4770  0.2857  1045.89
+ 0.825   0.5310  0.2500  1037.87
+ 0.850   0.5883  0.2143  1030.97
+ 0.875   0.6487  0.1786  1024.94
+ 0.900   0.7124  0.1429  1019.60
+ 0.925   0.7793  0.1071  1014.76
+ 0.950   0.8496  0.0714  1010.24
+ 0.975   0.9231  0.0357  1005.78
+ 0.9998   1.0000  0.0000  1000.00
+ 0.9999   1.0000  0.0000  000.00
+ 1.0000  1.0000  0.0000  000.00
+ 
+ 
+ SGT
+ ** SG  KRG  KROG  PCOG
+ 0.0000  0.0000  1.0000  0.0000
+ 0.025   0.0003  0.9643  0.0000
+ 0.050   0.0018  0.9286  0.0000
+ 0.075   0.0047  0.8929  0.0000
+ 0.100   0.0094  0.8571  0.0000
+ 0.125   0.0160  0.8214  0.0000
+ 0.150   0.0248  0.7857  0.0000
+ 0.175   0.0359  0.7500  0.0000
+ 0.200   0.0495  0.7143  0.0000
+ 0.225   0.0656  0.6786  0.0000
+ 0.250   0.0845  0.6429  0.0000
+ 0.275   0.1062  0.6071  0.0000
+ 0.300   0.1309  0.5714  0.0000
+ 0.325   0.1586  0.5357  0.0000
+ 0.350   0.1895  0.5000  0.0000
+ 0.375   0.2236  0.4643  0.0000
+ 0.400   0.2610  0.4286  0.0000
+ 0.425   0.3019  0.3929  0.0000
+ 0.450   0.3463  0.3571  0.0000
+ 0.475   0.3943  0.3214  0.0000
+ 0.500   0.4460  0.2857  0.0000
+ 0.525   0.5014  0.2500  0.0000
+ 0.550   0.5606  0.2143  0.0000
+ 0.575   0.6237  0.1786  0.0000
+ 0.600   0.6908  0.1429  0.0000
+ 0.625   0.7619  0.1071  0.0000
+ 0.650   0.8371  0.0714  0.0000
+ 0.675   0.9164  0.0357  0.0000
+ 0.700   1.0000  0.0000  0.0000
+ 
+ *HYSKRG *LAND 0.20
+ 
+ 
+ 
+   **
+   ** THE FOLLOWING INCLUDE FILE REFERS TO THE PRE-DEFINED INCLUDE FILES
+   **                                          OF DIFFERENT REALIZATIONS
+   **
+ 
+ 
+ INITIAL
+ VERTICAL DEPTH_AVE WATER_GAS NOTRANZONE EQUIL
+ 
+ ZGAS
+ 0.0 1
+ 
+ 
+ REFPRES
+   20000.0
+ 
+ REFDEPTH
+   2000.0
+ 
+ DWGC
+   1000.0
+ 
+ GASZONE NOOIL
+ 
+ 
+
+ ===================== SUMMARY (from subroutine: INDATA) ======================
+  Error summary before initialization ...
+  Will terminate if data errors have been found.
+     2 Warning messages.    0 Error messages.
+ ==============================================================================
+
+ NUMERICAL
+ **AUTOTUNE ON
+ *ADTSC ON
+ 
+
+ ************** PARASOL: BLOCK COUNTS FOR LEVELS AND CLASSES **************
+ *                                                         Call No.   1   *
+ * Level 1                                                                *
+ *        Class       Blocks      Black       Red      Pre-eliminated     *
+ *            1          243        243         0                   0     *
+ *                                                                        *
+ **************************************************************************
+
+
+ ** Restart Record Written at Time Step : 0       
+ RUN
+ DATE 2030 1 1
+ **
+ **
+ **
+ **
+
+ ================== INFORMATIONAL (from subroutine: WMWLIN) ===================
+  The well named "CO2_INJ01" is assigned the well number 1.
+   
+ ==============================================================================
+
+ WELL  'CO2_INJ01'
+ INJECTOR 'CO2_INJ01'
+ INCOMP  SOLVENT  1.0  0.0
+
+ ================== INFORMATIONAL (from subroutine: WMWTIN) ===================
+  Well no. 1 ('CO2_INJ01') is
+  being opened because *OPERATE was encountered for this well.
+ ==============================================================================
+
+ OPERATE  MAX  BHP    21000.00  CONT REPEAT
+ **OPERATE  MAX  STG     250000.00  CONT REPEAT
+ 
+ **          rad  geofac  wfrac  skin
+ GEOMETRY  K  0.108  0.37  1.00  0.0
+ 
+ PERF GEOA 'CO2_INJ01'
+ 
+ ** UBA                 ff          Status  Connection
+     5 5 1      1.0  OPEN    FLOW-FROM  'SURFACE'  REFLAYER
+     5 5 2      1.0  OPEN    FLOW-FROM   1
+     5 5 3      1.0  OPEN    FLOW-FROM   2
+ 
+ 
+
+ ================== INFORMATIONAL (from subroutine: WMWLIN) ===================
+  The well named "PRD" is assigned the well number 2.
+   
+ ==============================================================================
+
+ WELL  'PRD'
+ PRODUCER 'PRD'
+ 
+
+ ================== INFORMATIONAL (from subroutine: WMWTIN) ===================
+  Well no. 2 ('PRD') is
+  being opened because *OPERATE was encountered for this well.
+ ==============================================================================
+
+ OPERATE  MIN  BHP    10000.00  CONT REPEAT
+ 
+ **          rad  geofac  wfrac  skin
+ GEOMETRY  K  0.108  0.37  1.00  0.0
+ 
+ PERF GEOA 'PRD'
+ 
+ ** UBA                 ff          Status  Connection
+     1 2 1      1.0  OPEN    FLOW-TO  'SURFACE'  REFLAYER
+     1 2 2      1.0  OPEN    FLOW-TO   1
+     1 2 3      1.0  OPEN    FLOW-TO   2
+ 
+ 
+ INCLUDE 'SCHEDULE_SHUT.INC'
+ *SHUTIN  'PRD'
+ 
+
+ ************** PARASOL: BLOCK COUNTS FOR LEVELS AND CLASSES **************
+ *                                                         Call No.   2   *
+ * Level 1                                                                *
+ *        Class       Blocks      Black       Red      Pre-eliminated     *
+ *            1          245        123       122                   0     *
+ *                                                                        *
+ **************************************************************************
+
+ LOAD BALANCING STATUS FOR NON-SOLVER WORK
+   Thread                   1
+   Implicit blocks          3
+   Explicit blocks        240
+   Total                  243
+
+    Number of Solver equation blocks=                   245  (maximum  MDSOL=        246)
+    Number of Jacobian connections=                     600  (maximum MDPTCN=        600)
+
+ ******************* PARASOL: ILU ENTRIES FOR LEVELS AND CLASSES ********************
+ *                                                                                  *
+ * Level 1                                                                          *
+ *        Class  TU Entries  TL Entries  DD Entries  TU Submatrices  TL Submatrices *
+ *            1         790         790         147             722             722 *
+ *                                                                                  *
+ ************************************************************************************
+
+ PARASOL CONTROL PARAMETERS
+  isolvr      : Solver identification number                               =   2
+  ipatrn      : Integer pattern code for parallelization data              =   0
+  ncpus       : Number of CPUs                                             =  16
+  nthrds      : Number of threads for linear solver parallelization        =   1
+  idegaa      : Intraclass factorization degree                            =   1
+  idegab      : Interclass factorization degree                            =   2
+  idgaal      : Intraclass degree for last class                           =   1
+  nclas2      : Number of arbitrary classes of equation blocks             =   2
+  nprosl      : Number of classes for parallelization of scaling and                                  
+                mat-mult                                                   =   1
+  ickrbl      : Enables abandonment of red-black reduction when red blocks
+                too few                                                    =   0
+  redmin      : Red fraction determining abandonment of red-black          =   0.60000
+  ireorf      : Flag for reordering refined blocks                         =   0
+  ireowl      : Flag for reordering wells                                  =   0
+  ireoby      : Flag for reordering boundary blocks                        =   0
+  iorrev      : Flag for reversing ordering to give better consecutivity   =   0
+  ireosd      : Flag for spiral or diagonal reordering                     =   0
+  ilbmod_gp   : Mode (simple or complicated) for GMRES load balancing      =   0
+  nlblar_gp   : Number of large classes for GMRES load balancing           =   1
+  nlbsml_gp   : Number of small classes for GMRES load balancing           =   0
+  flblrg_gp   : Fraction of blocks in large classes, GMRES                 =   1.00000
+  ilbmod_sp   : Mode for load balancing during scaling                     =   0
+  nlblar_sp   : Number of large classes, scaling load balancing            =   1
+  nlbsml_sp   : Number of small classes, scaling load balancing            =   0
+  flblrg_sp   : Fraction of blocks in large classes, scalpp                =   1.00000
+  ilbmod_ap   : Mode for mat-mult load balancing                           =   0
+  nlblar_ap   : Number of large classes, mat-mult load balancing           =   1
+  nlbsml_ap   : Number of small classes, mat-mult load balancing           =   0
+  flblrg_ap   : Fraction of blocks in large classes, mat-mult              =   1.00000
+  npchbo      : 2**(npchbo) is the number of processors for which the
+                partition is designed                                      =   0
+  ncl1sb      : Number of classes at level 1 in the AUTOPSLAB partitiong   =   1
+  nthrds_set  : Number of threads set                                      =   1
+  ncpus_actual: Actual number of CPUs                                      =  16
+  nlvls       : Number of levels in the parallelization data structure     =   1
+  nclass      : Number of equation block classes in parallelization
+                the data structure                                         =   1
+
+         ************************* GEM-GHG CONTROL PARAMETERS *************************
+         * SOLUBILITY                                                                 *
+         *    Henry Constants from:                                                   *
+         *      Correlation after Harvey (*HENRY-MOD1-)                               *
+         *        Soluble component(s): CO2.                                          *
+         * GHG Option Flags                                                           *
+         *    Solubility Flag (ihenry)  =  0;  Solubility                             *
+         *    Flash Flag (iogwf)        =  1;  No wat vaporization                    *
+         *    H2O as a Component (ih2o) =  0;  No H2O_INCLUDED                        *
+         *    OGW Flash Method (mthogw) =  2                                          *
+         *                                                                            *
+         ******************************************************************************
+
+    NPTSS, NPTCS, NPTPS: 243 243 243
+   (Spatial, Complete-Spatial, Active cells)
+1
+  *****************************************************
+  * Initial Reservoir Conditions and Fluid Properties *
+  *****************************************************
+
+  Separator Conditions
+
+  Separator used for fluid-in-place calculations :
+
+   Stages :
+
+ Stage  Type   Set or Table   Pressure  Temperature      Output Destinations    Wet Gas Stage
+                                kpa      degC            Liquid  Middle  Vapor
+ -----  ----   ------------   --------  -----------      ---------------------  -------------
+  1     EOS        1             101.3    15.6            OIL             GAS         *   
+
+   Stream Density Calculations :
+
+ Stream Type   Set/Table/Z   Pressure  Temperature
+                                 kpa      degC
+ ------ -----  ------------   --------   -----------
+   OIL   EOS      1              101.3     15.6
+   GAS   EOS      1              101.3     15.6
+   WTG GASLAW     1.0            101.3     15.6
+ -------------------------------------------------------------------------------
+
+  Reservoir
+      Ave. Pressure,  kpa                       = 2.07546E+04
+      Ave. Porosity                             = 0.20003
+      Total Bulk Reservoir Volume, res m3       = 1.92294E+11
+      Total Pore Volume, res m3                 = 3.84653E+10
+      Total Hydrocarbon Pore Volume, res m3     = 3.84653E+04
+  Oil Phase
+      Ave. oil saturation                       = 0.00000
+      Total moles, mol                          = 0.00000E+00
+  Gas Phase
+      Ave. gas saturation                       = 0.00000
+      Ave. gas phase pressure,  kpa             = 2.07546E+04
+      Ave. gas phase Z factor                   = 9.00301E-01
+      Shrinkage factor, OGIP/std vol of free gas= 1.00000E+00
+      Total moles, mol                          = 3.06325E+08
+  Water Phase
+      Ave. water saturation                     = 1.00000
+      Total moles of dissolved hydrocarbon, mol = 0.00000E+00
+      Total moles, mol                          = 2.19072E+15
+
+  Fluid Properties
+      Relative oil volume, res m3 /std m3       = 0.00000E+00
+      Relative gas volume, res m3 /std m3       = 5.31355E-03
+      Solution gas-oil-ratio, std m3 /std m3    = 0.00000E+00
+      Total Component Amounts in Reservoir           Moles         kg 
+          CO2                                   = 0.00000E+00   0.00000E+00
+          CH4                                   = 3.06322E+08   4.91432E+06
+          CO2_T                                 = 3.06325E+03   1.34814E+02
+          H2O                                   = 2.19072E+15   3.94658E+13
+
+  Original Oil in Place, OOIP, std m3 
+      In Oil Zone                  = 0.00000E+00
+      Condensate in Gas Zone       = 0.00000E+00
+      Dissolved in Water Zone      = 0.00000E+00
+      Total OOIP                                = 0.00000E+00    <--------  OOIP
+  Original Gas in Place, OGIP, std m3 
+      In Gas Zone                  = 7.23909E+06
+      Dissolved Gas in Oil Zone    = 0.00000E+00
+      Dissolved Gas in Water Zone  = 0.00000E+00
+      Total OGIP                                = 7.23909E+06    <--------  OGIP
+  Original Water in Place, OWIP, std m3 
+      In Water Zone                = 3.94330E+10
+      Vaporized in Gas Zone        = 0.00000E+00
+      Total OWIP                                = 3.94330E+10    <--------  OWIP
+1
+ ***********************************************************************************************************************************
+ TIME: 0.0000  days                              G E M   S E C T O R   S U M M A R Y                              DATE: 2030:01:01  
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+ 
+                               SECTOR-1                                                                                             
+                               FIELD                                                                                                
+                                                                                                                                    
+ Bulk Volume
+   Total Bulk Volume.  M m3    1.92294E+8                                                                                           
+ Pore Volumes
+   Total Pore Volume.  M m3    3.84653E+7                                                                                           
+   HC. Pore Volume     M m3    38.465                                                                                               
+ Originally in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+ Currently in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+   Reservoir Oil       M m3    0                                                                                                    
+   Reservoir Free Gas  M m3    38.465                                                                                               
+   Reservoir Water     M m3    3.84652E+7                                                                                           
+   Cum Water Influx    M m3    0                                                                                                    
+ Average Pressures
+   Total PV Ave.       kpa     20755                                                                                                
+   HC PV Ave.          kpa     20755                                                                                                
+   PV Ave. Datum P     kpa     20755                                                                                                
+   HC PV Ave. Datum P  kpa     20755                                                                                                
+ Average Temperature
+   Bulk Vol Ave.      degC     75                                                                                                   
+ Ave. Saturations
+   Oil                         0                                                                                                    
+   Gas                         1.0E-6                                                                                               
+   Water                       1                                                                                                    
+ Percentage Recovery 
+   Stock Tank Oil              100                                                                                                  
+   Gas at Surface              0                                                                                                    
+   Water                       0                                                                                                    
+ Cumulative Injection 
+   Solvent         MM m3       0                                                                                                    
+   Water            M m3       0                                                                                                    
+ Cumulative Production 
+   Oil              M m3       0                                                                                                    
+   Gas             MM m3       0                                                                                                    
+   Water            M m3       0                                                                                                    
+   Wet Gas         MM m3       0                                                                                                    
+ Injection Rate 
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   0                                                                                                    
+ Production Rate 
+   Oil              M m3/day   0                                                                                                    
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   0                                                                                                    
+   Wet Gas         MM m3/day   0                                                                                                    
+ 
+1
+         Caprock Sens                            
+                                                                                         
+                                                                                         
+         ML_CASE 
+         Time = 0.0000E+00 days (2030 JAN. 01, 00 hr 00 min 00 sec)
+
+         Summary at time step number                :        0
+         Total number of iterations                 :        0.
+         Average number of iterations per time step :    0.0000
+         Average time step size                     :    0.0000 days
+1
+
+                                     G E M   T I M E   S T E P   S U M M A R Y
+                                                    Caprock Sens
+                                                      ML_CASE
+ ====================================================================================================================
+     Time Step            Time                            Maximum Changes                       Mat  Cum    Solver
+ ----------------- ----------------- ---------------------------------------------------------  Bal  time -----------
+       Size Newton                        Pressure         Saturation         Composition       Err  step Iter/   Cum
+ No.   days  cycls  Days     Date      Block     kpa     Block   Fraction   Block    Fraction    %   cuts  Cycl  Fail
+ ----  ------ ---- ------ ---------- --------- ------ --------- --------- --------- ---------- ----- ---- ----- -----
+    1  1.0e-2   2  1.0e-2 2030.01.01    5,5,1  -411      5,5,1  1.9e-8(g)    1,1,1        ( 1) .1132    0   1.0    0
+    2  2.5e-2   1  3.5e-2 2030.01.01    5,5,1  501.6     5,5,1  -26e-9(w)    1,1,1        ( 1) .1828    0   1.0    0
+    3  6.2e-2   1  9.7e-2 2030.01.01    5,5,3  14.48     5,5,1  -44e-9(w)    1,1,1        ( 1) 73e-3    0   2.0    0
+    4  .1562    1  .2538  2030.01.01    5,5,3  15.84     5,5,2  -46e-9(w)    1,1,1        ( 1) 31e-3    0   2.0    0
+    5  .3906    1  .6444  2030.01.01    5,5,3  15.21     5,5,1  -13e-8(g)    1,1,1        ( 1) 13e-3    0   3.0    0
+    6  .9766    1  1.621  2030.01.02    5,4,1  12.51     5,5,3  -11e-8(g)    1,1,1        ( 1) 55e-4    0   3.0    0
+    7  2.441    1  4.062  2030.01.05    5,4,1  6.774     5,5,1  3.7e-8(g)    1,1,1        ( 1) 23e-4    0   3.0    0
+    8  6.104    1  10.17  2030.01.11    5,6,3  2.002     5,5,1  -10e-8(w)    1,1,1        ( 1) 90e-5    0   2.0    0
+    9  15.26    1  25.42  2030.01.26    5,5,3  .8721     5,5,1  3.3e-7(g)    1,1,1        ( 1) 31e-5    0   2.0    0
+   10w 5.575    1  31.00  2030.02.01    5,1,1  .2751     5,5,1  -48e-8(w)    1,1,1        ( 1) 25e-5    0   2.0    0
+ 
+ ***********************************************************************************************************************************
+ TIME:  31.000 days                               G E M   F I E L D  S U M M A R Y                                DATE: 2030:FEB:01 
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+                                 +                     ++                     +
+                                 +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------++---------------------+
+                                 + No.       Name      ++ No.       Name      +
+                                 +---- ----------------++---- ----------------+
+                                 +   1     CO2_INJ01   ++   1       Field     +
+ --------------------------------+---------------------++---------------------+
+ Well parameters                 +                     ++                     +
+   Well Type                     +   Mob Wtd Gas Inj   ++                     +
+   Status                        +          BHP        ++                     +
+   On-time fraction              +          1.0        ++                     +
+   Cumulative Open days          +          31         ++          31         +
+ Well Pressures                  +                     ++                     +
+   Bottom Hole     kPa           +        21000        ++                     +
+   Grid Block      kPa           +        20384        ++                     +
+   Drawdown        kPa           +        616.35       ++                     +
+   Ref Layer Head  kPa           +          0          ++                     +
+   Tubing Head     kPa           +                     ++                     +
+ Mobility Weighted Pressures     +                     ++                     +
+   P-P(0)          kPa           +        113.63       ++                     +
+   Block Pressure  kPa           +        20563        ++                     +
+   Datum Pressure  kPa           +        20868        ++                     +
+ Inst Surface Injection Rates    +                     ++                     +
+   Water            m3/day       +          0          ++          0          +
+   Gas             M m3/day      +        443.46       ++        443.46       +
+ Surface cumulative injection    +                     ++                     +
+   Well Open Time  days          +          31         ++          31         +
+   Water           M m3          +          0          ++          0          +
+   Gas             MM m3         +        13.793       ++        13.793       +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+          ***************************************************************************
+          *  Well Summary at Reservoir Conditions at 3.1000E+01 days (2030 FEB. 01) *
+          ***************************************************************************
+
+
+  Well                                        BHP       Oil Rate     Gas Rate   Water Rate   O-G-W Rate   BHP-Pblock
+   No.    Name       Type      Block          kpa         m3 /d        m3 /d       m3 /d       m3 /d        kpa
+  ----  --------   -------    -------    ----------   ----------   ----------   ----------   ----------   ----------
+    1   CO2_INJ0      BHP         5,5,1    2.1000E+04   0.0000E+00   6.3908E+02   0.0000E+00   6.3908E+02   6.1635E+02
+                                  5,5,2    2.1304E+04   0.0000E+00   4.5131E+02   0.0000E+00   4.5131E+02   4.3540E+02
+                                  5,5,3    2.1611E+04   0.0000E+00   2.6746E+02   0.0000E+00   2.6746E+02   2.5812E+02
+                               Total                  0.0000E+00   1.3578E+03   0.0000E+00   1.3578E+03
+    2   PRD       SHUT IN WELL
+
+  Cumulative Field Total at Reservoir Conditions for Components........................................
+
+  Comp          Cum Inj       Cum Prod        Accum      Acc/(Inj-Pro)      Recovery        Error
+                 gmole          gmole         gmole                               %     mol in place,%
+  --------    -----------    -----------    -----------    -----------    -----------    -----------
+  CO2         5.85787E+08    0.00000E+00    5.85793E+08    1.00001E+00    0.00000E+00    1.02773E-03
+  CH4         0.00000E+00    0.00000E+00   -2.85778E-07    1.00000E+00    0.00000E+00   -9.32934E-14
+  CO2_T       0.00000E+00    0.00000E+00    0.00000E+00    1.00000E+00    0.00000E+00    0.00000E+00
+  H2O         0.00000E+00    0.00000E+00   -1.88608E+05    1.00000E+00    0.00000E+00   -8.60940E-09
+
+
+  Total Cum Inj, mol  =  5.85787E+08             Ave. Acc/(Inj-Pro)         =  1.00000E+00
+  Total Cum Prod, mol =  0.00000E+00             Ave. Error, % mol in place =  2.56935E-04
+  Total Accum, mol    =  5.85605E+08
+
+          CO2 Storage Amounts in Reservoir           Moles         kg 
+              Gaseous Phase                     = 0.00000E+00   0.00000E+00
+              Liquid Phase                      = 0.00000E+00   0.00000E+00
+              Supercritical Phase               = 8.57344E+03   3.77317E+02
+              Trapped Sg < Sgc / Hysteresis     = 5.47583E+02   2.40991E+01
+              Dissolved in Water                = 5.85785E+08   2.57804E+07
+
+  Mole Percent Hydrocarbon Recovered: Total-HC-Prod/Total-HC-Orginally-In-Place =     0.0000
+
+  Field Total Prod/Inj Summary at Reservoir Conditions for Phases.......................................
+
+                   Inj            Prod         Cum Inj        Cum Prod       Cum Inj        Cum Prod
+  Phase           m3 /d          m3 /d           m3             m3         % Pore Vol     % Pore Vol
+  -----          ------         ------         -------        --------     ----------     ----------
+  Oil         0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+  Gas         1.35784E+03    0.00000E+00    4.22351E+04    0.00000E+00    1.09801E-04    0.00000E+00
+  O+G         1.35784E+03    0.00000E+00    4.22351E+04    0.00000E+00    1.09801E-04    0.00000E+00
+  Water       0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+
+  Surface Well Stream Compositions and Molar Rates at 3.1000E+01 days (2030 FEB. 01)...............................
+
+  Well   1 'CO2_INJ01'  Hydrocarbon Injector Stream Compositions :
+
+                            Injected 
+                              fluid
+                            ---------
+                  CO2        100.0000
+                  CH4          0.0000
+                  CO2_T        0.0000
+                            ---------
+ Mol wt, kg/gmol               0.0440
+ Surface Density, gmol/ m3    42.4694
+ Surface Density, kg/ m3       1.8691
+ Heating value, kJ/gmol        0.0000
+
+                 ****Stream Molar and Mass Rates****
+
+                 Injected Hydrocarbon
+              ---------------------
+     Well         moles/d       kg /d
+  ----------  ------------ ------------
+  1 CO2_INJ0   1.8834E+07   8.2887E+05
+
+
+ ...............................................................................................................
+  Total from All Separators
+
+ Stream          Cum Inj        Cum Prod
+  -----          -------        --------
+  Oil         0.00000E+00    0.00000E+00      m3 
+  Gas         1.37932E+07    0.00000E+00      m3 
+ Wet Gas      0.00000E+00    0.00000E+00      m3 
+  Water       0.00000E+00    0.00000E+00      m3 
+
+                 Inj Rate      Prod Rate
+  Phase           moles/d        moles/d
+  -----       -----------    -----------
+  Oil         0.00000E+00    0.00000E+00
+  Gas         1.88336E+07    0.00000E+00
+ Wet Gas      0.00000E+00    0.00000E+00
+  Water       0.00000E+00    0.00000E+00
+
+ Compositions (mole fractions) of Total Field Produced and Injected Streams:
+
+                        Oil                           Gas                          Wet Gas
+ Component    Produced       Injected       Produced       Injected       Produced       Injected
+ ---------    --------       --------       --------       --------       --------       --------
+      CO2    0.00000E+00   0.00000E+00     0.00000E+00   1.00000E+00     0.00000E+00   0.00000E+00
+      CH4    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+    CO2_T    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+1
+ ***********************************************************************************************************************************
+ TIME: 31      days                              G E M   S E C T O R   S U M M A R Y                              DATE: 2030:02:01  
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+ 
+                               SECTOR-1                                                                                             
+                               FIELD                                                                                                
+                                                                                                                                    
+ Bulk Volume
+   Total Bulk Volume.  M m3    1.92294E+8                                                                                           
+ Pore Volumes
+   Total Pore Volume.  M m3    3.84653E+7                                                                                           
+   HC. Pore Volume     M m3    38.464                                                                                               
+ Originally in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+ Currently in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    21.032                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+   Reservoir Oil       M m3    0                                                                                                    
+   Reservoir Free Gas  M m3    38.464                                                                                               
+   Reservoir Water     M m3    3.84652E+7                                                                                           
+   Cum Water Influx    M m3    0                                                                                                    
+ Average Pressures
+   Total PV Ave.       kpa     20755                                                                                                
+   HC PV Ave.          kpa     20755                                                                                                
+   PV Ave. Datum P     kpa     20755                                                                                                
+   HC PV Ave. Datum P  kpa     20755                                                                                                
+ Average Temperature
+   Bulk Vol Ave.      degC     75                                                                                                   
+ Ave. Saturations
+   Oil                         0                                                                                                    
+   Gas                         9.99979E-7                                                                                           
+   Water                       1                                                                                                    
+ Percentage Recovery 
+   Stock Tank Oil              100                                                                                                  
+   Gas at Surface              -190.5                                                                                               
+   Water                       0                                                                                                    
+ Cumulative Injection 
+   Solvent         MM m3       13.793                                                                                               
+   Water            M m3       0                                                                                                    
+ Cumulative Production 
+   Oil              M m3       0                                                                                                    
+   Gas             MM m3       0                                                                                                    
+   Water            M m3       0                                                                                                    
+   Wet Gas         MM m3       0                                                                                                    
+ Injection Rate 
+   Gas             MM m3/day   0.44346                                                                                              
+   Water            M m3/day   0                                                                                                    
+ Production Rate 
+   Oil              M m3/day   0                                                                                                    
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   0                                                                                                    
+   Wet Gas         MM m3/day   0                                                                                                    
+ 
+ ...............................................................................................................
+ Percent by Std Vol of Original Oil in Place Recovered (RECO) =  0.000     (TotalOilProduction/OOIP)
+ Percent by Std Vol of Original Gas in Place Recovered (RECG) =  0.000     (TotalGasProduction/OGIP)
+ Percent Hydrocarbon Pore Volume Injected            (HCPVIN) =  109.8    
+ ...............................................................................................................
+
+    *** Avg. degree of implicitness: 3/243 = 0.0123
+
+ CPU Report: Current Date and Time: 2025-Mar-09   19:03:34      Elapsed Time (secs):       0.36
+ CPU Report:  At(days); YYYY/MMMM/Dy/Hr/Min/Sec; TS number; Elapsed Time; ElT-sec/sim-day %Implicit Totit  Nsolit  Mem(MB)   ECT(sec)
+ CPU Report:  3.1000E+01 2030 FEB. 01: 00 00 00        10    3.5900E-01    1.1581E-02       1.23       11      22       42   1.3897E+00
+ CPU Report:                                                CPU seconds;  CPU-sec/sim-day           Nrep1  Mtfail    
+ CPU Report:                                                 1.8750E-01    6.0484E-03                   0       0
+ DIM Report: TS:     10  MDPTCN        MDV      MDBET        MDALD       MDALP      MDSOL         MDDD        MDLU MDNOR    NACTV
+ DIM Report: Max:           594        192       1343         6203        6558        246          177         961   101
+ DIM Report: Used:          594        127       1217         6077        6308        245          147         790            243
+ DATE 2030   2  1
+1
+
+                                     G E M   T I M E   S T E P   S U M M A R Y
+                                                    Caprock Sens
+                                                      ML_CASE
+ ====================================================================================================================
+     Time Step            Time                            Maximum Changes                       Mat  Cum    Solver
+ ----------------- ----------------- ---------------------------------------------------------  Bal  time -----------
+       Size Newton                        Pressure         Saturation         Composition       Err  step Iter/   Cum
+ No.   days  cycls  Days     Date      Block     kpa     Block   Fraction   Block    Fraction    %   cuts  Cycl  Fail
+ ----  ------ ---- ------ ---------- --------- ------ --------- --------- --------- ---------- ----- ---- ----- -----
+   11  22.30    1  53.30  2030.02.23    5,1,1  1.060     5,5,1  2.3e-6(g)    1,1,1        ( 1) 76e-6    0   2.0    0
+   12w 5.699    1  59.00  2030.03.01    5,5,3  .3007     5,5,1  1.4e-5(g)    1,1,1        ( 1) 66e-6    0   2.0    0
+ 
+ ***********************************************************************************************************************************
+ TIME:  59.000 days                               G E M   F I E L D  S U M M A R Y                                DATE: 2030:MAR:01 
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+                                 +                     ++                     +
+                                 +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------++---------------------+
+                                 + No.       Name      ++ No.       Name      +
+                                 +---- ----------------++---- ----------------+
+                                 +   1     CO2_INJ01   ++   1       Field     +
+ --------------------------------+---------------------++---------------------+
+ Well parameters                 +                     ++                     +
+   Well Type                     +   Mob Wtd Gas Inj   ++                     +
+   Status                        +          BHP        ++                     +
+   On-time fraction              +          1.0        ++                     +
+   Cumulative Open days          +          59         ++          59         +
+ Well Pressures                  +                     ++                     +
+   Bottom Hole     kPa           +        21000        ++                     +
+   Grid Block      kPa           +        20384        ++                     +
+   Drawdown        kPa           +        615.93       ++                     +
+   Ref Layer Head  kPa           +          0          ++                     +
+   Tubing Head     kPa           +                     ++                     +
+ Mobility Weighted Pressures     +                     ++                     +
+   P-P(0)          kPa           +        114.52       ++                     +
+   Block Pressure  kPa           +        20564        ++                     +
+   Datum Pressure  kPa           +        20869        ++                     +
+ Inst Surface Injection Rates    +                     ++                     +
+   Water            m3/day       +          0          ++          0          +
+   Gas             M m3/day      +        442.56       ++        442.56       +
+ Surface cumulative injection    +                     ++                     +
+   Well Open Time  days          +          59         ++          59         +
+   Water           M m3          +          0          ++          0          +
+   Gas             MM m3         +        26.191       ++        26.191       +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+          ***************************************************************************
+          *  Well Summary at Reservoir Conditions at 5.9000E+01 days (2030 MAR. 01) *
+          ***************************************************************************
+
+
+  Well                                        BHP       Oil Rate     Gas Rate   Water Rate   O-G-W Rate   BHP-Pblock
+   No.    Name       Type      Block          kpa         m3 /d        m3 /d       m3 /d       m3 /d        kpa
+  ----  --------   -------    -------    ----------   ----------   ----------   ----------   ----------   ----------
+    1   CO2_INJ0      BHP         5,5,1    2.1000E+04   0.0000E+00   6.3864E+02   0.0000E+00   6.3864E+02   6.1593E+02
+                                  5,5,2    2.1304E+04   0.0000E+00   4.5029E+02   0.0000E+00   4.5029E+02   4.3442E+02
+                                  5,5,3    2.1611E+04   0.0000E+00   2.6615E+02   0.0000E+00   2.6615E+02   2.5685E+02
+                               Total                  0.0000E+00   1.3551E+03   0.0000E+00   1.3551E+03
+    2   PRD       SHUT IN WELL
+
+  Cumulative Field Total at Reservoir Conditions for Components........................................
+
+  Comp          Cum Inj       Cum Prod        Accum      Acc/(Inj-Pro)      Recovery        Error
+                 gmole          gmole         gmole                               %     mol in place,%
+  --------    -----------    -----------    -----------    -----------    -----------    -----------
+  CO2         1.11230E+09    0.00000E+00    1.11230E+09    1.00000E+00    0.00000E+00    2.64742E-04
+  CH4         0.00000E+00    0.00000E+00   -1.67117E-06    1.00000E+00    0.00000E+00   -5.45559E-13
+  CO2_T       0.00000E+00    0.00000E+00    0.00000E+00    1.00000E+00    0.00000E+00    0.00000E+00
+  H2O         0.00000E+00    0.00000E+00   -1.06155E+06    1.00000E+00    0.00000E+00   -4.84567E-08
+
+
+  Total Cum Inj, mol  =  1.11230E+09             Ave. Acc/(Inj-Pro)         =  1.00000E+00
+  Total Cum Prod, mol =  0.00000E+00             Ave. Error, % mol in place =  6.61976E-05
+  Total Accum, mol    =  1.11124E+09
+
+          CO2 Storage Amounts in Reservoir           Moles         kg 
+              Gaseous Phase                     = 0.00000E+00   0.00000E+00
+              Liquid Phase                      = 0.00000E+00   0.00000E+00
+              Supercritical Phase               = 1.16206E+05   5.11424E+03
+              Trapped Sg < Sgc / Hysteresis     = 8.28541E+01   3.64641E+00
+              Dissolved in Water                = 1.11219E+09   4.89474E+07
+
+  Mole Percent Hydrocarbon Recovered: Total-HC-Prod/Total-HC-Orginally-In-Place =     0.0000
+
+  Field Total Prod/Inj Summary at Reservoir Conditions for Phases.......................................
+
+                   Inj            Prod         Cum Inj        Cum Prod       Cum Inj        Cum Prod
+  Phase           m3 /d          m3 /d           m3             m3         % Pore Vol     % Pore Vol
+  -----          ------         ------         -------        --------     ----------     ----------
+  Oil         0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+  Gas         1.35508E+03    0.00000E+00    8.01951E+04    0.00000E+00    2.08487E-04    0.00000E+00
+  O+G         1.35508E+03    0.00000E+00    8.01951E+04    0.00000E+00    2.08487E-04    0.00000E+00
+  Water       0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+
+  Surface Well Stream Compositions and Molar Rates at 5.9000E+01 days (2030 MAR. 01)...............................
+
+  Well   1 'CO2_INJ01'  Hydrocarbon Injector Stream Compositions :
+
+                            Injected 
+                              fluid
+                            ---------
+                  CO2        100.0000
+                  CH4          0.0000
+                  CO2_T        0.0000
+                            ---------
+ Mol wt, kg/gmol               0.0440
+ Surface Density, gmol/ m3    42.4694
+ Surface Density, kg/ m3       1.8691
+ Heating value, kJ/gmol        0.0000
+
+                 ****Stream Molar and Mass Rates****
+
+                 Injected Hydrocarbon
+              ---------------------
+     Well         moles/d       kg /d
+  ----------  ------------ ------------
+  1 CO2_INJ0   1.8795E+07   8.2719E+05
+
+
+ ...............................................................................................................
+  Total from All Separators
+
+ Stream          Cum Inj        Cum Prod
+  -----          -------        --------
+  Oil         0.00000E+00    0.00000E+00      m3 
+  Gas         2.61907E+07    0.00000E+00      m3 
+ Wet Gas      0.00000E+00    0.00000E+00      m3 
+  Water       0.00000E+00    0.00000E+00      m3 
+
+                 Inj Rate      Prod Rate
+  Phase           moles/d        moles/d
+  -----       -----------    -----------
+  Oil         0.00000E+00    0.00000E+00
+  Gas         1.87954E+07    0.00000E+00
+ Wet Gas      0.00000E+00    0.00000E+00
+  Water       0.00000E+00    0.00000E+00
+
+ Compositions (mole fractions) of Total Field Produced and Injected Streams:
+
+                        Oil                           Gas                          Wet Gas
+ Component    Produced       Injected       Produced       Injected       Produced       Injected
+ ---------    --------       --------       --------       --------       --------       --------
+      CO2    0.00000E+00   0.00000E+00     0.00000E+00   1.00000E+00     0.00000E+00   0.00000E+00
+      CH4    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+    CO2_T    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+1
+ ***********************************************************************************************************************************
+ TIME: 59      days                              G E M   S E C T O R   S U M M A R Y                              DATE: 2030:03:01  
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+ 
+                               SECTOR-1                                                                                             
+                               FIELD                                                                                                
+                                                                                                                                    
+ Bulk Volume
+   Total Bulk Volume.  M m3    1.92294E+8                                                                                           
+ Pore Volumes
+   Total Pore Volume.  M m3    3.84653E+7                                                                                           
+   HC. Pore Volume     M m3    38.471                                                                                               
+ Originally in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+ Currently in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    33.43                                                                                                
+   Water at Surface    M m3    3.9433E+7                                                                                            
+   Reservoir Oil       M m3    0                                                                                                    
+   Reservoir Free Gas  M m3    38.471                                                                                               
+   Reservoir Water     M m3    3.84652E+7                                                                                           
+   Cum Water Influx    M m3    0                                                                                                    
+ Average Pressures
+   Total PV Ave.       kpa     20756                                                                                                
+   HC PV Ave.          kpa     20756                                                                                                
+   PV Ave. Datum P     kpa     20756                                                                                                
+   HC PV Ave. Datum P  kpa     20756                                                                                                
+ Average Temperature
+   Bulk Vol Ave.      degC     75                                                                                                   
+ Ave. Saturations
+   Oil                         0                                                                                                    
+   Gas                         1.00015E-6                                                                                           
+   Water                       1                                                                                                    
+ Percentage Recovery 
+   Stock Tank Oil              100                                                                                                  
+   Gas at Surface              -361.8                                                                                               
+   Water                       0                                                                                                    
+ Cumulative Injection 
+   Solvent         MM m3       26.191                                                                                               
+   Water            M m3       0                                                                                                    
+ Cumulative Production 
+   Oil              M m3       0                                                                                                    
+   Gas             MM m3       0                                                                                                    
+   Water            M m3       0                                                                                                    
+   Wet Gas         MM m3       0                                                                                                    
+ Injection Rate 
+   Gas             MM m3/day   0.44256                                                                                              
+   Water            M m3/day   0                                                                                                    
+ Production Rate 
+   Oil              M m3/day   0                                                                                                    
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   0                                                                                                    
+   Wet Gas         MM m3/day   0                                                                                                    
+ 
+ ...............................................................................................................
+ Percent by Std Vol of Original Oil in Place Recovered (RECO) =  0.000     (TotalOilProduction/OOIP)
+ Percent by Std Vol of Original Gas in Place Recovered (RECG) =  0.000     (TotalGasProduction/OGIP)
+ Percent Hydrocarbon Pore Volume Injected            (HCPVIN) =  208.5    
+ ...............................................................................................................
+
+    *** Avg. degree of implicitness: 3/243 = 0.0123
+
+ CPU Report: Current Date and Time: 2025-Mar-09   19:03:34      Elapsed Time (secs):       0.39
+ CPU Report:  At(days); YYYY/MMMM/Dy/Hr/Min/Sec; TS number; Elapsed Time; ElT-sec/sim-day %Implicit Totit  Nsolit  Mem(MB)   ECT(sec)
+ CPU Report:  5.9000E+01 2030 MAR. 01: 00 00 00        12    3.8800E-01    1.0357E-03       1.23       13      26       42   9.5286E-02
+ CPU Report:                                                CPU seconds;  CPU-sec/sim-day           Nrep1  Mtfail    
+ CPU Report:                                                 2.1875E-01    1.1161E-03                   0       0
+ DIM Report: TS:     12  MDPTCN        MDV      MDBET        MDALD       MDALP      MDSOL         MDDD        MDLU MDNOR    NACTV
+ DIM Report: Max:           594        192       1343         6203        6558        246          177         961   101
+ DIM Report: Used:          594        127       1217         6077        6308        245          147         790            243
+ DATE 2030   3  1
+ 
+ ** *SHUTIN  'CO2_INJ01'
+ 
+1
+
+                                     G E M   T I M E   S T E P   S U M M A R Y
+                                                    Caprock Sens
+                                                      ML_CASE
+ ====================================================================================================================
+     Time Step            Time                            Maximum Changes                       Mat  Cum    Solver
+ ----------------- ----------------- ---------------------------------------------------------  Bal  time -----------
+       Size Newton                        Pressure         Saturation         Composition       Err  step Iter/   Cum
+ No.   days  cycls  Days     Date      Block     kpa     Block   Fraction   Block    Fraction    %   cuts  Cycl  Fail
+ ----  ------ ---- ------ ---------- --------- ------ --------- --------- --------- ---------- ----- ---- ----- -----
+   13  22.79    1  81.79  2030.03.23    5,5,1  1.374     5,5,1  5.6e-4(g)    1,1,1        ( 1) 47e-4    0   2.0    0
+   14w 8.206    1  90.00  2030.04.01    5,5,1  363.5     5,5,1  -57e-3(w)    1,1,1        ( 1) .1155    0   4.0    0
+ 
+ ***********************************************************************************************************************************
+ TIME:  90.000 days                               G E M   F I E L D  S U M M A R Y                                DATE: 2030:APR:01 
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+                                 +                     ++                     +
+                                 +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------++---------------------+
+                                 + No.       Name      ++ No.       Name      +
+                                 +---- ----------------++---- ----------------+
+                                 +   1     CO2_INJ01   ++   1       Field     +
+ --------------------------------+---------------------++---------------------+
+ Well parameters                 +                     ++                     +
+   Well Type                     +   Mob Wtd Gas Inj   ++                     +
+   Status                        +          BHP        ++                     +
+   On-time fraction              +          1.0        ++                     +
+   Cumulative Open days          +          90         ++          90         +
+ Well Pressures                  +                     ++                     +
+   Bottom Hole     kPa           +        21000        ++                     +
+   Grid Block      kPa           +        20749        ++                     +
+   Drawdown        kPa           +        251.03       ++                     +
+   Ref Layer Head  kPa           +          0          ++                     +
+   Tubing Head     kPa           +                     ++                     +
+ Mobility Weighted Pressures     +                     ++                     +
+   P-P(0)          kPa           +        292.82       ++                     +
+   Block Pressure  kPa           +        20753        ++                     +
+   Datum Pressure  kPa           +        21074        ++                     +
+ Inst Surface Injection Rates    +                     ++                     +
+   Water            m3/day       +          0          ++          0          +
+   Gas             M m3/day      +        241.02       ++        241.02       +
+ Surface cumulative injection    +                     ++                     +
+   Well Open Time  days          +          90         ++          90         +
+   Water           M m3          +          0          ++          0          +
+   Gas             MM m3         +        38.221       ++        38.221       +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+          ***************************************************************************
+          *  Well Summary at Reservoir Conditions at 9.0000E+01 days (2030 APR. 01) *
+          ***************************************************************************
+
+
+  Well                                        BHP       Oil Rate     Gas Rate   Water Rate   O-G-W Rate   BHP-Pblock
+   No.    Name       Type      Block          kpa         m3 /d        m3 /d       m3 /d       m3 /d        kpa
+  ----  --------   -------    -------    ----------   ----------   ----------   ----------   ----------   ----------
+    1   CO2_INJ0      BHP         5,5,1    2.1000E+04   0.0000E+00   2.2153E+02   0.0000E+00   2.2153E+02   2.5103E+02
+                                  5,5,2    2.1304E+04   0.0000E+00   3.1745E+02   0.0000E+00   3.1745E+02   3.0642E+02
+                                  5,5,3    2.1611E+04   0.0000E+00   1.9115E+02   0.0000E+00   1.9115E+02   1.8448E+02
+                               Total                  0.0000E+00   7.3013E+02   0.0000E+00   7.3013E+02
+    2   PRD       SHUT IN WELL
+
+  Cumulative Field Total at Reservoir Conditions for Components........................................
+
+  Comp          Cum Inj       Cum Prod        Accum      Acc/(Inj-Pro)      Recovery        Error
+                 gmole          gmole         gmole                               %     mol in place,%
+  --------    -----------    -----------    -----------    -----------    -----------    -----------
+  CO2         1.62321E+09    0.00000E+00    1.61571E+09    9.95378E-01    0.00000E+00   -4.62164E-01
+  CH4         0.00000E+00    0.00000E+00   -1.97691E-06    1.00000E+00    0.00000E+00   -6.45371E-13
+  CO2_T       0.00000E+00    0.00000E+00    0.00000E+00    1.00000E+00    0.00000E+00    0.00000E+00
+  H2O         0.00000E+00    0.00000E+00   -1.56416E+06    1.00000E+00    0.00000E+00   -7.13995E-08
+
+
+  Total Cum Inj, mol  =  1.62321E+09             Ave. Acc/(Inj-Pro)         =  9.98845E-01
+  Total Cum Prod, mol =  0.00000E+00             Ave. Error, % mol in place =  1.15541E-01
+  Total Accum, mol    =  1.61415E+09
+
+          CO2 Storage Amounts in Reservoir           Moles         kg 
+              Gaseous Phase                     = 0.00000E+00   0.00000E+00
+              Liquid Phase                      = 0.00000E+00   0.00000E+00
+              Supercritical Phase               = 3.23169E+08   1.42227E+07
+              Trapped Sg < Sgc / Hysteresis     = 5.37780E+02   2.36677E+01
+              Dissolved in Water                = 1.29254E+09   5.68848E+07
+
+  Mole Percent Hydrocarbon Recovered: Total-HC-Prod/Total-HC-Orginally-In-Place =     0.0000
+
+  Field Total Prod/Inj Summary at Reservoir Conditions for Phases.......................................
+
+                   Inj            Prod         Cum Inj        Cum Prod       Cum Inj        Cum Prod
+  Phase           m3 /d          m3 /d           m3             m3         % Pore Vol     % Pore Vol
+  -----          ------         ------         -------        --------     ----------     ----------
+  Oil         0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+  Gas         7.30129E+02    0.00000E+00    1.16964E+05    0.00000E+00    3.04077E-04    0.00000E+00
+  O+G         7.30129E+02    0.00000E+00    1.16964E+05    0.00000E+00    3.04077E-04    0.00000E+00
+  Water       0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+
+  Surface Well Stream Compositions and Molar Rates at 9.0000E+01 days (2030 APR. 01)...............................
+
+  Well   1 'CO2_INJ01'  Hydrocarbon Injector Stream Compositions :
+
+                            Injected 
+                              fluid
+                            ---------
+                  CO2        100.0000
+                  CH4          0.0000
+                  CO2_T        0.0000
+                            ---------
+ Mol wt, kg/gmol               0.0440
+ Surface Density, gmol/ m3    42.4694
+ Surface Density, kg/ m3       1.8691
+ Heating value, kJ/gmol        0.0000
+
+                 ****Stream Molar and Mass Rates****
+
+                 Injected Hydrocarbon
+              ---------------------
+     Well         moles/d       kg /d
+  ----------  ------------ ------------
+  1 CO2_INJ0   1.0236E+07   4.5049E+05
+
+
+ ...............................................................................................................
+  Total from All Separators
+
+ Stream          Cum Inj        Cum Prod
+  -----          -------        --------
+  Oil         0.00000E+00    0.00000E+00      m3 
+  Gas         3.82208E+07    0.00000E+00      m3 
+ Wet Gas      0.00000E+00    0.00000E+00      m3 
+  Water       0.00000E+00    0.00000E+00      m3 
+
+                 Inj Rate      Prod Rate
+  Phase           moles/d        moles/d
+  -----       -----------    -----------
+  Oil         0.00000E+00    0.00000E+00
+  Gas         1.02361E+07    0.00000E+00
+ Wet Gas      0.00000E+00    0.00000E+00
+  Water       0.00000E+00    0.00000E+00
+
+ Compositions (mole fractions) of Total Field Produced and Injected Streams:
+
+                        Oil                           Gas                          Wet Gas
+ Component    Produced       Injected       Produced       Injected       Produced       Injected
+ ---------    --------       --------       --------       --------       --------       --------
+      CO2    0.00000E+00   0.00000E+00     0.00000E+00   1.00000E+00     0.00000E+00   0.00000E+00
+      CH4    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+    CO2_T    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+1
+ ***********************************************************************************************************************************
+ TIME: 90      days                              G E M   S E C T O R   S U M M A R Y                              DATE: 2030:04:01  
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+ 
+                               SECTOR-1                                                                                             
+                               FIELD                                                                                                
+                                                                                                                                    
+ Bulk Volume
+   Total Bulk Volume.  M m3    1.92294E+8                                                                                           
+ Pore Volumes
+   Total Pore Volume.  M m3    3.84653E+7                                                                                           
+   HC. Pore Volume     M m3    61.76                                                                                                
+ Originally in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+ Currently in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    45.29                                                                                                
+   Water at Surface    M m3    3.9433E+7                                                                                            
+   Reservoir Oil       M m3    0                                                                                                    
+   Reservoir Free Gas  M m3    61.76                                                                                                
+   Reservoir Water     M m3    3.84652E+7                                                                                           
+   Cum Water Influx    M m3    0                                                                                                    
+ Average Pressures
+   Total PV Ave.       kpa     20758                                                                                                
+   HC PV Ave.          kpa     20755                                                                                                
+   PV Ave. Datum P     kpa     20758                                                                                                
+   HC PV Ave. Datum P  kpa     20755                                                                                                
+ Average Temperature
+   Bulk Vol Ave.      degC     75                                                                                                   
+ Ave. Saturations
+   Oil                         0                                                                                                    
+   Gas                         1.60561E-6                                                                                           
+   Water                       1                                                                                                    
+ Percentage Recovery 
+   Stock Tank Oil              100                                                                                                  
+   Gas at Surface              -528                                                                                                 
+   Water                       0                                                                                                    
+ Cumulative Injection 
+   Solvent         MM m3       38.221                                                                                               
+   Water            M m3       0                                                                                                    
+ Cumulative Production 
+   Oil              M m3       0                                                                                                    
+   Gas             MM m3       0                                                                                                    
+   Water            M m3       0                                                                                                    
+   Wet Gas         MM m3       0                                                                                                    
+ Injection Rate 
+   Gas             MM m3/day   0.24102                                                                                              
+   Water            M m3/day   0                                                                                                    
+ Production Rate 
+   Oil              M m3/day   0                                                                                                    
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   0                                                                                                    
+   Wet Gas         MM m3/day   0                                                                                                    
+ 
+ ...............................................................................................................
+ Percent by Std Vol of Original Oil in Place Recovered (RECO) =  0.000     (TotalOilProduction/OOIP)
+ Percent by Std Vol of Original Gas in Place Recovered (RECG) =  0.000     (TotalGasProduction/OGIP)
+ Percent Hydrocarbon Pore Volume Injected            (HCPVIN) =  304.1    
+ ...............................................................................................................
+
+    *** Avg. degree of implicitness: 3/243 = 0.0123
+
+ CPU Report: Current Date and Time: 2025-Mar-09   19:03:34      Elapsed Time (secs):       0.40
+ CPU Report:  At(days); YYYY/MMMM/Dy/Hr/Min/Sec; TS number; Elapsed Time; ElT-sec/sim-day %Implicit Totit  Nsolit  Mem(MB)   ECT(sec)
+ CPU Report:  9.0000E+01 2030 APR. 01: 00 00 00        14    4.0200E-01    4.5161E-04       1.23       15      32       42   2.7548E-02
+ CPU Report:                                                CPU seconds;  CPU-sec/sim-day           Nrep1  Mtfail    
+ CPU Report:                                                 2.3438E-01    5.0403E-04                   0       0
+ DIM Report: TS:     14  MDPTCN        MDV      MDBET        MDALD       MDALP      MDSOL         MDDD        MDLU MDNOR    NACTV
+ DIM Report: Max:           594        192       1343         6203        6558        246          177         961   101
+ DIM Report: Used:          594        127       1217         6077        6308        245          147         790            243
+ DATE 2030   4  1
+ 
+ *OPEN  'PRD'
+ 
+1
+
+                                     G E M   T I M E   S T E P   S U M M A R Y
+                                                    Caprock Sens
+                                                      ML_CASE
+ ====================================================================================================================
+     Time Step            Time                            Maximum Changes                       Mat  Cum    Solver
+ ----------------- ----------------- ---------------------------------------------------------  Bal  time -----------
+       Size Newton                        Pressure         Saturation         Composition       Err  step Iter/   Cum
+ No.   days  cycls  Days     Date      Block     kpa     Block   Fraction   Block    Fraction    %   cuts  Cycl  Fail
+ ----  ------ ---- ------ ---------- --------- ------ --------- --------- --------- ---------- ----- ---- ----- -----
+   15  13.56    2  103.6  2030.04.14    1,2,1  -497      5,5,2  -39e-3(w)    1,1,1        ( 1) .1093    0   3.0    0
+   16w 16.44    1  120.0  2030.05.01    1,2,1  -489      5,5,1  1.7e-2(g)    1,1,1        ( 1) 84e-3    0   3.0    0
+ 
+ ***********************************************************************************************************************************
+ TIME:  120.00 days                               G E M   F I E L D  S U M M A R Y                                DATE: 2030:MAY:01 
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+                                 +                     +                     ++                     +
+                                 +         WELL        +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------+---------------------++---------------------+
+                                 + No.       Name      + No.       Name      ++ No.       Name      +
+                                 +---- ----------------+---- ----------------++---- ----------------+
+                                 +   1     CO2_INJ01   +   2        PRD      ++   1       Field     +
+ --------------------------------+---------------------+---------------------++---------------------+
+ Well parameters                 +                     +                     ++                     +
+   Well Type                     +   Mob Wtd Gas Inj   +       Producer      ++                     +
+   Status                        +          BHP        +          BHP        ++                     +
+   On-time fraction              +          1.0        +          1.0        ++                     +
+   Cumulative Open days          +         120         +          30         ++         150         +
+ Well Pressures                  +                     +                     ++                     +
+   Bottom Hole     kPa           +        21000        +        10000        ++                     +
+   Grid Block      kPa           +        20463        +        19267        ++                     +
+   Drawdown        kPa           +        536.6        +        9266.7       ++                     +
+   Ref Layer Head  kPa           +          0          +          0          ++                     +
+   Tubing Head     kPa           +                     +                     ++                     +
+ Mobility Weighted Pressures     +                     +                     ++                     +
+   P-P(0)          kPa           +        158.09       +        -983.7       ++                     +
+   Block Pressure  kPa           +        20622        +        19243        ++                     +
+   Datum Pressure  kPa           +        20949        +        19771        ++                     +
+ Inst Surface Production Rates   +                     +                     ++                     +
+   Oil              m3/day       +          0          +          0          ++          0          +
+   Water            m3/day       +          0          +        29478        ++        29478        +
+   Gas             M m3/day      +          0          +      6.51785E-8     ++      6.51785E-8     +
+   Wet Gas         M m3/day      +          0          +      6.53423E-8     ++      6.53423E-8     +
+ Surface Production Rate Ratios  +                     +                     ++                     +
+   GOR              m3/ m3       +          0          +          0          ++          0          +
+   WCUT            Percent       +          0          +         100         ++         100         +
+   WGR              m3/MM m3     +          0          +      4.5226E+14     ++      4.5226E+14     +
+   WWGR             m3/MM m3     +          0          +      4.5113E+14     ++      4.5113E+14     +
+   GWGR             m3/ m3       +          0          +       0.99749       ++       0.99749       +
+ Surface cumulative production   +                     +                     ++                     +
+   Well Open Time  days          +          0          +          30         ++          30         +
+   Oil             M m3          +          0          +          0          ++          0          +
+   Water           M m3          +          0          +        905.16       ++        905.16       +
+   Gas             MM m3         +          0          +      1.96862E-9     ++      1.96862E-9     +
+   Wet Gas         MM m3         +          0          +      1.97357E-9     ++      1.97357E-9     +
+ Inst Surface Injection Rates    +                     +                     ++                     +
+   Water            m3/day       +          0          +          0          ++          0          +
+   Gas             M m3/day      +        341.91       +          0          ++        341.91       +
+ Surface cumulative injection    +                     +                     ++                     +
+   Well Open Time  days          +         120         +          0          ++         120         +
+   Water           M m3          +          0          +          0          ++          0          +
+   Gas             MM m3         +        47.727       +          0          ++        47.727       +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+          ***************************************************************************
+          *  Well Summary at Reservoir Conditions at 1.2000E+02 days (2030 MAY. 01) *
+          ***************************************************************************
+
+
+  Well                                        BHP       Oil Rate     Gas Rate   Water Rate   O-G-W Rate   BHP-Pblock
+   No.    Name       Type      Block          kpa         m3 /d        m3 /d       m3 /d       m3 /d        kpa
+  ----  --------   -------    -------    ----------   ----------   ----------   ----------   ----------   ----------
+    1   CO2_INJ0      BHP         5,5,1    2.1000E+04   0.0000E+00   4.4753E+02   0.0000E+00   4.4753E+02   5.3660E+02
+                                  5,5,2    2.1304E+04   0.0000E+00   3.3884E+02   0.0000E+00   3.3884E+02   3.8003E+02
+                                  5,5,3    2.1611E+04   0.0000E+00   2.5681E+02   0.0000E+00   2.5681E+02   2.4784E+02
+                               Total                  0.0000E+00   1.0432E+03   0.0000E+00   1.0432E+03
+    2   PRD           BHP         1,2,1    1.0000E+04   0.0000E+00  -1.2316E-07  -9.6157E+03  -9.6157E+03  -9.2667E+03
+                                  1,2,2    1.0543E+04   0.0000E+00  -1.2065E-07  -9.5734E+03  -9.5734E+03  -9.2291E+03
+                                  1,2,3    1.1039E+04   0.0000E+00  -1.1882E-07  -9.5758E+03  -9.5758E+03  -9.2345E+03
+                               Total                  0.0000E+00  -3.6263E-07  -2.8765E+04  -2.8765E+04
+
+  Cumulative Field Total at Reservoir Conditions for Components........................................
+
+  Comp          Cum Inj       Cum Prod        Accum      Acc/(Inj-Pro)      Recovery        Error
+                 gmole          gmole         gmole                               %     mol in place,%
+  --------    -----------    -----------    -----------    -----------    -----------    -----------
+  CO2         2.02694E+09    1.43724E-18    2.02005E+09    9.96602E-01    0.00000E+00   -3.39791E-01
+  CH4         0.00000E+00    8.33029E-02   -1.01577E-01    1.21937E+00    2.71946E-08   -5.96564E-09
+  CO2_T       0.00000E+00    0.00000E+00    0.00000E+00    1.00000E+00    0.00000E+00    0.00000E+00
+  H2O         0.00000E+00    5.02864E+10   -5.02852E+10    9.99976E-01    2.29543E-03    5.55956E-08
+
+
+  Total Cum Inj, mol  =  2.02694E+09             Ave. Acc/(Inj-Pro)         =  1.05399E+00
+  Total Cum Prod, mol =  5.02864E+10             Ave. Error, % mol in place =  8.49478E-02
+  Total Accum, mol    = -4.82651E+10
+
+          CO2 Storage Amounts in Reservoir           Moles         kg 
+              Gaseous Phase                     = 0.00000E+00   0.00000E+00
+              Liquid Phase                      = 0.00000E+00   0.00000E+00
+              Supercritical Phase               = 8.03502E+08   3.53621E+07
+              Trapped Sg < Sgc / Hysteresis     = 7.56194E+02   3.32801E+01
+              Dissolved in Water                = 1.21655E+09   5.35402E+07
+
+  Mole Percent Hydrocarbon Recovered: Total-HC-Prod/Total-HC-Orginally-In-Place =     0.0000
+
+  Field Total Prod/Inj Summary at Reservoir Conditions for Phases.......................................
+
+                   Inj            Prod         Cum Inj        Cum Prod       Cum Inj        Cum Prod
+  Phase           m3 /d          m3 /d           m3             m3         % Pore Vol     % Pore Vol
+  -----          ------         ------         -------        --------     ----------     ----------
+  Oil         0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+  Gas         1.04318E+03   -3.62634E-07    1.45950E+05   -1.08388E-05    3.79433E-04    2.81783E-14
+  O+G         1.04318E+03   -3.62634E-07    1.45950E+05   -1.08388E-05    3.79433E-04    2.81783E-14
+  Water       0.00000E+00   -2.87649E+04    0.00000E+00   -8.83196E+05    0.00000E+00    2.29609E-03
+
+  Surface Well Stream Compositions and Molar Rates at 1.2000E+02 days (2030 MAY. 01)...............................
+
+  Well   1 'CO2_INJ01'  Hydrocarbon Injector Stream Compositions :
+
+                            Injected 
+                              fluid
+                            ---------
+                  CO2        100.0000
+                  CH4          0.0000
+                  CO2_T        0.0000
+                            ---------
+ Mol wt, kg/gmol               0.0440
+ Surface Density, gmol/ m3    42.4694
+ Surface Density, kg/ m3       1.8691
+ Heating value, kJ/gmol        0.0000
+
+                 ****Stream Molar and Mass Rates****
+
+                 Injected Hydrocarbon
+              ---------------------
+     Well         moles/d       kg /d
+  ----------  ------------ ------------
+  1 CO2_INJ0   1.4521E+07   6.3906E+05
+
+  Well   2 'PRD'  Producer Stream Compositions :
+
+                Reservoir   Separator   Separator   Separator
+                  fluid         oil        WTG         gas     
+                ---------   ---------   ---------   ---------
+      CO2          0.0000      0.0000      0.0000      0.0000
+      CH4        100.0000      0.0000    100.0000    100.0000
+      CO2_T        0.0000      0.0000      0.0000      0.0000
+                ---------   ---------   ---------   ---------
+ Mol frc of well   1.0000      0.0000      1.0000      1.0000
+ Mol wt, kg/gmol   0.0160      0.0000      0.0160      0.0160
+ Density, gmol/ m3             0.0000     42.2093     42.3154
+ Density, kg/ m3               0.0000      0.6772      0.6789
+ Heat vl, kJ/gmol              0.0000    212.7580    212.7580
+
+                 ****Stream Molar and Mass Rates****
+
+                Oil Rates        Gas Rates        Wet Gas Rates    O+G Rates        Water Rates      O+G+W Rates
+              ---------------  ---------------  ---------------  ---------------  ---------------  ---------------
+     Well     moles/d  kg /d   moles/d  kg /d   moles/d  kg /d   moles/d  kg /d   moles/d  kg /d   moles/d  kg /d
+  ----------  ------- -------  ------- -------  ------- -------  ------- -------  ------- -------  ------- -------
+  2 PRD       0       0        -2.8e-3 -4.4e-5  -2.8e-3 -4.4e-5  -2.8e-3 -4.4e-5  -1.64e9 -2.95e7  -1.64e9 -2.95e7
+
+
+ ...............................................................................................................
+  Total from All Separators
+
+ Stream          Cum Inj        Cum Prod
+  -----          -------        --------
+  Oil         0.00000E+00    0.00000E+00      m3 
+  Gas         4.77270E+07    1.96862E-03      m3 
+ Wet Gas      0.00000E+00    1.97357E-03      m3 
+  Water       0.00000E+00    9.05155E+05      m3 
+
+                 Inj Rate      Prod Rate
+  Phase           moles/d        moles/d
+  -----       -----------    -----------
+  Oil         0.00000E+00    0.00000E+00
+  Gas         1.45207E+07    2.75805E-03
+ Wet Gas      0.00000E+00    2.75805E-03
+  Water       0.00000E+00    1.63764E+09
+
+ Compositions (mole fractions) of Total Field Produced and Injected Streams:
+
+                        Oil                           Gas                          Wet Gas
+ Component    Produced       Injected       Produced       Injected       Produced       Injected
+ ---------    --------       --------       --------       --------       --------       --------
+      CO2    0.00000E+00   0.00000E+00     3.16992E-17   1.00000E+00     3.16992E-17   0.00000E+00
+      CH4    0.00000E+00   0.00000E+00     1.00000E+00   0.00000E+00     1.00000E+00   0.00000E+00
+    CO2_T    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+1
+ ***********************************************************************************************************************************
+ TIME: 120     days                              G E M   S E C T O R   S U M M A R Y                              DATE: 2030:05:01  
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+ 
+                               SECTOR-1                                                                                             
+                               FIELD                                                                                                
+                                                                                                                                    
+ Bulk Volume
+   Total Bulk Volume.  M m3    1.92294E+8                                                                                           
+ Pore Volumes
+   Total Pore Volume.  M m3    3.8465E+7                                                                                            
+   HC. Pore Volume     M m3    96.666                                                                                               
+ Originally in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+ Currently in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    54.813                                                                                               
+   Water at Surface    M m3    3.94321E+7                                                                                           
+   Reservoir Oil       M m3    0                                                                                                    
+   Reservoir Free Gas  M m3    96.666                                                                                               
+   Reservoir Water     M m3    3.84649E+7                                                                                           
+   Cum Water Influx    M m3    0                                                                                                    
+ Average Pressures
+   Total PV Ave.       kpa     20721                                                                                                
+   HC PV Ave.          kpa     20667                                                                                                
+   PV Ave. Datum P     kpa     20721                                                                                                
+   HC PV Ave. Datum P  kpa     20667                                                                                                
+ Average Temperature
+   Bulk Vol Ave.      degC     75                                                                                                   
+ Ave. Saturations
+   Oil                         0                                                                                                    
+   Gas                         2.5131E-6                                                                                            
+   Water                       1                                                                                                    
+ Percentage Recovery 
+   Stock Tank Oil              100                                                                                                  
+   Gas at Surface              -659.3                                                                                               
+   Water                       2.29543E-3                                                                                           
+ Cumulative Injection 
+   Solvent         MM m3       47.727                                                                                               
+   Water            M m3       0                                                                                                    
+ Cumulative Production 
+   Oil              M m3       0                                                                                                    
+   Gas             MM m3       1.96862E-9                                                                                           
+   Water            M m3       905.16                                                                                               
+   Wet Gas         MM m3       1.97357E-9                                                                                           
+ Injection Rate 
+   Gas             MM m3/day   0.34191                                                                                              
+   Water            M m3/day   0                                                                                                    
+ Production Rate 
+   Oil              M m3/day   0                                                                                                    
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   29.478                                                                                               
+   Wet Gas         MM m3/day   0                                                                                                    
+ 
+ ...............................................................................................................
+ Percent by Std Vol of Original Oil in Place Recovered (RECO) =  0.000     (TotalOilProduction/OOIP)
+ Percent by Std Vol of Original Gas in Place Recovered (RECG) = 0.2719E-07 (TotalGasProduction/OGIP)
+ Percent Hydrocarbon Pore Volume Injected            (HCPVIN) =  379.4    
+ ...............................................................................................................
+
+    *** Avg. degree of implicitness: 6/243 = 0.0247
+
+ CPU Report: Current Date and Time: 2025-Mar-09   19:03:34      Elapsed Time (secs):       0.42
+ CPU Report:  At(days); YYYY/MMMM/Dy/Hr/Min/Sec; TS number; Elapsed Time; ElT-sec/sim-day %Implicit Totit  Nsolit  Mem(MB)   ECT(sec)
+ CPU Report:  1.2000E+02 2030 MAY. 01: 00 00 00        16    4.1900E-01    5.6667E-04       2.47       18      41       42   1.7567E-02
+ CPU Report:                                                CPU seconds;  CPU-sec/sim-day           Nrep1  Mtfail    
+ CPU Report:                                                 2.5000E-01    5.2083E-04                   0       0
+ DIM Report: TS:     16  MDPTCN        MDV      MDBET        MDALD       MDALP      MDSOL         MDDD        MDLU MDNOR    NACTV
+ DIM Report: Max:           594        192       1343         6203        7056        246          254        1219   101
+ DIM Report: Used:          594        135       1217         6077        6580        245          195         878            243
+ DATE 2030   5  1
+1
+
+                                     G E M   T I M E   S T E P   S U M M A R Y
+                                                    Caprock Sens
+                                                      ML_CASE
+ ====================================================================================================================
+     Time Step            Time                            Maximum Changes                       Mat  Cum    Solver
+ ----------------- ----------------- ---------------------------------------------------------  Bal  time -----------
+       Size Newton                        Pressure         Saturation         Composition       Err  step Iter/   Cum
+ No.   days  cycls  Days     Date      Block     kpa     Block   Fraction   Block    Fraction    %   cuts  Cycl  Fail
+ ----  ------ ---- ------ ---------- --------- ------ --------- --------- --------- ---------- ----- ---- ----- -----
+   17w 31.00    1  151.0  2030.06.01    1,2,1  -656      5,5,1  -29e-3(w)    1,1,1        ( 1) .1019    0   3.0    0
+ 
+ ***********************************************************************************************************************************
+ TIME:  151.00 days                               G E M   F I E L D  S U M M A R Y                                DATE: 2030:JUN:01 
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+                                 +                     +                     ++                     +
+                                 +         WELL        +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------+---------------------++---------------------+
+                                 + No.       Name      + No.       Name      ++ No.       Name      +
+                                 +---- ----------------+---- ----------------++---- ----------------+
+                                 +   1     CO2_INJ01   +   2        PRD      ++   1       Field     +
+ --------------------------------+---------------------+---------------------++---------------------+
+ Well parameters                 +                     +                     ++                     +
+   Well Type                     +   Mob Wtd Gas Inj   +       Producer      ++                     +
+   Status                        +          BHP        +          BHP        ++                     +
+   On-time fraction              +          1.0        +          1.0        ++                     +
+   Cumulative Open days          +         151         +          61         ++         212         +
+ Well Pressures                  +                     +                     ++                     +
+   Bottom Hole     kPa           +        21000        +        10000        ++                     +
+   Grid Block      kPa           +        20451        +        18611        ++                     +
+   Drawdown        kPa           +        549.36       +        8610.6       ++                     +
+   Ref Layer Head  kPa           +          0          +          0          ++                     +
+   Tubing Head     kPa           +                     +                     ++                     +
+ Mobility Weighted Pressures     +                     +                     ++                     +
+   P-P(0)          kPa           +        141.36       +        -1640        ++                     +
+   Block Pressure  kPa           +        20606        +        18592        ++                     +
+   Datum Pressure  kPa           +        20934        +        19115        ++                     +
+ Inst Surface Production Rates   +                     +                     ++                     +
+   Oil              m3/day       +          0          +          0          ++          0          +
+   Water            m3/day       +          0          +        27405        ++        27405        +
+   Gas             M m3/day      +          0          +      6.36655E-8     ++      6.36655E-8     +
+   Wet Gas         M m3/day      +          0          +      6.38255E-8     ++      6.38255E-8     +
+ Surface Production Rate Ratios  +                     +                     ++                     +
+   GOR              m3/ m3       +          0          +          0          ++          0          +
+   WCUT            Percent       +          0          +         100         ++         100         +
+   WGR              m3/MM m3     +          0          +      4.3046E+14     ++      4.3046E+14     +
+   WWGR             m3/MM m3     +          0          +      4.2938E+14     ++      4.2938E+14     +
+   GWGR             m3/ m3       +          0          +       0.99749       ++       0.99749       +
+ Surface cumulative production   +                     +                     ++                     +
+   Well Open Time  days          +          0          +          61         ++          61         +
+   Oil             M m3          +          0          +          0          ++          0          +
+   Water           M m3          +          0          +        1754.7       ++        1754.7       +
+   Gas             MM m3         +          0          +      3.94225E-9     ++      3.94225E-9     +
+   Wet Gas         MM m3         +          0          +      3.95216E-9     ++      3.95216E-9     +
+ Inst Surface Injection Rates    +                     +                     ++                     +
+   Water            m3/day       +          0          +          0          ++          0          +
+   Gas             M m3/day      +        348.38       +          0          ++        348.38       +
+ Surface cumulative injection    +                     +                     ++                     +
+   Well Open Time  days          +         151         +          0          ++         151         +
+   Water           M m3          +          0          +          0          ++          0          +
+   Gas             MM m3         +        58.527       +          0          ++        58.527       +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+          ***************************************************************************
+          *  Well Summary at Reservoir Conditions at 1.5100E+02 days (2030 JUNE 01) *
+          ***************************************************************************
+
+
+  Well                                        BHP       Oil Rate     Gas Rate   Water Rate   O-G-W Rate   BHP-Pblock
+   No.    Name       Type      Block          kpa         m3 /d        m3 /d       m3 /d       m3 /d        kpa
+  ----  --------   -------    -------    ----------   ----------   ----------   ----------   ----------   ----------
+    1   CO2_INJ0      BHP         5,5,1    2.1000E+04   0.0000E+00   4.5171E+02   0.0000E+00   4.5171E+02   5.4936E+02
+                                  5,5,2    2.1304E+04   0.0000E+00   3.3835E+02   0.0000E+00   3.3835E+02   3.9868E+02
+                                  5,5,3    2.1611E+04   0.0000E+00   2.7320E+02   0.0000E+00   2.7320E+02   2.6541E+02
+                               Total                  0.0000E+00   1.0633E+03   0.0000E+00   1.0633E+03
+    2   PRD           BHP         1,2,1    1.0000E+04   0.0000E+00  -1.2447E-07  -8.9388E+03  -8.9388E+03  -8.6106E+03
+                                  1,2,2    1.0537E+04   0.0000E+00  -1.2171E-07  -8.9035E+03  -8.9035E+03  -8.5794E+03
+                                  1,2,3    1.1032E+04   0.0000E+00  -1.1963E-07  -8.9072E+03  -8.9072E+03  -8.5860E+03
+                               Total                  0.0000E+00  -3.6582E-07  -2.6750E+04  -2.6750E+04
+
+  Cumulative Field Total at Reservoir Conditions for Components........................................
+
+  Comp          Cum Inj       Cum Prod        Accum      Acc/(Inj-Pro)      Recovery        Error
+                 gmole          gmole         gmole                               %     mol in place,%
+  --------    -----------    -----------    -----------    -----------    -----------    -----------
+  CO2         2.48559E+09    3.54113E-15    2.47546E+09    9.95925E-01    0.00000E+00   -4.07513E-01
+  CH4         0.00000E+00    1.66818E-01   -1.86609E-01    1.11864E+00    5.44584E-08   -6.46103E-09
+  CO2_T       0.00000E+00    0.00000E+00    0.00000E+00    1.00000E+00    0.00000E+00    0.00000E+00
+  H2O         0.00000E+00    9.74846E+10   -9.74653E+10    9.99802E-01    4.44989E-03    8.83103E-07
+
+
+  Total Cum Inj, mol  =  2.48559E+09             Ave. Acc/(Inj-Pro)         =  1.02859E+00
+  Total Cum Prod, mol =  9.74846E+10             Ave. Error, % mol in place =  1.01878E-01
+  Total Accum, mol    = -9.49898E+10
+
+          CO2 Storage Amounts in Reservoir           Moles         kg 
+              Gaseous Phase                     = 0.00000E+00   0.00000E+00
+              Liquid Phase                      = 0.00000E+00   0.00000E+00
+              Supercritical Phase               = 1.11206E+09   4.89418E+07
+              Trapped Sg < Sgc / Hysteresis     = 1.19990E+03   5.28074E+01
+              Dissolved in Water                = 1.36340E+09   6.00033E+07
+
+  Mole Percent Hydrocarbon Recovered: Total-HC-Prod/Total-HC-Orginally-In-Place =     0.0000
+
+  Field Total Prod/Inj Summary at Reservoir Conditions for Phases.......................................
+
+                   Inj            Prod         Cum Inj        Cum Prod       Cum Inj        Cum Prod
+  Phase           m3 /d          m3 /d           m3             m3         % Pore Vol     % Pore Vol
+  -----          ------         ------         -------        --------     ----------     ----------
+  Oil         0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00    0.00000E+00
+  Gas         1.06326E+03   -3.65817E-07    1.78911E+05   -2.21792E-05    4.65123E-04    5.76602E-14
+  O+G         1.06326E+03   -3.65817E-07    1.78911E+05   -2.21792E-05    4.65123E-04    5.76602E-14
+  Water       0.00000E+00   -2.67495E+04    0.00000E+00   -1.71243E+06    0.00000E+00    4.45189E-03
+
+  Surface Well Stream Compositions and Molar Rates at 1.5100E+02 days (2030 JUNE 01)...............................
+
+  Well   1 'CO2_INJ01'  Hydrocarbon Injector Stream Compositions :
+
+                            Injected 
+                              fluid
+                            ---------
+                  CO2        100.0000
+                  CH4          0.0000
+                  CO2_T        0.0000
+                            ---------
+ Mol wt, kg/gmol               0.0440
+ Surface Density, gmol/ m3    42.4694
+ Surface Density, kg/ m3       1.8691
+ Heating value, kJ/gmol        0.0000
+
+                 ****Stream Molar and Mass Rates****
+
+                 Injected Hydrocarbon
+              ---------------------
+     Well         moles/d       kg /d
+  ----------  ------------ ------------
+  1 CO2_INJ0   1.4795E+07   6.5114E+05
+
+  Well   2 'PRD'  Producer Stream Compositions :
+
+                Reservoir   Separator   Separator   Separator
+                  fluid         oil        WTG         gas     
+                ---------   ---------   ---------   ---------
+      CO2          0.0000      0.0000      0.0000      0.0000
+      CH4        100.0000      0.0000    100.0000    100.0000
+      CO2_T        0.0000      0.0000      0.0000      0.0000
+                ---------   ---------   ---------   ---------
+ Mol frc of well   1.0000      0.0000      1.0000      1.0000
+ Mol wt, kg/gmol   0.0160      0.0000      0.0160      0.0160
+ Density, gmol/ m3             0.0000     42.2093     42.3154
+ Density, kg/ m3               0.0000      0.6772      0.6789
+ Heat vl, kJ/gmol              0.0000    212.7580    212.7580
+
+                 ****Stream Molar and Mass Rates****
+
+                Oil Rates        Gas Rates        Wet Gas Rates    O+G Rates        Water Rates      O+G+W Rates
+              ---------------  ---------------  ---------------  ---------------  ---------------  ---------------
+     Well     moles/d  kg /d   moles/d  kg /d   moles/d  kg /d   moles/d  kg /d   moles/d  kg /d   moles/d  kg /d
+  ----------  ------- -------  ------- -------  ------- -------  ------- -------  ------- -------  ------- -------
+  2 PRD       0       0        -2.7e-3 -4.3e-5  -2.7e-3 -4.3e-5  -2.7e-3 -4.3e-5  -1.52e9 -2.74e7  -1.52e9 -2.74e7
+
+
+ ...............................................................................................................
+  Total from All Separators
+
+ Stream          Cum Inj        Cum Prod
+  -----          -------        --------
+  Oil         0.00000E+00    0.00000E+00      m3 
+  Gas         5.85267E+07    3.94225E-03      m3 
+ Wet Gas      0.00000E+00    3.95216E-03      m3 
+  Water       0.00000E+00    1.75472E+06      m3 
+
+                 Inj Rate      Prod Rate
+  Phase           moles/d        moles/d
+  -----       -----------    -----------
+  Oil         0.00000E+00    0.00000E+00
+  Gas         1.47954E+07    2.69403E-03
+ Wet Gas      0.00000E+00    2.69403E-03
+  Water       0.00000E+00    1.52252E+09
+
+ Compositions (mole fractions) of Total Field Produced and Injected Streams:
+
+                        Oil                           Gas                          Wet Gas
+ Component    Produced       Injected       Produced       Injected       Produced       Injected
+ ---------    --------       --------       --------       --------       --------       --------
+      CO2    0.00000E+00   0.00000E+00     4.23839E-14   1.00000E+00     4.23839E-14   0.00000E+00
+      CH4    0.00000E+00   0.00000E+00     1.00000E+00   0.00000E+00     1.00000E+00   0.00000E+00
+    CO2_T    0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00     0.00000E+00   0.00000E+00
+1
+ ***********************************************************************************************************************************
+ TIME: 151     days                              G E M   S E C T O R   S U M M A R Y                              DATE: 2030:06:01  
+ ***********************************************************************************************************************************
+                                                            Caprock Sens                                                            
+                                                               ML_CASE                                                              
+ ===================================================================================================================================
+ 
+                               SECTOR-1                                                                                             
+                               FIELD                                                                                                
+                                                                                                                                    
+ Bulk Volume
+   Total Bulk Volume.  M m3    1.92294E+8                                                                                           
+ Pore Volumes
+   Total Pore Volume.  M m3    3.84647E+7                                                                                           
+   HC. Pore Volume     M m3    119.05                                                                                               
+ Originally in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    7.2391                                                                                               
+   Water at Surface    M m3    3.9433E+7                                                                                            
+ Currently in Place
+   Stock Tank Oil      M m3    0                                                                                                    
+   Gas at Surface     MM m3    65.537                                                                                               
+   Water at Surface    M m3    3.94312E+7                                                                                           
+   Reservoir Oil       M m3    0                                                                                                    
+   Reservoir Free Gas  M m3    119.05                                                                                               
+   Reservoir Water     M m3    3.84646E+7                                                                                           
+   Cum Water Influx    M m3    0                                                                                                    
+ Average Pressures
+   Total PV Ave.       kpa     20686                                                                                                
+   HC PV Ave.          kpa     20650                                                                                                
+   PV Ave. Datum P     kpa     20686                                                                                                
+   HC PV Ave. Datum P  kpa     20650                                                                                                
+ Average Temperature
+   Bulk Vol Ave.      degC     75                                                                                                   
+ Ave. Saturations
+   Oil                         0                                                                                                    
+   Gas                         3.0951E-6                                                                                            
+   Water                       1                                                                                                    
+ Percentage Recovery 
+   Stock Tank Oil              100                                                                                                  
+   Gas at Surface              -808.5                                                                                               
+   Water                       4.44989E-3                                                                                           
+ Cumulative Injection 
+   Solvent         MM m3       58.527                                                                                               
+   Water            M m3       0                                                                                                    
+ Cumulative Production 
+   Oil              M m3       0                                                                                                    
+   Gas             MM m3       3.94225E-9                                                                                           
+   Water            M m3       1754.7                                                                                               
+   Wet Gas         MM m3       3.95216E-9                                                                                           
+ Injection Rate 
+   Gas             MM m3/day   0.34838                                                                                              
+   Water            M m3/day   0                                                                                                    
+ Production Rate 
+   Oil              M m3/day   0                                                                                                    
+   Gas             MM m3/day   0                                                                                                    
+   Water            M m3/day   27.405                                                                                               
+   Wet Gas         MM m3/day   0                                                                                                    
+ 
+ ...............................................................................................................
+ Percent by Std Vol of Original Oil in Place Recovered (RECO) =  0.000     (TotalOilProduction/OOIP)
+ Percent by Std Vol of Original Gas in Place Recovered (RECG) = 0.5446E-07 (TotalGasProduction/OGIP)
+ Percent Hydrocarbon Pore Volume Injected            (HCPVIN) =  465.1    
+ ...............................................................................................................
+
+    *** Avg. degree of implicitness: 6/243 = 0.0247
+
+ CPU Report: Current Date and Time: 2025-Mar-09   19:03:34      Elapsed Time (secs):       0.43
+ CPU Report:  At(days); YYYY/MMMM/Dy/Hr/Min/Sec; TS number; Elapsed Time; ElT-sec/sim-day %Implicit Totit  Nsolit  Mem(MB)   ECT(sec)
+ CPU Report:  1.5100E+02 2030 JUNE 01: 00 00 00        17    4.2600E-01    2.2581E-04       2.47       19      44       42   0.0000E+00
+ CPU Report:                                                CPU seconds;  CPU-sec/sim-day           Nrep1  Mtfail    
+ CPU Report:                                                 2.5000E-01    0.0000E+00                   0       0
+ DIM Report: TS:     17  MDPTCN        MDV      MDBET        MDALD       MDALP      MDSOL         MDDD        MDLU MDNOR    NACTV
+ DIM Report: Max:           594        192       1343         6203        7056        246          254        1219   101
+ DIM Report: Used:          594        135       1217         6077        6580        245          195         878            243
+ DATE 2030   6  1
+ 
+1
+         Caprock Sens                            
+                                                                                         
+                                                                                         
+         ML_CASE 
+         Time = 1.5100E+02 days (2030 JUNE 01, 00 hr 00 min 00 sec)
+
+         Summary at time step number                :       17
+         Total number of iterations                 :       19.
+         Average number of iterations per time step :    1.1176
+         Average time step size                     :    8.8824 days
+
+ ** Restart Record Written at Time Step : 17          Time : 151 days. (*DATE 2030 06 01)
+
+  Simulator preparing to halt: A *STOP keyword was found
+
+
+     ***********************************************
+     A V A I L A B L E    R E S T A R T    T I M E S
+     ***********************************************
+ 
+      Time          Time                 Date
+      Step         (days)             yyyy/mm/dd
+     ======     =============     ==================
+          0     0.00000000000     2030/01/01
+         17     151.000000000     2030/06/01
+
+
+ =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ STOP GEM 2023.10   End of simulation
+ Total number of time steps:                  17
+ Total number of Newton cycles:               19
+ Total number of solver iterations:           44
+ Total number of time step cuts:               0
+ Total number of solver failures:              0
+ Material Balance Error; Weighted by OrigMatInPlace+Inj:   1.0188E-01 %
+ Solver/CPUs/threads/nlv1ca/cdir/dplanes/host: PARASOL/ 16/  1/  1/ -/  0/DESKTOP-V8OLSF1
+ Maximum non-pre-elim solver eqns per block:   5
+ Implicitness, average/peak:                   1.49448 %/ 2.46914 %
+ Memory usage, average/peak/vm size:           42 MB/ 44 MB/ 47 MB
+ Date and time at end of run:                  2025-Mar-09   19:03:34
+ CPU second(s) used:                           0.296875
+ Elapsed second(s):                            0.475

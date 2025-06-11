@@ -1,0 +1,190 @@
+   ***********************************************************************************
+   ** mxdrm002.dat: Water Flooding                                                  **
+   ***********************************************************************************
+   ***********************************************************************************************
+   **                                                                                           **
+   ** FILE:  (a demo template)              MXDRM002.DAT                                        **
+   **                                                                                           **
+   ** MODEL: 13x14x6 GRIDS              4 OIL WELL SPACING            LAYERING SAND RESERVOIR   **
+   **        SOLUTION GAS DRIVE         WATERFLOOD                    WELL WORKOVER             **
+   **        GROUP VOIDAGE CONTROL      SI UNIT                                                 **
+   **                                                                                           **
+   ** USAGE: EVALUATING PRODUCTION  PERFORMANCE  FOR  A  SOLUTION  GAS  DRIVE  RESERVOIR  UNDER **         
+   **        WATERFLOOD  OPERATION                                                              **
+   **
+   ***********************************************************************************************
+   **                                                                                           **
+   ** THIS TEMPLATE DEMONSTRATES WATERFLOOD SIMULATION.  THE SAME RESERVOIR AS  TEMPLATE  No. 4 **
+   ** IS NOW UNDER WATERFLOOD TO ENHANCE OIL RECOVERY. IN THE TEMPLATE THE  WATER  INJECTOR  IS **
+   ** LOCATED IN A DOWNDIP LOCATION WITH 3 OIL  PRODUCERS  IN  STRUCTURALLY  HIGHER  LOCATIONS. **
+   ** RESERVOIR IS PRODUCD FOR A YEAR UNTIL THE PRESSURE DECLINES TO SLIGHTLY ABOVE THE  BUBBLE **
+   ** POINT BEFORE WATER FLOODING BEGINS.  WATER IS  INJECTED  AUTOMATICALLY  AT  100%  VOIDAGE **
+   ** REPLACEMENT RATIO USING THE GROUP WELL CONTROL OPTION.   WELLS ARE  WORKED-OVER  WHENEVER **
+   ** THE LAYER IS WATERED-OUT (MATURED).  SIMULATION RUN TERMINATED WHEN THE  PRODUCTION  RATE **
+   ** REACHES THE ASSUMED FIELD CUTOFF CONDITION.                                               **
+   **                                                                                           **
+   ***********************************************************************************************
+   **************************************************************************************
+   ** CONTACT:    CMG,   (403)531-1300;   282-6495 (fax);support@cmgl.ca    (Internet) **
+   **************************************************************************************                                
+
+RESULTS SIMULATOR IMEX
+
+   *FILENAMES *OUTPUT *INDEX-OUT *MAIN-RESULTS-OUT
+
+       *TITLE1  'WATER FLOODING, MXDRM002'
+       *CASEID  'MXDRM002'
+
+
+   **---INPUT/OUTPUT CONTROL SECTION----------------------------------------------------
+
+       *INUNIT  *SI
+
+       *WRST          *TIME                                          
+       *WPRN    *WELL *TIME                      
+       *WPRN    *GRID *TIME                                         
+       *OUTPRN  *WELL *LAYER                        
+       *OUTPRN  *GRID *IMEXMAP *SG     *SO     *SW  *PRES   
+       *WSRF    *WELL *TIME                       
+       *WSRF    *GRID *TIME                        
+       *OUTSRF  *GRID *SG     *SO     *SW  *PRES *FLUXCON FLUXRC FLUXSC
+       *OUTDIARY      *BRIEF   *PRESAQ *HEADER  20                            
+
+
+   **----RESERVOIR DESCRIPTION KEYWORD GROUP--------------------------------------------
+
+       *GRID *VARI 9 9 3
+       *KDIR *DOWN
+
+       *DI   *CON  100
+       *DJ   *CON  100
+       *DK   *CON  2.5
+       
+	   *DEPTH 1 1 1 2000.0
+
+       *POR  *CON 0.2
+
+	  *PRPOR  20000.0  ** KPa **
+	  *CPOR   1E-07    ** 1/KPa ** = 1E-5 1/bar
+
+	   ** *INCLUDE '../GRID/PERMI_1.INC'
+       *PERMI *CON 100.0
+	   *PERMJ *EQUALSI
+       *PERMK *EQUALSI * 0.1
+
+  *VOLMOD *IJK  1:9  1:9 1:3  1.0
+                1:9  1:1  1:3  1000
+                1:9 9:9 1:3  1000
+               9:9  2:8 1:3  1000
+                1:1   2:8 1:3  1000
+
+   **---COMPONENT PROPERTIES----------------------------------------------------------
+
+       *MODEL *BLACKOIL
+       *PVT 1 
+       **         P       RS       BO      EG   VISO   VISG
+                700.0     6.8    1.121    5.77  1.11  0.01262
+               1600.0    17.29   1.173   12.41  0.96  0.01349
+               2270.0    21.85   1.179   17.08  0.95  0.01371
+               3160.0    26.91   1.182   23.98  0.88  0.01401
+               4640.0    33.99   1.214   35.33  0.83  0.01434
+               6430.0    41.66   1.217   48.84  0.79  0.01485
+               8500.0    52.16   1.245   65.49  0.74  0.01535
+              12490.0    70.89   1.295   96.05  0.70  0.01657
+              17280.0    93.19   1.343  132.78  0.59  0.01849
+              20960.0   107.78   1.386  159.54  0.54  0.02040
+              34470.0   201.68   1.490  257.76  0.30  0.02741
+              48260.0   359.65   1.596  357.98  0.23  0.03456
+              68950.0   596.61   1.755  613.66  0.20  0.05281
+
+       *DENSITY *OIL      830.0
+       *DENSITY *GAS      1.330  
+       *DENSITY *WATER   1153.0
+
+       *CO      1.1360E-6
+       *CVO     3.0120E-5
+       *BWI       1.010
+       *CW      4.3510E-7
+       ** *REFPW     102.0
+	   *REFPW 34000
+       *VWI       1.290
+       *CVW        0.0
+
+
+   **---ROCK-FLUID DATA KEYWORD GROUP--------------------------------------------------
+
+       *ROCKFLUID
+       *RPT 1 
+       *SWT
+        **    SW     KRW    KROW    PCOW
+            0.200  0.0000  1.0000  195.84
+            0.229  0.0001  0.7407   95.20
+            0.255  0.0003  0.6829   60.00
+            0.308  0.0012  0.5722   22.00
+            0.334  0.0023  0.5194   18.80
+            0.412  0.0102  0.3715   12.60
+            0.464  0.0219  0.1526    8.43
+            0.557  0.0416  0.0822    4.40
+            0.606  0.0721  0.0000    1.32
+            0.647  0.1448  0.0000    0.00
+            0.700  0.1780  0.0000    0.00
+            0.800  0.2604  0.0000    0.00
+            1.000  1.0000  0.0000    0.00
+
+       *SLT
+        **    SL     KRG    KROG    PCOG
+            0.200  1.0000  0.0000 3891.60
+            0.316  0.6784  0.0000  579.60
+            0.435  0.6215  0.0000  372.40
+            0.562  0.5456  0.0000  242.50
+            0.614  0.3939  0.0020   60.80
+            0.702  0.1399  0.0280   37.21
+            0.812  0.0515  0.1721   13.65
+            0.875  0.0297  0.3395   10.45
+            0.906  0.0226  0.4395    9.00
+            0.937  0.0173  0.5500    7.51
+            0.969  0.0131  0.6702    5.90
+            1.000  0.0000  1.0000    0.00
+
+
+   **---INITIALIZATION------------------------------------------------------------
+
+       *INITIAL
+       *VERTICAL *BLOCK_CENTER *WATER_OIL_GAS
+       *PB       *CON
+                  30000.0  
+       *REFDEPTH   2000.0
+       *REFPRES   20000.0  
+       *DGOC       1000.0
+       *DWOC       1500.0     
+
+
+   **---NUMERICAL-----------------------------------------------------------------
+
+       *NUMERICAL
+       *DTMAX    121.0
+       *NCUTS      6
+
+
+   **---WELL AND RUN DATA---------------------------------------------------------
+
+       *RUN
+       *DATE 1995 01 01
+	   
+	   
+	   *WELL 1 'INJ'        ** Define well 1 and well 2.
+
+	   *INJECTOR *UNWEIGHT 1           ** Define well 1 as an injector.
+	   *INCOMP *WATER                  ** It injects water.
+	   *OPERATE *MAX *STW    2000.00    ** Primary operating constraint 
+	 
+	   *PERF  1             
+	   ** if     jf     kf     wi 
+		  5     5      1:3     -
+	   
+
+	   *TIME 100.0                    ** Normal termination should occur here.
+	   *TIME 500.0                    ** Normal termination should occur here.
+	   *TIME 1000.0                    ** Normal termination should occur here.
+	   *STOP
+

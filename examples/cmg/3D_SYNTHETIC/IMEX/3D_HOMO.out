@@ -1,0 +1,1390 @@
+  ********************************************************************************
+  *                                                                              *
+  *                                IMEX  2023.10                                 *
+  *            Adaptive-Implicit Black Oil & Unconventional Simulator            *
+  *                       Quarterly Release 1 for Win x64                        *
+  *                            2023-Mar-16   09:09:33                            *
+  *                                                                              *
+  *                          (c) Copyright 1977 - 2023                           *
+  *                Computer Modelling Group Ltd., Calgary, Canada                *
+  *                             All Rights Reserved                              *
+  *                                                                              *
+  ********************************************************************************
+
+
+  Command-line Arguments:  -f 3D_HOMO.DAT
+                           -wait
+                           -doms
+                           -parasol 1
+
+  Date and Time of Start of Run:  Mar  6, 2025  21:47:37
+
+     IMEX is using the following common block maximums:
+
+     Grid Blocks        =         243          Wells                =    1
+     Total well layers  =           3          Constraints per well =    4
+     Orthogonalizations =          30          Table Entries        =   13
+ 
+ ===================== SUMMARY (from subroutine: INDYNM) ======================
+  Dimensioning scanning of data is complete.
+  Simulation will stop if there were error messages.
+     0 Warning messages.    0 Error messages.
+ ==============================================================================
+ 
+ 
+    ***********************************************************************************
+    ** mxdrm002.dat: Water Flooding                                                  **
+    ***********************************************************************************
+    ***********************************************************************************************
+    **                                                                                           **
+    ** FILE:  (a demo template)              MXDRM002.DAT                                        **
+    **                                                                                           **
+    ** MODEL: 13x14x6 GRIDS              4 OIL WELL SPACING            LAYERING SAND RESERVOIR   **
+    **        SOLUTION GAS DRIVE         WATERFLOOD                    WELL WORKOVER             **
+    **        GROUP VOIDAGE CONTROL      SI UNIT                                                 **
+    **                                                                                           **
+    ** USAGE: EVALUATING PRODUCTION  PERFORMANCE  FOR  A  SOLUTION  GAS  DRIVE  RESERVOIR  UNDER **
+    **        WATERFLOOD  OPERATION                                                              **
+    **
+    ***********************************************************************************************
+    **                                                                                           **
+    ** THIS TEMPLATE DEMONSTRATES WATERFLOOD SIMULATION.  THE SAME RESERVOIR AS  TEMPLATE  No. 4 **
+    ** IS NOW UNDER WATERFLOOD TO ENHANCE OIL RECOVERY. IN THE TEMPLATE THE  WATER  INJECTOR  IS **
+    ** LOCATED IN A DOWNDIP LOCATION WITH 3 OIL  PRODUCERS  IN  STRUCTURALLY  HIGHER  LOCATIONS. **
+    ** RESERVOIR IS PRODUCD FOR A YEAR UNTIL THE PRESSURE DECLINES TO SLIGHTLY ABOVE THE  BUBBLE **
+    ** POINT BEFORE WATER FLOODING BEGINS.  WATER IS  INJECTED  AUTOMATICALLY  AT  100%  VOIDAGE **
+    ** REPLACEMENT RATIO USING THE GROUP WELL CONTROL OPTION.   WELLS ARE  WORKED-OVER  WHENEVER **
+    ** THE LAYER IS WATERED-OUT (MATURED).  SIMULATION RUN TERMINATED WHEN THE  PRODUCTION  RATE **
+    ** REACHES THE ASSUMED FIELD CUTOFF CONDITION.                                               **
+    **                                                                                           **
+    ***********************************************************************************************
+    **************************************************************************************
+    ** CONTACT:    CMG,   (403)531-1300;   282-6495 (fax);support@cmgl.ca    (Internet) **
+    **************************************************************************************
+ 
+ RESULTS SIMULATOR IMEX
+ 
+    *FILENAMES *OUTPUT *INDEX-OUT *MAIN-RESULTS-OUT
+ 
+
+
+     Beginning data file reading and echo . . .
+        *TITLE1  'WATER FLOODING, MXDRM002'
+        *CASEID  'MXDRM002'
+ 
+ 
+    **---INPUT/OUTPUT CONTROL SECTION----------------------------------------------------
+ 
+        *INUNIT  *SI
+ 
+        *WRST          *TIME
+        *WPRN    *WELL *TIME
+        *WPRN    *GRID *TIME
+        *OUTPRN  *WELL *LAYER
+        *OUTPRN  *GRID *IMEXMAP *SG     *SO     *SW  *PRES
+        *WSRF    *WELL *TIME
+        *WSRF    *GRID *TIME
+        *OUTSRF  *GRID *SG     *SO     *SW  *PRES FLUXCON FLUXRC FLUXSC
+        *OUTDIARY      *BRIEF   *PRESAQ *HEADER  20
+ 
+ 
+    **----RESERVOIR DESCRIPTION KEYWORD GROUP--------------------------------------------
+ 
+        *GRID *VARI 9 9 3
+        *KDIR *DOWN
+ 
+        *DI   *CON  100
+        *DJ   *CON  100
+        *DK   *CON  2.5
+ 
+ 	   *DEPTH 1 1 1 2000.0
+ 
+        *POR  *CON 0.2
+ 
+ 	  *PRPOR  20000.0  ** KPa **
+ 	  *CPOR   1E-07    ** 1/KPa ** = 1E-5 1/bar
+ 
+ 	   ** *INCLUDE '../GRID/PERMI_1.INC'
+        *PERMI *CON 100.0
+ 	   *PERMJ *EQUALSI
+        *PERMK *EQUALSI * 0.1
+ 
+   *VOLMOD *IJK  1:9  1:9 1:3  1.0
+                 1:9  1:1  1:3  1000
+                 1:9 9:9 1:3  1000
+                9:9  2:8 1:3  1000
+                 1:1   2:8 1:3  1000
+ 
+    **---COMPONENT PROPERTIES----------------------------------------------------------
+ 
+
+ ===================== WARNING (from subroutine: GRREV1) ======================
+  Some Volume Modifiers were larger than expected (exceeded 2).
+  Check your data and/or see your User's Manual.
+ ==============================================================================
+
+        *MODEL *BLACKOIL
+        *PVT 1
+        **         P       RS       BO      EG   VISO   VISG
+                 700.0     6.8    1.121    5.77  1.11  0.01262
+                1600.0    17.29   1.173   12.41  0.96  0.01349
+                2270.0    21.85   1.179   17.08  0.95  0.01371
+                3160.0    26.91   1.182   23.98  0.88  0.01401
+                4640.0    33.99   1.214   35.33  0.83  0.01434
+                6430.0    41.66   1.217   48.84  0.79  0.01485
+                8500.0    52.16   1.245   65.49  0.74  0.01535
+               12490.0    70.89   1.295   96.05  0.70  0.01657
+               17280.0    93.19   1.343  132.78  0.59  0.01849
+               20960.0   107.78   1.386  159.54  0.54  0.02040
+               34470.0   201.68   1.490  257.76  0.30  0.02741
+               48260.0   359.65   1.596  357.98  0.23  0.03456
+               68950.0   596.61   1.755  613.66  0.20  0.05281
+ 
+
+ ================== INFORMATIONAL (from subroutine: CHKROW1) ==================
+  One atm pressure entry is added to the PVT table(s) to prevent extrapolation.
+  Please check the printed table(s).
+ ==============================================================================
+
+        *DENSITY *OIL      830.0
+        *DENSITY *GAS      1.330
+        *DENSITY *WATER   1153.0
+ 
+        *CO      1.1360E-6
+        *CVO     3.0120E-5
+        *BWI       1.010
+        *CW      4.3510E-7
+        ** *REFPW     102.0
+ 	   *REFPW 34000
+        *VWI       1.290
+        *CVW        0.0
+ 
+ 
+    **---ROCK-FLUID DATA KEYWORD GROUP--------------------------------------------------
+ 
+
+ ===================== WARNING (from subroutine: INCOMP) ======================
+  P/Z Output is disabled as Temperatures were not defined for all PVT Regions.
+  Please review the *TRES Keyword.
+  Line: 116   File Name: 3D_HOMO.DAT
+ ==============================================================================
+
+        *ROCKFLUID
+        *RPT 1
+        *SWT
+         **    SW     KRW    KROW    PCOW
+             0.200  0.0000  1.0000  195.84
+             0.229  0.0001  0.7407   95.20
+             0.255  0.0003  0.6829   60.00
+             0.308  0.0012  0.5722   22.00
+             0.334  0.0023  0.5194   18.80
+             0.412  0.0102  0.3715   12.60
+             0.464  0.0219  0.1526    8.43
+             0.557  0.0416  0.0822    4.40
+             0.606  0.0721  0.0000    1.32
+             0.647  0.1448  0.0000    0.00
+             0.700  0.1780  0.0000    0.00
+             0.800  0.2604  0.0000    0.00
+             1.000  1.0000  0.0000    0.00
+ 
+        *SLT
+         **    SL     KRG    KROG    PCOG
+             0.200  1.0000  0.0000 3891.60
+             0.316  0.6784  0.0000  579.60
+             0.435  0.6215  0.0000  372.40
+             0.562  0.5456  0.0000  242.50
+             0.614  0.3939  0.0020   60.80
+             0.702  0.1399  0.0280   37.21
+             0.812  0.0515  0.1721   13.65
+             0.875  0.0297  0.3395   10.45
+             0.906  0.0226  0.4395    9.00
+             0.937  0.0173  0.5500    7.51
+             0.969  0.0131  0.6702    5.90
+             1.000  0.0000  1.0000    0.00
+ 
+ 
+    **---INITIALIZATION------------------------------------------------------------
+ 
+        *INITIAL
+        *VERTICAL *BLOCK_CENTER *WATER_OIL_GAS
+        *PB       *CON
+                   30000.0
+        *REFDEPTH   2000.0
+        *REFPRES   20000.0
+        *DGOC       1000.0
+        *DWOC       1500.0
+ 
+ 
+    **---NUMERICAL-----------------------------------------------------------------
+ 
+        *NUMERICAL
+        *DTMAX    121.0
+        *NCUTS      6
+ 
+ 
+    **---WELL AND RUN DATA---------------------------------------------------------
+ 
+
+ ===================== SUMMARY (from subroutine: INDATA) ======================
+  Reading of initial data is complete.
+  Simulation will stop if there were error messages.
+     2 Warning messages.    0 Error messages.
+ ==============================================================================
+
+
+
+
+         Capillary pressure - Gravity initialization
+
+
+         Successful Initialization
+
+
+1
+        *RUN
+        *DATE 1995 01 01
+ 	
+ 	
+ 	   *WELL 1 'INJ'        ** Define well 1 and well 2.
+ 
+ 	   *INJECTOR *UNWEIGHT 1           ** Define well 1 as an injector.
+ 	   *INCOMP *WATER                  ** It injects water.
+
+ ================== INFORMATIONAL (from subroutine: WMWTIN) ===================
+  Well no. 1 ('INJ') is
+  being opened because *OPERATE was encountered for this well.
+ ==============================================================================
+
+ 	   *OPERATE *MAX *STW    2000.00    ** Primary operating constraint
+ 	
+
+ ================== INFORMATIONAL (from subroutine: WMWTIN) ===================
+  Maximum bottom hole pressure not specified for injector INJ
+  (Well No. 1). Setting default MAX BHP of 1.0e6 kPa   .
+ ==============================================================================
+
+ 	   *PERF  1
+ 	   ** if     jf     kf     wi
+ 		  5     5      1:3     -
+ 	
+ 
+
+ ===================== WARNING (from subroutine: WMCHCK) ======================
+  WELL INJ is an unweighted injector with XFLOW-MODEL FULLY-MIXED.
+  The current formulation does not allow this. Resetting to XFLOW-MODEL ZERO-FLOW.
+ ==============================================================================
+
+
+ ===================== SUMMARY (from subroutine: INWELL) ======================
+  Reading of well data is complete.
+  Simulation will stop if there were error messages.
+     3 Warning messages.    0 Error messages.
+ ==============================================================================
+
+    Material in place including all subgrids, (o,w,g):     0.0000     m3      0.47310E+09 m3       0.0000     m3  
+1
+
+
+
+                   ****************************************************************************************************
+                   *                                PVT Functions (Region   1)                                        *
+                   *--------------------------------------------------------------------------------------------------*
+                   *   pressure    sol'n gas     oil fvf      gas fvf    gas exp   oil visc   gas visc     co         *
+                   *     kPa        m3 /m3       rm3/m3       rm3/m3     m3 /rm3     mPas       mPas       1/kPa      *
+                   *                                                                                                  *
+                   *     101.325       0.000     1.08641     0.73904       1.353   1.210      1.2041E-02  1.1360E-06  *
+                   *     700.000       6.800     1.12100     0.17331       5.770   1.110      1.2620E-02  1.1360E-06  *
+                   *    1600.000      17.290     1.17300     0.08058      12.410  0.9600      1.3490E-02  1.1360E-06  *
+                   *    2270.000      21.850     1.17900     0.05855      17.080  0.9500      1.3710E-02  1.1360E-06  *
+                   *    3160.000      26.910     1.18200     0.04170      23.980  0.8800      1.4010E-02  1.1360E-06  *
+                   *    4640.000      33.990     1.21400     0.02830      35.330  0.8300      1.4340E-02  1.1360E-06  *
+                   *    6430.000      41.660     1.21700     0.02048      48.840  0.7900      1.4850E-02  1.1360E-06  *
+                   *    8500.000      52.160     1.24500     0.01527      65.490  0.7400      1.5350E-02  1.1360E-06  *
+                   *   12490.000      70.890     1.29500     0.01041      96.050  0.7000      1.6570E-02  1.1360E-06  *
+                   *   17280.000      93.190     1.34300     0.00753     132.780  0.5900      1.8490E-02  1.1360E-06  *
+                   *   20960.000     107.780     1.38600     0.00627     159.540  0.5400      2.0400E-02  1.1360E-06  *
+                   *   34470.000     201.680     1.49000     0.00388     257.760  0.3000      2.7410E-02  1.1360E-06  *
+                   *   48260.000     359.650     1.59600     0.00279     357.980  0.2300      3.4560E-02  1.1360E-06  *
+                   *   68950.000     596.610     1.75500     0.00163     613.660  0.2000      5.2810E-02  1.1360E-06  *
+                   ****************************************************************************************************
+1
+ 
+                   *****************************************************************************
+                   *              Water-Oil Saturation Functions (Rock Type   1, Set   1)      *
+                   *---------------------------------------------------------------------------*
+                   *       SWT              KRW           KRNW          Drainage   Imbibition  *
+                   *                                                      PCNW        PCNWI    *
+                   *                                                      kPa         kPa      *
+                   *    0.200000        0.000000        1.000000       195.84                  *
+                   *    0.229000        0.000100        0.740700       95.200                  *
+                   *    0.255000        0.000300        0.682900       60.000                  *
+                   *    0.308000        0.001200        0.572200       22.000                  *
+                   *    0.334000        0.002300        0.519400       18.800                  *
+                   *    0.412000        0.010200        0.371500       12.600                  *
+                   *    0.464000        0.021900        0.152600       8.4300                  *
+                   *    0.557000        0.041600        0.082200       4.4000                  *
+                   *    0.606000        0.072100        0.000000       1.3200                  *
+                   *    0.647000        0.144800        0.000000       0.0000                  *
+                   *    0.700000        0.178000        0.000000       0.0000                  *
+                   *    0.800000        0.260400        0.000000       0.0000                  *
+                   *    1.000000        1.000000        0.000000       0.0000                  *
+                   *****************************************************************************
+
+                   Swcon = 0.200000;   Swcrit = 0.200000
+
+                   Sorw = 0.394000;    Soirw = 0.000000
+
+
+
+ 
+                   *****************************************************************************
+                   *         Gas-Liquid Saturation Functions (Rock Type   1, Set   1)          *
+                   *---------------------------------------------------------------------------*
+                   *       SLT              KRG           KRNG          Drainage   Imbibition  *
+                   *                                                      PCNG        PCNGI    *
+                   *                                                      kPa         kPa      *
+                   *    0.200000        1.000000        0.000000       3891.6                  *
+                   *    0.316000        0.678400        0.000000       579.60                  *
+                   *    0.435000        0.621500        0.000000       372.40                  *
+                   *    0.562000        0.545600        0.000000       242.50                  *
+                   *    0.614000        0.393900        0.002000       60.800                  *
+                   *    0.702000        0.139900        0.028000       37.210                  *
+                   *    0.812000        0.051500        0.172100       13.650                  *
+                   *    0.875000        0.029700        0.339500       10.450                  *
+                   *    0.906000        0.022600        0.439500       9.0000                  *
+                   *    0.937000        0.017300        0.550000       7.5100                  *
+                   *    0.969000        0.013100        0.670200       5.9000                  *
+                   *    1.000000        0.000000        1.000000       0.0000                  *
+                   *****************************************************************************
+
+                   Slcon = 0.200000;   Slrg = 0.562000
+
+                   Sgcon = 0.000000;   Sgcrit = 0.000000
+
+
+
+1
+
+                                                       *************************
+                                                       * SIMULATION PARAMETERS *
+                                                       *************************
+
+
+
+                                     Number of grid blocks in x direction:            9
+                                     Number of grid blocks in y direction:            9
+                                     Number of grid blocks in z direction:            3
+                                     Total number of grid blocks:                   243
+
+                                     Number of equations:                             3
+                                     Number of orthogonalizations:                   30
+                                     Maximum number of Newton iterations:            10
+
+                                               PVT REGION  1
+                                               **************
+
+                                     Oil density at stock tank conditions:      830.00000  kg/m3
+                                     Gas density at standard conditions:          1.33000  kg/m3
+                                     Oil Viscosity Pressure Derivative:       0.30120E-04  mPas/kPa
+                                     Water density at stock tank conditions:   1153.00000  kg/m3
+                                     Water Formation Vol. Factor:                 1.01000  rm3/m3
+                                     Water Compressibility:                   0.43510E-06  1/kPa
+                                     Water reference Pressure *REFPW:         34000.00000  kPa
+                                     Water Viscosity at *REFPW:                   1.29000  mPas
+                                     Water Viscosity Pressure Derivative:     0.00000E+00  mPas/kPa
+
+                                     Rock compressibility:                    1.00000E-07  1/kPa
+
+                                               INITIALIZATION REGION  1
+                                               *************************
+                                     Reference Depth *REFDEPTH:                2000.00000  m
+                                     Reference Pressure *REFPRES:             20000.00000  kPa
+                                     Depth to Water Contact:                   1500.00000  m
+                                     Depth to Gas Contact:                     1000.00000  m
+
+
+ Time =          0.00         **********************************************************************         INITIAL CONDITIONS
+                                                      Oil Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =          0.00         **********************************************************************         INITIAL CONDITIONS
+                                                      Gas Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =          0.00         **********************************************************************         INITIAL CONDITIONS
+                                                     Water Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  1.000        
+
+
+ Time =          0.00         **********************************************************************         INITIAL CONDITIONS
+                                                           Pressure (kPa)
+                              **********************************************************************
+
+ Plane K = 1                                           All values are  20000.       
+
+ Plane K = 2                                           All values are  20028.       
+
+ Plane K = 3                                           All values are  20056.       
+
+                    Average reservoir pressure including aquifer blocks =  20027.82 kPa    
+                    Average reservoir pressure excluding aquifer blocks =      0.00 kPa    
+
+
+ Time =          0.00         **********************************************************************         INITIAL CONDITIONS
+                                         Implicit - Explicit Map    Implicit(*)  Explicit(.)
+                              **********************************************************************
+
+ Plane K = 1
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 2
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 3
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+1                                                           ******************************
+                                                               Current Well Definitions
+                                                            ******************************
+
+                                                .......................................................
+                                                .           Units for Well Index                      .
+                                                . Producers and Weighted Injectors    : md-m          .
+                                                . Unweighted oil and water Injectors  : m3/kPa-day    .
+                                                . Unweighted gas and solvent Injectors: m3/kPa-day    .
+                                                .......................................................
+**********************************************************************************************************************************************************
+*  WELL                       WELL    |     Constraint     |                    |   WELL     Oil PI    Wat PI    Gas PI    Sol PI    Pol PI    Swt PI    *
+*  No NAME            (STA)   Type    |Typ    Value  Units |No. I J K Location  |   INDEX    m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  *
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+*   1 INJ             (OPN)UWt WatInj |STW 2.000E+03  m3/d |   1 5,5,1          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*                                     |                    |   2 5,5,2          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*                                     |                    |   3 5,5,3          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+                                                                                             0.00      7.159E-02 0.00                                     
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+1
+ ***********************************************************************************************************************************
+ TIME: 0.0000 days                              I M E X   S E C T O R   S U M M A R Y                             DATE: 1995:01:01  
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+ 
+                                SECTOR-1                                                                                            
+                                Entire                                                                                              
+                                 Field                                                                                              
+   Total Pore Volume.  M rm3    480736                                                                                              
+   HC. Pore Volume     M rm3                                                                                                        
+ Fluids in Place
+   Total Gas          MM m3                                                                                                         
+   Free Gas           MM m3                                                                                                         
+   Water               M m3     473101                                                                                              
+   Reservoir Gas       M rm3                                                                                                        
+   Reservoir Water     M rm3    480737                                                                                              
+ Average Pressure 
+   Total Pore Volume  kPa        20028                                                                                              
+   HC. Pore Volume    kPa                                                                                                           
+ Average Saturation %
+   Gas                                                                                                                              
+   Water                        100.00                                                                                              
+ Percentage Recovery 
+   Total Gas                                                                                                                        
+   Water                                                                                                                            
+ Cumulative Injection 
+   Gas             MM m3                                                                                                            
+   Water            M m3                                                                                                            
+ Cumulative Production 
+   Gas             MM m3                                                                                                            
+   Water            M m3                                                                                                            
+ Injection Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day                                                                                                        
+ Production Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day                                                                                                        
+ 
+ 
+ Restart record at itime=    0 written to restart file
+
+
+                             I M E X   T I M E   S T E P   S U M M A R Y
+                                      WATER FLOODING, MXDRM002
+                                              MXDRM002
+ ===================================================================================================
+    Time Step           Time          Total Production      Total Injection  Total Max. Max. Change
+ ---------------- ---------------- ----------------------- -----------------  PV   Mat. ------------
+                C                    Gas     Water    WGR    Gas     Water   Avg.  bal. Satur. Pres.
+        Size    U                                     M3/                    Pres. err. DSMAX  DPMAX
+  No.   days IT T days   yy:mm:dd   MM3/D     M3/D    MM3   MM3/D     M3/D    kPa   %           kPa
+ ------ ---- -- - ----- ---------- -------- -------- ----- -------- -------- ----- ---- ------ -----
+     1w 1.00 1  0 1.000 1995:01:02                                  2000.000 20036 e-7w  2e-8g  16e3
+     2  .500 1  0 1.500 1995:01:03                                  2000.000 20040 e-7w  2e-9g  1939
+     3  .773 1  0 2.273 1995:01:03                                  2000.000 20046 e-7w  1e-9g   965
+     4  2.41 1  0 4.679 1995:01:06                                  2000.000 20065 e-7w  e-10g   525
+     5  12.0 1  0 16.71 1995:01:18                                  2000.000 20160 e-7w  e-10g   226
+     6  41.6 1  0 58.35 1995:02:28                                  2000.000 20491 e-6w  e-10g   514
+     7  41.6 1  0 100.0 1995:04:11                                  2000.000 20822 e-6w  e-10g   478
+
+
+ Time =        100.00         **********************************************************************         DATE: APR  11,1995
+                                                      Oil Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =        100.00         **********************************************************************         DATE: APR  11,1995
+                                                      Gas Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =        100.00         **********************************************************************         DATE: APR  11,1995
+                                                     Water Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  1.000        
+
+
+ Time =        100.00         **********************************************************************         DATE: APR  11,1995
+                                                           Pressure (kPa)
+                              **********************************************************************
+
+ Plane K = 1
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  20240.   20509.   20824.   21092.   21210.   21092.   20824.   20509.   20240. 
+ J=  2  20509.   21354.   22200.   22938.   23295.   22938.   22200.   21355.   20509. 
+ J=  3  20824.   22200.   23683.   25166.   26091.   25166.   23683.   22200.   20824. 
+ J=  4  21092.   22938.   25166.   27950.   30730.   27950.   25166.   22938.   21092. 
+ J=  5  21210.   23295.   26091.   30730.   40886.i  30730.   26091.   23295.   21210. 
+ J=  6  21092.   22938.   25166.   27950.   30730.   27950.   25166.   22938.   21092. 
+ J=  7  20824.   22200.   23683.   25166.   26091.   25166.   23683.   22200.   20824. 
+ J=  8  20509.   21354.   22200.   22938.   23295.   22938.   22200.   21354.   20509. 
+ J=  9  20240.   20509.   20824.   21092.   21210.   21092.   20824.   20509.   20240. 
+
+ Plane K = 2
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  20268.   20537.   20852.   21120.   21238.   21120.   20852.   20537.   20268. 
+ J=  2  20537.   21382.   22228.   22966.   23323.   22966.   22228.   21382.   20537. 
+ J=  3  20852.   22228.   23711.   25194.   26119.   25194.   23711.   22228.   20852. 
+ J=  4  21120.   22966.   25194.   27978.   30758.   27978.   25194.   22966.   21120. 
+ J=  5  21238.   23323.   26119.   30758.   40914.i  30758.   26119.   23323.   21238. 
+ J=  6  21120.   22966.   25194.   27977.   30758.   27977.   25194.   22966.   21120. 
+ J=  7  20852.   22228.   23711.   25194.   26119.   25194.   23711.   22228.   20852. 
+ J=  8  20537.   21382.   22228.   22966.   23323.   22966.   22228.   21382.   20537. 
+ J=  9  20268.   20537.   20852.   21120.   21238.   21120.   20852.   20537.   20268. 
+
+ Plane K = 3
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  20296.   20565.   20880.   21148.   21265.   21148.   20880.   20565.   20296. 
+ J=  2  20565.   21410.   22256.   22994.   23351.   22994.   22256.   21410.   20565. 
+ J=  3  20880.   22256.   23739.   25222.   26147.   25222.   23739.   22256.   20880. 
+ J=  4  21148.   22994.   25222.   28005.   30786.   28005.   25222.   22994.   21148. 
+ J=  5  21265.   23351.   26147.   30786.   40942.i  30786.   26147.   23351.   21265. 
+ J=  6  21148.   22994.   25222.   28005.   30786.   28005.   25222.   22994.   21148. 
+ J=  7  20880.   22256.   23739.   25222.   26147.   25222.   23739.   22256.   20880. 
+ J=  8  20565.   21410.   22256.   22994.   23351.   22994.   22256.   21410.   20565. 
+ J=  9  20296.   20565.   20880.   21148.   21265.   21148.   20880.   20565.   20296. 
+
+                    Average reservoir pressure including aquifer blocks =  20821.55 kPa    
+                    Average reservoir pressure excluding aquifer blocks =      0.00 kPa    
+
+
+ Time =        100.00         **********************************************************************         DATE: APR  11,1995
+                                         Implicit - Explicit Map    Implicit(*)  Explicit(.)
+                              **********************************************************************
+
+ Plane K = 1
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 2
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 3
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+1
+ ***********************************************************************************************************************************
+ TIME: 100.00 days                              I M E X   S E C T O R   S U M M A R Y                             DATE: 1995:04:11  
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+ 
+                                SECTOR-1                                                                                            
+                                Entire                                                                                              
+                                 Field                                                                                              
+   Total Pore Volume.  M rm3    480774                                                                                              
+   HC. Pore Volume     M rm3                                                                                                        
+ Fluids in Place
+   Total Gas          MM m3                                                                                                         
+   Free Gas           MM m3                                                                                                         
+   Water               M m3     473301                                                                                              
+   Reservoir Gas       M rm3                                                                                                        
+   Reservoir Water     M rm3    480775                                                                                              
+ Average Pressure 
+   Total Pore Volume  kPa        20822                                                                                              
+   HC. Pore Volume    kPa                                                                                                           
+ Average Saturation %
+   Gas                                                                                                                              
+   Water                        100.00                                                                                              
+ Percentage Recovery 
+   Total Gas                                                                                                                        
+   Water                       -.04227                                                                                              
+ Cumulative Injection 
+   Gas             MM m3                                                                                                            
+   Water            M m3        200.00                                                                                              
+ Cumulative Production 
+   Gas             MM m3                                                                                                            
+   Water            M m3                                                                                                            
+ Injection Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day    2.0000                                                                                              
+ Production Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day                                                                                                        
+ 
+
+
+
+ 
+ Restart record at itime=    7 written to restart file
+
+ 
+ ***********************************************************************************************************************************
+ TIME:  100.00 days                              I M E X   F I E L D  S U M M A R Y                               DATE: 1995:APR:11 
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+                                 +                     ++                     +
+                                 +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------++---------------------+
+                                 + No.       Name      ++ No.       Name      +
+                                 +---- ----------------++---- ----------------+
+                                 +   1        INJ      ++   1       Field     +
+ --------------------------------+---------------------++---------------------+
+ Well parameters                 +                     ++                     +
+   Well Type                     + Mob Unwtd Water Inj ++                     +
+   Status                        +          STW        ++                     +
+   On-time fraction              +          1.0        ++                     +
+   Cumulative Open days          +         100         ++         100         +
+ Well Pressures                  +                     ++                     +
+   Bottom Hole     kPa           +        68822        ++                     +
+   Grid Block      kPa           +        40886        ++                     +
+   Drawdown        kPa           +        27937        ++                     +
+   Ref Layer Head  kPa           +          0          ++                     +
+   Tubing Head     kPa           +                     ++                     +
+ Mobility Weighted Pressures     +                     ++                     +
+   P-P(0)          kPa           +        20886        ++                     +
+   Block Pressure  kPa           +        40885        ++                     +
+   Datum Pressure  kPa           +        40914        ++                     +
+ Inst Surface Injection Rates    +                     ++                     +
+   Oil             m3/day        +          0          ++          0          +
+   Water           m3/day        +         2000        ++         2000        +
+   Gas             Mm3/day       +          0          ++          0          +
+ Surface cumulative injection    +                     ++                     +
+   Well Open Time  days          +         100         ++         100         +
+   Oil             Mm3           +          0          ++          0          +
+   Water           Mm3           +         200         ++         200         +
+   Gas             MMm3          +          0          ++          0          +
+ ===================================================================================================================================
+ ===================================================================================================================================
+ 
+ ***********************************************************************************************************************************
+ TIME:  100.00 days                      I M E X   L A Y E R  S U M M A R Y  F O R  W E L L  1 ("INJ") .          DATE: 1995:APR:11              
+ ***********************************************************************************************************************************
+                                                             WATER FLOODING, MXDRM002                                                            
+                                                                     MXDRM002                                                                    
+ ===================================================================================================================================
+                                +                     +                     +                     ++                     +
+          Well 1 ("INJ")        +        LAYER        +        LAYER        +        LAYER        ++    TOTAL FOR WELL   +
+          WATER INJECTOR        +---------------------+---------------------+---------------------++---------------------+
+                STW             +        Name         +        Name         +        Name         ++ No.       Name      +
+                                +---------------------+---------------------+---------------------++---- ----------------+
+                                +        5,5,1        +        5,5,2        +        5,5,3        ++   1        INJ      +
+ -------------------------------+---------------------+---------------------+---------------------++---------------------+
+ Layer status                   +         OPEN        +         OPEN        +         OPEN        ++                     +
+ Reference Layer (*)            +          *          +                     +                     ++                     +
+ Layer Pressures                +                     +                     +                     ++                     +
+   Bottom Hole     kPa          +     68822.499619    +     68850.91325     +     68879.327239    ++                     +
+   Grid Block      kPa          +     40885.659237    +     40913.728335    +     40941.797463    ++                     +
+   Drawdown        kPa          +     27936.840381    +     27937.184915    +     27937.529775    ++                     +
+   Head: playr-pwf kPa          +          0          +     28.41363165     +     56.827619923    ++                     +
+ Inst Surface Rates (+ = inj)   +                     +                     +                     ++                     +
+   Oil             m3/day       +          0          +          0          +          0          ++          0          +
+   Water           m3/day       +     666.65844244    +     666.66666407    +     666.67489349    ++         2000        +
+   Gas             Mm3/day      +          0          +          0          +          0          ++          0          +
+ Surface Cumulatives (+ = inj)  +                     +                     +                     ++                     +
+   Oil             Mm3          +          0          +          0          +          0          ++          0          +
+   Water           Mm3          +     66.665849231    +     66.666666437    +     66.667484332    ++         200         +
+   Gas             MMm3         +          0          +          0          +          0          ++          0          +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+ 	   *TIME 100.0                    ** Normal termination should occur here.
+
+ ===================== SUMMARY (from subroutine: INWELL) ======================
+  Reading of well data is complete.
+  Simulation will stop if there were error messages.
+     3 Warning messages.    0 Error messages.
+ ==============================================================================
+
+1                                                           ******************************
+                                                               Current Well Definitions
+                                                            ******************************
+
+                                                .......................................................
+                                                .           Units for Well Index                      .
+                                                . Producers and Weighted Injectors    : md-m          .
+                                                . Unweighted oil and water Injectors  : m3/kPa-day    .
+                                                . Unweighted gas and solvent Injectors: m3/kPa-day    .
+                                                .......................................................
+**********************************************************************************************************************************************************
+*  WELL                       WELL    |     Constraint     |                    |   WELL     Oil PI    Wat PI    Gas PI    Sol PI    Pol PI    Swt PI    *
+*  No NAME            (STA)   Type    |Typ    Value  Units |No. I J K Location  |   INDEX    m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  *
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+*   1 INJ             (OPN)UWt WatInj |STW 2.000E+03  m3/d |   1 5,5,1          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*                                     |                    |   2 5,5,2          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*                                     |                    |   3 5,5,3          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+                                                                                             0.00      7.159E-02 0.00                                     
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+
+                             I M E X   T I M E   S T E P   S U M M A R Y
+                                      WATER FLOODING, MXDRM002
+                                              MXDRM002
+ ===================================================================================================
+    Time Step           Time          Total Production      Total Injection  Total Max. Max. Change
+ ---------------- ---------------- ----------------------- -----------------  PV   Mat. ------------
+                C                    Gas     Water    WGR    Gas     Water   Avg.  bal. Satur. Pres.
+        Size    U                                     M3/                    Pres. err. DSMAX  DPMAX
+  No.   days IT T days   yy:mm:dd   MM3/D     M3/D    MM3   MM3/D     M3/D    kPa   %           kPa
+ ------ ---- -- - ----- ---------- -------- -------- ----- -------- -------- ----- ---- ------ -----
+     8w  121 1  0 221.0 1995:08:10                                  2000.000 21782 e-5w  1e-9g  1215
+     9   121 1  0 342.0 1995:12:09                                  2000.000 22741 e-5w  1e-9g  1110
+    10  79.0 1  0 421.0 1996:02:26                                  2000.000 23366 e-5w  e-10g   694
+    11  79.0 1  0 500.0 1996:05:15                                  2000.000 23992 e-5w  e-10g   672
+
+
+ Time =        500.00         **********************************************************************         DATE: MAY  15,1996
+                                                      Oil Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =        500.00         **********************************************************************         DATE: MAY  15,1996
+                                                      Gas Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =        500.00         **********************************************************************         DATE: MAY  15,1996
+                                                     Water Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  1.000        
+
+
+ Time =        500.00         **********************************************************************         DATE: MAY  15,1996
+                                                           Pressure (kPa)
+                              **********************************************************************
+
+ Plane K = 1
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  22741.   23318.   24041.   24649.   24901.   24649.   24041.   23318.   22741. 
+ J=  2  23318.   24380.   25442.   26353.   26777.   26353.   25442.   24380.   23318. 
+ J=  3  24041.   25442.   26994.   28545.   29497.   28545.   26994.   25442.   24041. 
+ J=  4  24649.   26353.   28545.   31332.   34116.   31332.   28545.   26353.   24649. 
+ J=  5  24901.   26777.   29497.   34116.   44256.i  34116.   29497.   26777.   24901. 
+ J=  6  24649.   26353.   28545.   31332.   34116.   31332.   28545.   26353.   24649. 
+ J=  7  24041.   25442.   26994.   28545.   29497.   28545.   26994.   25442.   24041. 
+ J=  8  23318.   24380.   25442.   26353.   26777.   26353.   25442.   24380.   23318. 
+ J=  9  22741.   23318.   24041.   24649.   24901.   24649.   24041.   23318.   22741. 
+
+ Plane K = 2
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  22769.   23346.   24069.   24677.   24929.   24677.   24069.   23346.   22769. 
+ J=  2  23346.   24408.   25470.   26381.   26805.   26381.   25470.   24408.   23346. 
+ J=  3  24069.   25470.   27021.   28573.   29525.   28573.   27021.   25470.   24069. 
+ J=  4  24677.   26381.   28573.   31360.   34144.   31360.   28573.   26381.   24677. 
+ J=  5  24929.   26805.   29525.   34144.   44284.i  34144.   29525.   26805.   24929. 
+ J=  6  24677.   26381.   28573.   31360.   34144.   31360.   28573.   26381.   24677. 
+ J=  7  24069.   25470.   27021.   28573.   29525.   28572.   27021.   25470.   24069. 
+ J=  8  23346.   24408.   25470.   26381.   26805.   26381.   25470.   24408.   23346. 
+ J=  9  22769.   23346.   24069.   24677.   24929.   24677.   24069.   23346.   22769. 
+
+ Plane K = 3
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  22797.   23374.   24097.   24705.   24957.   24705.   24097.   23374.   22797. 
+ J=  2  23374.   24436.   25498.   26409.   26833.   26409.   25498.   24436.   23374. 
+ J=  3  24097.   25498.   27049.   28600.   29553.   28600.   27049.   25498.   24097. 
+ J=  4  24705.   26409.   28600.   31387.   34172.   31387.   28600.   26409.   24705. 
+ J=  5  24957.   26833.   29553.   34172.   44312.i  34172.   29553.   26833.   24957. 
+ J=  6  24705.   26409.   28600.   31387.   34172.   31387.   28600.   26409.   24705. 
+ J=  7  24097.   25498.   27049.   28600.   29553.   28600.   27049.   25498.   24097. 
+ J=  8  23374.   24436.   25498.   26409.   26833.   26409.   25498.   24436.   23374. 
+ J=  9  22797.   23374.   24097.   24705.   24957.   24705.   24097.   23374.   22797. 
+
+                    Average reservoir pressure including aquifer blocks =  23991.77 kPa    
+                    Average reservoir pressure excluding aquifer blocks =      0.00 kPa    
+
+
+ Time =        500.00         **********************************************************************         DATE: MAY  15,1996
+                                         Implicit - Explicit Map    Implicit(*)  Explicit(.)
+                              **********************************************************************
+
+ Plane K = 1
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 2
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 3
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+1
+ ***********************************************************************************************************************************
+ TIME: 500.00 days                              I M E X   S E C T O R   S U M M A R Y                             DATE: 1996:05:15  
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+ 
+                                SECTOR-1                                                                                            
+                                Entire                                                                                              
+                                 Field                                                                                              
+   Total Pore Volume.  M rm3    480927                                                                                              
+   HC. Pore Volume     M rm3                                                                                                        
+ Fluids in Place
+   Total Gas          MM m3                                                                                                         
+   Free Gas           MM m3                                                                                                         
+   Water               M m3     474101                                                                                              
+   Reservoir Gas       M rm3                                                                                                        
+   Reservoir Water     M rm3    480927                                                                                              
+ Average Pressure 
+   Total Pore Volume  kPa        23992                                                                                              
+   HC. Pore Volume    kPa                                                                                                           
+ Average Saturation %
+   Gas                                                                                                                              
+   Water                        100.00                                                                                              
+ Percentage Recovery 
+   Total Gas                                                                                                                        
+   Water                       -.21137                                                                                              
+ Cumulative Injection 
+   Gas             MM m3                                                                                                            
+   Water            M m3        1000.0                                                                                              
+ Cumulative Production 
+   Gas             MM m3                                                                                                            
+   Water            M m3                                                                                                            
+ Injection Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day    2.0000                                                                                              
+ Production Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day                                                                                                        
+ 
+
+
+
+ 
+ Restart record at itime=   11 written to restart file
+
+ 
+ ***********************************************************************************************************************************
+ TIME:  500.00 days                              I M E X   F I E L D  S U M M A R Y                               DATE: 1996:MAY:15 
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+                                 +                     ++                     +
+                                 +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------++---------------------+
+                                 + No.       Name      ++ No.       Name      +
+                                 +---- ----------------++---- ----------------+
+                                 +   1        INJ      ++   1       Field     +
+ --------------------------------+---------------------++---------------------+
+ Well parameters                 +                     ++                     +
+   Well Type                     + Mob Unwtd Water Inj ++                     +
+   Status                        +          STW        ++                     +
+   On-time fraction              +          1.0        ++                     +
+   Cumulative Open days          +         500         ++         500         +
+ Well Pressures                  +                     ++                     +
+   Bottom Hole     kPa           +        72193        ++                     +
+   Grid Block      kPa           +        44256        ++                     +
+   Drawdown        kPa           +        27937        ++                     +
+   Ref Layer Head  kPa           +          0          ++                     +
+   Tubing Head     kPa           +                     ++                     +
+ Mobility Weighted Pressures     +                     ++                     +
+   P-P(0)          kPa           +        24257        ++                     +
+   Block Pressure  kPa           +        44256        ++                     +
+   Datum Pressure  kPa           +        44284        ++                     +
+ Inst Surface Injection Rates    +                     ++                     +
+   Oil             m3/day        +          0          ++          0          +
+   Water           m3/day        +         2000        ++         2000        +
+   Gas             Mm3/day       +          0          ++          0          +
+ Surface cumulative injection    +                     ++                     +
+   Well Open Time  days          +         500         ++         500         +
+   Oil             Mm3           +          0          ++          0          +
+   Water           Mm3           +         1000        ++         1000        +
+   Gas             MMm3          +          0          ++          0          +
+ ===================================================================================================================================
+ ===================================================================================================================================
+ 
+ ***********************************************************************************************************************************
+ TIME:  500.00 days                      I M E X   L A Y E R  S U M M A R Y  F O R  W E L L  1 ("INJ") .          DATE: 1996:MAY:15              
+ ***********************************************************************************************************************************
+                                                             WATER FLOODING, MXDRM002                                                            
+                                                                     MXDRM002                                                                    
+ ===================================================================================================================================
+                                +                     +                     +                     ++                     +
+          Well 1 ("INJ")        +        LAYER        +        LAYER        +        LAYER        ++    TOTAL FOR WELL   +
+          WATER INJECTOR        +---------------------+---------------------+---------------------++---------------------+
+                STW             +        Name         +        Name         +        Name         ++ No.       Name      +
+                                +---------------------+---------------------+---------------------++---- ----------------+
+                                +        5,5,1        +        5,5,2        +        5,5,3        ++   1        INJ      +
+ -------------------------------+---------------------+---------------------+---------------------++---------------------+
+ Layer status                   +         OPEN        +         OPEN        +         OPEN        ++                     +
+ Reference Layer (*)            +          *          +                     +                     ++                     +
+ Layer Pressures                +                     +                     +                     ++                     +
+   Bottom Hole     kPa          +     72193.084997    +     72221.537864    +     72249.991089    ++                     +
+   Grid Block      kPa          +     44256.242639    +     44284.352856    +     44312.463383    ++                     +
+   Drawdown        kPa          +     27936.842357    +     27937.185008    +     27937.527706    ++                     +
+   Head: playr-pwf kPa          +          0          +     28.452867205    +     56.906092512    ++                     +
+ Inst Surface Rates (+ = inj)   +                     +                     +                     ++                     +
+   Oil             m3/day       +          0          +          0          +          0          ++          0          +
+   Water           m3/day       +     666.6584896     +     666.66666629    +     666.67484412    ++         2000        +
+   Gas             Mm3/day      +          0          +          0          +          0          ++          0          +
+ Surface Cumulatives (+ = inj)  +                     +                     +                     ++                     +
+   Oil             Mm3          +          0          +          0          +          0          ++          0          +
+   Water           Mm3          +     333.32927688    +     333.33333289    +     333.33739024    ++         1000        +
+   Gas             MMm3         +          0          +          0          +          0          ++          0          +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+ 	   *TIME 500.0                    ** Normal termination should occur here.
+
+ ===================== SUMMARY (from subroutine: INWELL) ======================
+  Reading of well data is complete.
+  Simulation will stop if there were error messages.
+     3 Warning messages.    0 Error messages.
+ ==============================================================================
+
+1                                                           ******************************
+                                                               Current Well Definitions
+                                                            ******************************
+
+                                                .......................................................
+                                                .           Units for Well Index                      .
+                                                . Producers and Weighted Injectors    : md-m          .
+                                                . Unweighted oil and water Injectors  : m3/kPa-day    .
+                                                . Unweighted gas and solvent Injectors: m3/kPa-day    .
+                                                .......................................................
+**********************************************************************************************************************************************************
+*  WELL                       WELL    |     Constraint     |                    |   WELL     Oil PI    Wat PI    Gas PI    Sol PI    Pol PI    Swt PI    *
+*  No NAME            (STA)   Type    |Typ    Value  Units |No. I J K Location  |   INDEX    m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  m3/d/kPa  *
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+*   1 INJ             (OPN)UWt WatInj |STW 2.000E+03  m3/d |   1 5,5,1          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*                                     |                    |   2 5,5,2          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*                                     |                    |   3 5,5,3          | 2.386E-02  0.00      2.386E-02 0.00                                    *
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+                                                                                             0.00      7.159E-02 0.00                                     
+*--------------------------------------------------------------------------------------------------------------------------------------------------------*
+
+                             I M E X   T I M E   S T E P   S U M M A R Y
+                                      WATER FLOODING, MXDRM002
+                                              MXDRM002
+ ===================================================================================================
+    Time Step           Time          Total Production      Total Injection  Total Max. Max. Change
+ ---------------- ---------------- ----------------------- -----------------  PV   Mat. ------------
+                C                    Gas     Water    WGR    Gas     Water   Avg.  bal. Satur. Pres.
+        Size    U                                     M3/                    Pres. err. DSMAX  DPMAX
+  No.   days IT T days   yy:mm:dd   MM3/D     M3/D    MM3   MM3/D     M3/D    kPa   %           kPa
+ ------ ---- -- - ----- ---------- -------- -------- ----- -------- -------- ----- ---- ------ -----
+    12w  121 1  0 621.0 1996:09:13                                  2000.000 24949 e-5w  1e-9g  1000
+    13   121 1  0 742.0 1997:01:12                                  2000.000 25906 e-4w  1e-9g   982
+    14   121 1  0 863.0 1997:05:13                                  2000.000 26861 e-4w  1e-9g   971
+    15  68.5 1  0 931.5 1997:07:21                                  2000.000 27402 e-4w  e-10g   547
+    16  68.5 1  0  1000 1997:09:27                                  2000.000 27942 e-4w  e-10g   545
+
+
+ Time =       1000.00         **********************************************************************         DATE: SEPT 27,1997
+                                                      Oil Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =       1000.00         **********************************************************************         DATE: SEPT 27,1997
+                                                      Gas Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  0.000        
+
+
+ Time =       1000.00         **********************************************************************         DATE: SEPT 27,1997
+                                                     Water Saturation (fraction)
+                              **********************************************************************
+
+                                                       All values are  1.000        
+
+
+ Time =       1000.00         **********************************************************************         DATE: SEPT 27,1997
+                                                           Pressure (kPa)
+                              **********************************************************************
+
+ Plane K = 1
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  26573.   27203.   28001.   28670.   28945.   28670.   28001.   27203.   26573. 
+ J=  2  27203.   28303.   29404.   30345.   30780.   30345.   29404.   28303.   27203. 
+ J=  3  28001.   29404.   30965.   32526.   33483.   32526.   30965.   29404.   28001. 
+ J=  4  28670.   30345.   32526.   35310.   38090.   35310.   32526.   30345.   28670. 
+ J=  5  28945.   30780.   33483.   38090.   48213.i  38090.   33483.   30780.   28945. 
+ J=  6  28670.   30345.   32526.   35310.   38090.   35310.   32526.   30345.   28670. 
+ J=  7  28001.   29404.   30965.   32526.   33483.   32526.   30965.   29403.   28000. 
+ J=  8  27203.   28303.   29403.   30345.   30780.   30345.   29403.   28303.   27203. 
+ J=  9  26573.   27203.   28000.   28670.   28945.   28670.   28000.   27203.   26573. 
+
+ Plane K = 2
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  26601.   27231.   28028.   28698.   28973.   28698.   28028.   27231.   26601. 
+ J=  2  27231.   28331.   29431.   30373.   30808.   30373.   29431.   28331.   27231. 
+ J=  3  28028.   29431.   30993.   32554.   33511.   32554.   30993.   29431.   28028. 
+ J=  4  28698.   30373.   32554.   35338.   38118.   35338.   32554.   30373.   28698. 
+ J=  5  28973.   30808.   33511.   38118.   48241.i  38118.   33511.   30808.   28973. 
+ J=  6  28698.   30373.   32554.   35338.   38118.   35338.   32554.   30373.   28698. 
+ J=  7  28028.   29431.   30993.   32554.   33511.   32554.   30993.   29431.   28028. 
+ J=  8  27231.   28331.   29431.   30373.   30808.   30373.   29431.   28331.   27231. 
+ J=  9  26601.   27231.   28028.   28697.   28973.   28697.   28028.   27231.   26601. 
+
+ Plane K = 3
+      I =  1        2        3        4        5        6        7        8        9
+ J=  1  26628.   27259.   28056.   28725.   29001.   28725.   28056.   27259.   26629. 
+ J=  2  27259.   28359.   29459.   30401.   30836.   30401.   29459.   28359.   27259. 
+ J=  3  28056.   29459.   31021.   32582.   33539.   32582.   31021.   29459.   28056. 
+ J=  4  28725.   30401.   32582.   35366.   38146.   35366.   32582.   30401.   28725. 
+ J=  5  29001.   30836.   33539.   38146.   48269.i  38146.   33539.   30836.   29001. 
+ J=  6  28725.   30401.   32582.   35366.   38146.   35366.   32582.   30401.   28725. 
+ J=  7  28056.   29459.   31021.   32582.   33539.   32582.   31021.   29459.   28056. 
+ J=  8  27259.   28359.   29459.   30401.   30836.   30401.   29459.   28359.   27259. 
+ J=  9  26628.   27259.   28056.   28725.   29001.   28725.   28056.   27259.   26628. 
+
+                    Average reservoir pressure including aquifer blocks =  27942.47 kPa    
+                    Average reservoir pressure excluding aquifer blocks =      0.00 kPa    
+
+
+ Time =       1000.00         **********************************************************************         DATE: SEPT 27,1997
+                                         Implicit - Explicit Map    Implicit(*)  Explicit(.)
+                              **********************************************************************
+
+ Plane K = 1
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 2
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+
+ Plane K = 3
+      I = 1     2     3     4     5     6     7     8     9
+ J=  1    .     .     .     .     .     .     .     .     . 
+ J=  2    .     .     .     .     .     .     .     .     . 
+ J=  3    .     .     .     .     .     .     .     .     . 
+ J=  4    .     .     .     .     .     .     .     .     . 
+ J=  5    .     .     .     .     *i    .     .     .     . 
+ J=  6    .     .     .     .     .     .     .     .     . 
+ J=  7    .     .     .     .     .     .     .     .     . 
+ J=  8    .     .     .     .     .     .     .     .     . 
+ J=  9    .     .     .     .     .     .     .     .     . 
+1
+ ***********************************************************************************************************************************
+ TIME: 1000.0 days                              I M E X   S E C T O R   S U M M A R Y                             DATE: 1997:09:27  
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+ 
+                                SECTOR-1                                                                                            
+                                Entire                                                                                              
+                                 Field                                                                                              
+   Total Pore Volume.  M rm3    481117                                                                                              
+   HC. Pore Volume     M rm3                                                                                                        
+ Fluids in Place
+   Total Gas          MM m3                                                                                                         
+   Free Gas           MM m3                                                                                                         
+   Water               M m3     475102                                                                                              
+   Reservoir Gas       M rm3                                                                                                        
+   Reservoir Water     M rm3    481117                                                                                              
+ Average Pressure 
+   Total Pore Volume  kPa        27942                                                                                              
+   HC. Pore Volume    kPa                                                                                                           
+ Average Saturation %
+   Gas                                                                                                                              
+   Water                        100.00                                                                                              
+ Percentage Recovery 
+   Total Gas                                                                                                                        
+   Water                       -.42274                                                                                              
+ Cumulative Injection 
+   Gas             MM m3                                                                                                            
+   Water            M m3        2000.0                                                                                              
+ Cumulative Production 
+   Gas             MM m3                                                                                                            
+   Water            M m3                                                                                                            
+ Injection Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day    2.0000                                                                                              
+ Production Rate 
+   Gas             MM m3/day                                                                                                        
+   Water            M m3/day                                                                                                        
+ 
+
+
+
+ 
+ Restart record at itime=   16 written to restart file
+
+ 
+ ***********************************************************************************************************************************
+ TIME:  1000.0 days                              I M E X   F I E L D  S U M M A R Y                               DATE: 1997:SEP:27 
+ ***********************************************************************************************************************************
+                                                      WATER FLOODING, MXDRM002                                                      
+                                                              MXDRM002                                                              
+ ===================================================================================================================================
+                                 +                     ++                     +
+                                 +         WELL        ++   TOTAL FOR GROUP   +
+                                 +---------------------++---------------------+
+                                 + No.       Name      ++ No.       Name      +
+                                 +---- ----------------++---- ----------------+
+                                 +   1        INJ      ++   1       Field     +
+ --------------------------------+---------------------++---------------------+
+ Well parameters                 +                     ++                     +
+   Well Type                     + Mob Unwtd Water Inj ++                     +
+   Status                        +          STW        ++                     +
+   On-time fraction              +          1.0        ++                     +
+   Cumulative Open days          +         1000        ++         1000        +
+ Well Pressures                  +                     ++                     +
+   Bottom Hole     kPa           +        76150        ++                     +
+   Grid Block      kPa           +        48213        ++                     +
+   Drawdown        kPa           +        27937        ++                     +
+   Ref Layer Head  kPa           +          0          ++                     +
+   Tubing Head     kPa           +                     ++                     +
+ Mobility Weighted Pressures     +                     ++                     +
+   P-P(0)          kPa           +        28213        ++                     +
+   Block Pressure  kPa           +        48213        ++                     +
+   Datum Pressure  kPa           +        48241        ++                     +
+ Inst Surface Injection Rates    +                     ++                     +
+   Oil             m3/day        +          0          ++          0          +
+   Water           m3/day        +         2000        ++         2000        +
+   Gas             Mm3/day       +          0          ++          0          +
+ Surface cumulative injection    +                     ++                     +
+   Well Open Time  days          +         1000        ++         1000        +
+   Oil             Mm3           +          0          ++          0          +
+   Water           Mm3           +         2000        ++         2000        +
+   Gas             MMm3          +          0          ++          0          +
+ ===================================================================================================================================
+ ===================================================================================================================================
+ 
+ ***********************************************************************************************************************************
+ TIME:  1000.0 days                      I M E X   L A Y E R  S U M M A R Y  F O R  W E L L  1 ("INJ") .          DATE: 1997:SEP:27              
+ ***********************************************************************************************************************************
+                                                             WATER FLOODING, MXDRM002                                                            
+                                                                     MXDRM002                                                                    
+ ===================================================================================================================================
+                                +                     +                     +                     ++                     +
+          Well 1 ("INJ")        +        LAYER        +        LAYER        +        LAYER        ++    TOTAL FOR WELL   +
+          WATER INJECTOR        +---------------------+---------------------+---------------------++---------------------+
+                STW             +        Name         +        Name         +        Name         ++ No.       Name      +
+                                +---------------------+---------------------+---------------------++---- ----------------+
+                                +        5,5,1        +        5,5,2        +        5,5,3        ++   1        INJ      +
+ -------------------------------+---------------------+---------------------+---------------------++---------------------+
+ Layer status                   +         OPEN        +         OPEN        +         OPEN        ++                     +
+ Reference Layer (*)            +          *          +                     +                     ++                     +
+ Layer Pressures                +                     +                     +                     ++                     +
+   Bottom Hole     kPa          +     76149.920548    +     76178.424602    +     76206.929015    ++                     +
+   Grid Block      kPa          +     48213.080641    +     48241.239592    +     48269.398862    ++                     +
+   Drawdown        kPa          +     27936.839908    +     27937.18501     +     27937.530153    ++                     +
+   Head: playr-pwf kPa          +          0          +     28.504053452    +     57.008466942    ++                     +
+ Inst Surface Rates (+ = inj)   +                     +                     +                     ++                     +
+   Oil             m3/day       +          0          +          0          +          0          ++          0          +
+   Water           m3/day       +     666.65843114    +     666.66666635    +     666.67490251    ++         2000        +
+   Gas             Mm3/day      +          0          +          0          +          0          ++          0          +
+ Surface Cumulatives (+ = inj)  +                     +                     +                     ++                     +
+   Oil             Mm3          +          0          +          0          +          0          ++          0          +
+   Water           Mm3          +     666.65854281    +     666.66666597    +     666.67479122    ++         2000        +
+   Gas             MMm3         +          0          +          0          +          0          ++          0          +
+ ===================================================================================================================================
+ ===================================================================================================================================
+1
+ 	   *TIME 1000.0                    ** Normal termination should occur here.
+
+ ===================== SUMMARY (from subroutine: TSIO)   ======================
+  Simulation run terminated. Stopping time reached.
+    
+     3 Warning messages.    0 Error messages.
+ ==============================================================================
+
+
+
+     ***********************************************
+     A V A I L A B L E    R E S T A R T    T I M E S
+     ***********************************************
+ 
+      Time          Time                 Date
+      Step         (days)             yyyy:mm:dd
+     ======     =============     ==================
+          0     0.00000000000     1995:01:01
+          7     100.000000000     1995:04:11
+         11     500.000000000     1996:05:15
+         16     1000.00000000     1997:09:27
+
+
+       Field Total                                   Fluid
+                             Oil       Gas       Water    Solvent   Polymer    Salt
+                            -------   -------   -------   -------   -------   -------
+                            (MM3)     (MMM3)    (MM3)     (MMM3)     (MKG)     (MKG)     
+  Cumulative Production       NA         0         0        NA        NA        NA   
+  Cumulative Injection        NA         0       2000.0     NA        NA        NA   
+  Cumulative Gas Lift         NA         0        NA        NA        NA        NA   
+  Cumulative Aquifer Influx   NA        NA         0        NA        NA        NA   
+  Current Fluids In Place     NA      -.03675    475102     NA        NA        NA   
+  Production Rates            NA         0         0        NA        NA        NA   
+  Injection Rates             NA         0       2.0000     NA        NA        NA   
+
+  Timesteps:     16  Newton Cycles:       16  Cuts:      0  Solver Iterations:           73
+  Average Implicitness    : 0.012
+  Fluid Component Model   : WATER + OIL + GAS (SINGLE-P)
+  Material Balances (wg): 1.000 1.000
+  Average Active Blocks:         243 Average Non-BHP Active Wells:     1
+  Total Blocks :         243 Total Wells :     1
+  Active Blocks:         243 Non-BHP Active Wells:     1
+  Time at end of simulation:   1000.00     (days)
+  Average reservoir pressure excluding water zone:          (kPa)
+  Total Number of Solver Failures:       0  Stalls:       0  ITERMAX Reached:       0
+  Jacobian Domains      1  (DOMS)
+  Total lstpro/lstpar calls:     2  (    0)
+  Linear Solver: Parasol
+  Number of level 1 solver classes:    1
+  AUTOPSLAB Cutting Direction:    J
+  Preconditioner Ordering: REDBLACK
+  Preconditioner Degree aa, ab, as, bb, ba:    1    2    1    1    1
+  KMP_AFFINITY: Default
+  OMP_SCHEDULE: Default
+  Max Impl Blocks:        3  %Impl:  1.2%  (TS,CUT,NCYC): (     1, 0,  1 )
+  Max Solver Iterations (TS,CUT,NCYC):       5 (     8, 0,  1 )
+  Number of threads set:    1
+  Total number of cpus:   16
+  Memory Usage Peak:       46 MB on TS:    12 TS 1 Peak:       41 MB  Average:       44 MB  VM Size:       55 MB
+  Memory Usage Final Size:         47 MB
+  Host computer: DESKTOP-V8OLSF1
+  Elapsed Time:         0.55 seconds
+
+  End of Simulation: Normal Termination
+
+  Date and Time of End of Run:  Mar  6, 2025  21:47:38
+

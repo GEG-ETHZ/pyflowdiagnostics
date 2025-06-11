@@ -1,0 +1,110 @@
+<eclipse>
+<message date="1/1/2000" time="0.00000000000000">
+ CHECKING FOR LICENSES                                                   
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ ECLIPSE SPECIAL OPTIONS CHECKED OUT:                                    
+ lgr                                                                     
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ CHECKING FOR LICENSES                                                   
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ ECLIPSE LICENSE CHECKED OUT                                             
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ THE MEMORY REQUIRED TO PROCESS THE GRID SECTION IS                      
+      25242 KBYTES                                                       
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ NEITHER OLDTRAN,OLDTRANR NOR NEWTRAN SPECIFIED                          
+ BLOCK CENTRE TRANSMISSIBILITIES TO BE CALCULATED                        
+ USING  OLDTRAN                                                          
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ 15 NON-NEIGHBOUR CONNECTIONS PRESENT                                    
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ NUMBER OF ACTIVE GLOBAL CELLS IS 456                                    
+ NUMBER OF ACTIVE  LOCAL CELLS IS 0                                      
+  TOTAL NUMBER OF ACTIVE CELLS IS 456                                    
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ THE MEMORY REQUIRED TO PROCESS THE SOLUTION SECTION IS                  
+       7303 KBYTES                                                       
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+    63868 CHARACTER VARIABLES USED                                       
+</message>
+<warning date="1/1/2000" time="0.00000000000000">
+ INITIAL WATER SATURATION(S) ARE BELOW MINIMUM VALUE(S)                  
+ IN A TOTAL OF 441 GRID BLOCK(S) IN THE GLOBAL GRID.                     
+ THE LOWEST VALUE (RELATIVE TO ITS MINIMUM) OCCURS IN                    
+ GRID BLOCK (1, 1, 1) WHERE:                                             
+ EXPECTED MINIMUM INITIAL WATER SATURATION IS 0.00000                    
+ CURRENT INITIAL WATER SATURATION IS 0.10000                             
+ EXPECTED MAXIMUM INITIAL WATER SATURATION IS 1.00000                    
+ RESULTS MAY NOT BE PHYSICAL AND/OR CONVERGENCE ISSUES MAY OCCUR.        
+ PLEASE ENSURE DATA ARE WITHIN THE RIGHT RANGE                           
+</warning>
+<warning date="1/1/2000" time="0.00000000000000">
+ INITIAL OIL SATURATION(S) ARE ABOVE MAXIMUM VALUE(S)                    
+ IN A TOTAL OF 441 GRID BLOCK(S) IN THE GLOBAL GRID.                     
+ THE HIGHEST VALUE (RELATIVE TO ITS MAXIMUM) OCCURS IN                   
+ GRID BLOCK (1, 1, 1) WHERE:                                             
+ EXPECTED MINIMUM INITIAL OIL SATURATION IS 0.00000                      
+ CURRENT INITIAL OIL SATURATION IS 0.90000                               
+ EXPECTED MAXIMUM INITIAL OIL SATURATION IS 1.00000                      
+ RESULTS MAY NOT BE PHYSICAL AND/OR CONVERGENCE ISSUES MAY OCCUR.        
+ PLEASE ENSURE DATA ARE WITHIN THE RIGHT RANGE                           
+</warning>
+<warning date="1/1/2000" time="0.00000000000000">
+ THE BOTTOM HOLE PRESSURE LIMIT FOR WELL INJ                             
+ HAS BEEN DEFAULTED. THE DEFAULT VALUE IS  100000.   PSIA                
+</warning>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL INJ      AT TIME      0.00   DAYS                          
+ CONTROLLED BY WATER RATE                                                
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL PRD      AT TIME      0.00   DAYS                          
+ CONTROLLED BY BOTTOM HOLE PRESSURE                                      
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ RESTART FILE WRITTEN   REPORT     0                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<message date="14/4/2000" time="104.34940467234954">
+ ******************************************                              
+ * WELL INJ      HAS CHANGED TO           *                              
+ * CONTROL BY BOTTOM HOLE PRESSURE        *                              
+ * FROM TIME    104.35   DAYS  .          *                              
+ ******************************************                              
+</message>
+<message date="31/12/2000" time="365.00000000000000">
+ RESTART FILE WRITTEN   REPORT     1                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<message date="31/12/2001" time="730.00000000000000">
+ RESTART FILE WRITTEN   REPORT     2                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<message date="31/12/2002" time="1095.00000000000000">
+ RESTART FILE WRITTEN   REPORT     3                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<message date="31/12/2003" time="1460.00000000000000">
+ RESTART FILE WRITTEN   REPORT     4                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<message date="30/12/2004" time="1825.00000000000000">
+ RESTART FILE WRITTEN   REPORT     5                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+</eclipse>

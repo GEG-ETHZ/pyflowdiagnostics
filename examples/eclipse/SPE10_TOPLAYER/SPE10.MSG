@@ -1,0 +1,123 @@
+<eclipse>
+<message date="1/1/2000" time="0.00000000000000">
+ CHECKING FOR LICENSES                                                   
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ CHECKING FOR LICENSES                                                   
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ ECLIPSE LICENSE CHECKED OUT                                             
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ THE MEMORY REQUIRED TO PROCESS THE GRID SECTION IS                      
+       6356 KBYTES                                                       
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ NEITHER OLDTRAN,OLDTRANR NOR NEWTRAN SPECIFIED                          
+ BLOCK CENTRE TRANSMISSIBILITIES TO BE CALCULATED                        
+ USING  OLDTRAN                                                          
+</message>
+<comment date="1/1/2000" time="0.00000000000000">
+ NO NON-NEIGHBOUR CONNECTIONS FOUND                                      
+</comment>
+<message date="1/1/2000" time="0.00000000000000">
+ NUMBER OF ACTIVE CELLS IS 13132                                         
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ THE MEMORY REQUIRED TO PROCESS THE SOLUTION SECTION IS                  
+      13139 KBYTES                                                       
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+    62296 CHARACTER VARIABLES USED                                       
+</message>
+<warning date="1/1/2000" time="0.00000000000000">
+ INITIAL WATER SATURATION(S) ARE BELOW MINIMUM VALUE(S)                  
+ IN A TOTAL OF 13132 GRID BLOCK(S) IN THE GLOBAL GRID.                   
+ THE LOWEST VALUE (RELATIVE TO ITS MINIMUM) OCCURS IN                    
+ GRID BLOCK (1, 1, 1) WHERE:                                             
+ EXPECTED MINIMUM INITIAL WATER SATURATION IS 0.25000                    
+ CURRENT INITIAL WATER SATURATION IS 0.10000                             
+ EXPECTED MAXIMUM INITIAL WATER SATURATION IS 0.70000                    
+ RESULTS MAY NOT BE PHYSICAL AND/OR CONVERGENCE ISSUES MAY OCCUR.        
+ PLEASE ENSURE DATA ARE WITHIN THE RIGHT RANGE                           
+</warning>
+<warning date="1/1/2000" time="0.00000000000000">
+ INITIAL OIL SATURATION(S) ARE ABOVE MAXIMUM VALUE(S)                    
+ IN A TOTAL OF 13132 GRID BLOCK(S) IN THE GLOBAL GRID.                   
+ THE HIGHEST VALUE (RELATIVE TO ITS MAXIMUM) OCCURS IN                   
+ GRID BLOCK (1, 1, 1) WHERE:                                             
+ EXPECTED MINIMUM INITIAL OIL SATURATION IS 0.30000                      
+ CURRENT INITIAL OIL SATURATION IS 0.90000                               
+ EXPECTED MAXIMUM INITIAL OIL SATURATION IS 0.75000                      
+ RESULTS MAY NOT BE PHYSICAL AND/OR CONVERGENCE ISSUES MAY OCCUR.        
+ PLEASE ENSURE DATA ARE WITHIN THE RIGHT RANGE                           
+</warning>
+<warning date="1/1/2000" time="0.00000000000000">
+ THE BOTTOM HOLE PRESSURE LIMIT FOR WELL I*                              
+ HAS BEEN DEFAULTED. THE DEFAULT VALUE IS  100000.   PSIA                
+</warning>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL I1       AT TIME      0.00   DAYS                          
+ CONTROLLED BY WATER RATE                                                
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL I2       AT TIME      0.00   DAYS                          
+ CONTROLLED BY WATER RATE                                                
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL P1       AT TIME      0.00   DAYS                          
+ CONTROLLED BY BOTTOM HOLE PRESSURE                                      
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL P2       AT TIME      0.00   DAYS                          
+ CONTROLLED BY BOTTOM HOLE PRESSURE                                      
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL P3       AT TIME      0.00   DAYS                          
+ CONTROLLED BY BOTTOM HOLE PRESSURE                                      
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ OPENING WELL P4       AT TIME      0.00   DAYS                          
+ CONTROLLED BY BOTTOM HOLE PRESSURE                                      
+</message>
+<message date="1/1/2000" time="0.00000000000000">
+ RESTART FILE WRITTEN   REPORT     0                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<problem date="1/1/2000" time="0.00000000000000">
+ NON-LINEAR EQUATION CONVERGENCE FAILURE (INIT)                          
+ ITERATION LIMIT REACHED - TIME STEP CHOPPED FROM   1.00 DAYS            
+</problem>
+<problem date="1/1/2000" time="0.00000000000000">
+ NON-LINEAR EQUATION CONVERGENCE FAILURE                                 
+ ITERATION LIMIT REACHED - BUT TIME STEP                                 
+ ACCEPTED BECAUSE IT IS TOO SMALL TO CHOP.                               
+ USE KEYWORD MESSOPTS TO MODIFY THE SEVERITY CODE FOR                    
+ MESSAGES REPORTING TIME STEPS FORCED TO BE ACCEPTED.                    
+</problem>
+<message date="2/1/2000" time="1.70000002533197">
+ ******************************************                              
+ * WELL I1       HAS CHANGED TO           *                              
+ * CONTROL BY BOTTOM HOLE PRESSURE        *                              
+ * FROM TIME      1.70   DAYS  .          *                              
+ ******************************************                              
+</message>
+<message date="7/1/2000" time="6.32660395850228">
+ ******************************************                              
+ * WELL I2       HAS CHANGED TO           *                              
+ * CONTROL BY BOTTOM HOLE PRESSURE        *                              
+ * FROM TIME      6.33   DAYS  .          *                              
+ ******************************************                              
+</message>
+<message date="10/4/2000" time="100.00000000000000">
+ RESTART FILE WRITTEN   REPORT     1                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+<message date="19/7/2000" time="200.00000000000000">
+ RESTART FILE WRITTEN   REPORT     2                                     
+ RESTART INCLUDES INTERBLOCK FLOWS                                       
+                  WATER AND GAS PHASE PRESSURES                          
+</message>
+</eclipse>

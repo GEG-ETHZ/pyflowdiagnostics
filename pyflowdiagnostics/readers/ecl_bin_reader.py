@@ -13,8 +13,10 @@
 
 import numpy as np
 import struct
-import os
 import logging
+import os
+from collections import defaultdict
+from datetime import datetime
 
 __all__ = ["EclReader", ]
 
@@ -43,7 +45,7 @@ class EclReader:
         """Initializes the EclReader object.
 
         Args:
-            input_file_path (str): Path to the main ECLIPSE input file (.DATA or .IXF).
+            input_file_path (str): Path to the main ECLIPSE input file (.DATA or .AFI).
 
         Raises:
             FileNotFoundError: If the input file or any required related file is not found.
@@ -80,13 +82,12 @@ class EclReader:
         return self._read_bin(self.egrid_file_path, keys)
 
 
-    def read_rst(self, keys: list = None, tstep_id: int = None, unified: bool = False) -> dict:
-        """Reads data from a restart file (.X00xx).
+    def read_rst(self, keys: list = None, tstep_id: int = None) -> dict:
+        """Reads data from a restart file (UNRST or .X00xx).
 
         Args:
             keys (list, optional): List of keys to read. If None, all keys are read. Defaults to None.
             tstep_id (int, optional): Time step ID. Required for reading restart files. Defaults to None.
-            unified (bool, optional): Whether to read a unified restart file (.UNRST).  Not yet implemented. Defaults to False.
 
         Returns:
             dict: Dictionary containing the requested data, keyed by the provided keys.
@@ -98,16 +99,230 @@ class EclReader:
             FileNotFoundError: If the specified restart file is not found.
         """
 
-        if unified:
-            raise NotImplementedError("Unified restart file (.UNRST) support is not yet implemented.")
         if tstep_id is None:
             raise ValueError("Missing required argument: tstep_id.")
 
+        if self.unrst_file_path is not None:
+            data = self._read_unrst(self.unrst_file_path, keys)
+            d_out = {}
+            for key in keys:
+                if tstep_id >= len(data.get(key, [])):
+                    d_out[key] = np.array([])
+                else:
+                    d_out[key] = data[key][tstep_id]
+            return d_out
+
+        return self.read_rst_step(keys, tstep_id)
+
+
+    def read_rst_step(self, keys: list = None, tstep_id: int = None) -> dict:
         file_path = f"{self.input_file_path_base}.X{self._int2ext(tstep_id)}"
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"Restart file not found: {file_path}")
-
         return self._read_bin(file_path, keys)
+
+
+    def read_unrst(self, file_path: str, keys: list = None, tstep_id: int = None) -> dict:
+        result_dict = {"TIME": [], "DATE": []}
+        if keys:
+            for key in keys:
+                result_dict[key] = []
+
+        time_steps = []
+
+        with open(file_path, 'rb') as fid:
+            endian = self._detect_endian(fid)
+            current_position = fid.tell()
+            cumulative_days = 0
+
+            # 1. Index all timesteps
+            while True:
+                data, _, key = self._load_vector(fid, endian)
+                key = key.strip()
+
+                if key == "SEQNUM":
+                    time_steps.append((data[0], current_position))
+
+                current_position = fid.tell()
+                if fid.tell() >= os.fstat(fid.fileno()).st_size:
+                    break
+
+            # print("Raw SEQNUM values:", [s for s, _ in time_steps])
+
+            # Fix: SEQNUM marks the next timestep, so shift by -1
+            # time_steps = [(max(0, seqnum - 1), pos) for seqnum, pos in time_steps]
+
+            def read_one_timestep(fid, pos):
+                fid.seek(pos)
+                result = {}
+                found_keys = {k: False for k in keys} if keys else {}
+
+                while keys is None or not all(found_keys.values()):
+                    data, _, key = self._load_vector(fid, endian)
+                    key = key.strip()
+
+                    if key == "INTEHEAD":
+                        IDAY, IMON, IYEAR = data[64], data[65], data[66]
+                        result["DATE"] = datetime(IYEAR, IMON, IDAY)
+
+                        if keys and "INTEHEAD" in found_keys:
+                            result["INTEHEAD"] = data
+                            found_keys["INTEHEAD"] = True
+
+                    elif keys and key in found_keys:
+                        if isinstance(data, np.ndarray):
+                            result[key] = data
+                        elif isinstance(data, (bytes, str)):
+                            result[key] = data.decode(errors="ignore").strip()
+                        elif isinstance(data, (int, float)):
+                            result[key] = np.array([data], dtype=np.float32)
+                        else:
+                            result[key] = data
+                        found_keys[key] = True
+
+                    if fid.tell() >= os.fstat(fid.fileno()).st_size:
+                        break
+
+                # Fill missing keys with empty numpy arrays
+                if keys:
+                    for k in keys:
+                        if k not in result:
+                            result[k] = np.array([])
+
+                return result
+
+            # 2. Read specific timestep
+            if tstep_id is not None:
+                match = [t for t in time_steps if t[0] == tstep_id]
+                if not match:
+                    raise ValueError(f"Timestep {tstep_id} not found in {file_path}")
+                step_data = read_one_timestep(fid, match[0][1])
+                # Only return requested keys
+                if keys:
+                    return {k: step_data.get(k, np.array([])) for k in keys}
+                else:
+                    return step_data
+
+            # 3. Read all timesteps
+            previous_date = None
+            for step, pos in time_steps:
+                step_data = read_one_timestep(fid, pos)
+
+                # Track DATE and TIME
+                if "DATE" in step_data:
+                    curr_date = step_data["DATE"]
+                    if previous_date is None:
+                        cumulative_days = 0
+                    else:
+                        cumulative_days += (curr_date - previous_date).days
+                    previous_date = curr_date
+
+                    result_dict["TIME"].append(cumulative_days)
+                    result_dict["DATE"].append(curr_date)
+
+                # Append each key, even if data is missing
+                if keys:
+                    for key in keys:
+                        value = step_data.get(key, np.array([]))
+                        result_dict[key].append(value)
+
+        return result_dict
+
+    from collections import defaultdict
+    from datetime import datetime
+    import os
+    import numpy as np
+
+    def _read_unrst(self, file_path: str, keys: list = None, tstep_id: int = None) -> dict:
+        def read_one_timestep(fid, pos, endian, keys):
+            """Reads a full timestep starting at position `pos`."""
+            fid.seek(pos)
+            result_tmp = {}
+
+            while True:
+                data, _, key = self._load_vector(fid, endian)
+                key = key.strip()
+
+                if key == "INTEHEAD":
+                    IDAY, IMON, IYEAR = data[64], data[65], data[66]
+                    result_tmp["DATE"] = datetime(IYEAR, IMON, IDAY)
+                    result_tmp["INTEHEAD"] = data  # Keep as np.ndarray
+
+                elif isinstance(data, np.ndarray):
+                    result_tmp[key] = data
+                elif isinstance(data, (bytes, str)):
+                    result_tmp[key] = data.decode(errors="ignore").strip() if isinstance(data, bytes) else data.strip()
+                else:
+                    result_tmp[key] = np.array([data])
+
+                if fid.tell() >= os.fstat(fid.fileno()).st_size:
+                    break
+
+                peek_pos = fid.tell()
+                try:
+                    _, _, next_key = self._load_vector(fid, endian)
+                    if next_key.strip() == "SEQNUM":
+                        break
+                except Exception:
+                    break
+                fid.seek(peek_pos)
+
+            if keys is not None:
+                result_tmp = {k: v for k, v in result_tmp.items() if k in keys or k == "DATE"}
+
+            return result_tmp
+
+        result_dict = defaultdict(list)
+        time_steps = []
+
+        with open(file_path, 'rb') as fid:
+            endian = self._detect_endian(fid)
+            file_size = os.fstat(fid.fileno()).st_size
+
+            while fid.tell() < file_size:
+                pos = fid.tell()
+                data, _, key = self._load_vector(fid, endian)
+                if key.strip() == "SEQNUM":
+                    time_steps.append((data[0], pos))
+
+        # Initialize result_dict with empty lists for all requested keys
+        if keys:
+            for k in keys:
+                result_dict[k] = []
+
+        if tstep_id is not None:
+            match = [t for t in time_steps if t[0] == tstep_id]
+            if not match:
+                raise ValueError(f"Timestep {tstep_id} not found in {file_path}")
+            with open(file_path, 'rb') as fid:
+                return read_one_timestep(fid, match[0][1], endian, keys)
+
+        cumulative_days = 0
+        previous_date = None
+
+        for step, pos in time_steps:
+            with open(file_path, 'rb') as fid_inner:
+                result = read_one_timestep(fid_inner, pos, endian, keys)
+
+            if "DATE" in result:
+                current_date = result["DATE"]
+                if previous_date:
+                    cumulative_days += (current_date - previous_date).days
+                result_dict["TIME"].append(cumulative_days)
+                result_dict["DATE"].append((current_date.year, current_date.month, current_date.day, 0, 0))
+                previous_date = current_date
+
+            for k in keys or result.keys():
+                if k in result:
+                    result_dict[k].append(result[k])
+
+        # Ensure all explicitly requested keys that were never found remain empty
+        if keys:
+            for k in keys:
+                if k not in result_dict:
+                    result_dict[k] = []
+
+        return dict(result_dict)
 
 
     # ---- Private Methods ---------------------------------------------------------------------------------------------
@@ -139,15 +354,22 @@ class EclReader:
         Raises:
             FileNotFoundError: If any of the required files (.INIT, .EGRID) are not found.
         """
-        self.init_file_path = f"{self.input_file_path_base}.INIT"
-        self.egrid_file_path = f"{self.input_file_path_base}.EGRID"
-        self.unrst_file_path = f"{self.input_file_path_base}.UNRST"
 
-        required_files = [self.init_file_path, self.egrid_file_path]
-        for file in required_files:
-            if not os.path.exists(file):
-                raise FileNotFoundError(f"Required file not found: {file}")
-        # TODO: Support both UNRST and X00xx files
+        def find_file_with_known_cases(base: str, ext: str) -> str:
+            for suffix in [ext.upper(), ext.lower()]:
+                candidate = f"{base}.{suffix}"
+                if os.path.exists(candidate):
+                    return candidate
+            raise FileNotFoundError(f"Required file not found: {base}.{ext} (tried {ext.upper()} and {ext.lower()})")
+
+        self.init_file_path = find_file_with_known_cases(self.input_file_path_base, "INIT")
+        self.egrid_file_path = find_file_with_known_cases(self.input_file_path_base, "EGRID")
+        self.unrst_file_path = None
+        for suffix in ["UNRST", "unrst"]:
+            candidate = f"{self.input_file_path_base}.{suffix}"
+            if os.path.exists(candidate):
+                self.unrst_file_path = candidate
+                break
 
 
     def _read_bin(self, file_path: str, keys: list) -> dict:

@@ -1,0 +1,25 @@
+EclReader
+=========
+
+.. currentmodule:: pyflowdiagnostics.readers.ecl_bin_reader
+
+.. autoclass:: EclReader
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~EclReader.read_egrid
+      ~EclReader.read_init
+      ~EclReader.read_rst
+      ~EclReader.read_rst_step
+      ~EclReader.read_unrst
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: read_egrid
+   .. automethod:: read_init
+   .. automethod:: read_rst
+   .. automethod:: read_rst_step
+   .. automethod:: read_unrst

@@ -25,7 +25,7 @@ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 import logging
 
 import h5py
-import os, math
+import math
 from datetime import datetime
 import numpy as np
 import pandas as pd
@@ -92,7 +92,7 @@ class RawHDF:
 
     def __call__(self, name, h5obj):
         # Only h5py datasets have dtype attribute, so we can search on this
-        if hasattr(h5obj, 'dtype') and not name in self.names:
+        if hasattr(h5obj, 'dtype') and name not in self.names:
             self.names += [name]
             dataset = np.array(self.file[name][:])
             self.data[name] = dataset
@@ -104,7 +104,7 @@ class RawHDF:
                 wells_datasets = ['TimeSeries/WELLS/Origins', 'TimeSeries/WELLS/Variables',
                                   'TimeSeries/WELLS/Data', 'TimeSeries/WELLS/Timesteps']
                 for name in wells_datasets:
-                    if not name in self.names:
+                    if name not in self.names:
                         self.names += [name]
                         dataset = np.array(self.file[name][:])
                         self.data[name] = dataset
@@ -370,7 +370,7 @@ def get_layers_timeseries(sr3):
     layers_datasets = ['TimeSeries/LAYERS/Origins', 'TimeSeries/LAYERS/Variables',
                       'TimeSeries/LAYERS/Data', 'TimeSeries/LAYERS/Timesteps']
     for name in layers_datasets:
-        if not name in sr3.names:
+        if name not in sr3.names:
             print(name + ' is not available..')
             return None
 
@@ -420,7 +420,7 @@ def get_completions_timeseries(sr3):
     layers_datasets = ['TimeSeries/LAYERS/Origins', 'TimeSeries/LAYERS/Variables',
                       'TimeSeries/LAYERS/Data', 'TimeSeries/LAYERS/Timesteps']
     for name in layers_datasets:
-        if not name in sr3.names:
+        if name not in sr3.names:
             print(name + ' is not available..')
             return None
 

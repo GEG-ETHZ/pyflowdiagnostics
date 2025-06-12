@@ -267,7 +267,7 @@ class FlowDiagnostics:
         self.sp_ind = np.array(sp_ind)
 
         if isinstance(sp["FLUXCONW"], list) and not sp["FLUXCONW"]:
-            raise RuntimeError(f"Failed to read fluxes. Ensure FLUXCON keyword is set in OUTSRF.")
+            raise RuntimeError("Failed to read fluxes. Ensure FLUXCON keyword is set in OUTSRF.")
         try:
             FLUXCONW = sp["FLUXCONW"][self.time_step_id]
             FLUXCONO = sp["FLUXCONO"][self.time_step_id]
@@ -353,7 +353,8 @@ class FlowDiagnostics:
                 well.completions[-1].set_flow_rate(self.grid.compute_outflow(I, J, K))
 
         # set well status (OPEN/SHUT) according to completion status
-        for name in well_names: self.wells[name].set_status()
+        for name in well_names:
+            self.wells[name].set_status()
 
 
     def _read_well_completion_CMG(self) -> None:
@@ -388,7 +389,7 @@ class FlowDiagnostics:
             try:
                 WELLOPMO = df['WELLOPMO'].values
             except:
-                ValueError(f"Required key: 'WELLOPMO' is not found.")
+                ValueError("Required key: 'WELLOPMO' is not found.")
             well_type = 0 # unknown
             if not is_init_step_output:
                 if WELLOPMO[self.time_step_id] > 0:
@@ -402,7 +403,7 @@ class FlowDiagnostics:
         try:
             well_completions = sr3.data['TimeSeries/LAYERS/Origins']
         except:
-            raise ValueError(f"Required output 'TimeSeries/LAYERS/Origins' is not found.")
+            raise ValueError("Required output 'TimeSeries/LAYERS/Origins' is not found.")
 
         for cmpl_info in well_completions:
             match = re.match(pattern, cmpl_info.decode('utf-8'))
@@ -422,7 +423,7 @@ class FlowDiagnostics:
 
     def _read_simulator_dynamic_output(self) -> None:
         """Reads dynamic simulator output including fluxes and well completions."""
-        logging.info(f"Reading dynamic simulation outputs.")
+        logging.info("Reading dynamic simulation outputs.")
 
         # Read fluxes
         d_fluxes, d_NNC_fluxes = self._read_flux()
@@ -726,7 +727,7 @@ class FlowDiagnostics:
                 for label, data in data_labels.items():
                     fid.write(f"{label}\n")
                     np.savetxt(fid, data, fmt="%e" if "TOF" in label else "%3d")
-                    fid.write(f"/\n")
+                    fid.write("/\n")
 
             logging.info(f"Flow diagnostics results saved to: {file_path}")
             return True

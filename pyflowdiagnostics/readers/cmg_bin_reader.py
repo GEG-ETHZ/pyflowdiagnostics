@@ -11,9 +11,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import logging
 import os.path
 
-from pyflowdiagnostics.readers.sr3_reader import  *
+from pyflowdiagnostics.readers import sr3_reader
 
 __all__ = ["CmgReader", ]
 
@@ -62,9 +63,9 @@ class CmgReader:
                 Returns an empty dictionary if no keys are provided.
         """
         if self._sr3.grid.LGR:
-            sp_ind, sp = get_spatial_properties(self._sr3, keys, original_grid_only=True)
+            sp_ind, sp = sr3_reader.get_spatial_properties(self._sr3, keys, original_grid_only=True)
         else:
-            sp_ind, sp = get_spatial_properties(self._sr3, keys)
+            sp_ind, sp = sr3_reader.get_spatial_properties(self._sr3, keys)
 
         return sp_ind, sp
 
@@ -75,7 +76,7 @@ class CmgReader:
         Returns:
             dict: Dictionary containing time series data for each well
         """
-        return get_wells_timeseries(self._sr3)
+        return sr3_reader.get_wells_timeseries(self._sr3)
 
 
     def get_layer_time_series(self) -> dict:
@@ -84,7 +85,7 @@ class CmgReader:
         Returns:
             dict: Dictionary containing layer time series data for each well
         """
-        return get_layers_timeseries(self._sr3)
+        return sr3_reader.get_layers_timeseries(self._sr3)
 
 
     def get_sr3(self) -> object:
@@ -130,4 +131,4 @@ class CmgReader:
     def _initialize_sr3(self) -> None:
         """Initializes the sr3 file."""
         logging.info(f"Reading sr3 file: {self.sr3_file_path}. It may take a while...")
-        self._sr3 = read_SR3(self.sr3_file_path)
+        self._sr3 = sr3_reader.read_SR3(self.sr3_file_path)

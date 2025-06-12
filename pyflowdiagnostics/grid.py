@@ -298,10 +298,10 @@ class Grid:
         """
         self.dual_poro = False
         if dp_flag == 0:
-            logging.info(f"Single porosity model detected.")
+            logging.info("Single porosity model detected.")
         else:
             if dp_flag in [1, 2]:  # Valid dual poro flags
-                logging.info(f"Dual-porosity model detected.")
+                logging.info("Dual-porosity model detected.")
                 self.dual_poro = True
                 if self.nz == 2:
                     self.single_layer = True

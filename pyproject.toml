@@ -41,9 +41,8 @@ docs = [
     "pydata_sphinx_theme",
 ]
 tests = [
-    "flake8",
+    "ruff",
     "pytest",
-    "flake8-pyproject",
 ]
 all = [
     "pyflowdiagnostics[docs]",
@@ -63,10 +62,12 @@ include = ["pyflowdiagnostics*"]
 [tool.setuptools_scm]
 version_file = "pyflowdiagnostics/version.py"
 
-[tool.flake8]
-per-file-ignores = [
-    "__init__.py: ",
-]
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"well.py" = ["E741"]      # we should fix this
+"grid.py" = ["E741"]      # we should fix this
+"flow_diagnostics.py" = ["E722", "E741", "F841"]  # we should fix this
+"sr3_reader.py" = ["E722", "F841"]  # external library
 
 [tool.coverage.run]
 relative_files = true

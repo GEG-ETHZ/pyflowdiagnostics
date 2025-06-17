@@ -51,7 +51,7 @@ Or, in your Python script:
 
 .. code-block:: python
 
-   import pyflowdiagnostics.flow_diagnostics as pfds
+   import pyflowdiagnostics.flow_diagnostics as pfd
 
    tsteps = [1, 5, 10]
 

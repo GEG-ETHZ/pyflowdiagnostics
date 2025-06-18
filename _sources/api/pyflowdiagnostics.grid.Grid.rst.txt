@@ -1,0 +1,33 @@
+Grid
+====
+
+.. currentmodule:: pyflowdiagnostics.grid
+
+.. autoclass:: Grid
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~Grid.compute_flux_reservoir_cond
+      ~Grid.compute_outflow
+      ~Grid.compute_total_fluxes
+      ~Grid.get_NNC_flux_keys
+      ~Grid.get_connections
+      ~Grid.get_flux_keys
+      ~Grid.get_inv_fvf_keys
+      ~Grid.get_total_flux_flattened
+      ~Grid.ijk_from_I_J_K
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: compute_flux_reservoir_cond
+   .. automethod:: compute_outflow
+   .. automethod:: compute_total_fluxes
+   .. automethod:: get_NNC_flux_keys
+   .. automethod:: get_connections
+   .. automethod:: get_flux_keys
+   .. automethod:: get_inv_fvf_keys
+   .. automethod:: get_total_flux_flattened
+   .. automethod:: ijk_from_I_J_K

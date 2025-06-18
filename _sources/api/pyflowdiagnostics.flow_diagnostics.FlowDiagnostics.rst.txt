@@ -1,0 +1,27 @@
+FlowDiagnostics
+===============
+
+.. currentmodule:: pyflowdiagnostics.flow_diagnostics
+
+.. autoclass:: FlowDiagnostics
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~FlowDiagnostics.compute_F_and_Phi
+      ~FlowDiagnostics.compute_Lorenz
+      ~FlowDiagnostics.compute_partition
+      ~FlowDiagnostics.compute_sweep
+      ~FlowDiagnostics.compute_well_pair_ids
+      ~FlowDiagnostics.execute
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: compute_F_and_Phi
+   .. automethod:: compute_Lorenz
+   .. automethod:: compute_partition
+   .. automethod:: compute_sweep
+   .. automethod:: compute_well_pair_ids
+   .. automethod:: execute

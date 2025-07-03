@@ -239,11 +239,8 @@ class EclReader:
             raise FileNotFoundError(f"Input file not found: {self.input_file_path}")
 
         base, ext = os.path.splitext(self.input_file_path)
-        if ext.upper() not in [".DATA", ".IXF"]:
-            if ext.upper() == ".AFI":
-                logging.warning("Intersect input file detected. Limited support available.")
-            else:
-                raise RuntimeError(f"Unsupported input file: {self.input_file_path}")
+        if ext.upper() not in [".DATA", ".AFI"]:
+            raise RuntimeError(f"Unsupported input file: {self.input_file_path}")
 
         self.input_file_path_base = base
 

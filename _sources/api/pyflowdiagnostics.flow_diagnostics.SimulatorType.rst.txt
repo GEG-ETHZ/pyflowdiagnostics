@@ -1,0 +1,19 @@
+SimulatorType
+=============
+
+.. currentmodule:: pyflowdiagnostics.flow_diagnostics
+
+.. autoclass:: SimulatorType
+   :show-inheritance:
+
+   .. rubric:: Attributes Summary
+
+   .. autosummary::
+
+      ~SimulatorType.CMG
+      ~SimulatorType.ECL
+
+   .. rubric:: Attributes Documentation
+
+   .. autoattribute:: CMG
+   .. autoattribute:: ECL

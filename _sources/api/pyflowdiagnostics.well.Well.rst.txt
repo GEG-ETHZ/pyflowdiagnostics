@@ -1,0 +1,19 @@
+Well
+====
+
+.. currentmodule:: pyflowdiagnostics.well
+
+.. autoclass:: Well
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~Well.add_completion
+      ~Well.set_status
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: add_completion
+   .. automethod:: set_status

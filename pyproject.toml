@@ -43,6 +43,7 @@ docs = [
 tests = [
     "ruff",
     "pytest",
+    "pooch",
 ]
 all = [
     "pyflowdiagnostics[docs]",

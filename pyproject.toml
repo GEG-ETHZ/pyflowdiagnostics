@@ -44,6 +44,8 @@ tests = [
     "ruff",
     "pytest",
     "pooch",
+    "coveralls",
+    "pytest_cov",
 ]
 all = [
     "pyflowdiagnostics[docs]",

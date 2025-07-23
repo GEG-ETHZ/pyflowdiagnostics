@@ -13,3 +13,7 @@ pyflowdiagnostics/version.py
 build/
 dist/
 pyflowdiagnostics.egg-info/
+
+# Test related
+data/
+.coverage

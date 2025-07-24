@@ -1,0 +1,943 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Grid &#8212; pyflowdiagnostics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=3ca669d2"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api/pyflowdiagnostics.grid.Grid';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Well" href="well.html" />
+    <link rel="prev" title="Grid" href="grid.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.2.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pyflowdiagnostics</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://geg.ethz.ch/">
+    GEG
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/GEG-ETHZ/pyflowdiagnostics" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://geg.ethz.ch/">
+    GEG
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/GEG-ETHZ/pyflowdiagnostics" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="flow_diagnostics.html">Flow Diagnostics</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyflowdiagnostics.flow_diagnostics.SimulatorType.html">SimulatorType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html">FlowDiagnostics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="grid.html">Grid</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Grid</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="well.html">Well</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyflowdiagnostics.well.Completion.html">Completion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyflowdiagnostics.well.Well.html">Well</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="readers.html">Readers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="pyflowdiagnostics.readers.ecl_bin_reader.EclReader.html">EclReader</a></li>
+</ul>
+</details></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">API reference</a></li>
+    
+    
+    <li class="breadcrumb-item"><a href="grid.html" class="nav-link">Grid</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Grid</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="grid">
+<h1>Grid<a class="headerlink" href="#grid" title="Link to this heading">#</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pyflowdiagnostics.grid.</span></span><span class="sig-name descname"><span class="pre">Grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dimens</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">porv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dp_flag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict_NNC</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Manages grid properties and fluxes.</p>
+<p>Stores grid dimensions, pore volume, active cell information,
+and handles flux calculations. Supports dual porosity and
+non-neighboring connections (NNCs).</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.nx">
+<span class="sig-name descname"><span class="pre">nx</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.nx" title="Link to this definition">#</a></dt>
+<dd><p>Number of grid cells in the x-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.ny">
+<span class="sig-name descname"><span class="pre">ny</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.ny" title="Link to this definition">#</a></dt>
+<dd><p>Number of grid cells in the y-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.nz">
+<span class="sig-name descname"><span class="pre">nz</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.nz" title="Link to this definition">#</a></dt>
+<dd><p>Number of grid cells in the z-direction.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.nn">
+<span class="sig-name descname"><span class="pre">nn</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.nn" title="Link to this definition">#</a></dt>
+<dd><p>Total number of grid cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.num_max_dims">
+<span class="sig-name descname"><span class="pre">num_max_dims</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.num_max_dims" title="Link to this definition">#</a></dt>
+<dd><p>Maximum number of dimensions (typically 3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.num_max_phases">
+<span class="sig-name descname"><span class="pre">num_max_phases</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.num_max_phases" title="Link to this definition">#</a></dt>
+<dd><p>Maximum number of fluid phases (typically 3).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.single_layer">
+<span class="sig-name descname"><span class="pre">single_layer</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.single_layer" title="Link to this definition">#</a></dt>
+<dd><p>True if the grid has only one layer (nz == 1 or nz==2 in DP).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.porv">
+<span class="sig-name descname"><span class="pre">porv</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.porv" title="Link to this definition">#</a></dt>
+<dd><p>Pore volume array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.actnum">
+<span class="sig-name descname"><span class="pre">actnum</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.actnum" title="Link to this definition">#</a></dt>
+<dd><p>Active cell mask (1 for active cells, 0 otherwise).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.actnum_bool">
+<span class="sig-name descname"><span class="pre">actnum_bool</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.actnum_bool" title="Link to this definition">#</a></dt>
+<dd><p>Boolean array indicating active cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.num_active_cells">
+<span class="sig-name descname"><span class="pre">num_active_cells</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.num_active_cells" title="Link to this definition">#</a></dt>
+<dd><p>Number of active grid cells.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.dual_poro">
+<span class="sig-name descname"><span class="pre">dual_poro</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.dual_poro" title="Link to this definition">#</a></dt>
+<dd><p>True if dual porosity is enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.NNC">
+<span class="sig-name descname"><span class="pre">NNC</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.NNC" title="Link to this definition">#</a></dt>
+<dd><p>True if non-neighboring connections (NNCs) are enabled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid._flux_keys">
+<span class="sig-name descname"><span class="pre">_flux_keys</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid._flux_keys" title="Link to this definition">#</a></dt>
+<dd><p>List of flux keys for standard connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid._NNC_flux_keys">
+<span class="sig-name descname"><span class="pre">_NNC_flux_keys</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid._NNC_flux_keys" title="Link to this definition">#</a></dt>
+<dd><p>List of flux keys for NNC connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid._q_xyz">
+<span class="sig-name descname"><span class="pre">_q_xyz</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid._q_xyz" title="Link to this definition">#</a></dt>
+<dd><p>Array of phase fluxes in all directions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_Qx,</span> <span class="pre">_Qy,</span> <span class="pre">_Qz</span></span></dt>
+<dd><p>Flux arrays in x, y, and z directions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid._conx">
+<span class="sig-name descname"><span class="pre">_conx</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid._conx" title="Link to this definition">#</a></dt>
+<dd><p>Connection matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid._valid_conx_idx">
+<span class="sig-name descname"><span class="pre">_valid_conx_idx</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid._valid_conx_idx" title="Link to this definition">#</a></dt>
+<dd><p>Boolean array indicating valid connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid._Qxyz_flattened">
+<span class="sig-name descname"><span class="pre">_Qxyz_flattened</span></span><a class="headerlink" href="#pyflowdiagnostics.grid.Grid._Qxyz_flattened" title="Link to this definition">#</a></dt>
+<dd><p>Flattened array of all valid fluxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<p class="rubric">Methods Summary</p>
+<div class="pst-scrollable-table-container"><table class="autosummary longtable table">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.compute_flux_reservoir_cond" title="pyflowdiagnostics.grid.Grid.compute_flux_reservoir_cond"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_flux_reservoir_cond</span></code></a>(d_fluxes, d_inv_fvf)</p></td>
+<td><p>Computes fluxes in reservoir condition using fluxes in surface condition and formation volume factors.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.compute_outflow" title="pyflowdiagnostics.grid.Grid.compute_outflow"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_outflow</span></code></a>(I, J, K)</p></td>
+<td><p>Computes outflow at a given grid cell (I, J, K).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.compute_total_fluxes" title="pyflowdiagnostics.grid.Grid.compute_total_fluxes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">compute_total_fluxes</span></code></a>(d_fluxes[, d_NNC_fluxes])</p></td>
+<td><p>Computes and stores total fluxes, including NNC fluxes.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.get_NNC_flux_keys" title="pyflowdiagnostics.grid.Grid.get_NNC_flux_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_NNC_flux_keys</span></code></a>()</p></td>
+<td><p>Returns the flux keys for NNC connections, if applicable.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.get_connections" title="pyflowdiagnostics.grid.Grid.get_connections"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_connections</span></code></a>()</p></td>
+<td><p>Returns the connection matrix.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.get_flux_keys" title="pyflowdiagnostics.grid.Grid.get_flux_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_flux_keys</span></code></a>()</p></td>
+<td><p>Returns the flux keys for standard connections.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.get_inv_fvf_keys" title="pyflowdiagnostics.grid.Grid.get_inv_fvf_keys"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_inv_fvf_keys</span></code></a>()</p></td>
+<td><p>Returns the inverse FVF keys.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.get_total_flux_flattened" title="pyflowdiagnostics.grid.Grid.get_total_flux_flattened"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_total_flux_flattened</span></code></a>()</p></td>
+<td><p>Returns the total flux.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#pyflowdiagnostics.grid.Grid.ijk_from_I_J_K" title="pyflowdiagnostics.grid.Grid.ijk_from_I_J_K"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ijk_from_I_J_K</span></code></a>(I, J, K)</p></td>
+<td><p>Calculates the ijk index from I, J, K indices.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="rubric">Methods Documentation</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.compute_flux_reservoir_cond">
+<span class="sig-name descname"><span class="pre">compute_flux_reservoir_cond</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_inv_fvf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.compute_flux_reservoir_cond"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.compute_flux_reservoir_cond" title="Link to this definition">#</a></dt>
+<dd><p>Computes fluxes in reservoir condition using fluxes in surface condition and formation volume factors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d_fluxes</strong> (<em>dict</em>) – Dictionary of flux data for standard connections.</p></li>
+<li><p><strong>d_inv_fvf</strong> (<em>dict</em>) – Dictionary of inverse formation volume factors</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>fluxes in reservoir condition.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.compute_outflow">
+<span class="sig-name descname"><span class="pre">compute_outflow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.compute_outflow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.compute_outflow" title="Link to this definition">#</a></dt>
+<dd><p>Computes outflow at a given grid cell (I, J, K).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>int</em>) – I-index of the grid cell.</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – J-index of the grid cell.</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – K-index of the grid cell.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Outflow at the grid cell. Positive: injection, negative: production.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.compute_total_fluxes">
+<span class="sig-name descname"><span class="pre">compute_total_fluxes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">d_NNC_fluxes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.compute_total_fluxes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.compute_total_fluxes" title="Link to this definition">#</a></dt>
+<dd><p>Computes and stores total fluxes, including NNC fluxes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>d_fluxes</strong> (<em>dict</em>) – Dictionary of flux data for reservoir connections.</p></li>
+<li><p><strong>d_NNC_fluxes</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dictionary of flux data for NNC connections. Defaults to None.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.get_NNC_flux_keys">
+<span class="sig-name descname"><span class="pre">get_NNC_flux_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.get_NNC_flux_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.get_NNC_flux_keys" title="Link to this definition">#</a></dt>
+<dd><p>Returns the flux keys for NNC connections, if applicable.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of NNC flux keys, or None if NNCs are not enabled.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.get_connections">
+<span class="sig-name descname"><span class="pre">get_connections</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.get_connections"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.get_connections" title="Link to this definition">#</a></dt>
+<dd><p>Returns the connection matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The connection matrix.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.get_flux_keys">
+<span class="sig-name descname"><span class="pre">get_flux_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.get_flux_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.get_flux_keys" title="Link to this definition">#</a></dt>
+<dd><p>Returns the flux keys for standard connections.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of flux keys.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.get_inv_fvf_keys">
+<span class="sig-name descname"><span class="pre">get_inv_fvf_keys</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.get_inv_fvf_keys"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.get_inv_fvf_keys" title="Link to this definition">#</a></dt>
+<dd><p>Returns the inverse FVF keys.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of inverse FVF keys.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.get_total_flux_flattened">
+<span class="sig-name descname"><span class="pre">get_total_flux_flattened</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.get_total_flux_flattened"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.get_total_flux_flattened" title="Link to this definition">#</a></dt>
+<dd><p>Returns the total flux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The flattened total flux.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pyflowdiagnostics.grid.Grid.ijk_from_I_J_K">
+<span class="sig-name descname"><span class="pre">ijk_from_I_J_K</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">I</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">J</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">K</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../_modules/pyflowdiagnostics/grid.html#Grid.ijk_from_I_J_K"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pyflowdiagnostics.grid.Grid.ijk_from_I_J_K" title="Link to this definition">#</a></dt>
+<dd><p>Calculates the ijk index from I, J, K indices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>I</strong> (<em>int</em>) – I-index of the grid cell.</p></li>
+<li><p><strong>J</strong> (<em>int</em>) – J-index of the grid cell.</p></li>
+<li><p><strong>K</strong> (<em>int</em>) – K-index of the grid cell.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>ijk index of the grid cell.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="grid.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Grid</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="well.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Well</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid"><code class="docutils literal notranslate"><span class="pre">Grid</span></code></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.nx"><code class="docutils literal notranslate"><span class="pre">Grid.nx</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.ny"><code class="docutils literal notranslate"><span class="pre">Grid.ny</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.nz"><code class="docutils literal notranslate"><span class="pre">Grid.nz</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.nn"><code class="docutils literal notranslate"><span class="pre">Grid.nn</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.num_max_dims"><code class="docutils literal notranslate"><span class="pre">Grid.num_max_dims</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.num_max_phases"><code class="docutils literal notranslate"><span class="pre">Grid.num_max_phases</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.single_layer"><code class="docutils literal notranslate"><span class="pre">Grid.single_layer</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.porv"><code class="docutils literal notranslate"><span class="pre">Grid.porv</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.actnum"><code class="docutils literal notranslate"><span class="pre">Grid.actnum</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.actnum_bool"><code class="docutils literal notranslate"><span class="pre">Grid.actnum_bool</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.num_active_cells"><code class="docutils literal notranslate"><span class="pre">Grid.num_active_cells</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.dual_poro"><code class="docutils literal notranslate"><span class="pre">Grid.dual_poro</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.NNC"><code class="docutils literal notranslate"><span class="pre">Grid.NNC</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid._flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid._flux_keys</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid._NNC_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid._NNC_flux_keys</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid._q_xyz"><code class="docutils literal notranslate"><span class="pre">Grid._q_xyz</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid._conx"><code class="docutils literal notranslate"><span class="pre">Grid._conx</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid._valid_conx_idx"><code class="docutils literal notranslate"><span class="pre">Grid._valid_conx_idx</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid._Qxyz_flattened"><code class="docutils literal notranslate"><span class="pre">Grid._Qxyz_flattened</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.compute_flux_reservoir_cond"><code class="docutils literal notranslate"><span class="pre">Grid.compute_flux_reservoir_cond</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.compute_outflow"><code class="docutils literal notranslate"><span class="pre">Grid.compute_outflow</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.compute_total_fluxes"><code class="docutils literal notranslate"><span class="pre">Grid.compute_total_fluxes</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.get_NNC_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid.get_NNC_flux_keys</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.get_connections"><code class="docutils literal notranslate"><span class="pre">Grid.get_connections</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.get_flux_keys"><code class="docutils literal notranslate"><span class="pre">Grid.get_flux_keys</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.get_inv_fvf_keys"><code class="docutils literal notranslate"><span class="pre">Grid.get_inv_fvf_keys</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.get_total_flux_flattened"><code class="docutils literal notranslate"><span class="pre">Grid.get_total_flux_flattened</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyflowdiagnostics.grid.Grid.ijk_from_I_J_K"><code class="docutils literal notranslate"><span class="pre">Grid.ijk_from_I_J_K</span></code></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/api/pyflowdiagnostics.grid.Grid.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2025, Tsubasa Onishi.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

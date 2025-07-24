@@ -1,0 +1,19 @@
+Completion
+==========
+
+.. currentmodule:: pyflowdiagnostics.well
+
+.. autoclass:: Completion
+   :show-inheritance:
+
+   .. rubric:: Methods Summary
+
+   .. autosummary::
+
+      ~Completion.set_flow_rate
+      ~Completion.set_ijk
+
+   .. rubric:: Methods Documentation
+
+   .. automethod:: set_flow_rate
+   .. automethod:: set_ijk

@@ -1,0 +1,1372 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pyflowdiagnostics.flow_diagnostics &#8212; pyflowdiagnostics</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=d75fae25" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../../_static/documentation_options.js?v=3ca669d2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '_modules/pyflowdiagnostics/flow_diagnostics';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="0.2.1" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">pyflowdiagnostics</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://geg.ethz.ch/">
+    GEG
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/GEG-ETHZ/pyflowdiagnostics" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar hide-on-wide">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../manual/index.html">
+    User Guide
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../../api/index.html">
+    API reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-external" href="https://geg.ethz.ch/">
+    GEG
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/GEG-ETHZ/pyflowdiagnostics" title="GitHub" class="nav-link pst-navbar-icon" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="../index.html" class="nav-link">Module code</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">pyflowdiagnostics.flow_diagnostics</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <h1>Source code for pyflowdiagnostics.flow_diagnostics</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2025 Tsubasa Onishi</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="c1"># you may not use this file except in compliance with the License.</span>
+<span class="c1"># You may obtain a copy of the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="c1"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="c1"># See the License for the specific language governing permissions and</span>
+<span class="c1"># limitations under the License.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflowdiagnostics.readers</span><span class="w"> </span><span class="kn">import</span> <span class="n">EclReader</span><span class="p">,</span> <span class="n">CmgReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflowdiagnostics.grid</span><span class="w"> </span><span class="kn">import</span> <span class="n">Grid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflowdiagnostics.well</span><span class="w"> </span><span class="kn">import</span> <span class="n">Well</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyflowdiagnostics.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_default_solver</span>
+
+<span class="n">EPS</span> <span class="o">=</span> <span class="mf">1.0e-5</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;SimulatorType&quot;</span><span class="p">,</span> <span class="s2">&quot;FlowDiagnostics&quot;</span><span class="p">]</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="fm">__dir__</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">__all__</span>
+
+
+<div class="viewcode-block" id="SimulatorType">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.SimulatorType.html#pyflowdiagnostics.flow_diagnostics.SimulatorType">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SimulatorType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enum class for simulator type&quot;&quot;&quot;</span>
+    <span class="n">ECL</span> <span class="o">=</span> <span class="s2">&quot;ECL&quot;</span>
+    <span class="n">CMG</span> <span class="o">=</span> <span class="s2">&quot;CMG&quot;</span></div>
+
+
+
+<div class="viewcode-block" id="FlowDiagnostics">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">FlowDiagnostics</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes and analyzes flow diagnostics from reservoir simulation results.</span>
+
+<span class="sd">    This class reads simulation outputs, calculates time-of-flight (TOF),</span>
+<span class="sd">    tracer concentrations, flow allocation factors, and other diagnostic parameters.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        input_file_path (str): Path to the simulation input file.</span>
+<span class="sd">        output_dir (str): Directory where output files are saved.</span>
+<span class="sd">        grid (Grid): Grid object representing the reservoir grid.</span>
+<span class="sd">        time_step_id (Optional[int]): Current time step ID being processed.</span>
+<span class="sd">        wells (dict[str, Well]): Dictionary of Well objects, keyed by well name.</span>
+<span class="sd">        injectors (list[Well]): List of injector Well objects.</span>
+<span class="sd">        producers (list[Well]): List of producer Well objects.</span>
+<span class="sd">        binary_reader (EclReader | CmgReader): Instance of the Eclipse or CMG binary file reader.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the FlowDiagnostics object.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            file_path (str): Path to the Eclipse/IX input file (.DATA/.AFI) or CMG input file (.DAT).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_resolve_path</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_setup_output_directory</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_set_simulator_specific_methods</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_static_simulator_output</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wells</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">injectors</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">producers</span> <span class="o">=</span> <span class="p">[]</span>
+
+
+<div class="viewcode-block" id="FlowDiagnostics.execute">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.execute">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">time_step_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Executes the flow diagnostics analysis for a given time step.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            time_step_id (int): The time step ID to process.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Working on time step </span><span class="si">{</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span> <span class="o">=</span> <span class="n">time_step_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_simulator_dynamic_output</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_TOF_and_tracer</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_compute_flow_allocations</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_compute_other_diagnostics</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Failed to compute TOF and tracer concentrations.&quot;</span><span class="p">)</span></div>
+
+
+
+    <span class="c1"># ---- Private Methods ---------------------------------------------------------------------------------------------</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_resolve_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Resolves an absolute file path.</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Absolute path of input file path.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span> <span class="n">file_path</span><span class="p">))</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span> <span class="k">else</span> <span class="n">file_path</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_setup_output_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets up the output directory for results.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Path to the created output directory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">output_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">),</span>
+                                  <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">.fdout&quot;</span><span class="p">)</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">output_dir</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_simulator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SimulatorType</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Detects the type of simulator from the file extension.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            SimulatorType: The detected simulator type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ext</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ext</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.DATA&quot;</span><span class="p">,</span> <span class="s2">&quot;.AFI&quot;</span><span class="p">]:</span>
+            <span class="n">simulator_type</span> <span class="o">=</span> <span class="n">SimulatorType</span><span class="o">.</span><span class="n">ECL</span> <span class="c1"># e100, e300, IX, or OPM</span>
+        <span class="k">elif</span> <span class="n">ext</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;.DAT&quot;</span><span class="p">]:</span>
+            <span class="n">simulator_type</span> <span class="o">=</span> <span class="n">SimulatorType</span><span class="o">.</span><span class="n">CMG</span> <span class="c1"># CMG simulators (IMEX, GEM, STARS)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">supported_ext</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.DATA&quot;</span><span class="p">,</span> <span class="s2">&quot;.AFI&quot;</span><span class="p">,</span> <span class="s2">&quot;.DAT&quot;</span><span class="p">]</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Unsupported file extension &#39;</span><span class="si">{</span><span class="n">ext</span><span class="si">}</span><span class="s2">&#39;. Supported extensions: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">supported_ext</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Simulator type: </span><span class="si">{</span><span class="n">simulator_type</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">simulator_type</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_set_simulator_specific_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the appropriate methods and binary reader based on simulator type.&quot;&quot;&quot;</span>
+        <span class="n">simulator_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_simulator</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">simulator_type</span> <span class="o">==</span> <span class="n">SimulatorType</span><span class="o">.</span><span class="n">ECL</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span> <span class="o">=</span> <span class="n">EclReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_grid_ECL</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux_ECL</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_well_completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_well_completion_ECL</span>
+        <span class="k">elif</span> <span class="n">simulator_type</span> <span class="o">==</span> <span class="n">SimulatorType</span><span class="o">.</span><span class="n">CMG</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span> <span class="o">=</span> <span class="n">CmgReader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input_file_path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_grid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_grid_CMG</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux_CMG</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_read_well_completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_well_completion_CMG</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_grid_ECL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads static simulator output (simulator type: ECL).&quot;&quot;&quot;</span>
+        <span class="n">results_init</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">read_init</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;INTEHEAD&quot;</span><span class="p">,</span> <span class="s2">&quot;PORV&quot;</span><span class="p">])</span>
+        <span class="n">results_egrid</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">read_egrid</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;FILEHEAD&quot;</span><span class="p">,</span> <span class="s2">&quot;NNC1&quot;</span><span class="p">,</span> <span class="s2">&quot;NNC2&quot;</span><span class="p">])</span>
+        <span class="n">dimens</span> <span class="o">=</span> <span class="n">results_init</span><span class="p">[</span><span class="s2">&quot;INTEHEAD&quot;</span><span class="p">][</span><span class="mi">8</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+        <span class="n">porv</span> <span class="o">=</span> <span class="n">results_init</span><span class="p">[</span><span class="s2">&quot;PORV&quot;</span><span class="p">]</span>
+        <span class="n">dp_flag</span> <span class="o">=</span> <span class="n">results_egrid</span><span class="p">[</span><span class="s2">&quot;FILEHEAD&quot;</span><span class="p">][</span><span class="mi">5</span><span class="p">]</span>
+        <span class="n">dict_NNC</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;NNC1&quot;</span><span class="p">:</span> <span class="n">results_egrid</span><span class="p">[</span><span class="s2">&quot;NNC1&quot;</span><span class="p">],</span> <span class="s2">&quot;NNC2&quot;</span><span class="p">:</span> <span class="n">results_egrid</span><span class="p">[</span><span class="s2">&quot;NNC2&quot;</span><span class="p">]}</span>
+        <span class="k">return</span> <span class="n">dimens</span><span class="p">,</span> <span class="n">porv</span><span class="p">,</span> <span class="n">dp_flag</span><span class="p">,</span> <span class="n">dict_NNC</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_grid_CMG</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads static simulator output (simulator type: CMG).&quot;&quot;&quot;</span>
+
+        <span class="n">sr3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">get_sr3</span><span class="p">()</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">sp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">get_grid_properties</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GRID/BLOCKPVOL&quot;</span><span class="p">,</span> <span class="s2">&quot;GRID/ICTPS1&quot;</span><span class="p">,</span> <span class="s2">&quot;GRID/ICTPS2&quot;</span><span class="p">,</span> <span class="s2">&quot;GRID/ICNTDR&quot;</span><span class="p">])</span>
+
+        <span class="n">dimens</span> <span class="o">=</span> <span class="n">sr3</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">cart_dims</span>
+        <span class="n">porv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">sr3</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">n_cells</span><span class="p">)</span>  <span class="c1"># pore volume. active cells only in CMG</span>
+        <span class="n">porv</span><span class="p">[</span><span class="o">~</span><span class="n">sr3</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">inactive</span><span class="p">]</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s2">&quot;GRID/BLOCKPVOL&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">dp_flag</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">sr3</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">n_cells</span> <span class="o">==</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">sr3</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">cells</span><span class="o">.</span><span class="n">volumes</span><span class="p">)</span> <span class="k">else</span> <span class="mi">0</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellid1</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s1">&#39;GRID/ICTPS1&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># upstream cells</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cellid2</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s1">&#39;GRID/ICTPS2&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># downstream cells</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_dir</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s1">&#39;GRID/ICNTDR&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># connection dirs</span>
+        <span class="n">irregular_conx_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_dir</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># TODO: Assuming connection_dir&gt;3 means NNC. Not fully tested.</span>
+        <span class="n">dict_NNC</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;NNC1&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid1</span><span class="p">[</span><span class="n">irregular_conx_idx</span><span class="p">],</span> <span class="s2">&quot;NNC2&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid2</span><span class="p">[</span><span class="n">irregular_conx_idx</span><span class="p">]}</span>
+
+        <span class="k">return</span> <span class="n">dimens</span><span class="p">,</span> <span class="n">porv</span><span class="p">,</span> <span class="n">dp_flag</span><span class="p">,</span> <span class="n">dict_NNC</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_static_simulator_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Grid</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads static simulator output.</span>
+<span class="sd">        Initialize grid object that manages necessary for flow diagnostics (pore volume, fluxes, connections, etc.)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Grid: Grid object.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">dimens</span><span class="p">,</span> <span class="n">porv</span><span class="p">,</span> <span class="n">dp_flag</span><span class="p">,</span> <span class="n">dict_NNC</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_grid</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">Grid</span><span class="p">(</span><span class="n">dimens</span><span class="p">,</span> <span class="n">porv</span><span class="p">,</span> <span class="n">dp_flag</span><span class="p">,</span> <span class="n">dict_NNC</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_flux_from_restart_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads flux data for the given time step.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            keys (list): List of flux keys to read (FLROILI+, FLROILJ+, FLRWATI+, FLRWATJ+, etc.).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            dict: Dictionary of flux data, keyed by the provided keys.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            IOError: If flux data cannot be read.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Read fluxes at reservoir conditions</span>
+            <span class="n">results_rst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">read_rst</span><span class="p">(</span><span class="n">keys</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">)</span>
+
+            <span class="c1"># If all arrays are empty, try surface conditions</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">results_rst</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+
+                <span class="c1"># Generate alternative surface flux and inverse formation volume factor (FVF) keys</span>
+                <span class="n">keys_flo</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;FLR&quot;</span><span class="p">,</span> <span class="s2">&quot;FLO&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">]</span>
+                <span class="n">keys_fvf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_inv_fvf_keys</span><span class="p">()</span>
+
+                <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fluxes at reservoir condition: </span><span class="si">{</span><span class="n">keys</span><span class="si">}</span><span class="s2"> not found. Computing using fluxes at surface condition and FVF.&quot;</span><span class="p">)</span>
+
+                <span class="c1"># Read surface fluxes and formation volume factors</span>
+                <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">read_rst</span><span class="p">(</span><span class="n">keys_flo</span> <span class="o">+</span> <span class="n">keys_fvf</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">)</span>
+
+                <span class="c1"># Extract valid keys before computing reservoir condition fluxes</span>
+                <span class="n">d_fluxes</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_flo</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">results</span><span class="p">}</span>
+                <span class="n">d_inv_fvf</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">results</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_fvf</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">results</span><span class="p">}</span>
+
+                <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">size</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">arr</span> <span class="ow">in</span> <span class="n">d_fluxes</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
+                    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Surface fluxes are not found. Check RPTRST.&quot;</span><span class="p">)</span>
+
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">compute_flux_reservoir_cond</span><span class="p">(</span><span class="n">d_fluxes</span><span class="p">,</span> <span class="n">d_inv_fvf</span><span class="p">)</span>
+
+            <span class="c1"># Return the successfully read reservoir condition fluxes</span>
+            <span class="k">return</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">results_rst</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">results_rst</span><span class="p">}</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to read fluxes (keys: </span><span class="si">{</span><span class="n">keys</span><span class="si">}</span><span class="s2">): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_flux_ECL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+        <span class="n">d_fluxes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux_from_restart_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_flux_keys</span><span class="p">())</span>
+        <span class="n">d_NNC_fluxes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux_from_restart_file</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_NNC_flux_keys</span><span class="p">())</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">NNC</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">d_fluxes</span><span class="p">,</span> <span class="n">d_NNC_fluxes</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_flux_CMG</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Read flux outputs from sr3 file, then convert them into Eclipse style format.</span>
+
+<span class="sd">        Assumptions based on some experiments (no documentation found in the CMG manuals):</span>
+
+<span class="sd">        - With the `FLUXCON` keyword, fluxes for all phases (`FLUXCONW`, `FLUXCONO`, `FLUXCONG`) are always generated,</span>
+<span class="sd">          even in single/two-phase flow cases.</span>
+<span class="sd">        - Flux values are in **reservoir conditions**.</span>
+<span class="sd">        - `connection_dir &gt; 3` means **NNCs** (1: I-dir, 2: J-dir, and 3: K-dir).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[dict, dict]: A tuple containing:</span>
+
+<span class="sd">            - **d_fluxes**: Standard flux dictionary.</span>
+<span class="sd">            - **d_NNC_fluxes**: NNC flux dictionary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sp_ind</span><span class="p">,</span> <span class="n">sp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">get_grid_properties</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;FLUXCONW&quot;</span><span class="p">,</span> <span class="s2">&quot;FLUXCONO&quot;</span><span class="p">,</span> <span class="s2">&quot;FLUXCONG&quot;</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sp_ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sp_ind</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">sp</span><span class="p">[</span><span class="s2">&quot;FLUXCONW&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">sp</span><span class="p">[</span><span class="s2">&quot;FLUXCONW&quot;</span><span class="p">]:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Failed to read fluxes. Ensure FLUXCON keyword is set in OUTSRF.&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">FLUXCONW</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s2">&quot;FLUXCONW&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">]</span>
+            <span class="n">FLUXCONO</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s2">&quot;FLUXCONO&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">]</span>
+            <span class="n">FLUXCONG</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="s2">&quot;FLUXCONG&quot;</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">]</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to read fluxes: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">. Check if fluxes are reported at time step: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Identify indices for different connection types</span>
+        <span class="n">idx_dirs</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_dir</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_dir</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_dir</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="s2">&quot;N&quot;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_dir</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span>  <span class="c1"># &quot;N&quot; for NNCs</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Standard connection cell IDs</span>
+        <span class="n">cellids</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;I&quot;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cellid1</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid2</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;I&quot;</span><span class="p">]]),</span>
+            <span class="s2">&quot;J&quot;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cellid1</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;J&quot;</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid2</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;J&quot;</span><span class="p">]]),</span>
+            <span class="s2">&quot;K&quot;</span><span class="p">:</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cellid1</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;K&quot;</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid2</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;K&quot;</span><span class="p">]]),</span>
+        <span class="p">}</span>
+
+        <span class="c1"># NNC connection cell IDs</span>
+        <span class="n">nnc1</span><span class="p">,</span> <span class="n">nnc2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid1</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]],</span> <span class="bp">self</span><span class="o">.</span><span class="n">cellid2</span><span class="p">[</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]]</span>
+
+        <span class="c1"># Initialize flux dictionaries</span>
+        <span class="n">d_fluxes</span><span class="p">,</span> <span class="n">d_NNC_fluxes</span> <span class="o">=</span> <span class="p">{},</span> <span class="p">{}</span>
+
+        <span class="c1"># Standard flux processing</span>
+        <span class="n">d_FLUXCON</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;OIL&quot;</span><span class="p">:</span> <span class="n">FLUXCONO</span><span class="p">,</span> <span class="s2">&quot;WAT&quot;</span><span class="p">:</span> <span class="n">FLUXCONW</span><span class="p">,</span> <span class="s2">&quot;GAS&quot;</span><span class="p">:</span> <span class="n">FLUXCONG</span><span class="p">}</span>
+
+        <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_flux_keys</span><span class="p">():</span>
+            <span class="n">phase</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>  <span class="c1"># Extract &quot;OIL&quot;, &quot;WAT&quot;, or &quot;GAS&quot;</span>
+            <span class="n">direction</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>  <span class="c1"># Extract &quot;I&quot;, &quot;J&quot;, or &quot;K&quot;</span>
+            <span class="k">if</span> <span class="n">phase</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">d_FLUXCON</span> <span class="ow">or</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cellids</span><span class="p">:</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Skipping invalid phase or direction. phase: </span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2">, dir: </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>  <span class="c1"># Skip if not a valid phase or directions</span>
+
+            <span class="n">FLUXCON</span> <span class="o">=</span> <span class="n">d_FLUXCON</span><span class="p">[</span><span class="n">phase</span><span class="p">]</span>
+            <span class="n">idx_dir</span> <span class="o">=</span> <span class="n">idx_dirs</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+            <span class="n">cellid1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cellids</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+
+            <span class="n">q_tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nn</span><span class="p">)</span>
+            <span class="n">q_tmp</span><span class="p">[</span><span class="n">cellid1</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">FLUXCON</span><span class="p">[</span><span class="n">idx_dir</span><span class="p">]</span>  <span class="c1"># Minus sign for Eclipse format</span>
+            <span class="n">d_fluxes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">q_tmp</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">]</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># ... NNCs</span>
+        <span class="c1">#</span>
+
+        <span class="n">ecl_NNC_flux_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_NNC_flux_keys</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">size</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_NNC_flux_keys</span><span class="p">:</span>
+                <span class="n">phase</span> <span class="o">=</span> <span class="n">key</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">phase</span> <span class="ow">in</span> <span class="n">d_FLUXCON</span><span class="p">:</span>
+                    <span class="n">d_NNC_fluxes</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">d_FLUXCON</span><span class="p">[</span><span class="n">phase</span><span class="p">][</span><span class="n">idx_dirs</span><span class="p">[</span><span class="s2">&quot;N&quot;</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">d_NNC_fluxes</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">d_fluxes</span><span class="p">,</span> <span class="n">d_NNC_fluxes</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_well_completion_ECL</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads well completions from restart file.&quot;&quot;&quot;</span>
+        <span class="n">results_rst</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">read_rst</span><span class="p">(</span><span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;INTEHEAD&quot;</span><span class="p">,</span> <span class="s2">&quot;ZWEL&quot;</span><span class="p">,</span> <span class="s2">&quot;IWEL&quot;</span><span class="p">,</span> <span class="s2">&quot;ICON&quot;</span><span class="p">],</span> <span class="n">tstep_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">)</span>
+
+        <span class="n">NWELLS</span><span class="p">,</span> <span class="n">NCWMAX</span><span class="p">,</span> <span class="n">NICONZ</span> <span class="o">=</span> <span class="n">results_rst</span><span class="p">[</span><span class="s2">&quot;INTEHEAD&quot;</span><span class="p">][</span><span class="mi">16</span><span class="p">],</span> <span class="n">results_rst</span><span class="p">[</span><span class="s2">&quot;INTEHEAD&quot;</span><span class="p">][</span><span class="mi">17</span><span class="p">],</span> <span class="n">results_rst</span><span class="p">[</span><span class="s2">&quot;INTEHEAD&quot;</span><span class="p">][</span><span class="mi">32</span><span class="p">]</span>
+        <span class="n">ZWEL</span><span class="p">,</span> <span class="n">IWEL</span><span class="p">,</span> <span class="n">ICON</span> <span class="o">=</span> <span class="n">results_rst</span><span class="p">[</span><span class="s2">&quot;ZWEL&quot;</span><span class="p">],</span> <span class="n">results_rst</span><span class="p">[</span><span class="s2">&quot;IWEL&quot;</span><span class="p">],</span> <span class="n">results_rst</span><span class="p">[</span><span class="s2">&quot;ICON&quot;</span><span class="p">]</span>
+        <span class="n">IWEL</span> <span class="o">=</span> <span class="n">IWEL</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">NWELLS</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>
+        <span class="n">ICON</span> <span class="o">=</span> <span class="n">ICON</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">NICONZ</span><span class="p">,</span> <span class="n">NCWMAX</span><span class="p">,</span> <span class="n">NWELLS</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span>
+
+        <span class="n">well_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ZWEL</span> <span class="k">if</span> <span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wells</span> <span class="o">=</span> <span class="p">{</span><span class="n">name</span><span class="p">:</span> <span class="n">Well</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span> <span class="n">type_id</span><span class="o">=</span><span class="n">IWEL</span><span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">well_names</span><span class="p">)}</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">well_names</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">completion</span> <span class="ow">in</span> <span class="n">ICON</span><span class="p">[:,</span> <span class="p">:,</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">completion</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="n">completion</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">well</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+                <span class="n">well</span><span class="o">.</span><span class="n">add_completion</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="n">completion</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+                <span class="n">well</span><span class="o">.</span><span class="n">completions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ijk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">ijk_from_I_J_K</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+                <span class="n">well</span><span class="o">.</span><span class="n">completions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_flow_rate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">compute_outflow</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+
+        <span class="c1"># set well status (OPEN/SHUT) according to completion status</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">well_names</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">set_status</span><span class="p">()</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_well_completion_CMG</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reads well completions from `sr3` file.</span>
+
+<span class="sd">        Assumptions (no documentation found in the CMG manuals):</span>
+
+<span class="sd">        **Well Type:**</span>
+
+<span class="sd">        - `WELLOPMO &gt; 0`: Injector</span>
+<span class="sd">        - `WELLOPMO &lt; 0`: Producer</span>
+
+<span class="sd">        **Well Status:**</span>
+
+<span class="sd">        - `WELLSTATE = 0`: OPEN</span>
+<span class="sd">        - `WELLSTATE = 1`: SHUT</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">sr3</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">get_sr3</span><span class="p">()</span>
+
+        <span class="n">well_names</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">char</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">sr3</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;TimeSeries/WELLS/Origins&#39;</span><span class="p">],</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="n">well_time_series</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">binary_reader</span><span class="o">.</span><span class="n">get_time_series</span><span class="p">()</span>
+
+        <span class="n">t_well_time_series</span> <span class="o">=</span> <span class="n">well_time_series</span><span class="p">[</span><span class="n">well_names</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">values</span>
+        <span class="n">is_init_step_output</span> <span class="o">=</span> <span class="kc">False</span> <span class="k">if</span> <span class="n">t_well_time_series</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">True</span>
+
+        <span class="c1"># initialize well objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">wells</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">well_name</span> <span class="ow">in</span> <span class="n">well_names</span><span class="p">:</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">well_time_series</span><span class="p">[</span><span class="n">well_name</span><span class="p">]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">WELLOPMO</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;WELLOPMO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Required key: &#39;WELLOPMO&#39; is not found.&quot;</span><span class="p">)</span>
+            <span class="n">well_type</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># unknown</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_init_step_output</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">WELLOPMO</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">well_type</span> <span class="o">=</span> <span class="mi">5</span> <span class="c1"># injector</span>
+                <span class="k">elif</span> <span class="n">WELLOPMO</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">well_type</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># producer</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="p">[</span><span class="n">well_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">Well</span><span class="p">(</span><span class="n">well_name</span><span class="p">,</span> <span class="n">well_type</span><span class="p">)</span>
+
+        <span class="c1"># add completions for each well</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;(\w+)\{(\d+,\d+,\d+)\}&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">well_completions</span> <span class="o">=</span> <span class="n">sr3</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;TimeSeries/LAYERS/Origins&#39;</span><span class="p">]</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Required output &#39;TimeSeries/LAYERS/Origins&#39; is not found.&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">cmpl_info</span> <span class="ow">in</span> <span class="n">well_completions</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">cmpl_info</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="n">well_name</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">well</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="p">[</span><span class="n">well_name</span><span class="p">]</span>
+                <span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="k">for</span> <span class="n">num</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;[]&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)]</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">well_time_series</span><span class="p">[</span><span class="n">well_name</span><span class="p">]</span>
+                <span class="n">status_arr</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;WELLSTATE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">is_init_step_output</span><span class="p">:</span>
+                    <span class="n">status_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">status_arr</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">well</span><span class="o">.</span><span class="n">add_completion</span><span class="p">(</span><span class="n">I</span><span class="o">=</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="o">=</span><span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="o">=</span><span class="n">K</span><span class="p">,</span>
+                                    <span class="n">stat</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">status_arr</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="n">well</span><span class="o">.</span><span class="n">completions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ijk</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">ijk_from_I_J_K</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+                <span class="n">well</span><span class="o">.</span><span class="n">completions</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_flow_rate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">compute_outflow</span><span class="p">(</span><span class="n">I</span><span class="p">,</span> <span class="n">J</span><span class="p">,</span> <span class="n">K</span><span class="p">))</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_read_simulator_dynamic_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads dynamic simulator output including fluxes and well completions.&quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Reading dynamic simulation outputs.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Read fluxes</span>
+        <span class="n">d_fluxes</span><span class="p">,</span> <span class="n">d_NNC_fluxes</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_flux</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">compute_total_fluxes</span><span class="p">(</span><span class="n">d_fluxes</span><span class="p">,</span> <span class="n">d_NNC_fluxes</span><span class="p">)</span>
+
+        <span class="c1"># Read well and completion data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_read_well_completion</span><span class="p">()</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_solve_TOF_tracer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wells</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Well</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solves the Time-of-Flight (TOF) and tracer equations for the given source wells.</span>
+
+<span class="sd">         This method constructs and solves a sparse linear system to determine the TOF</span>
+<span class="sd">         and tracer concentrations in each grid cell.  It handles both injector and</span>
+<span class="sd">         producer wells.</span>
+
+<span class="sd">         Args:</span>
+<span class="sd">             wells (list[Well]): A list of `Well` objects representing the source wells</span>
+<span class="sd">                 (either injectors or producers).</span>
+
+<span class="sd">         Returns:</span>
+<span class="sd">             tuple[np.ndarray, np.ndarray, np.ndarray]: A tuple containing:</span>
+<span class="sd">                 - tof (np.ndarray): A 1D NumPy array of Time-of-Flight values for each grid cell.</span>
+<span class="sd">                 - tracer (np.ndarray): A 2D NumPy array of tracer concentrations. Each column</span>
+<span class="sd">                   corresponds to a source well, and each row corresponds to a grid cell.</span>
+<span class="sd">                 - partition (np.ndarray): A 1D NumPy array representing the partition of each</span>
+<span class="sd">                   grid cell based on tracer concentration.</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+
+        <span class="n">nn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">nn</span>  <span class="c1"># Total number of grid cells</span>
+        <span class="n">nact</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">num_active_cells</span>  <span class="c1"># Number of active cells</span>
+        <span class="n">conx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_connections</span><span class="p">()</span>  <span class="c1"># Grid cell connections</span>
+        <span class="n">total_flux_flattened</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">get_total_flux_flattened</span><span class="p">()</span>  <span class="c1"># Flattened flux values</span>
+
+        <span class="c1"># --- Construct RHS (b) ---</span>
+        <span class="n">rhs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">nn</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">wells</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">rhs</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">porv</span>  <span class="c1"># Assign pore volume to the first column</span>
+
+        <span class="c1"># Assign fluxes at source cells to the 2:num_wells columns for tracer eqs rhs.</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">well</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wells</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">cmpl</span> <span class="ow">in</span> <span class="n">well</span><span class="o">.</span><span class="n">completions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cmpl</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">:</span>
+                    <span class="n">rhs</span><span class="p">[</span><span class="n">cmpl</span><span class="o">.</span><span class="n">IJK</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cmpl</span><span class="o">.</span><span class="n">flow_rate</span>
+
+        <span class="c1"># Aggregate total fluxes at well cells</span>
+        <span class="n">inflow_source</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rhs</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">]</span>
+
+        <span class="c1"># --- Construct Flow Matrix (A) ---</span>
+
+        <span class="c1"># Reverse fluxes if dealing with producers</span>
+        <span class="k">if</span> <span class="n">wells</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;PRD&quot;</span><span class="p">:</span>
+            <span class="n">inflow_source</span><span class="p">,</span> <span class="n">total_flux_flattened</span> <span class="o">=</span> <span class="o">-</span><span class="n">inflow_source</span><span class="p">,</span> <span class="o">-</span><span class="n">total_flux_flattened</span>
+
+        <span class="n">inflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">total_flux_flattened</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">outflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">total_flux_flattened</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="c1"># initialize total inflow w/o inflow from source(s)</span>
+        <span class="n">inflow_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nact</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">inflow_total</span><span class="p">,</span> <span class="n">conx</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">inflow</span><span class="p">)</span>
+        <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">inflow_total</span><span class="p">,</span> <span class="n">conx</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="n">outflow</span><span class="p">)</span>
+
+        <span class="n">d</span> <span class="o">=</span> <span class="n">inflow_total</span> <span class="o">+</span> <span class="n">inflow_source</span>  <span class="c1"># Total inflow (diagonal terms)</span>
+
+        <span class="c1"># Flux sparse matrix representation</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">csr_matrix</span><span class="p">((</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">inflow</span><span class="p">,</span> <span class="o">-</span><span class="n">outflow</span><span class="p">]),</span>
+            <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">conx</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">conx</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]),</span>
+             <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">conx</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">conx</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]))</span>
+        <span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nact</span><span class="p">,</span> <span class="n">nact</span><span class="p">))</span>
+
+        <span class="c1"># Modify diagonal elements</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="o">-</span><span class="n">F</span> <span class="o">+</span> <span class="n">sp</span><span class="o">.</span><span class="n">diags</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">nact</span><span class="p">,</span> <span class="n">nact</span><span class="p">))</span>
+
+        <span class="c1"># filter out cells without inflows (avoid singular matrix)</span>
+        <span class="n">active_cells_inflow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">diagonal</span><span class="p">())</span> <span class="o">&gt;</span> <span class="n">EPS</span>
+
+        <span class="c1"># Apply filters (actnum + inflow flag)</span>
+        <span class="n">b</span> <span class="o">=</span> <span class="n">rhs</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">,</span> <span class="p">:][</span><span class="n">active_cells_inflow</span><span class="p">,</span> <span class="p">:]</span>
+        <span class="n">A</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">active_cells_inflow</span><span class="p">][:,</span> <span class="n">active_cells_inflow</span><span class="p">]</span>
+
+        <span class="c1"># solve Ax=b</span>
+        <span class="n">solve</span> <span class="o">=</span> <span class="n">get_default_solver</span><span class="p">()</span>
+        <span class="n">Ainv</span> <span class="o">=</span> <span class="n">solve</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">Ainv</span> <span class="o">*</span> <span class="n">b</span>
+
+        <span class="c1"># --- Assign solutions to full arrays ---</span>
+        <span class="n">tof</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">nn</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+        <span class="n">tracer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">nn</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">wells</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+
+        <span class="c1"># Map solved values back to full grid</span>
+        <span class="n">active_cell_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="n">active_cells_inflow</span><span class="p">]</span>
+        <span class="n">tof</span><span class="p">[</span><span class="n">active_cell_indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">tracer</span><span class="p">[</span><span class="n">active_cell_indices</span><span class="p">,</span> <span class="p">:]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># Compute partitioning based on tracer concentration</span>
+        <span class="n">partition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_partition</span><span class="p">(</span><span class="n">tracer</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tof</span><span class="p">,</span> <span class="n">tracer</span><span class="p">,</span> <span class="n">partition</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_TOF_and_tracer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes Time-of-Flight (TOF) and tracer concentrations.</span>
+
+<span class="sd">        This method calculates TOF and tracer distributions for both injectors and</span>
+<span class="sd">        producers.  It calls the `_solve_TOF_tracer` method for each well type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if the TOF and tracer computations were successful, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Computing TOF and tracer concentrations.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No wells found. Skipping TOF computation.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">injectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">well</span> <span class="k">for</span> <span class="n">well</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">well</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;INJ&quot;</span> <span class="ow">and</span> <span class="n">well</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">producers</span> <span class="o">=</span> <span class="p">[</span><span class="n">well</span> <span class="k">for</span> <span class="n">well</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">wells</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">well</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s2">&quot;PRD&quot;</span> <span class="ow">and</span> <span class="n">well</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solve_TOF_tracer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">injectors</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">injectors</span> <span class="k">else</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CP</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_solve_TOF_tracer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">producers</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">producers</span> <span class="k">else</span> <span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">well_pair_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_well_pair_ids</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">partI</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_write_grid_flow_diagnostics</span><span class="p">()</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_other_diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes additional flow diagnostics (F-Phi plots, sweep efficiency, etc.).</span>
+
+<span class="sd">        This method calculates and saves additional flow diagnostics based on computed</span>
+<span class="sd">        TOF and tracer results. Handles both single and dual porosity cases.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">injectors</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">producers</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                <span class="s2">&quot;Skipping computation of other flow diagnostics (F-Phi plots, sweep efficiency) &quot;</span>
+                <span class="s2">&quot;due to missing injectors or producers (total TOF is required).&quot;</span>
+            <span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Computing additional flow diagnostics (F-Phi plots, sweep efficiency).&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Replace NaN values in TOF arrays with their maximum valid value</span>
+        <span class="n">tof_inj_no_nan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">)</span>
+        <span class="n">tof_prod_no_nan</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">dual_poro</span><span class="p">:</span>
+            <span class="c1"># --- Dual Porosity Case ---</span>
+            <span class="n">nM</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tof_inj_no_nan</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># Half for matrix, half for fracture</span>
+
+            <span class="c1"># Split TOF into matrix and fracture domains</span>
+            <span class="n">tof_inj_matrix</span><span class="p">,</span> <span class="n">tof_inj_fracture</span> <span class="o">=</span> <span class="n">tof_inj_no_nan</span><span class="p">[:</span><span class="n">nM</span><span class="p">],</span> <span class="n">tof_inj_no_nan</span><span class="p">[</span><span class="n">nM</span><span class="p">:]</span>
+            <span class="n">tof_prod_matrix</span><span class="p">,</span> <span class="n">tof_prod_fracture</span> <span class="o">=</span> <span class="n">tof_prod_no_nan</span><span class="p">[:</span><span class="n">nM</span><span class="p">],</span> <span class="n">tof_prod_no_nan</span><span class="p">[</span><span class="n">nM</span><span class="p">:]</span>
+
+            <span class="c1"># Split active cell and pore volume arrays</span>
+            <span class="n">actnum_matrix</span><span class="p">,</span> <span class="n">actnum_fracture</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">[:</span><span class="n">nM</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">[</span><span class="n">nM</span><span class="p">:]</span>
+            <span class="n">porv_matrix</span><span class="p">,</span> <span class="n">porv_fracture</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">porv</span><span class="p">[:</span><span class="n">nM</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">porv</span><span class="p">[</span><span class="n">nM</span><span class="p">:]</span>
+
+            <span class="c1"># Extract valid TOF values for active cells</span>
+            <span class="n">tof_valid_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">tof_inj_matrix</span><span class="p">[</span><span class="n">actnum_matrix</span><span class="p">],</span> <span class="n">tof_prod_matrix</span><span class="p">[</span><span class="n">actnum_matrix</span><span class="p">]])</span>
+            <span class="n">tof_valid_fracture</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">tof_inj_fracture</span><span class="p">[</span><span class="n">actnum_fracture</span><span class="p">],</span> <span class="n">tof_prod_fracture</span><span class="p">[</span><span class="n">actnum_fracture</span><span class="p">]])</span>
+
+            <span class="c1"># Compute F-Phi plots</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">FM</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PhiM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_F_and_Phi</span><span class="p">(</span><span class="n">porv_matrix</span><span class="p">[</span><span class="n">actnum_matrix</span><span class="p">],</span> <span class="n">tof_valid_matrix</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">FF</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PhiF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_F_and_Phi</span><span class="p">(</span><span class="n">porv_fracture</span><span class="p">[</span><span class="n">actnum_fracture</span><span class="p">],</span> <span class="n">tof_valid_fracture</span><span class="p">)</span>
+
+            <span class="c1"># Compute sweep efficiency</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">EvM</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tDM</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sweep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FM</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PhiM</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">EvF</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tDF</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sweep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FF</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">PhiF</span><span class="p">)</span>
+
+            <span class="c1"># Compute tracer concentration</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CM</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EvM</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tDM</span><span class="p">)</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">CF</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">EvF</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tDF</span><span class="p">)</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># --- Single Porosity Case ---</span>
+            <span class="n">tof_valid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">tof_inj_no_nan</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">],</span> <span class="n">tof_prod_no_nan</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">]])</span>
+
+            <span class="c1"># Compute F-Phi plots</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_F_and_Phi</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">porv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">actnum_bool</span><span class="p">],</span> <span class="n">tof_valid</span><span class="p">)</span>
+
+            <span class="c1"># Compute sweep efficiency</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Ev</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tD</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">compute_sweep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Phi</span><span class="p">)</span>
+
+            <span class="c1"># Compute tracer concentration</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">C</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Ev</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tD</span><span class="p">)</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">)</span>
+
+        <span class="c1"># Write results to file</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_other_flow_diagnostics</span><span class="p">()</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_flow_allocations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes flow allocation matrices for injectors and producers.</span>
+
+<span class="sd">        This method calculates and stores flow allocation factors, which indicate</span>
+<span class="sd">        how much each injector contributes to each producer (and vice-versa).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">injectors</span> <span class="ow">or</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">producers</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Skipping computation of allocation factors due to missing injectors or producers.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="n">injector_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">well</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">well</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">injectors</span><span class="p">]</span>
+        <span class="n">producer_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">well</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">well</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">producers</span><span class="p">]</span>
+
+        <span class="n">FlowAllocI</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_flow_allocation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">injectors</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CP</span><span class="p">,</span> <span class="n">producer_names</span><span class="p">)</span>
+        <span class="n">FlowAllocP</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_compute_flow_allocation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">producers</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">CI</span><span class="p">,</span> <span class="n">injector_names</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_allocation_factors</span><span class="p">(</span><span class="n">FlowAllocI</span><span class="p">,</span> <span class="n">FlowAllocP</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_compute_flow_allocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">wells</span><span class="p">,</span> <span class="n">C_matrix</span><span class="p">,</span> <span class="n">target_names</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper function to compute flow allocation matrices.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            wells (list[Well]): List of Well objects (injectors or producers).</span>
+<span class="sd">            C_matrix (np.ndarray): Tracer concentration matrix.</span>
+<span class="sd">            target_names (list[str]): Names of the target wells.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            pd.DataFrame: DataFrame containing the flow allocation matrix.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">FlowAlloc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">wells</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_names</span><span class="p">)))</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">well</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">wells</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target_names</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">cmpl</span> <span class="ow">in</span> <span class="n">well</span><span class="o">.</span><span class="n">completions</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">cmpl</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="s2">&quot;OPEN&quot;</span><span class="p">:</span>
+                        <span class="n">FlowAlloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="n">C_matrix</span><span class="p">[</span><span class="n">cmpl</span><span class="o">.</span><span class="n">IJK</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+            <span class="n">FlowAlloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">FlowAlloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:])</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">FlowAlloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="p">:]))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">FlowAlloc</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">target_names</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">well</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">well</span> <span class="ow">in</span> <span class="n">wells</span><span class="p">])</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_write_allocation_factors</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_inj</span><span class="p">,</span> <span class="n">df_prd</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Saves flow allocation factors to an Excel file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            df_inj (pd.DataFrame): DataFrame of injector flow allocation.</span>
+<span class="sd">            df_prd (pd.DataFrame): DataFrame of producer flow allocation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="s2">&quot;Allocation_Factor.xlsx&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s2">&quot;xlsxwriter&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+            <span class="n">df_inj</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Injector Flow Allocation&quot;</span><span class="p">)</span>
+            <span class="n">df_prd</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;Producer Flow Allocation&quot;</span><span class="p">)</span>
+        <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow allocation factors saved to </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_write_grid_flow_diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Writes flow diagnostics results to a GRDECL file.</span>
+
+<span class="sd">        Saves computed TOF (Time-of-Flight) and partitioning data to a GRDECL file for visualization in Petrel.</span>
+<span class="sd">        Handles both single and dual porosity cases and replaces NaN values appropriately.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            bool: True if writing to the GRDECL file was successful, False otherwise.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;GridFlowDiagnostics_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.GRDECL&quot;</span><span class="p">)</span>
+
+        <span class="c1"># --- Prepare Data for Writing ---</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">dual_poro</span><span class="p">:</span>
+            <span class="n">num_matrix_cells</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">data_labels</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;TOFIM&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">[:</span><span class="n">num_matrix_cells</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;TOFIF&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">[</span><span class="n">num_matrix_cells</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;PARTIM&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">partI</span><span class="p">[:</span><span class="n">num_matrix_cells</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partI</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;PARTIF&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">partI</span><span class="p">[</span><span class="n">num_matrix_cells</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partI</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;TOFPM&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">[:</span><span class="n">num_matrix_cells</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;TOFPF&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">[</span><span class="n">num_matrix_cells</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;PARTPM&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span><span class="p">[:</span><span class="n">num_matrix_cells</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;PARTPF&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span><span class="p">[</span><span class="n">num_matrix_cells</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;WELLPAIRM&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">well_pair_ids</span><span class="p">[:</span><span class="n">num_matrix_cells</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">well_pair_ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;WELLPAIRF&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">well_pair_ids</span><span class="p">[</span><span class="n">num_matrix_cells</span><span class="p">:]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">well_pair_ids</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">data_labels</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;TOFI&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofI</span><span class="p">,</span> <span class="s2">&quot;PARTI&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">partI</span><span class="p">,</span>
+                <span class="s2">&quot;TOFP&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tofP</span><span class="p">,</span> <span class="s2">&quot;PARTP&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">partP</span><span class="p">,</span>
+                <span class="s2">&quot;WELLPAIR&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">well_pair_ids</span>
+            <span class="p">}</span>
+
+        <span class="c1"># Remove None values</span>
+        <span class="n">data_labels</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="n">val</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">data_labels</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}</span>
+
+        <span class="c1"># If no valid data, log a warning and exit</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">data_labels</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Skipping _write_grid_flow_diagnostics: No valid TOF or partitioning data to write.&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+        <span class="c1"># --- Replace NaNs and Handle Data Formatting ---</span>
+        <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">data_labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">)):</span>  <span class="c1"># If all values are NaN, replace with 0</span>
+                <span class="n">data_labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                <span class="n">logging</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All values in </span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2"> are NaN, replacing with zeros.&quot;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="s2">&quot;TOF&quot;</span> <span class="ow">in</span> <span class="n">label</span><span class="p">:</span>
+                <span class="n">data_labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+                                              <span class="n">data</span><span class="p">)</span>  <span class="c1"># Replace NaNs with max valid value</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">data_labels</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>  <span class="c1"># Replace NaNs with -1 for categorical/int data</span>
+
+        <span class="c1"># --- Write Data to GRDECL File ---</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fid</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">label</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">data_labels</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">fid</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%e</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="s2">&quot;TOF&quot;</span> <span class="ow">in</span> <span class="n">label</span> <span class="k">else</span> <span class="s2">&quot;</span><span class="si">%3d</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="n">fid</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;/</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="n">logging</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Flow diagnostics results saved to: </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logging</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error writing to </span><span class="si">{</span><span class="n">file_path</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_write_other_flow_diagnostics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generates and saves flow diagnostics plots (F-Phi, tracer concentration)</span>
+<span class="sd">        and writes outputs into csv files.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">grid</span><span class="o">.</span><span class="n">dual_poro</span><span class="p">:</span>
+
+            <span class="n">df_FPhi_fracture</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Storage Capacity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">PhiF</span><span class="p">,</span> <span class="s1">&#39;Flow Capacity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">FF</span><span class="p">})</span>
+            <span class="n">df_FPhi_fracture</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;F_Phi_Fracture_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">df_FPhi_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Storage Capacity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">PhiM</span><span class="p">,</span> <span class="s1">&#39;Flow Capacity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">FM</span><span class="p">})</span>
+            <span class="n">df_FPhi_matrix</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;F_Phi_Matrix_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">df_tracer_fracture</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Time PVI&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tDF</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Tracer Concentration&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">CF</span><span class="p">})</span>
+            <span class="n">df_tracer_fracture</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Tracer_Fracture_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">df_tracer_matrix</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Time PVI&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tDM</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Tracer Concentration&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">CM</span><span class="p">})</span>
+            <span class="n">df_tracer_matrix</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Tracer_Matrix_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="n">df_FPhi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Storage Capacity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">Phi</span><span class="p">,</span> <span class="s1">&#39;Flow Capacity&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">})</span>
+            <span class="n">df_FPhi</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;F_Phi_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">df_tracer</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Time PVI&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">tD</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;Tracer Concentration&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">C</span><span class="p">})</span>
+            <span class="n">df_tracer</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Tracer_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">time_step_id</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">),</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+
+    <span class="c1"># ---- Static Methods ---------------------------------------------------------------------------------------------</span>
+
+
+<div class="viewcode-block" id="FlowDiagnostics.compute_partition">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.compute_partition">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_partition</span><span class="p">(</span><span class="n">C</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the partition of grid cells based on tracer concentrations.</span>
+
+<span class="sd">        This static method determines which source well (injector, or producer with a reversed flux field)</span>
+<span class="sd">         has the highest tracer concentration in each grid cell.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            C (np.ndarray): A 2D NumPy array of tracer concentrations.  The shape should</span>
+<span class="sd">                be (number of grid cells, number of injectors).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1D NumPy array representing the partition. Each element</span>
+<span class="sd">                corresponds to a grid cell and indicates the index (1-based) of the</span>
+<span class="sd">                source well with the maximum absolute tracer concentration.  NaN values</span>
+<span class="sd">                are assigned where the maximum concentration is 0 or NaN.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Compute max absolute value along columns (axis=1)</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">C</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Get index (1-based) of the maximum value per row</span>
+        <span class="n">partition</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">C</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1.</span>  <span class="c1"># 0-based, add 1</span>
+
+        <span class="c1"># Set partI to NaN where val == 0 or val is NaN_</span>
+        <span class="n">partition</span><span class="p">[(</span><span class="n">val</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">|</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">val</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="k">return</span> <span class="n">partition</span></div>
+
+
+
+<div class="viewcode-block" id="FlowDiagnostics.compute_well_pair_ids">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.compute_well_pair_ids">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_well_pair_ids</span><span class="p">(</span><span class="n">partI</span><span class="p">,</span> <span class="n">partP</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the partition of grid cells based on tracer concentrations.</span>
+
+<span class="sd">        This static method determines well pair ids at each cell, based on injector</span>
+<span class="sd">        and producer partitions.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            partI (np.ndarray): A 2D NumPy array of partition ids (injectors).</span>
+<span class="sd">            partP (np.ndarray): A 2D NumPy array of partition ids (producers).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            np.ndarray: A 1D NumPy array representing the well pair ids.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">partI</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">partP</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="c1"># Stack injectors and producers to create well pairs</span>
+        <span class="n">well_pairs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">((</span><span class="n">partI</span><span class="p">,</span> <span class="n">partP</span><span class="p">))</span>
+
+        <span class="c1"># Remove rows where either injector or producer is NaN</span>
+        <span class="n">valid_mask</span> <span class="o">=</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">well_pairs</span><span class="p">)</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">unique_pairs</span><span class="p">,</span> <span class="n">inverse_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">well_pairs</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">return_inverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Create well pair IDs: start from 1</span>
+        <span class="n">well_pair_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">well_pairs</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>  <span class="c1"># Initialize with NaN</span>
+        <span class="n">well_pair_ids</span><span class="p">[</span><span class="n">valid_mask</span><span class="p">]</span> <span class="o">=</span> <span class="n">inverse_indices</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># Assign unique IDs (1, 2, 3...)</span>
+
+        <span class="k">return</span> <span class="n">well_pair_ids</span></div>
+
+
+
+<div class="viewcode-block" id="FlowDiagnostics.compute_F_and_Phi">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.compute_F_and_Phi">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_F_and_Phi</span><span class="p">(</span><span class="n">pv</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">tof</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the flow-capacity/storage-capacity diagram (F, Phi).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            pv (np.ndarray): A 1D NumPy array of pore volumes for each grid cell.</span>
+<span class="sd">            tof (np.ndarray): A 2D NumPy array of time-of-flight values from injector and</span>
+<span class="sd">                producer, per cell.  Should have two columns.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[np.ndarray, np.ndarray]: A tuple containing:</span>
+<span class="sd">                - F (np.ndarray): Flow capacity (cumulative flux).</span>
+<span class="sd">                - Phi (np.ndarray): Storage capacity (cumulative pore volume).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="n">tof</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Tof input must have two columns.&quot;</span>
+
+        <span class="c1"># Compute total travel time for each cell</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">tof</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># Sort cells based on total travel time</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">ts_sorted</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+        <span class="c1"># Reorder volumes according to travel time</span>
+        <span class="n">v_sorted</span> <span class="o">=</span> <span class="n">pv</span><span class="p">[</span><span class="n">order</span><span class="p">]</span>
+
+        <span class="c1"># Compute cumulative storage capacity (Phi)</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">v_sorted</span><span class="p">)</span>
+        <span class="n">total_volume</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Total volume of the region</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">Phi</span> <span class="o">/</span> <span class="n">total_volume</span><span class="p">))</span>  <span class="c1"># Normalize Phi</span>
+
+        <span class="c1"># Compute flux per cell (assuming incompressible flow)</span>
+        <span class="n">flux</span> <span class="o">=</span> <span class="n">v_sorted</span> <span class="o">/</span> <span class="p">(</span><span class="n">ts_sorted</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">)</span>  <span class="c1"># Avoid division by zero</span>
+
+        <span class="c1"># Compute cumulative flow capacity (F)</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">flux</span><span class="p">)</span>
+        <span class="n">total_flux</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>  <span class="c1"># Total flux computed</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="mi">0</span><span class="p">],</span> <span class="n">F</span> <span class="o">/</span> <span class="n">total_flux</span><span class="p">))</span>  <span class="c1"># Normalize F</span>
+
+        <span class="k">return</span> <span class="n">F</span><span class="p">,</span> <span class="n">Phi</span></div>
+
+
+
+<div class="viewcode-block" id="FlowDiagnostics.compute_sweep">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.compute_sweep">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_sweep</span><span class="p">(</span><span class="n">F</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">Phi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes sweep efficiency versus dimensionless time (PVI).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            F (np.ndarray): Flow capacity.</span>
+<span class="sd">            Phi (np.ndarray): Storage capacity.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            tuple[np.ndarray, np.ndarray]: A tuple containing:</span>
+<span class="sd">                - Ev (np.ndarray): Sweep efficiency.</span>
+<span class="sd">                - tD (np.ndarray): Dimensionless time (PVI).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Ensure F and Phi are numpy arrays</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+
+        <span class="c1"># Remove any null segments to avoid division by zero</span>
+        <span class="n">hit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+        <span class="n">hit</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">hit</span><span class="p">]</span>
+        <span class="n">Phi</span> <span class="o">=</span> <span class="n">Phi</span><span class="p">[</span><span class="n">hit</span><span class="p">]</span>
+
+        <span class="c1"># Compute dimensionless time (avoid division by zero)</span>
+        <span class="n">tD</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
+        <span class="n">tD</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Phi</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">Phi</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">F</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">EPS</span><span class="p">)</span>
+
+        <span class="c1"># Compute sweep efficiency</span>
+        <span class="n">Ev</span> <span class="o">=</span> <span class="n">Phi</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">F</span><span class="p">)</span> <span class="o">*</span> <span class="n">tD</span>
+
+        <span class="k">return</span> <span class="n">Ev</span><span class="p">,</span> <span class="n">tD</span></div>
+
+
+
+<div class="viewcode-block" id="FlowDiagnostics.compute_Lorenz">
+<a class="viewcode-back" href="../../api/pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.html#pyflowdiagnostics.flow_diagnostics.FlowDiagnostics.compute_Lorenz">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_Lorenz</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">Phi</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Computes the Lorenz coefficient, a measure of heterogeneity.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            F (np.ndarray): Flow capacity.</span>
+<span class="sd">            Phi (np.ndarray): Storage capacity.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            float: The Lorenz coefficient.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">Phi</span><span class="p">)</span>
+        <span class="n">Lc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">F</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">F</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">v</span><span class="p">)</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Lc</span></div>
+</div>
+
+
+
+
+
+
+</pre></div>
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2025-2025, Tsubasa Onishi.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.2.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

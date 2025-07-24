@@ -42,3 +42,5 @@ clean:
 	rm -rf */__pycache__/ */*/__pycache__/      # python cache
 	rm -rf .coverage htmlcov/ .pytest_cache/    # tests and coverage
 	rm -rf docs/api/pyflowdiagnostics* docs/_build/ docs/savefig/ # docs
+	rm -rf pyflowdiagnostics_logs/
+	rm -rf .ruff_cache/

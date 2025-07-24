@@ -4,17 +4,18 @@ import numpy as np
 from os.path import join, dirname
 
 
-def get_input_data(version):
+def get_input_data():
     # Get data
+    version="2025-07-24"
     fname = "pyfd-data"
     out = pooch.retrieve(
         f"https://github.com/GEG-ETHZ/pyfd-data/archive/refs/tags/{version}.zip",
-        "1d31e5bf605610298546cbc7800630499553502fed73a08f42885552870f29c3",
+        "61caf9b88b3f84227eabf2f1557c0d3f790caf6de3cb1559ebe3482b922c746a",
         fname=fname+".zip",
-        path="data",
+        path=join(dirname(__file__), "data"),
     )
-    fdir = out.rsplit('.', 1)[0]
-    with zipfile.ZipFile(out, 'r') as zip_ref:
+    fdir = out.rsplit(".", 1)[0]
+    with zipfile.ZipFile(out, "r") as zip_ref:
         zip_ref.extractall(fdir)
 
     ecl_dir = join(fdir, f"pyfd-data-{version}", "examples", "ecl")
@@ -54,10 +55,10 @@ def get_regression_data():
     --------------------------------------------------------------------------------
 
     import numpy as np
-    tracer = np.loadtxt('SPE10.fdout/Tracer_1.csv',
-                        skiprows=1, delimiter=',', dtype=np.single)
-    f_phi = np.loadtxt('SPE10.fdout/F_Phi_1.csv',
-                       skiprows=1, delimiter=',', dtype=np.single)
-    np.savez_compressed('regression', f_phi=f_phi[::5, :], tracer=tracer[::5, :])
+    tracer = np.loadtxt("SPE10.fdout/Tracer_1.csv",
+                        skiprows=1, delimiter=",", dtype=np.single)
+    f_phi = np.loadtxt("SPE10.fdout/F_Phi_1.csv",
+                       skiprows=1, delimiter=",", dtype=np.single)
+    np.savez_compressed("regression", f_phi=f_phi[::5, :], tracer=tracer[::5, :])
     """
-    return np.load(join(dirname(__file__), 'data', 'regression.npz'))
+    return np.load(join(dirname(__file__), "data", "regression.npz"))

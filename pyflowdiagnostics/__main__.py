@@ -52,10 +52,10 @@ def config_parser():
     return parser
 
 
-def main():
+def main(args=None):
 
     parser = config_parser()
-    args = parser.parse_args()
+    args = parser.parse_args(sys.argv[1:] if args is None else args)
     if vars(args).pop('report'):
         print(utils.Report())
     elif vars(args).pop('version'):

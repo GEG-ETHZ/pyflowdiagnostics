@@ -1,5 +1,6 @@
 # Directories
 __pycache__/
+pyflowdiagnostics_logs/
 
 # Sphinx
 docs/_build/

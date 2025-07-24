@@ -1,4 +1,5 @@
 import pytest
+import shutil
 import numpy as np
 from os.path import join
 from numpy.testing import assert_allclose
@@ -6,26 +7,28 @@ from numpy.testing import assert_allclose
 from . import get_data
 import pyflowdiagnostics
 import pyflowdiagnostics.flow_diagnostics as pfd
+from pyflowdiagnostics.__main__ import main as run
 
 # Get input data
-SPE10_DIR = get_data.get_input_data(version="2025-07-23")
+SPE10_DIR = get_data.get_input_data()
 
 # Get regression data
 DATA = get_data.get_regression_data()
 
 
-def test_status_quo_python():
+def test_status_quo_python(tmpdir):
+    shutil.copytree(SPE10_DIR, tmpdir, dirs_exist_ok=True)
 
-    fd = pfd.FlowDiagnostics(join(SPE10_DIR, "SPE10.DATA"))
+    fd = pfd.FlowDiagnostics(join(tmpdir, "SPE10.DATA"))
     fd.execute(time_step_id=1)
 
     # Read in result
     tracer = np.loadtxt(
-        join(SPE10_DIR, 'SPE10.fdout/Tracer_1.csv'),
+        join(tmpdir, 'SPE10.fdout/Tracer_1.csv'),
         skiprows=1, delimiter=',', dtype=np.single,
     )
     f_phi = np.loadtxt(
-        join(SPE10_DIR, 'SPE10.fdout/F_Phi_1.csv'),
+        join(tmpdir, 'SPE10.fdout/F_Phi_1.csv'),
         skiprows=1, delimiter=',', dtype=np.single,
     )
 
@@ -34,21 +37,23 @@ def test_status_quo_python():
     assert_allclose(DATA['f_phi'], f_phi[::5, :], atol=0, rtol=1e-6)
 
 
-def test_status_quo_cli():
+def test_status_quo_cli_python(tmpdir):
+    shutil.copytree(SPE10_DIR, tmpdir, dirs_exist_ok=True)
 
-    fd = pfd.FlowDiagnostics(join(SPE10_DIR, "SPE10.DATA"))
-    fd.execute(time_step_id=1)
+    run((
+        '-f', join(tmpdir, "SPE10.DATA"),
+        '-t', '1',
+    ))
 
     # Read in result
     tracer = np.loadtxt(
-        join(SPE10_DIR, 'SPE10.fdout/Tracer_1.csv'),
+        join(tmpdir, 'SPE10.fdout/Tracer_1.csv'),
         skiprows=1, delimiter=',', dtype=np.single,
     )
     f_phi = np.loadtxt(
-        join(SPE10_DIR, 'SPE10.fdout/F_Phi_1.csv'),
+        join(tmpdir, 'SPE10.fdout/F_Phi_1.csv'),
         skiprows=1, delimiter=',', dtype=np.single,
     )
-
 
     # Check them
     assert_allclose(DATA['tracer'], tracer[::5, :], atol=0, rtol=1e-6)
@@ -56,7 +61,33 @@ def test_status_quo_cli():
 
 
 @pytest.mark.script_launch_mode('subprocess')
-def test_cli_main(script_runner):
+def test_status_quo_cli_terminal(tmpdir, script_runner):
+    shutil.copytree(SPE10_DIR, tmpdir, dirs_exist_ok=True)
+
+    ret = script_runner.run(
+        ['pyflowdiagnostics', '-f', join(tmpdir, "SPE10.DATA"), '-t', '1',]
+    )
+    assert ret.success
+    assert ret.stdout == ""
+    assert "INFO Run finished normally. Elapsed time: " in ret.stderr
+
+    # Read in result
+    tracer = np.loadtxt(
+        join(tmpdir, 'SPE10.fdout/Tracer_1.csv'),
+        skiprows=1, delimiter=',', dtype=np.single,
+    )
+    f_phi = np.loadtxt(
+        join(tmpdir, 'SPE10.fdout/F_Phi_1.csv'),
+        skiprows=1, delimiter=',', dtype=np.single,
+    )
+
+    # Check them
+    assert_allclose(DATA['tracer'], tracer[::5, :], atol=0, rtol=1e-6)
+    assert_allclose(DATA['f_phi'], f_phi[::5, :], atol=0, rtol=1e-6)
+
+
+@pytest.mark.script_launch_mode('subprocess')
+def test_cli_main(tmpdir, script_runner):
 
     # help
     for inp in ['--help', '-h']:
@@ -91,7 +122,7 @@ def test_cli_main(script_runner):
 
     # try to run
     ret = script_runner.run(
-            ['pyflowdiagnostics', '-f', 'test.DATA', '-t', '1'])
+            ['pyflowdiagnostics', '-f', join(tmpdir, "test.DATA"), '-t', '1'])
     assert not ret.success
     assert "RuntimeError: Input file not found" in ret.stderr
 

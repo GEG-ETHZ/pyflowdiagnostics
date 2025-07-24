@@ -93,3 +93,52 @@ Sample results:
    :name: saigup
 
    SAIGUP: permeability and TOF.
+
+
+Example using sample data
+-------------------------
+
+First, we grab the example data from the repo
+https://github.com/GEG-ETHZ/pyfd-data.
+
+.. code-block:: python
+
+   import os
+   import pooch
+   import zipfile
+   import pyflowdiagnostics.flow_diagnostics as pfd
+
+   fname = "pyfd-data"
+   version = "2025-07-23"
+   out = pooch.retrieve(
+       f"https://github.com/GEG-ETHZ/pyfd-data/archive/refs/tags/{version}.zip",
+       "1d31e5bf605610298546cbc7800630499553502fed73a08f42885552870f29c3",
+       fname=fname+".zip",
+       path="data",
+   )
+
+   fdir = out.rsplit('.', 1)[0]
+   with zipfile.ZipFile(out, 'r') as zip_ref:
+       zip_ref.extractall(fdir)
+
+Alternatively, you can grab the data manually from the repo
+(https://github.com/GEG-ETHZ/pyfd-data) or use the usual tools,
+
+.. code-block:: console
+
+   wget https://github.com/GEG-ETHZ/pyfd-data/archive/refs/tags/2025-07-23.zip
+
+
+Then we can run pyflowdiagnostics just as introduced above:
+
+.. code-block:: python
+
+   ecl_dir = os.path.join(fdir, f"pyfd-data-{version}", "examples", "ecl")
+   spe10_dir = os.path.join(ecl_dir, "e100", "SPE10_TOPLAYER")
+
+   fd = pfd.FlowDiagnostics(os.path.join(spe10_dir, "SPE10.DATA"))
+   fd.execute(time_step_id=1)
+
+This will create a directory ``SPE10.fdout`` within the data folder ``e100``,
+with the four files ``Allocation_factor.xlsx``, ``F_Phi_1.csv``,
+``GridFlowDiagnostics_1.GRDECL``, and ``Tracer_1.csv``.

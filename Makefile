@@ -4,7 +4,7 @@ help:
 	@echo "  install        install in editable mode"
 	@echo "  dev-install    install in editable mode with dev requirements"
 #	@echo "  pytest         run the test suite and report coverage"
-	@echo "  flake8         style check with flake8"
+	@echo "  ruff           check with ruff"
 	@echo "  html           build docs (update existing)"
 	@echo "  html-clean     build docs (new, removing any existing)"
 	@echo "  preview        renders docs in Browser"
@@ -21,8 +21,8 @@ dev-install:
 pytest:
 	rm -rf .coverage htmlcov/ .pytest_cache/ && pytest --cov=pyflowdiagnostics && coverage html
 
-flake8:
-	flake8 docs/ pyflowdiagnostics/  # tests/
+ruff:
+	ruff check
 
 html:
 	cd docs && make html
@@ -42,3 +42,5 @@ clean:
 	rm -rf */__pycache__/ */*/__pycache__/      # python cache
 	rm -rf .coverage htmlcov/ .pytest_cache/    # tests and coverage
 	rm -rf docs/api/pyflowdiagnostics* docs/_build/ docs/savefig/ # docs
+	rm -rf pyflowdiagnostics_logs/
+	rm -rf .ruff_cache/

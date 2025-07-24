@@ -1,5 +1,6 @@
 # Directories
 __pycache__/
+pyflowdiagnostics_logs/
 
 # Sphinx
 docs/_build/
@@ -13,3 +14,7 @@ pyflowdiagnostics/version.py
 build/
 dist/
 pyflowdiagnostics.egg-info/
+
+# Test related
+data/
+.coverage

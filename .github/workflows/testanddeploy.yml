@@ -83,17 +83,10 @@ jobs:
         shell: bash -l {0}
         run: ruff check
 
-      # - name: Test with pytest
-      #   shell: bash -l {0}
-      #   run: |
-      #     python -m pip install .
-      #     pytest --cov=pyflowdiagnostics
-
-      - name: Dummy test for now
+      - name: Test with pytest
         shell: bash -l {0}
-        run: |
-          python -m pip install .
-          pyflowdiagnostics --report
+        run: pytest --cov=pyflowdiagnostics
+
 
   deploy:
     needs: test

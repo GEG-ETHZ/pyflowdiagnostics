@@ -43,6 +43,10 @@ docs = [
 tests = [
     "ruff",
     "pytest",
+    "pooch",
+    "coveralls",
+    "pytest_cov",
+    "pytest-console-scripts",
 ]
 all = [
     "pyflowdiagnostics[docs]",

@@ -109,10 +109,10 @@ https://github.com/GEG-ETHZ/pyfd-data.
    import pyflowdiagnostics.flow_diagnostics as pfd
 
    fname = "pyfd-data"
-   version = "2025-07-23"
+   version = "2025-07-24"
    out = pooch.retrieve(
        f"https://github.com/GEG-ETHZ/pyfd-data/archive/refs/tags/{version}.zip",
-       "1d31e5bf605610298546cbc7800630499553502fed73a08f42885552870f29c3",
+       "61caf9b88b3f84227eabf2f1557c0d3f790caf6de3cb1559ebe3482b922c746a",
        fname=fname+".zip",
        path="data",
    )

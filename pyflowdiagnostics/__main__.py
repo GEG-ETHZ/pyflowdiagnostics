@@ -47,6 +47,8 @@ def config_parser():
                         action=argparse.BooleanOptionalAction, dest="debug")
     parser.add_argument("--report", action="store_true", default=False,
                         help="Show pyflowdiagnostics report and exit")
+    parser.add_argument("--version", action="store_true", default=False,
+                        help="Show pyflowdiagnostics version info and exit")
     return parser
 
 
@@ -56,6 +58,8 @@ def main():
     args = parser.parse_args()
     if vars(args).pop('report'):
         print(utils.Report())
+    elif vars(args).pop('version'):
+        print(f"pyflowdiagnostics v{utils.__version__}")
     elif not vars(args).get('file_path') or not vars(args).get('time_step_indices'):
         print(f"{parser.description}\n=> Type `pyflowdiagnostics --help` for "
               f"more info (pyflowdiagnostics v{utils.__version__}).")

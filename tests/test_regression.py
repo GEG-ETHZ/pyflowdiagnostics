@@ -1,79 +1,106 @@
-import pooch
-import zipfile
+import pytest
 import numpy as np
-from os.path import join, dirname
+from os.path import join
 from numpy.testing import assert_allclose
 
+from . import get_data
+import pyflowdiagnostics
 import pyflowdiagnostics.flow_diagnostics as pfd
 
+# Get input data
+SPE10_DIR = get_data.get_input_data(version="2025-07-23")
 
-# The check-data was generated in the following way on 2025-07-24:
-# --------------------------------------------------------------------------------
-#   Date: Thu Jul 24 14:17:05 2025 CEST
-#
-#                 OS : Linux (Ubuntu 24.04)
-#             CPU(s) : 2
-#            Machine : aarch64
-#       Architecture : 64bit
-#                RAM : 1.9 GiB
-#        Environment : Python
-#        File system : ext4
-#
-#   Python 3.12.10 | packaged by conda-forge | (main, Apr 10 2025, 22:10:27)
-#   [GCC 13.3.0]
-#
-#              numpy : 2.2.6
-#              scipy : 1.15.2
-#             pandas : 2.2.3
-#         xlsxwriter : 3.2.3
-#               h5py : 3.13.0
-#        pymatsolver : 0.3.1
-#  pyflowdiagnostics : 0.1.5.dev1+gb3cc99f.d20250723
-#            IPython : 9.2.0
-#         matplotlib : 3.9.1
-#       python-mumps : 0.0.3
-# --------------------------------------------------------------------------------
-# import numpy as np
-# tracer = np.loadtxt('SPE10.fdout/Tracer_1.csv', skiprows=1, delimiter=',', dtype=np.single)
-# f_phi = np.loadtxt('SPE10.fdout/F_Phi_1.csv', skiprows=1, delimiter=',', dtype=np.single)
-# np.savez_compressed('regression', f_phi=f_phi[::5, :], tracer=tracer[::5, :])
+# Get regression data
+DATA = get_data.get_regression_data()
 
 
-# Get data
-FNAME = "pyfd-data"
-VERSION = "2025-07-23"
-OUT = pooch.retrieve(
-    f"https://github.com/GEG-ETHZ/pyfd-data/archive/refs/tags/{VERSION}.zip",
-    "1d31e5bf605610298546cbc7800630499553502fed73a08f42885552870f29c3",
-    fname=FNAME+".zip",
-    path="data",
-)
-FDIR = OUT.rsplit('.', 1)[0]
-with zipfile.ZipFile(OUT, 'r') as zip_ref:
-    zip_ref.extractall(FDIR)
+def test_status_quo_python():
 
-
-def test_status_quo():
-
-    ecl_dir = join(FDIR, f"pyfd-data-{VERSION}", "examples", "ecl")
-    spe10_dir = join(ecl_dir, "e100", "SPE10_TOPLAYER")
-
-    fd = pfd.FlowDiagnostics(join(spe10_dir, "SPE10.DATA"))
+    fd = pfd.FlowDiagnostics(join(SPE10_DIR, "SPE10.DATA"))
     fd.execute(time_step_id=1)
 
     # Read in result
     tracer = np.loadtxt(
-        join(spe10_dir, 'SPE10.fdout/Tracer_1.csv'),
+        join(SPE10_DIR, 'SPE10.fdout/Tracer_1.csv'),
         skiprows=1, delimiter=',', dtype=np.single,
     )
     f_phi = np.loadtxt(
-        join(spe10_dir, 'SPE10.fdout/F_Phi_1.csv'),
+        join(SPE10_DIR, 'SPE10.fdout/F_Phi_1.csv'),
         skiprows=1, delimiter=',', dtype=np.single,
     )
 
-    # Get regression data
-    data = np.load(join(dirname(__file__), 'data', 'regression.npz'))
+    # Check them
+    assert_allclose(DATA['tracer'], tracer[::5, :], atol=0, rtol=1e-6)
+    assert_allclose(DATA['f_phi'], f_phi[::5, :], atol=0, rtol=1e-6)
+
+
+def test_status_quo_cli():
+
+    fd = pfd.FlowDiagnostics(join(SPE10_DIR, "SPE10.DATA"))
+    fd.execute(time_step_id=1)
+
+    # Read in result
+    tracer = np.loadtxt(
+        join(SPE10_DIR, 'SPE10.fdout/Tracer_1.csv'),
+        skiprows=1, delimiter=',', dtype=np.single,
+    )
+    f_phi = np.loadtxt(
+        join(SPE10_DIR, 'SPE10.fdout/F_Phi_1.csv'),
+        skiprows=1, delimiter=',', dtype=np.single,
+    )
+
 
     # Check them
-    assert_allclose(data['tracer'], tracer[::5, :], atol=0, rtol=1e-6)
-    assert_allclose(data['f_phi'], f_phi[::5, :], atol=0, rtol=1e-6)
+    assert_allclose(DATA['tracer'], tracer[::5, :], atol=0, rtol=1e-6)
+    assert_allclose(DATA['f_phi'], f_phi[::5, :], atol=0, rtol=1e-6)
+
+
+@pytest.mark.script_launch_mode('subprocess')
+def test_cli_main(script_runner):
+
+    # help
+    for inp in ['--help', '-h']:
+        ret = script_runner.run(['pyflowdiagnostics', inp])
+        assert ret.success
+        assert "Run Flow Diagnostics on a reservoir simulation file." in ret.stdout
+
+    # info
+    ret = script_runner.run('pyflowdiagnostics')
+    assert ret.success
+    assert "Run Flow Diagnostics on a reservoir simulation file." in ret.stdout
+    assert "pyflowdiagnostics v" in ret.stdout
+
+    # report
+    ret = script_runner.run(['pyflowdiagnostics', '--report'])
+    assert ret.success
+    # Exclude time to avoid errors.
+    # Exclude pyflowdiagnostics-version (after 600), because if run locally without
+    # having pyflowdiagnostics installed it will be "unknown" for the __main__ one.
+    assert pyflowdiagnostics.utils.Report().__repr__()[115:600] in ret.stdout
+
+    # version        -- VIA pyflowdiagnostics/__main__.py by calling the folder pyflowdiagnostics.
+    ret = script_runner.run(['python', 'pyflowdiagnostics', '--version'])
+    assert ret.success
+    assert "pyflowdiagnostics v" in ret.stdout
+
+    # Wrong function -- VIA pyflowdiagnostics/__main__.py by calling the file.
+    ret = script_runner.run(
+            ['python', join('pyflowdiagnostics', '__main__.py'), 'wrong'])
+    assert not ret.success
+    assert "error: unrecognized arguments: wrong" in ret.stderr
+
+    # try to run
+    ret = script_runner.run(
+            ['pyflowdiagnostics', '-f', 'test.DATA', '-t', '1'])
+    assert not ret.success
+    assert "RuntimeError: Input file not found" in ret.stderr
+
+
+@pytest.mark.script_launch_mode('subprocess')
+def test_import_time(script_runner):
+    # Relevant for responsiveness of CLI: How long does it take to import?
+    cmd = ["python", "-Ximporttime", "-c", "import pyflowdiagnostics"]
+    out = script_runner.run(cmd, print_result=False)
+    import_time_s = float(out.stderr.split('|')[-2])/1e6
+    # Currently we check t < 1.0 s (really slow, should be < 0.2 s)
+    assert import_time_s < 1.0

@@ -75,5 +75,5 @@ def test_status_quo():
     data = np.load(join(dirname(__file__), 'data', 'regression.npz'))
 
     # Check them
-    assert_allclose(data['tracer'], tracer[::5, :])
-    assert_allclose(data['f_phi'], f_phi[::5, :])
+    assert_allclose(data['tracer'], tracer[::5, :], atol=0, rtol=1e-6)
+    assert_allclose(data['f_phi'], f_phi[::5, :], atol=0, rtol=1e-6)

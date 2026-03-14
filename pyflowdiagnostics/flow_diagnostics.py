@@ -73,6 +73,7 @@ class FlowDiagnostics:
         self.wells = {}
         self.injectors = []
         self.producers = []
+        self._json_results = {}
 
 
     def execute(self, time_step_id: int) -> None:
@@ -85,11 +86,14 @@ class FlowDiagnostics:
         logging.info(f"Working on time step {time_step_id}.")
 
         self.time_step_id = time_step_id
+        self._json_results = {}
         self._read_simulator_dynamic_output()
 
         if self._compute_TOF_and_tracer():
             self._compute_flow_allocations()
+            self._compute_and_write_arrival_time_at_producers()
             self._compute_other_diagnostics()
+            self._write_combined_json()
         else:
             logging.error("Failed to compute TOF and tracer concentrations.")
 
@@ -635,6 +639,40 @@ class FlowDiagnostics:
         self._write_allocation_factors(FlowAllocI, FlowAllocP)
 
 
+    def _compute_and_write_arrival_time_at_producers(self) -> None:
+        """Computes arrival time of fluids at each producer well and writes to JSON.
+
+        For each producer, finds the minimum time-of-flight from injectors (tofI)
+        across its OPEN completion cells. This represents the earliest arrival
+        of injected fluid at that producer.
+        """
+        if not self.producers or self.tofI is None:
+            logging.debug("Skipping arrival time computation: no producers or tofI.")
+            return
+
+        arrival_times = []
+        for well in self.producers:
+            if well.type != "PRD":
+                continue
+            tof_values = []
+            for cmpl in well.completions:
+                if cmpl.status == "OPEN":
+                    tof_val = self.tofI[cmpl.IJK - 1]
+                    if not np.isnan(tof_val):
+                        tof_values.append(float(tof_val))
+            min_tof = float(np.min(tof_values)) if tof_values else None
+            arrival_times.append({"producer": well.name, "arrival_time": min_tof})
+
+        self._json_results["arrival_time"] = {
+            "description": (
+                "Earliest arrival time of injected fluid at each producer well (days). "
+                "Computed as the minimum time-of-flight from injectors across the producer's completion cells. "
+                "Lower values indicate faster breakthrough; null if no injector fluid reaches the producer."
+            ),
+            "producer_arrival_times": arrival_times,
+        }
+
+
     def _compute_flow_allocation(self, wells, C_matrix, target_names):
         """Helper function to compute flow allocation matrices.
 
@@ -677,15 +715,15 @@ class FlowDiagnostics:
             {"producer": prd, "injector": inj, "allocation": float(df_prd.loc[prd, inj])}
             for prd in df_prd.index for inj in df_prd.columns
         ]
-        allocation_json = {
-            "time_step_id": self.time_step_id,
+        self._json_results["allocation"] = {
+            "description": (
+                "Flow allocation factors: fraction of fluid from each injector that reaches each producer "
+                "(injector_allocation) and fraction of each producer's production that originates from each "
+                "injector (producer_allocation). Values range 0-1; higher values indicate stronger connectivity."
+            ),
             "injector_allocation": injector_allocation,
             "producer_allocation": producer_allocation,
         }
-        file_path_json = os.path.join(self.output_dir, f"Allocation_Factor_{self.time_step_id}.json")
-        with open(file_path_json, "w") as f:
-            json.dump(allocation_json, f, indent=2)
-        logging.info(f"Flow allocation factors saved to {file_path_json}")
 
 
     def _write_grid_flow_diagnostics(self) -> bool:
@@ -774,6 +812,20 @@ class FlowDiagnostics:
             df_tracer_matrix = pd.DataFrame({'Time PVI': self.tDM[:-1], 'Tracer Concentration': self.CM})
             df_tracer_matrix.to_csv(os.path.join(self.output_dir, f"Tracer_Matrix_{self.time_step_id}.csv"), index=False)
 
+            lorenz_matrix = self.compute_Lorenz(self.FM, self.PhiM)
+            lorenz_fracture = self.compute_Lorenz(self.FF, self.PhiF)
+            self._json_results["lorenz"] = {
+                "description": (
+                    "Lorenz coefficient: measure of flow heterogeneity (0=uniform, 1=highly heterogeneous). "
+                    "Derived from F-Phi (flow-storage capacity) curves. For dual porosity, separate values "
+                    "for matrix and fracture domains."
+                ),
+                "lorenz_coefficient": {
+                    "matrix": float(lorenz_matrix),
+                    "fracture": float(lorenz_fracture),
+                },
+            }
+
         else:
 
             df_FPhi = pd.DataFrame({'Storage Capacity': self.Phi, 'Flow Capacity': self.F})
@@ -782,6 +834,28 @@ class FlowDiagnostics:
             df_tracer = pd.DataFrame({'Time PVI': self.tD[:-1], 'Tracer Concentration': self.C})
             df_tracer.to_csv(os.path.join(self.output_dir, f"Tracer_{self.time_step_id}.csv"), index=False)
 
+            lorenz = self.compute_Lorenz(self.F, self.Phi)
+            self._json_results["lorenz"] = {
+                "description": (
+                    "Lorenz coefficient: measure of flow heterogeneity (0=uniform, 1=highly heterogeneous). "
+                    "Derived from F-Phi (flow-storage capacity) curves. Higher values indicate more channeling "
+                    "and uneven sweep."
+                ),
+                "lorenz_coefficient": float(lorenz),
+            }
+
+    def _write_combined_json(self) -> None:
+        """Writes all flow diagnostics metrics to a single JSON file with descriptions."""
+        if not self._json_results:
+            return
+        combined = {
+            "time_step_id": self.time_step_id,
+            "metrics": self._json_results,
+        }
+        file_path = os.path.join(self.output_dir, f"FlowDiagnostics_{self.time_step_id}.json")
+        with open(file_path, "w") as f:
+            json.dump(combined, f, indent=2)
+        logging.info(f"Flow diagnostics metrics saved to {file_path}")
 
     # ---- Static Methods ---------------------------------------------------------------------------------------------
 

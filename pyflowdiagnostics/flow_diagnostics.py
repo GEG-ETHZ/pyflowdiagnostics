@@ -11,6 +11,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import json
 import os
 import logging
 import numpy as np
@@ -656,17 +657,35 @@ class FlowDiagnostics:
 
 
     def _write_allocation_factors(self, df_inj, df_prd) -> None:
-        """Saves flow allocation factors to an Excel file.
+        """Saves flow allocation factors to Excel and JSON files.
 
         Args:
-            df_inj (pd.DataFrame): DataFrame of injector flow allocation.
-            df_prd (pd.DataFrame): DataFrame of producer flow allocation.
+            df_inj (pd.DataFrame): DataFrame of injector flow allocation (rows=injectors, cols=producers).
+            df_prd (pd.DataFrame): DataFrame of producer flow allocation (rows=producers, cols=injectors).
         """
-        file_path = os.path.join(self.output_dir, "Allocation_Factor.xlsx")
-        with pd.ExcelWriter(file_path, engine="xlsxwriter") as writer:
+        file_path_xlsx = os.path.join(self.output_dir, f"Allocation_Factor_{self.time_step_id}.xlsx")
+        with pd.ExcelWriter(file_path_xlsx, engine="xlsxwriter") as writer:
             df_inj.to_excel(writer, sheet_name="Injector Flow Allocation")
             df_prd.to_excel(writer, sheet_name="Producer Flow Allocation")
-        logging.info(f"Flow allocation factors saved to {file_path}")
+        logging.info(f"Flow allocation factors saved to {file_path_xlsx}")
+
+        injector_allocation = [
+            {"injector": inj, "producer": prd, "allocation": float(df_inj.loc[inj, prd])}
+            for inj in df_inj.index for prd in df_inj.columns
+        ]
+        producer_allocation = [
+            {"producer": prd, "injector": inj, "allocation": float(df_prd.loc[prd, inj])}
+            for prd in df_prd.index for inj in df_prd.columns
+        ]
+        allocation_json = {
+            "time_step_id": self.time_step_id,
+            "injector_allocation": injector_allocation,
+            "producer_allocation": producer_allocation,
+        }
+        file_path_json = os.path.join(self.output_dir, f"Allocation_Factor_{self.time_step_id}.json")
+        with open(file_path_json, "w") as f:
+            json.dump(allocation_json, f, indent=2)
+        logging.info(f"Flow allocation factors saved to {file_path_json}")
 
 
     def _write_grid_flow_diagnostics(self) -> bool:

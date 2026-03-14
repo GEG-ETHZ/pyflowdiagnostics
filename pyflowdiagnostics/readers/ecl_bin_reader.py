@@ -115,12 +115,15 @@ class EclReader:
                 data = self.read_unrst(self.unrst_file_path, keys)
                 self._unrst_data[keys_combined] = data
 
+            # For UNRST: index 0 is often initial step (no wells); report steps start at 1.
+            # So tstep_id=1 (first report step) maps to index 1.
+            idx = tstep_id
             d_out = {}
             for key in keys:
-                if tstep_id >= len(data.get(key, [])):
+                if idx < 0 or idx >= len(data.get(key, [])):
                     d_out[key] = np.array([])
                 else:
-                    d_out[key] = data[key][tstep_id]
+                    d_out[key] = data[key][idx]
             return d_out
 
         return self.read_rst_step(keys, tstep_id)
@@ -132,96 +135,225 @@ class EclReader:
             raise FileNotFoundError(f"Restart file not found: {file_path}")
         return self._read_bin(file_path, keys)
 
+    def get_report_step_date(self, tstep_id: int) -> dict | None:
+        """Returns date and cumulative days for a report step from INTEHEAD.
+
+        Args:
+            tstep_id (int): Report step ID (1-based).
+
+        Returns:
+            dict | None: {"date": "YYYY-MM-DD", "days": float} or None if unavailable.
+                days is cumulative days since simulation start (initial step).
+        """
+        def _intehead_to_date(intehead):
+            if intehead is None or len(intehead) < 67:
+                return None
+            IDAY, IMON, IYEAR = int(intehead[64]), int(intehead[65]), int(intehead[66])
+            return datetime(IYEAR, IMON, IDAY)
+
+        try:
+            results = self.read_rst(keys=["INTEHEAD"], tstep_id=tstep_id)
+        except (ValueError, FileNotFoundError):
+            return None
+        intehead = results.get("INTEHEAD")
+        if intehead is None or not isinstance(intehead, np.ndarray) or len(intehead) < 67:
+            return None
+        date = _intehead_to_date(intehead)
+        if date is None:
+            return None
+
+        if self.unrst_file_path is not None:
+            data = self.read_unrst(self.unrst_file_path, keys=["INTEHEAD"])
+            inteheads = data.get("INTEHEAD", [])
+            ref_intehead = inteheads[0] if inteheads else None
+            ref_date = _intehead_to_date(ref_intehead) if ref_intehead is not None else None
+            days = round((date - ref_date).total_seconds() / 86400.0, 2) if ref_date else None
+        else:
+            ref_date = None
+            x0000_path = f"{self.input_file_path_base}.X0000"
+            if os.path.exists(x0000_path):
+                ref_results = self._read_bin(x0000_path, ["INTEHEAD"])
+                ref_intehead = ref_results.get("INTEHEAD")
+                ref_date = _intehead_to_date(ref_intehead) if ref_intehead is not None else None
+            if ref_date is None and tstep_id > 1:
+                ref_results = self.read_rst_step(keys=["INTEHEAD"], tstep_id=1)
+                ref_intehead = ref_results.get("INTEHEAD")
+                ref_date = _intehead_to_date(ref_intehead) if ref_intehead is not None else None
+            days = round((date - ref_date).total_seconds() / 86400.0, 2) if ref_date else None
+
+        return {"date": date.strftime("%Y-%m-%d"), "days": days}
+
 
     def read_unrst(self, file_path: str, keys: list = None, tstep_id: int = None) -> dict:
-        def read_one_timestep(fid, pos, endian, keys):
-            """Reads a full timestep starting at position `pos`."""
-            fid.seek(pos)
-            result_tmp = {}
+        """Read UNRST using pattern matching (robust for OPM Flow and Eclipse formats).
 
+        Returns {key: [val_t0, val_t1, ...]} for each requested key, or single timestep
+        when tstep_id is specified (used internally by read_unrst with tstep_id=None).
+        """
+        if keys is None:
+            keys = []
+
+        all_results = {}
+        file_size = os.path.getsize(file_path)
+
+        with open(file_path, "rb") as fid:
+            file_data = fid.read()
+
+        first_int = struct.unpack("<i", file_data[:4])[0]
+        endian = "<" if (first_int > 0 and first_int < 1000) else ">"
+
+        # Find all INTEHEAD positions (timestep boundaries)
+        intehead_positions = []
+        pos = 0
+        while True:
+            pos = file_data.find(b"INTEHEAD", pos)
+            if pos == -1:
+                break
+            intehead_positions.append(pos - 4)
+            pos += 8
+
+        # Find positions for each requested key
+        key_positions = {key: [] for key in keys} if keys else {}
+        for key in keys:
+            pos = 0
             while True:
-                data, _, key = self._load_vector(fid, endian)
-                key = key.strip()
-
-                if key == "INTEHEAD":
-                    IDAY, IMON, IYEAR = data[64], data[65], data[66]
-                    result_tmp["DATE"] = datetime(IYEAR, IMON, IDAY)
-                    result_tmp["INTEHEAD"] = data  # Keep as np.ndarray
-
-                elif isinstance(data, np.ndarray):
-                    result_tmp[key] = data
-                elif isinstance(data, (bytes, str)):
-                    result_tmp[key] = data.decode(errors="ignore").strip() if isinstance(data, bytes) else data.strip()
-                else:
-                    result_tmp[key] = np.array([data])
-
-                if fid.tell() >= os.fstat(fid.fileno()).st_size:
+                pos = file_data.find(key.encode("ascii"), pos)
+                if pos == -1:
                     break
+                if pos >= 4:
+                    try:
+                        header_size = struct.unpack(endian + "i", file_data[pos - 4:pos])[0]
+                        if 8 <= header_size <= 1000:
+                            key_positions[key].append(pos - 4)
+                    except (struct.error, IndexError):
+                        pass
+                pos += len(key)
 
-                peek_pos = fid.tell()
+        with open(file_path, "rb") as fid:
+            dates = []
+            for intehead_pos in intehead_positions:
+                fid.seek(intehead_pos)
                 try:
-                    _, _, next_key = self._load_vector(fid, endian)
-                    if next_key.strip() == "SEQNUM":
-                        break
+                    header_size = struct.unpack(endian + "i", fid.read(4))[0]
+                    key = fid.read(8).decode("ascii", errors="ignore").strip()
+                    data_count = struct.unpack(endian + "i", fid.read(4))[0]
+                    data_type = fid.read(4).decode("ascii", errors="ignore").strip()
+                    end_size = struct.unpack(endian + "i", fid.read(4))[0]
+                    if key == "INTEHEAD" and header_size == end_size:
+                        raw_data = bytearray()
+                        read_count = 0
+                        while read_count < data_count:
+                            chunk_size = struct.unpack(endian + "i", fid.read(4))[0]
+                            chunk_data = fid.read(chunk_size)
+                            chunk_end = struct.unpack(endian + "i", fid.read(4))[0]
+                            if chunk_size != chunk_end:
+                                break
+                            raw_data.extend(chunk_data)
+                            read_count += chunk_size // 4
+                        if len(raw_data) >= data_count * 4:
+                            data = np.frombuffer(raw_data, dtype=endian + "i4")
+                            if len(data) > 66:
+                                IDAY, IMON, IYEAR = data[64], data[65], data[66]
+                                dates.append(datetime(IYEAR, IMON, IDAY))
+                            else:
+                                dates.append(None)
+                        else:
+                            dates.append(None)
+                    else:
+                        dates.append(None)
                 except Exception:
-                    break
-                fid.seek(peek_pos)
+                    dates.append(None)
 
-            if keys is not None:
-                result_tmp = {k: v for k, v in result_tmp.items() if k in keys or k == "DATE"}
+        for timestep_idx, (intehead_pos, date) in enumerate(zip(intehead_positions, dates)):
+            result = {}
+            if date is not None:
+                result["DATE"] = date
 
-            return result_tmp
+            with open(file_path, "rb") as fid:
+                try:
+                    fid.seek(intehead_pos)
+                    header_size = struct.unpack(endian + "i", fid.read(4))[0]
+                    key = fid.read(8).decode("ascii", errors="ignore").strip()
+                    data_count = struct.unpack(endian + "i", fid.read(4))[0]
+                    data_type = fid.read(4).decode("ascii", errors="ignore").strip()
+                    end_size = struct.unpack(endian + "i", fid.read(4))[0]
+                    if key == "INTEHEAD" and header_size == end_size:
+                        raw_data = bytearray()
+                        read_count = 0
+                        while read_count < data_count:
+                            chunk_size = struct.unpack(endian + "i", fid.read(4))[0]
+                            chunk_data = fid.read(chunk_size)
+                            chunk_end = struct.unpack(endian + "i", fid.read(4))[0]
+                            if chunk_size != chunk_end:
+                                break
+                            raw_data.extend(chunk_data)
+                            read_count += chunk_size // 4
+                        if len(raw_data) >= data_count * 4:
+                            result["INTEHEAD"] = np.frombuffer(raw_data, dtype=endian + "i4")
+                except Exception:
+                    pass
 
+            next_intehead = intehead_positions[timestep_idx + 1] if timestep_idx + 1 < len(intehead_positions) else file_size
+
+            for key in keys:
+                if key == "INTEHEAD":
+                    continue
+                key_pos = None
+                if key in key_positions:
+                    for p in key_positions[key]:
+                        if intehead_pos < p < next_intehead:
+                            key_pos = p
+                            break
+                if key_pos is None:
+                    result[key] = np.array([])
+                    continue
+                with open(file_path, "rb") as fid:
+                    fid.seek(key_pos)
+                    try:
+                        header_size = struct.unpack(endian + "i", fid.read(4))[0]
+                        key_name = fid.read(8).decode("ascii", errors="ignore").strip()
+                        data_count = struct.unpack(endian + "i", fid.read(4))[0]
+                        data_type = fid.read(4).decode("ascii", errors="ignore").strip()
+                        end_size = struct.unpack(endian + "i", fid.read(4))[0]
+                        if key_name != key or header_size != end_size:
+                            result[key] = np.array([])
+                            continue
+                        bytes_per_element = 8 if data_type == "CHAR" else 4
+                        total_bytes = data_count * bytes_per_element
+                        raw_data = bytearray()
+                        bytes_read = 0
+                        while bytes_read < total_bytes:
+                            chunk_size = struct.unpack(endian + "i", fid.read(4))[0]
+                            chunk_data = fid.read(chunk_size)
+                            chunk_end = struct.unpack(endian + "i", fid.read(4))[0]
+                            if chunk_size != chunk_end:
+                                break
+                            raw_data.extend(chunk_data)
+                            bytes_read += chunk_size
+                        if len(raw_data) >= total_bytes:
+                            if data_type == "CHAR":
+                                char_data = np.frombuffer(raw_data, dtype="S1").reshape((-1, 8))
+                                result[key] = np.char.decode(char_data, encoding="ascii").astype(str)
+                            else:
+                                dtype_map = {"REAL": "f4", "DOUB": "f8", "INTE": "i4", "LOGI": "i4"}
+                                dtype = dtype_map.get(data_type, "f4")
+                                result[key] = np.frombuffer(raw_data, dtype=endian + dtype)
+                        else:
+                            result[key] = np.array([])
+                    except Exception:
+                        result[key] = np.array([])
+
+            all_results[timestep_idx] = result
+
+        # Convert to {key: [val_t0, val_t1, ...]} for read_rst
         result_dict = defaultdict(list)
-        time_steps = []
-
-        with open(file_path, 'rb') as fid:
-            endian = self._detect_endian(fid)
-            file_size = os.fstat(fid.fileno()).st_size
-
-            while fid.tell() < file_size:
-                pos = fid.tell()
-                data, _, key = self._load_vector(fid, endian)
-                if key.strip() == "SEQNUM":
-                    time_steps.append((data[0], pos))
-
-        # Initialize result_dict with empty lists for all requested keys
-        if keys:
+        for idx in sorted(all_results.keys()):
+            r = all_results[idx]
             for k in keys:
+                result_dict[k].append(r.get(k, np.array([])))
+        for k in keys:
+            if k not in result_dict:
                 result_dict[k] = []
-
-        if tstep_id is not None:
-            match = [t for t in time_steps if t[0] == tstep_id]
-            if not match:
-                raise ValueError(f"Timestep {tstep_id} not found in {file_path}")
-            with open(file_path, 'rb') as fid:
-                return read_one_timestep(fid, match[0][1], endian, keys)
-
-        cumulative_days = 0
-        previous_date = None
-
-        for step, pos in time_steps:
-            with open(file_path, 'rb') as fid_inner:
-                result = read_one_timestep(fid_inner, pos, endian, keys)
-
-            if "DATE" in result:
-                current_date = result["DATE"]
-                if previous_date:
-                    cumulative_days += (current_date - previous_date).days
-                result_dict["TIME"].append(cumulative_days)
-                result_dict["DATE"].append((current_date.year, current_date.month, current_date.day, 0, 0))
-                previous_date = current_date
-
-            for k in keys or result.keys():
-                if k in result:
-                    result_dict[k].append(result[k])
-
-        # Ensure all explicitly requested keys that were never found remain empty
-        if keys:
-            for k in keys:
-                if k not in result_dict:
-                    result_dict[k] = []
-
         return dict(result_dict)
 
 

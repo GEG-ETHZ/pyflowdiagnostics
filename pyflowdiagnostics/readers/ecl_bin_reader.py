@@ -135,6 +135,54 @@ class EclReader:
             raise FileNotFoundError(f"Restart file not found: {file_path}")
         return self._read_bin(file_path, keys)
 
+    def get_report_step_date(self, tstep_id: int) -> dict | None:
+        """Returns date and cumulative days for a report step from INTEHEAD.
+
+        Args:
+            tstep_id (int): Report step ID (1-based).
+
+        Returns:
+            dict | None: {"date": "YYYY-MM-DD", "days": float} or None if unavailable.
+                days is cumulative days since simulation start (initial step).
+        """
+        def _intehead_to_date(intehead):
+            if intehead is None or len(intehead) < 67:
+                return None
+            IDAY, IMON, IYEAR = int(intehead[64]), int(intehead[65]), int(intehead[66])
+            return datetime(IYEAR, IMON, IDAY)
+
+        try:
+            results = self.read_rst(keys=["INTEHEAD"], tstep_id=tstep_id)
+        except (ValueError, FileNotFoundError):
+            return None
+        intehead = results.get("INTEHEAD")
+        if intehead is None or not isinstance(intehead, np.ndarray) or len(intehead) < 67:
+            return None
+        date = _intehead_to_date(intehead)
+        if date is None:
+            return None
+
+        if self.unrst_file_path is not None:
+            data = self.read_unrst(self.unrst_file_path, keys=["INTEHEAD"])
+            inteheads = data.get("INTEHEAD", [])
+            ref_intehead = inteheads[0] if inteheads else None
+            ref_date = _intehead_to_date(ref_intehead) if ref_intehead is not None else None
+            days = round((date - ref_date).total_seconds() / 86400.0, 2) if ref_date else None
+        else:
+            ref_date = None
+            x0000_path = f"{self.input_file_path_base}.X0000"
+            if os.path.exists(x0000_path):
+                ref_results = self._read_bin(x0000_path, ["INTEHEAD"])
+                ref_intehead = ref_results.get("INTEHEAD")
+                ref_date = _intehead_to_date(ref_intehead) if ref_intehead is not None else None
+            if ref_date is None and tstep_id > 1:
+                ref_results = self.read_rst_step(keys=["INTEHEAD"], tstep_id=1)
+                ref_intehead = ref_results.get("INTEHEAD")
+                ref_date = _intehead_to_date(ref_intehead) if ref_intehead is not None else None
+            days = round((date - ref_date).total_seconds() / 86400.0, 2) if ref_date else None
+
+        return {"date": date.strftime("%Y-%m-%d"), "days": days}
+
 
     def read_unrst(self, file_path: str, keys: list = None, tstep_id: int = None) -> dict:
         """Read UNRST using pattern matching (robust for OPM Flow and Eclipse formats).

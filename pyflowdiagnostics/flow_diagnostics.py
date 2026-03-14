@@ -817,10 +817,10 @@ class FlowDiagnostics:
             self._json_results["lorenz"] = {
                 "description": (
                     "Lorenz coefficient: measure of flow heterogeneity (0=uniform, 1=highly heterogeneous). "
-                    "Derived from F-Phi (flow-storage capacity) curves. For dual porosity, separate values "
-                    "for matrix and fracture domains."
+                    "Derived from F-Phi (flow-storage capacity) curves. global: reservoir-wide; well_pairs: "
+                    "per injector-producer streamtube. Higher values indicate more heterogeneous flow."
                 ),
-                "lorenz_coefficient": {
+                "global": {
                     "matrix": float(lorenz_matrix),
                     "fracture": float(lorenz_fracture),
                 },
@@ -838,18 +838,81 @@ class FlowDiagnostics:
             self._json_results["lorenz"] = {
                 "description": (
                     "Lorenz coefficient: measure of flow heterogeneity (0=uniform, 1=highly heterogeneous). "
-                    "Derived from F-Phi (flow-storage capacity) curves. Higher values indicate more channeling "
-                    "and uneven sweep."
+                    "Derived from F-Phi (flow-storage capacity) curves. global: reservoir-wide; well_pairs: "
+                    "per injector-producer streamtube. Higher values indicate more heterogeneous flow."
                 ),
-                "lorenz_coefficient": float(lorenz),
+                "global": float(lorenz),
             }
+
+        self._compute_well_pair_lorenz()
+
+    def _compute_well_pair_lorenz(self) -> None:
+        """Computes Lorenz coefficient per injector-producer well pair and appends to JSON results.
+
+        For each well pair (cells where partI and partP identify the dominant injector and producer),
+        builds F-Phi from pore volume and TOF, then computes the Lorenz coefficient.
+        """
+        MIN_CELLS = 2
+        if self.partI is None or self.partP is None or not self.injectors or not self.producers:
+            return
+
+        tof_inj = np.where(np.isnan(self.tofI), np.nanmax(self.tofI, initial=0), self.tofI)
+        tof_prod = np.where(np.isnan(self.tofP), np.nanmax(self.tofP, initial=0), self.tofP)
+        tof_valid = np.column_stack([tof_inj, tof_prod])
+
+        valid_mask = (
+            self.grid.actnum_bool
+            & ~np.isnan(self.partI)
+            & ~np.isnan(self.partP)
+            & (self.partI >= 1)
+            & (self.partI <= len(self.injectors))
+            & (self.partP >= 1)
+            & (self.partP <= len(self.producers))
+        )
+        well_pairs = np.column_stack([self.partI[valid_mask], self.partP[valid_mask]])
+        unique_pairs = np.unique(well_pairs.astype(int), axis=0)
+
+        well_pair_lorenz = []
+        for part_i, part_p in unique_pairs:
+            pair_mask = valid_mask & (self.partI == part_i) & (self.partP == part_p)
+            n_cells = np.sum(pair_mask)
+            if n_cells < MIN_CELLS:
+                continue
+            porv_sub = self.grid.porv[pair_mask]
+            tof_sub = tof_valid[pair_mask]
+            try:
+                F, Phi = self.compute_F_and_Phi(porv_sub, tof_sub)
+                lc = float(self.compute_Lorenz(F, Phi))
+            except Exception:
+                continue
+            inj_name = self.injectors[int(part_i) - 1].name
+            prd_name = self.producers[int(part_p) - 1].name
+            well_pair_lorenz.append({
+                "injector": inj_name,
+                "producer": prd_name,
+                "lorenz_coefficient": lc,
+                "n_cells": int(n_cells),
+            })
+
+        if well_pair_lorenz and "lorenz" in self._json_results:
+            self._json_results["lorenz"]["well_pairs"] = well_pair_lorenz
 
     def _write_combined_json(self) -> None:
         """Writes all flow diagnostics metrics to a single JSON file with descriptions."""
         if not self._json_results:
             return
+        time_block = {"time_step_id": self.time_step_id}
+        if isinstance(self.binary_reader, EclReader):
+            try:
+                time_info = self.binary_reader.get_report_step_date(self.time_step_id)
+                if time_info is not None:
+                    time_block["date"] = time_info["date"]
+                    time_block["days"] = time_info["days"]
+                    time_block["description"] = "Report step date (YYYY-MM-DD) and cumulative days since simulation start."
+            except Exception:
+                pass
         combined = {
-            "time_step_id": self.time_step_id,
+            "time": time_block,
             "metrics": self._json_results,
         }
         file_path = os.path.join(self.output_dir, f"FlowDiagnostics_{self.time_step_id}.json")

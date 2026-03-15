@@ -897,6 +897,44 @@ class FlowDiagnostics:
         if well_pair_lorenz and "lorenz" in self._json_results:
             self._json_results["lorenz"]["well_pairs"] = well_pair_lorenz
 
+    def _build_grid_json(self) -> dict:
+        """Builds the grid summary section for JSON output."""
+        g = self.grid
+        porv_sum = float(np.sum(g.porv[g.actnum_bool])) if g.actnum_bool.any() else 0.0
+        return {
+            "nx": int(g.nx),
+            "ny": int(g.ny),
+            "nz": int(g.nz),
+            "num_total_cells": int(g.nn),
+            "num_active_cells": int(g.num_active_cells),
+            "pore_volume_sum": porv_sum,
+            "num_non_neighbor_connections": int(getattr(g, "num_NNCs", 0)),
+            "description": "Grid dimensions and summary: nx, ny, nz, total/active cells, total pore volume, NNC count.",
+        }
+
+    def _build_wells_json(self) -> list:
+        """Builds the wells summary section for JSON output."""
+        wells_list = []
+        for well in self.wells.values():
+            completions_list = [
+                {
+                    "I": int(c.I),
+                    "J": int(c.J),
+                    "K": int(c.K),
+                    "status": c.status,
+                }
+                for c in well.completions
+            ]
+            wells_list.append({
+                "name": well.name,
+                "type": well.type,
+                "status": well.status,
+                "num_completions": len(well.completions),
+                "num_active_completions": well.num_active_completions,
+                "completions": completions_list,
+            })
+        return wells_list
+
     def _write_combined_json(self) -> None:
         """Writes all flow diagnostics metrics to a single JSON file with descriptions."""
         if not self._json_results:
@@ -913,7 +951,9 @@ class FlowDiagnostics:
                 pass
         combined = {
             "time": time_block,
-            "metrics": self._json_results,
+            "grid": self._build_grid_json(),
+            "wells": self._build_wells_json(),
+            "flow_diagnostic_metrics": self._json_results,
         }
         file_path = os.path.join(self.output_dir, f"FlowDiagnostics_{self.time_step_id}.json")
         with open(file_path, "w") as f:
